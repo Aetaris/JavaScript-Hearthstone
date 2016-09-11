@@ -1,0 +1,533 @@
+
+CHOOSING ARENA CLASS.
+
+Choices:
+- Hunter
+- Paladin
+- Druid
+
+Class Chosen: Paladin
+
+Card choice: Common
+Choices:
+- Annoy-o-Tron
+- Frostwolf Grunt
+- Haunted Creeper
+
+Card Chosen: Haunted Creeper
+
+Card choice: Rare
+Choices:
+- Eater of Secrets
+- Equality
+- Murloc Knight
+
+Card Chosen: Murloc Knight
+
+Card choice: Common
+Choices:
+- Argent Horserider
+- Novice Engineer
+- Bloodfen Raptor
+
+Card Chosen: Argent Horserider
+
+Card choice: Common
+Choices:
+- Warhorse Trainer
+- Chillwind Yeti
+- Nightblade
+
+Card Chosen: Chillwind Yeti
+
+Card choice: Rare
+Choices:
+- Eater of Secrets
+- Aldor Peacekeeper
+- Murloc Knight
+
+Card Chosen: Aldor Peacekeeper
+
+Card choice: Common
+Choices:
+- Warhorse Trainer
+- Blessing of Kings
+- Haunted Creeper
+
+Card Chosen: Blessing of Kings
+
+Card choice: Common
+Choices:
+- Stand Against Darkness
+- Blessing of Kings
+- Warhorse Trainer
+
+Card Chosen: Blessing of Kings
+
+Card choice: Common
+Choices:
+- Stand Against Darkness
+- Frostwolf Grunt
+- Piloted Shredder
+
+Card Chosen: Piloted Shredder
+
+Card choice: Rare
+Choices:
+- Azure Drake
+- Abomination
+- Aldor Peacekeeper
+
+Card Chosen: Aldor Peacekeeper
+
+Card choice: Common
+Choices:
+- Blessing of Kings
+- Guardian of Kings
+- Murloc Raider
+
+Card Chosen: Blessing of Kings
+
+Card choice: Epic
+Choices:
+- Big Game Hunter
+- Twilight Guardian
+- Avenging Wrath
+
+Card Chosen: Avenging Wrath
+
+Card choice: Common
+Choices:
+- Novice Engineer
+- Argent Horserider
+- Frostwolf Grunt
+
+Card Chosen: Argent Horserider
+
+Card choice: Epic
+Choices:
+- Validated Doomsayer
+- Avenging Wrath
+- Kodorider
+
+Card Chosen: Kodorider
+
+Card choice: Common
+Choices:
+- Boulderfist Ogre
+- Bloodfen Raptor
+- Mechwarper
+
+Card Chosen: Boulderfist Ogre
+
+Card choice: Common
+Choices:
+- North Sea Kraken
+- Bloodfen Raptor
+- Stand Against Darkness
+
+Card Chosen: North Sea Kraken
+
+Card choice: Common
+Choices:
+- Frostwolf Grunt
+- Hammer of Wrath
+- Hammer of Wrath
+
+Card Chosen: Hammer of Wrath
+
+Card choice: Common
+Choices:
+- Ogre Magi
+- Nightblade
+- Warhorse Trainer
+
+Card Chosen: Warhorse Trainer
+
+Card choice: Common
+Choices:
+- Tinkertown Technician
+- Nerub'ar Weblord
+- Annoy-o-Tron
+
+Card Chosen: Annoy-o-Tron
+
+Card choice: Common
+Choices:
+- Mechwarper
+- Hammer of Wrath
+- Stand Against Darkness
+
+Card Chosen: Hammer of Wrath
+
+Card choice: Common
+Choices:
+- Warhorse Trainer
+- Novice Engineer
+- Spider Tank
+
+Card Chosen: Spider Tank
+
+Card choice: Rare
+Choices:
+- Argent Commander
+- Equality
+- Master Jouster
+
+Card Chosen: Argent Commander
+
+Card choice: Common
+Choices:
+- Elven Archer
+- Spider Tank
+- Hammer of Wrath
+
+Card Chosen: Spider Tank
+
+Card choice: Common
+Choices:
+- Stand Against Darkness
+- Piloted Shredder
+- Blackwing Technician
+
+Card Chosen: Piloted Shredder
+
+Card choice: Common
+Choices:
+- Guardian of Kings
+- Piloted Shredder
+- Mechwarper
+
+Card Chosen: Piloted Shredder
+
+Card choice: Common
+Choices:
+- Haunted Creeper
+- Guardian of Kings
+- Clockwork Gnome
+
+Card Chosen: Haunted Creeper
+
+Card choice: Common
+Choices:
+- Warhorse Trainer
+- Warhorse Trainer
+- Nerub'ar Weblord
+
+Card Chosen: Warhorse Trainer
+
+Card choice: Common
+Choices:
+- Warhorse Trainer
+- Hammer of Wrath
+- Warhorse Trainer
+
+Card Chosen: Hammer of Wrath
+
+Card choice: Common
+Choices:
+- Guardian of Kings
+- Blessing of Kings
+- Annoy-o-Tron
+
+Card Chosen: Blessing of Kings
+
+Card choice: Common
+Choices:
+- Haunted Creeper
+- Argent Horserider
+- Nightblade
+
+Card Chosen: Haunted Creeper
+
+Card choice: Epic
+Choices:
+- Avenging Wrath
+- Avenging Wrath
+- Kodorider
+
+Card Chosen: Kodorider
+
+Deck complete (30/30). Listing cards:
+
+- 3x Haunted Creeper
+- 1x Murloc Knight
+- 2x Argent Horserider
+- 1x Chillwind Yeti
+- 2x Aldor Peacekeeper
+- 4x Blessing of Kings
+- 3x Piloted Shredder
+- 1x Avenging Wrath
+- 2x Kodorider
+- 1x Boulderfist Ogre
+- 1x North Sea Kraken
+- 3x Hammer of Wrath
+- 2x Warhorse Trainer
+- 1x Annoy-o-Tron
+- 2x Spider Tank
+- 1x Argent Commander
+
+CHOOSING ARENA CLASS.
+
+Choices:
+- Rogue
+- Druid
+- Warrior
+
+Class Chosen: Rogue
+
+Card choice: Common
+Choices:
+- Sap
+- Polluted Hoarder
+- Frostwolf Grunt
+
+Card Chosen: Sap
+
+Card choice: Rare
+Choices:
+- Knife Juggler
+- Argent Commander
+- Azure Drake
+
+Card Chosen: Argent Commander
+
+Card choice: Common
+Choices:
+- Argent Horserider
+- Backstab
+- Fan of Knives
+
+Card Chosen: Backstab
+
+Card choice: Common
+Choices:
+- Blackwing Technician
+- Shiv
+- Sprint
+
+Card Chosen: Sprint
+
+Card choice: Rare
+Choices:
+- Azure Drake
+- Eater of Secrets
+- Corrupted Healbot
+
+Card Chosen: Azure Drake
+
+Card choice: Common
+Choices:
+- Magma Rager
+- Annoy-o-Tron
+- Fan of Knives
+
+Card Chosen: Fan of Knives
+
+Card choice: Common
+Choices:
+- Shiv
+- Backstab
+- Fan of Knives
+
+Card Chosen: Backstab
+
+Card choice: Common
+Choices:
+- Boulderfist Ogre
+- Fan of Knives
+- Novice Engineer
+
+Card Chosen: Fan of Knives
+
+Card choice: Rare
+Choices:
+- Abomination
+- Crazed Alchemist
+- Azure Drake
+
+Card Chosen: Azure Drake
+
+Card choice: Common
+Choices:
+- Sprint
+- Argent Horserider
+- Stoneskin Gargoyle
+
+Card Chosen: Argent Horserider
+
+Card choice: Rare
+Choices:
+- Crazed Alchemist
+- Argent Commander
+- Corrupted Healbot
+
+Card Chosen: Argent Commander
+
+Card choice: Common
+Choices:
+- Shiv
+- Clockwork Gnome
+- Sprint
+
+Card Chosen: Clockwork Gnome
+
+Card choice: Common
+Choices:
+- Mechwarper
+- Magma Rager
+- Polluted Hoarder
+
+Card Chosen: Mechwarper
+
+Card choice: Common
+Choices:
+- Spider Tank
+- Stoneskin Gargoyle
+- Mechwarper
+
+Card Chosen: Spider Tank
+
+Card choice: Common
+Choices:
+- Spider Tank
+- Sprint
+- Piloted Shredder
+
+Card Chosen: Piloted Shredder
+
+Card choice: Common
+Choices:
+- Sprint
+- Backstab
+- Elven Archer
+
+Card Chosen: Backstab
+
+Card choice: Common
+Choices:
+- Boulderfist Ogre
+- Stoneskin Gargoyle
+- Sap
+
+Card Chosen: Sap
+
+Card choice: Common
+Choices:
+- Backstab
+- Mechanical Yeti
+- Shiv
+
+Card Chosen: Backstab
+
+Card choice: Rare
+Choices:
+- Knife Juggler
+- Master Jouster
+- Azure Drake
+
+Card Chosen: Azure Drake
+
+Card choice: Common
+Choices:
+- Fan of Knives
+- Magma Rager
+- Novice Engineer
+
+Card Chosen: Fan of Knives
+
+Card choice: Rare
+Choices:
+- Nerubian Egg
+- Azure Drake
+- Master Jouster
+
+Card Chosen: Azure Drake
+
+Card choice: Common
+Choices:
+- Magma Rager
+- Blackwing Corruptor
+- Sprint
+
+Card Chosen: Sprint
+
+Card choice: Common
+Choices:
+- Blackwing Technician
+- Polluted Hoarder
+- Shiv
+
+Card Chosen: Polluted Hoarder
+
+Card choice: Common
+Choices:
+- Shiv
+- Mechanical Yeti
+- Backstab
+
+Card Chosen: Backstab
+
+Card choice: Common
+Choices:
+- Sap
+- Backstab
+- Annoy-o-Tron
+
+Card Chosen: Backstab
+
+Card choice: Common
+Choices:
+- Backstab
+- Sprint
+- Murloc Raider
+
+Card Chosen: Backstab
+
+Card choice: Common
+Choices:
+- Ogre Magi
+- Backstab
+- Magma Rager
+
+Card Chosen: Backstab
+
+Card choice: Rare
+Choices:
+- Azure Drake
+- Master Jouster
+- Corrupted Healbot
+
+Card Chosen: Azure Drake
+
+Card choice: Common
+Choices:
+- Murloc Raider
+- Polluted Hoarder
+- Backstab
+
+Card Chosen: Backstab
+
+Card choice: Epic
+Choices:
+- Shade of Naxxramas
+- Validated Doomsayer
+- Twilight Guardian
+
+Card Chosen: Shade of Naxxramas
+
+Deck complete (30/30). Listing cards:
+
+- 2x Sap
+- 2x Argent Commander
+- 9x Backstab
+- 2x Sprint
+- 5x Azure Drake
+- 3x Fan of Knives
+- 1x Argent Horserider
+- 1x Clockwork Gnome
+- 1x Mechwarper
+- 1x Spider Tank
+- 1x Piloted Shredder
+- 1x Polluted Hoarder
+- 1x Shade of Naxxramas

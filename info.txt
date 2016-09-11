@@ -1,0 +1,6 @@
+EFFECT TYPES
+
+[???] hunger == triggers AFTER ??? occurs. Examples: Frothing Berserker. Can have 'friend' or 'foe' to be only friend or foe triggered.
+[???] hunger interrupt == triggers BEFORE ??? occurs. Examples: Archmage Antonidas.
+self defense == triggers BEFORE taking damage from an attack. Examples: Ice Barrier, Explosive Trap.
+pain == triggers AFTER damage is taken. Examples:

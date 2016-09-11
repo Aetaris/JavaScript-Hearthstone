@@ -1,0 +1,5 @@
+Decks are created.
+Decks battle. A deck is deleted if it loses. The winning deck "evolves" by loosing n random cards and gaining n random cards.
+Repeat Step 2.
+
+Decks are stored in files which names' are "keys" which are alphanumeric strings based on the cards of the deck. Inside the file is the deck in human readable format.
