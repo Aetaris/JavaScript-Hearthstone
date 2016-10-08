@@ -9,10 +9,10 @@ module.exports.test = function () {
     return printer.print('success');
 };
 
-var blue = module.exports.blue = function () {
+var player = module.exports.player = function (color) {
     return utilities.withEffects({
         type: "hero",
-        color: "Blue",
+        color: color,
         hero: {},
         name: "error",
         baseHp: 30,
@@ -31,69 +31,25 @@ var blue = module.exports.blue = function () {
         turn: false,
         weapon: false,
         effects: [],
+        isPlayer: false,
         minions: [],
         hand: [],
         deck: decks.basicDeck(),
+        graveyard: [],
         taunts: {
             start: false,
             heropower: false,
             custom1: false,
-            custom1used: false,
             custom2: false,
-            custom2used: false,
             custom3: false,
-            custom3used: false,
             victory: false,
             defeat: false
         },
         getMaxHp: function() { return utilities.genMaxHp(this); },
         getHp: function() { return utilities.genHp(this); },
         getMaxDamage: function() { return utilities.genMaxDamage(this); },
-        getDamage: function() { return utilities.genDamage(this); }
-    });
-};
-
-var red = module.exports.red = function () {
-    return utilities.withEffects({
-        type: "hero",
-        color: "Red",
-        hero: {},
-        name: "error",
-        baseHp: 30,
-        damageTaken: 0,
-        baseDamage: 0,
-        damageLost: 0,
-        armor: 0,
-        maxMana: 0,
-        mana: 0,
-        lockedMana: 0,
-        fatigue: 0,
-        ability: false,
-        cost: 0,
-        ai: false,
-        heroPowerUsed: false,
-        turn: false,
-        weapon: false,
-        effects: [],
-        minions: [],
-        hand: [],
-        deck: decks.basicDeck(),
-        taunts: {
-            start: false,
-            heropower: false,
-            custom1: false,
-            custom1used: false,
-            custom2: false,
-            custom2used: false,
-            custom3: false,
-            custom3used: false,
-            victory: false,
-            defeat: false
-        },
-        getMaxHp: function() { return utilities.genMaxHp(this); },
-        getHp: function() { return utilities.genHp(this); },
-        getMaxDamage: function() { return utilities.genMaxDamage(this); },
-        getDamage: function() { return utilities.genDamage(this); }
+        getDamage: function() { return utilities.genDamage(this); },
+        Attack: utilities.Attack
     });
 };
 
@@ -124,12 +80,10 @@ var setHero = module.exports.setHero = function(player, hero) {
 };
 
 var hero = module.exports.hero = function (color) {
-    if(color == 'red') {
-        return module.exports.red();
-    } else if(color == 'blue') {
-        return module.exports.blue();
+    if(color) {
+        return module.exports.player(color);
     } else {
-        printer.print('Error: hero(), setup.js:82, no value blue or red');
+        throw new Error("Error: Hero without color");
     }
 };
 
@@ -152,41 +106,28 @@ module.exports.drawStartCards = function(first, second) {
     
     var average = Math.round(total / first.deck.length);
     
+    var drawnCards = [];
+    
     for(i = 0; i < 3; i++) {
-        var card = utilities.drawCard(first, { player: first, foe: second, cause: false });
-        if(card.cost >= average + 1 ) {
-            printer.print(first.color + " " + first.name + " decides to shuffle " + card.name + " back into the deck and draw another card.");
+        drawnCards[i] = utilities.drawCard(first, { player: first, foe: second, cause: false });
+    }
+    for(i = 0; i < 3; i++) {
+        if(first.isPlayer == false || drawnCards[i].cost >= average + 1) {
+            if(first.isPlayer == true || second.isPlayer == false) {
+                printer.print(first.color + " " + first.name + " decides to shuffle " + drawnCards[i].name + " back into the deck and draw another card.");
+            } else {
+                printer.print(first.color + " " + first.name + " decides to shuffle a card back into the deck and draw another card.");
+            }
             var randomNum = Math.floor(first.deck.length * Math.random(0, 1));
-            first.deck.splice(randomNum, 0, card);
-            first.hand.splice(first.hand.indexOf(card), 1);
+            first.deck.splice(randomNum, 0, drawnCards[i]);
+            first.hand.splice(first.hand.indexOf(drawnCards[i]), 1);
             utilities.drawCard(first, { player: first, foe: second, cause: false });
         }
     }
+    if(first.isPlayer == true) {
+        
+    }
     
-    // var card = utilities.drawCard(first, { player: first, foe: second, cause: false });
-    // if(card.cost >= 5 ) {
-    //     printer.print(first.color + " " + first.name + " decides to shuffle " + card.name + " back into the deck and draw another card.");
-    //     var randomNum = Math.floor(first.deck.length * Math.random(0, 1));
-    //     first.deck.splice(randomNum, 0, card);
-    //     first.hand.splice(first.hand.indexOf(card), 1);
-    //     utilities.drawCard(first, { player: first, foe: second, cause: false });
-    // }
-    // var card = utilities.drawCard(first, { player: first, foe: second, cause: false });
-    // if(card.cost >= 5 ) {
-    //     printer.print(first.color + " " + first.name + " decides to shuffle " + card.name + " back into the deck and draw another card.");
-    //     var randomNum = Math.floor(first.deck.length * Math.random(0, 1));
-    //     first.deck.splice(randomNum, 0, card);
-    //     first.hand.splice(first.hand.indexOf(card), 1);
-    //     utilities.drawCard(first, { player: first, foe: second, cause: false });
-    // }
-    // var card = utilities.drawCard(first, { player: first, foe: second, cause: false });
-    // if(card.cost >= 5 ) {
-    //     printer.print(first.color + " " + first.name + " decides to shuffle " + card.name + " back into the deck and draw another card.");
-    //     var randomNum = Math.floor(first.deck.length * Math.random(0, 1));
-    //     first.deck.splice(randomNum, 0, card);
-    //     first.hand.splice(first.hand.indexOf(card), 1);
-    //     utilities.drawCard(first, { player: first, foe: second, cause: false });
-    // }
     printer.print("");
     printer.print("");
     printer.print("");
@@ -196,15 +137,23 @@ module.exports.drawStartCards = function(first, second) {
         total += second.deck[i].cost;
     }
     
-    var average = Math.round(total / second.deck.length);
+    average = Math.round(total / second.deck.length);
     
-    for(i = 0; i < 3; i++) {
-        var card = utilities.drawCard(second, { player: second, foe: first, cause: false });
-        if(card.cost >= average + 1 ) {
-            printer.print(second.color + " " + second.name + " decides to shuffle " + card.name + " back into the deck and draw another card.");
+    drawnCards = [];
+    
+    for(i = 0; i < 4; i++) {
+        drawnCards[i] = utilities.drawCard(second, { player: second, foe: first, cause: false });
+    }
+    for(i = 0; i < 4; i++) {
+        if(drawnCards[i].cost >= average + 1 ) {
+            if(first.isPlayer == true || second.isPlayer == false) {
+                printer.print(second.color + " " + second.name + " decides to shuffle " + drawnCards[i].name + " back into the deck and draw another card.");
+            } else {
+                printer.print(first.color + " " + first.name + " decides to shuffle a card back into the deck and draw another card.");
+            }
             var randomNum = Math.floor(second.deck.length * Math.random(0, 1));
-            second.deck.splice(randomNum, 0, card);
-            second.hand.splice(second.hand.indexOf(card), 1);
+            second.deck.splice(randomNum, 0, drawnCards[i]);
+            second.hand.splice(second.hand.indexOf(drawnCards[i]), 1);
             utilities.drawCard(second, { player: second, foe: first, cause: false });
         }
     }

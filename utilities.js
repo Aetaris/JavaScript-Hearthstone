@@ -1,10 +1,11 @@
 var printer = require('./printer.js');
+var filters = require('./filters.js');
 
 module.exports.Equip = function(weapon, context) {
     context.player.weapon = weapon;
 };
 
-module.exports.BreakWeapon = function(player, context) {
+var BreakWeapon = module.exports.BreakWeapon = function(player, context) {
     player.weapon = false;
 };
 
@@ -99,13 +100,13 @@ var spellDamage = module.exports.spellDamage = function(caster, foe, damage) {
 var dealDamage = module.exports.dealDamage = function(target, damage, context) {
     var shielded = false;
     for (var i = 0; i < target.effects.length; i++) {
-        if (target.effects[i].name === "Divine Shield") {
+        if (target.effects[i].name === "Divine Shield" && damage > 0) {
             target.effects.splice(i, 1);
             shielded = true;
             printer.print(target.color + " " + target.name + "'s Divine Shield is destroyed.");
             break;
         }
-        if (target.effects[i].name === "Immune") {
+        if (target.effects[i].name === "Immune" && damage > 0) {
             shielded = true;
             printer.print("Damage to " + target.color + " " + target.name + " is negated, as the target is Immune.");
             break;
@@ -115,7 +116,7 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
         for (var k = 0; k < target.owner.minions.length; k++) {
             for (var o = 0; o < target.owner.minions[k].effects.length; o++) {
                 if (target.owner.minions[k].effects[o].type === "friendly all buff effect" || target.owner.minions[k].effects[o].type === "friendly minion buff effect") {
-                    if (target.owner.minions[k].effects[o].effect.name === "Immune") {
+                    if (target.owner.minions[k].effects[o].effect.name === "Immune" && damage > 0) {
                         shielded = true;
                         printer.print("Damage to " + target.color + " " + target.name + " is negated, as the target is Immune.");
                         break;
@@ -128,7 +129,7 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
         for (var k = 0; k < target.minions.length; k++) {
             for (var o = 0; o < target.minions[k].effects.length; o++) {
                 if (target.minions[k].effects[o].type === "hero buff effect") {
-                    if (target.minions[k].effects[o].effect.name === "Immune") {
+                    if (target.minions[k].effects[o].effect.name === "Immune" && damage > 0) {
                         shielded = true;
                         printer.print("Damage to " + target.color + " " + target.name + " is negated, as the target is Immune.");
                         break;
@@ -150,6 +151,9 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
                 }
             }
             
+            if(!context.player.minions) {
+                throw new Error("code broken");
+            }
             for (var i = 0; i < context.player.minions.length; i++) {
                 var minion = context.player.minions[i];
                 minion.triggerEffectType("damage hunger", {player: context.player, foe: context.foe, cause: minion});
@@ -162,7 +166,7 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
                 minion.triggerEffectType("damage hunger foe", {player: context.foe, foe: context.player, cause: minion});
             }
             
-            if(context.cause !== "Life Check" && context.cause.hasEffectType("poison")) {
+            if(context.cause && context.cause !== "Life Check" && context.cause.hasEffectType("poison")) {
                 module.exports.kill(target, {
                     player: context.foe,
                     foe: context.player,
@@ -199,6 +203,13 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
             }
         }
     }
+    if(shielded == false && target.scenario && target.scenario.minionLifelink) {
+        dealDamage(target.scenario, damage, {player: target.scenario, foe: target.scenario, cause: context.cause});
+        if(target.scenario.getHp() <= 0) {
+            printer.print(target.scenario.endOfMatch.line);
+            target.scenario.endOfMatch.action(context.player, context.foe);
+        }
+    }
     if (target.getHp() <= 0 && target.type !== "hero") {
         if(target.owner === context.foe) {
             module.exports.kill(target, {
@@ -219,16 +230,22 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
     }
     if (target.getHp() <= 0 && target.type === "hero" && target) {
         target.triggerEffectType("death interrupt", {player: context.player, foe: context.foe, cause: target});
+        if(target.getHp() <= 0 && target.endOfMatch && target.endOfMatch.line) {
+            printer.print("");
+            printer.print(target.endOfMatch.line);
+            target.endOfMatch.line = false;
+        }
     }
     return false;
 };
 
 module.exports.healDamage = function(target, healing, context) {
+    var shouldDisplay = healing > 0 && target.damageTaken > 0;
     target.damageTaken -= healing;
     if (target.getHp() > target.getMaxHp()) {
         target.damageTaken = 0;
     }
-    if (healing > 0) {
+    if (shouldDisplay) {
         if(target.owner === context.player) {
             target.triggerEffectType("anti pain", {player: context.foe, foe: context.player, cause: target});
         }
@@ -262,14 +279,14 @@ module.exports.dispel = function(target, context) {
     // and start building an array of elements to DELETE
     var toDelete = {};
     for (var o = 0; o < effects.length; o++) {
-        if (effects[o].type === "dispel") {
+        if (effects[o].type == "dispel") {
             effects[o].action(minion, {
                 player: context.player,
                 foe: context.foe,
                 cause: minion
             });
         }
-        if (effects[o].name !== "Summoning Sickness" && effects[o].name !== "Remove Temporary Buff") {
+        if (effects[o].name != "Summoning Sickness" && effects[o].name != "Remove Temporary Buff") {
             toDelete[effects[o].name] = true;
         }
     }
@@ -284,11 +301,13 @@ module.exports.dispel = function(target, context) {
         }
     }
     target.battlecry = false;
-    target.deathrattle = false;
-    target.enrage = false;
+    target.effects.push({name: "Silence", type: "passive"});
 };
 
 module.exports.kill = function(target, context) {
+    
+    printer.print(target.color + " " + target.name + " has been killed!");
+    
     if (!target.effects) {
         printer.print("Aaaaaah!");
     }
@@ -303,8 +322,6 @@ module.exports.kill = function(target, context) {
     }
     
     context.player.minions.splice(context.player.minions.indexOf(target), 1);
-    
-    printer.print(target.color + " " + target.name + " has been killed!");
     
     if(context.cause.owner === target.owner) {
         if(context.cause.triggerEffectType) {
@@ -340,10 +357,80 @@ module.exports.kill = function(target, context) {
         minion.triggerEffectType("healing hunger hand", {player: context.foe, foe: context.player, cause: target});
         minion.triggerEffectType("healing hunger foe hand", {player: context.foe, foe: context.player, cause: target});
     }
-    context.player.triggerEffectType("death hunger", {player: context.player, foe: context.foe, cause: target, turn: context.player.turn})
-    context.player.triggerEffectType("death hunger friend", {player: context.player, foe: context.foe, cause: target, turn: context.player.turn})
-    context.foe.triggerEffectType("death hunger", {player: context.foe, foe: context.player, cause: target, turn: context.foe.turn})
-    context.foe.triggerEffectType("death hunger foe", {player: context.foe, foe: context.player, cause: target, turn: context.foe.turn})
+    context.player.triggerEffectType("death hunger", {player: context.player, foe: context.foe, cause: target, turn: context.player.turn});
+    context.player.triggerEffectType("death hunger friend", {player: context.player, foe: context.foe, cause: target, turn: context.player.turn});
+    context.foe.triggerEffectType("death hunger", {player: context.foe, foe: context.player, cause: target, turn: context.foe.turn});
+    context.foe.triggerEffectType("death hunger foe", {player: context.foe, foe: context.player, cause: target, turn: context.foe.turn});
+    
+    // Adding to graveyard
+    
+    if(!target || !target.card || typeof target.card !== "function") {
+        throw new Error("This minion has no card, or its card is not a function.");
+    }
+    context.player.graveyard.push(target.card());
+};
+
+module.exports.canPlayCard = function(player, context) {
+    for(var i = 0; i < player.hand.length; i++) {
+        if(player.mana >= getCardCost(player.hand[i], context)) {
+            return true;
+        }
+    }
+    return false;
+};
+
+var getCardCost = module.exports.getCardCost = function(card, context) {
+    var cost = card.cost;
+    if(!card.effects) {
+        throw new Error("Card does not have effects");
+    }
+    for(var c = 0; c < card.effects.length; c++) {
+        var effect = card.effects[c];
+        if(!effect) {
+            throw new Error("Card does not have effect");
+        }
+        if(effect.type == "buff cost") {
+            if(effect.num) {
+                cost += effect.num;
+            }
+            else if(effect.action) {
+                cost += effect.action(card, context);
+            }
+        }
+    }
+    for(var c = 0; c < context.player.minions.length; c++) {
+        for(var b = 0; b < context.player.minions[c].effects.length; b++) {
+            var effect = context.player.minions[c].effects[b];
+            if(effect.type === "aura hand friend buff cost" || effect.type === "aura hand buff cost") {
+                if(effect.num) {
+                    cost += effect.num;
+                }
+                else if(effect.action) {
+                    cost += effect.action(context);
+                }
+            }
+        }
+    }
+    for(var c = 0; c < context.foe.minions.length; c++) {
+        for(var b = 0; b < context.foe.minions[c].effects.length; b++) {
+            var effect = context.foe.minions[c].effects[b];
+            if(!effect) {
+                console.log("bug");
+            }
+            if(effect.type === "aura hand foe buff cost" || effect.type === "aura hand buff cost") {
+                if(effect.num) {
+                    cost += effect.num;
+                }
+                else if(effect.action) {
+                    cost += effect.action(card, {player: context.foe, foe: context.player, cause: card} );
+                }
+            }
+        }
+    }
+    if(cost < 0) {
+        return 0;
+    }
+    return cost;
 };
 
 module.exports.Joust = function(player, foe) {
@@ -418,7 +505,11 @@ module.exports.Joust = function(player, foe) {
 module.exports.drawCard = function(player, context) {
     var card = player.deck[0];
     if (player.deck.length > 0 && player.hand.length < 10) {
-        printer.print(player.color + " " + player.name + " draws a " + player.deck[0].name + ".");
+        if(player.isPlayer || !context.foe.isPlayer) {
+            printer.print(player.color + " " + player.name + " draws a " + player.deck[0].name + ".");
+        } else {
+            printer.print(player.color + " " + player.name + " draws a card.");
+        }
         player.hand.push(player.deck[0]);
         context.player.triggerEffectType("draw hunger", {player: context.player, foe: context.foe, cause: context.player});
         context.player.triggerEffectType("draw hunger friend", {player: context.player, foe: context.foe, cause: context.player});
@@ -443,7 +534,7 @@ module.exports.drawCard = function(player, context) {
     }
     if (player.deck.length <= 0) {
         player.fatigue += 1;
-        printer.print("Deck empty, could not draw cards! The " + player.color + " " + player.name + " takes " + player.fatigue + " fatigue damage!");
+        printer.print("The " + player.color + " " + player.name + " takes " + player.fatigue + " fatigue damage!");
         module.exports.dealDamage(player, player.fatigue, {
             player: player,
             foe: false,
@@ -451,7 +542,7 @@ module.exports.drawCard = function(player, context) {
         });
     }
     if (player.deck.length > 0 && player.hand.length >= 10) {
-        printer.print(player.color + " " + player.name + " draws and is forced to discard " + player.deck[0].name + ", as their hand is too full.");
+        printer.print(player.color + " " + player.name + " is forced to discard " + player.deck[0].name + ", as their hand is too full.");
         player.deck.splice(0, 1);
     }
     if (card) {
@@ -462,7 +553,9 @@ module.exports.drawCard = function(player, context) {
 module.exports.summon = function(minion, player, context) {
     if (context.player.minions.length < 7) {
         context.player.minions.push(minion);
-        minion.color = player.color;
+        if(minion.color == "Red" || minion.color == "Blue" || !minion.color) {
+            minion.color = player.color;
+        }
         minion.owner = context.player;
         for (var i = 0; i < player.minions.length; i++) {
             if (player.minions[i] !== minion) {
@@ -479,10 +572,15 @@ module.exports.summon = function(minion, player, context) {
                 }
             }
         }
-        for (i = 0; i < context.foe.minions.length; i++) {
-            for (var m = 0; m < context.foe.minions[i].effects.length; m++) {
-                if (context.foe.minions[i].effects[m].type === "summon hunger" || context.foe.minions[i].effects[m].type === "summon hunger foe") {
-                    context.foe.minions[i].effects[m].action(context.foe.minions[i], context);
+        if(context.foe) {
+            for (i = 0; i < context.foe.minions.length; i++) {
+                if(!context.foe.minions[i].effects) {
+                    throw new Error("oops");
+                }
+                for (var m = 0; m < context.foe.minions[i].effects.length; m++) {
+                    if (context.foe.minions[i].effects[m].type === "summon hunger" || context.foe.minions[i].effects[m].type === "summon hunger foe") {
+                        context.foe.minions[i].effects[m].action(context.foe.minions[i], context);
+                    }
                 }
             }
         }
@@ -492,21 +590,91 @@ module.exports.summon = function(minion, player, context) {
                 player.effects[i].action(player, context);
             }
         }
-        for (i = 0; i < context.foe.effects.length; i++) {
-            if (context.foe.effects[i].type === "summon hunger" || context.foe.effects[i].type === "summon hunger foe") {
-                var newContext = context;
-                newContext['minion'] = minion;
-                newContext['player'] = context.foe;
-                newContext['foe'] = context.player;
-                if (!context.foe.effects) {
-                    printer.print("AAAAAAH");
+        if(context.foe) {
+            for (i = 0; i < context.foe.effects.length; i++) {
+                if (context.foe.effects[i].type === "summon hunger" || context.foe.effects[i].type === "summon hunger foe") {
+                    var newContext = context;
+                    newContext['minion'] = minion;
+                    newContext['player'] = context.foe;
+                    newContext['foe'] = context.player;
+                    if (!context.foe.effects) {
+                        printer.print("AAAAAAH");
+                    }
+                    context.foe.effects[i].action(newContext.player, newContext);
                 }
-                context.foe.effects[i].action(newContext.player, newContext);
             }
         }
     }
-    else {
-        printer.print("Could not summon " + player.color + " " + minion.name + ". Why is it trying to? There are already seven minions!");
+};
+
+var Attack = module.exports.Attack = function(source, target, context) {
+    if(!target) {
+        return;
+    }
+    if (source.getDamage() > 0) {
+        printer.print(source.color + " " + source.name + " attacks " + target.color + " " + target.name + ".");
+        if(!context || !context.player) {
+            console.log("debug");
+        }
+        for(var i = 0; i < context.player.effects.length; i++) {
+            if((context.player.effects[i].type === "attack hunger" || context.player.effects[i].type === "attack hunger friend" ||
+            (context.player.effects[i].type === "self defense" && target === context.player)) && !context.player.turn) {
+                var newContext = context;
+                newContext['player'] = context.player;
+                newContext['foe'] = context.foe;
+                newContext['attacker'] = source;
+                newContext['target'] = target;
+                newContext['damage'] = source.damage;
+                var result = context.player.effects[i].action(newContext.player, newContext);
+                if(result) {
+                    target = result;
+                }
+            }
+        }
+        for(var i = 0; i < context.foe.effects.length; i++) {
+            if((context.foe.effects[i].type === "attack hunger" || context.foe.effects[i].type === "attack hunger foe" ||
+            (context.foe.effects[i].type === "self defense" && target === context.foe)) && !context.foe.turn) {
+                var newContext = context;
+                newContext['player'] = context.foe;
+                newContext['foe'] = context.player;
+                newContext['attacker'] = source;
+                newContext['target'] = target;
+                newContext['damage'] = source.damage;
+                var result = context.foe.effects[i].action(newContext.player, newContext);
+                if(result) {
+                    target = result;
+                }
+            }
+        }
+        var damageDealt = source.getDamage();
+        for(var i = 0; i < target.effects.length; i++) {
+            if(target.effects[i].type === "self defense") {
+                damageDealt = target.effects[i].action( {player: context.foe, foe: context.player, source: target, cause: source, damage: damageDealt} );
+            }
+        }
+        dealDamage(target, damageDealt, {player: context.player, foe: context.foe, cause: source});
+        if (target.type !== "hero" || target.getDamage() <= 0) {
+            var damageDealt = target.getDamage();
+            for(var i = 0; i < source.effects.length; i++) {
+                if(source.effects[i].type === "self defense") {
+                    damageDealt = source.effects[i].action( {player: context.player, foe: context.foe, source: source, cause: target, damage: damageDealt} );
+                }
+            }
+            dealDamage(source, damageDealt, {
+                player: context.foe,
+                foe: context.player,
+                cause: target
+            });
+        }
+        if (source.type === "hero" && source.weapon) {
+            var WeaponName = source.weapon.name;
+            source.weapon.durability -= 1;
+            printer.print("Remaining durability on the " + source.color + " " + source.name + "'s " + source.weapon.name + ": " + source.weapon.durability + ".");
+            if (source.weapon.durability <= 0) {
+                BreakWeapon(source, context);
+                printer.print("The " + source.color + " " + source.name + "'s " + WeaponName + " shatters.");
+            }
+        }
     }
 };
 
@@ -566,7 +734,7 @@ var genMaxHp = module.exports.genMaxHp = function(minion) {
     if (!minion.owner && minion.type !== "hero") {
         printer.print("Eek! Minion has no owner: " + minion.name)
     }
-    if (minion.type === "minion") {
+    if (minion.type === "minion" && minion.owner) {
         for (var i = 0; i < minion.owner.minions.length; i++) {
             for (var q = 0; q < minion.owner.minions[i].effects.length; q++) {
                 var effect = minion.owner.minions[i].effects[q];
@@ -740,23 +908,99 @@ var genDamage = module.exports.genDamage = function(minion) {
     return genMaxDamage(minion) - minion.damageLost;
 };
 
+module.exports.reverseStats = function(minion) {
+    var initialHp = minion.getHp();
+    var initialDmg = minion.getDamage();
+    minion.baseHp = initialDmg;
+    minion.baseDamage = initialHp;
+    var baseEffects = minion.effects.slice();
+    for(var i = 0; i < baseEffects.length; i++) {
+        var effect = baseEffects[i];
+        if(effect.type == "buff health" || effect.type == "buff damage" || effect.type == "set health" || effect.type == "set damage") {
+            minion.effects.splice(minion.effects.indexOf(baseEffects[i]), 1);
+        }
+    }
+};
+
+var AttackAI = module.exports.AttackAI = function(attacker, context) {
+    var targetables = filters.Attack(context);
+
+    var friendShielded = attacker.hasEffectName("Divine Shield");
+
+    var bestMinion = null;
+    var bestDesirability = 0;
+    
+    for(var i = 0; i < targetables.length; i++) {
+        var desirability = targetables[i].getDamage() + 1;
+        
+        var foeShielded = targetables[i].hasEffectName("Divine Shield");
+        
+        if(!attacker.getDamage()) {
+            throw new Error("agh");
+        }
+        
+        // if we can kill the minion, that's good
+        if (attacker.getDamage() >= targetables[i].getHp() && !foeShielded) {
+            desirability = desirability * 1.33 + 1;
+        }
+        
+        // if we can kill it without dying that's amazing
+        if (targetables[i].getDamage() <= attacker.getHp() || friendShielded) {
+            desirability = desirability * 1.5 + 1;
+        }
+        
+        // we want to strongly discourage suicide trades
+        if (targetables[i].getDamage() >= attacker.getHp() && attacker.getDamage() <= targetables[i].getHp()) {
+            desirability *= 0.4;
+        }
+        
+        if (desirability > bestDesirability) {
+            bestDesirability = desirability;
+            bestMinion = targetables[i];
+        }
+        
+        desirability *= context.player.getHp()/(2*context.player.getMaxHp());
+        
+        if(attacker.type === "hero" && targetables[i].getDamage() > attacker.getHp()) {
+            desirability = -1;
+        }
+    };
+    
+    var hasTaunt = false;
+    for(var i = 0; i < context.foe.minions.length; i++) {
+        if(context.foe.minions[i].hasEffectName("Taunt")) {
+            hasTaunt = true;
+        }
+    }
+
+    if(!attacker.getDamage) {
+        throw new Error("no getDamage");
+    }
+    var faceDesirability = attacker.getDamage();
+    faceDesirability /= context.foe.getHp()/30;
+
+    if ((bestDesirability > faceDesirability && bestMinion) || (hasTaunt && bestDesirability >= 2)) {
+        return bestMinion;
+    }
+    return !hasTaunt ? context.foe : false;
+};
+
 var withEffects = module.exports.withEffects = function (obj) {
     obj.addEffect = function(effect) {
-            if (!effect) {
-                throw new Error("Can't add null effect");
-            }
-            obj.effects.push(effect);
-        };
+        if (!effect) {
+            throw new Error("Can't add null effect");
+        }
+        obj.effects.push(effect);
+    };
     obj.removeEffect = function(effect) {
-            if(!effect) {
-                throw new Error("Can't remove null effect");
-            }
-            var ix = this.effects.indexOf(effect);
-            if(ix < 0) {
-                throw new Error("Can't remove effect outside of effects array");
-            }
+        if(!effect) {
+            throw new Error("Can't remove null effect");
+        }
+        var ix = this.effects.indexOf(effect);
+        if(ix > 0) {
             obj.effects.splice(ix, 1);
-        };
+        }
+    };
     obj.getEffectsName = function (name) {
         if (!name) {
             throw new Error("Unexpected null name!");
@@ -772,9 +1016,9 @@ var withEffects = module.exports.withEffects = function (obj) {
         if (!type) {
             throw new Error("Unexpected null type!");
         }
-        if(!obj.effects.filter) {
-            throw new Error("uh oh");
-        }
+        // if(!obj.effects.filter) {
+        //     throw new Error("uh oh");
+        // }
         return obj.effects.filter(function (e) {
             return e.type === type;
         });
@@ -798,8 +1042,8 @@ var withEffects = module.exports.withEffects = function (obj) {
         effects.forEach(function (effect) {
             if(!effect || !effect.action) {
                 console.log("triggerEffectType() [effect.name=" + effect.name +
-                ", effect.type=" + effect.type + ", " +
-                "obj name=" + obj.name + ", object=" + obj + "]");
+                ", effect.type=" + effect.type + ", effect action=" + effect.action +
+                ", obj name=" + obj.name + ", object=" + obj + "]");
                 throw new Error("Can't trigger action that doesn't exist");
             }
             else {
@@ -810,7 +1054,7 @@ var withEffects = module.exports.withEffects = function (obj) {
     return obj;
 };
 
-module.exports.makeSpell = function(rarity, cardSet, color, name, cost, overload, ability, targetai, ai, card, tier) {
+module.exports.makeSpell = function(rarity, cardSet, color, name, cost, overload, ability, targetai, filter, ai, card, tier) {
     return withEffects ({
         type: "spell",
         rarity: rarity,
@@ -820,6 +1064,7 @@ module.exports.makeSpell = function(rarity, cardSet, color, name, cost, overload
         cost: cost,
         ability: ability,
         targetai: targetai,
+        filter: filter,
         effects: [],
         ai: ai,
         card: card,
@@ -827,7 +1072,7 @@ module.exports.makeSpell = function(rarity, cardSet, color, name, cost, overload
     });
 };
 
-module.exports.makeWeapon = function(rarity, cardSet, name, cost, overload, baseDamage, durability, battlecry, targetai, effects, ai, card, tier) {
+module.exports.makeWeapon = function(rarity, cardSet, name, cost, overload, baseDamage, durability, battlecry, targetai, filter, effects, ai, card, tier) {
     return withEffects ({
         type: "weapon",
         rarity: rarity,
@@ -840,6 +1085,7 @@ module.exports.makeWeapon = function(rarity, cardSet, name, cost, overload, base
         durability: durability,
         battlecry: battlecry,
         targetai: targetai,
+        filter: filter,
         effects: effects,
         ai: ai,
         card: card,
@@ -847,7 +1093,7 @@ module.exports.makeWeapon = function(rarity, cardSet, name, cost, overload, base
     });
 };
 
-module.exports.makeMinion = function(race, rarity, cardSet, color, name, cost, overload, maxHp, baseDamage, battlecry, targetai, effects, ai, card, tier) {
+module.exports.makeMinion = function(race, rarity, cardSet, color, name, cost, overload, maxHp, baseDamage, battlecry, targetai, filter, effects, ai, card, tier) {
     return withEffects({
         type: "minion",
         rarity: rarity,
@@ -862,6 +1108,7 @@ module.exports.makeMinion = function(race, rarity, cardSet, color, name, cost, o
         damageLost: 0,
         battlecry: battlecry,
         targetai: targetai,
+        filter: filter,
         effects: effects,
         ai: ai,
         card: card,

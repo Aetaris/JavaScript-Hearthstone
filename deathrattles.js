@@ -5,6 +5,7 @@ var abilities = require('./abilities.js');
 var weapons = require('./weapons.js');
 var ais = require('./AIs.js');
 var targetais = require('./targetAIs.js');
+var filters = require('./filters.js');
 var cardLists = require('./cardlists.js');
 
 var LeperGnome = function(source, context) {
@@ -14,7 +15,6 @@ var LeperGnome = function(source, context) {
 
 var HauntedCreeper = function(source, context) {
     printer.print(context.player.color + " Haunted Creeper's deathrattle summons two " + context.player.color + " Spectral Spiders.");
-    context.player.minions.splice(context.player.minions.indexOf(source), 1);
     utilities.summon(SpectralSpider(context.player.color), context.player, context);
     utilities.summon(SpectralSpider(context.player.color), context.player, context);
 };
@@ -201,7 +201,7 @@ var BloodmageThalnos = function(source, context) {
 };
 
 var CorruptedHealbot = function(source, context) {
-    printer.print(source.color + " Corrupted Healbot's deathrattle restores Health to the opponent, the " + context.player.color + " " + context.player.name + ".");
+    printer.print(source.color + " Corrupted Healbot's deathrattle restores Health to the opponent, the " + context.foe.color + " " + context.foe.name + ".");
     utilities.healDamage(context.foe, 8, {player: context.foe, foe: context.player, cause: source});
 };
 
@@ -328,7 +328,7 @@ var Malorne = function(source, context) {
 
 var TirionFordring = function(source, context) {
     printer.print(source.color + " Tirion Fordring's deathrattle equips " + context.player.color + " " + context.player.name + " with a 5/3 Ashbringer weapon.");
-    utilities.Equip(Ashbringer, context);
+    utilities.Equip(Ashbringer(), context);
 };
 
 var DarkCultist = function(source, context) {
@@ -350,61 +350,68 @@ var DarkCultistBuff = {
 };
 
 var SpectralSpider = function(color) {
-    return utilities.makeMinion(false, "Common", "Naxxramas", color, "Spectral Spider", 0, 0, 1, 1, false, false, [effects.sickness], ais.MurlocRaider);
+    return utilities.makeMinion(false, "Common", "Naxxramas", color, "Spectral Spider", 0, 0, 1, 1, false, false, false, [effects.sickness], ais.MurlocRaider, SpectralSpider);
 };
 
 var EggNerubian = function(color) {
-    return utilities.makeMinion(false, "Rare", "Naxxramas", color, "Nerubian", 4, 0, 4, 4, false, false, [effects.sickness], ais.MurlocRaider);
+    return utilities.makeMinion(false, "Rare", "Naxxramas", color, "Nerubian", 4, 0, 4, 4, false, false, false, [effects.sickness], ais.MurlocRaider, EggNerubian);
 };
 
 var BelcherSlime = function(color) {
-    return utilities.makeMinion(false, "Common", "Naxxramas", color, "Slime", 1, 0, 2, 1, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, BelcherSlime);
+    return utilities.makeMinion(false, "Common", "Naxxramas", color, "Slime", 1, 0, 2, 1, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, BelcherSlime);
 };
 
 var DamagedGolem = function(color) {
-    return utilities.makeMinion("Mech", "Common", "Classic", color, "Damaged Golem", 2, 0, 1, 2, false, false, [effects.sickness], ais.MurlocRaider);
+    return utilities.makeMinion("Mech", "Common", "Classic", color, "Damaged Golem", 2, 0, 1, 2, false, false, false, [effects.sickness], ais.MurlocRaider, DamagedGolem);
 };
 
-var WhirlingBlades = function() {
-    return utilities.makeSpell("Special", "Whirling Blades", 1, 0, abilities.WhirlingBlades, targetais.WhirlingBlades, ais.WhirlingBlades);
+var WhirlingBlades = module.exports.WhirlingBlades = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Whirling Blades", 1, 0, abilities.WhirlingBlades,
+    targetais.WhirlingBlades, filters.minion, ais.WhirlingBlades, WhirlingBlades, 50);
 };
 
-var ArmorPlating = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Armor Plating", 1, 0, abilities.ArmorPlating, targetais.ArmorPlating, ais.ArmorPlating);
+var ArmorPlating = module.exports.ArmorPlating = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Armor Plating", 1, 0, abilities.ArmorPlating,
+    targetais.ArmorPlating, filters.minion, ais.ArmorPlating, ArmorPlating, 50);
 };
 
-var RustyHorn = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Rusty Horn", 1, 0, abilities.RustyHorn, targetais.RustyHorn, ais.RustyHorn);
+var RustyHorn = module.exports.RustyHorn = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Rusty Horn", 1, 0, abilities.RustyHorn,
+    targetais.RustyHorn, filters.minion, ais.RustyHorn, RustyHorn, 50);
 };
 
-var EmergencyCoolant = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Emergency Coolant", 1, 0, abilities.EmergencyCoolant, targetais.EmergencyCoolant, ais.EmergencyCoolant);
+var EmergencyCoolant = module.exports.EmergencyCoolant = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Emergency Coolant", 1, 0, abilities.EmergencyCoolant,
+    targetais.EmergencyCoolant, filters.minion, ais.EmergencyCoolant, EmergencyCoolant, 50);
 };
 
-var FinickyCloakfield = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Finicky Cloakfield", 1, 0, abilities.FinickyCloakfield, targetais.FinickyCloakfield, ais.FinickyCloakfield);
+var FinickyCloakfield = module.exports.FinickyCloakfield = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Finicky Cloakfield", 1, 0, abilities.FinickyCloakfield,
+    targetais.FinickyCloakfield, filters.minion, ais.FinickyCloakfield, FinickyCloakfield, 50);
 };
 
-var ReversingSwitch = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Reversing Switch", 1, 0, abilities.ReversingSwitch, targetais.ReversingSwitch, ais.ReversingSwitch);
+var ReversingSwitch = module.exports.ReversingSwitch = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Reversing Switch", 1, 0, abilities.ReversingSwitch,
+    targetais.ReversingSwitch, filters.minion, ais.ReversingSwitch, ReversingSwitch, 50);
 };
 
-var TimeRewinder = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Time Rewinder", 1, 0, abilities.TimeRewinder, targetais.TimeRewinder, ais.TimeRewinder);
+var TimeRewinder = module.exports.TimeRewinder = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Time Rewinder", 1, 0, abilities.TimeRewinder,
+    targetais.TimeRewinder, filters.minion, ais.TimeRewinder, TimeRewinder, 50);
 };
 
-var SpareParts = [
-    WhirlingBlades,
-    ArmorPlating,
-    RustyHorn,
-    EmergencyCoolant,
-    FinickyCloakfield,
-    ReversingSwitch,
-    TimeRewinder
+var SpareParts = module.exports.SpareParts = [
+    module.exports.WhirlingBlades,
+    module.exports.ArmorPlating,
+    module.exports.RustyHorn,
+    module.exports.EmergencyCoolant,
+    module.exports.FinickyCloakfield,
+    // module.exports.ReversingSwitch,
+    module.exports.TimeRewinder
 ];
 
 var Ashbringer = function(color) {
-    return utilities.makeWeapon(color, "Legendary", "Ashbringer", 5, 0, weapons.Ashbringer);
+    return utilities.makeWeapon("Legendary", "Classic", "Ashbringer", 5, 0, 5, 3, false, false, false, [], ais.ArcaniteReaper, Ashbringer, 100);
 };
 
 module.exports.LeperGnome_Deathrattle = {
@@ -446,7 +453,7 @@ module.exports.Abomination_Deathrattle = {
 module.exports.Deathcharger_Deathrattle = {
     name: "Deathcharger",
     type: "deathrattle",
-    action: Abomination
+    action: Deathcharger
 };
 
 module.exports.ClockworkGnome_Deathrattle = {

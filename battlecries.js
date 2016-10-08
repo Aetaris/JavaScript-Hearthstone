@@ -7,6 +7,7 @@ var effects = require('./effects.js');
 var heroes = require('./heroes.js');
 var ais = require('./AIs.js');
 var targetais = require('./targetAIs.js');
+var filters = require('./filters.js');
 var cardLists = require('./cardlists.js');
 
 module.exports.ElvenArcher = function(target, source, context) {
@@ -32,6 +33,19 @@ module.exports.NoviceEngineer = function(target, source, context) {
     printer.print(source.color + " Novice Engineer's battlecry creates a slightly convenient invention, allowing the " + source.color + " " + context.player.name + " to draw a card.");
 };
 
+module.exports.AbusiveSergeant = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " Abusive Sergeant's battlecry 'inspires' a friendly minion, giving them +2 Attack this turn.");
+        target.effects.push(AbusiveSergeantBuff);
+    }
+};
+
+var AbusiveSergeantBuff = {
+    name: "Temporary Damage",
+    type: "buff damage",
+    num: 2
+};
+
 module.exports.AldorPeacekeeper = function(target, source, context) {
     var target = context.foe;
     var maxDamage = 0;
@@ -49,7 +63,7 @@ module.exports.AldorPeacekeeper = function(target, source, context) {
 };
 
 module.exports.AzureDrake = function(target, source, context) {
-    printer.print(source.color + " Azure Drake's battlecry utilizes the vast array of arcane knowledge available to the blue dragonflight to draw a card for " + source.color + " " + context.player.name + ".");
+    printer.print(source.color + " Azure Drake's battlecry draws a card for " + source.color + " " + context.player.name + ".");
     utilities.drawCard(context.player, context);
 };
 
@@ -121,6 +135,13 @@ module.exports.FacelessManipulator = function(target, source, context) {
     }
 };
 
+module.exports.CrazedAlchemist = function(target, source, context) {
+    printer.print(source.color + " Crazed Alchemist throws an experimental concoction at " + target.color + " " + target.name + ", reversing their Attack and Health.", "results.txt", false);
+    printer.print(" (" + target.getDamage() + "/" + target.getHp() + ") -> ", "results.txt", false);
+    utilities.reverseStats(target);
+    printer.print("(" + target.getDamage() + "/" + target.getHp() + ")");
+};
+
 module.exports.Loatheb = function(target, source, context) {
     printer.print(source.color + " Loatheb's battlecry spews forth toxic spores, increasing the cost of all enemy spells by (5) next turn.");
     for(var i = 0; i < context.foe.hand.length; i++) {
@@ -144,7 +165,7 @@ module.exports.TinkertownTechnician = function(target, source, context) {
         source.addEffect(effects.TinkertownTechnicianDamage);
         var sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
         context.player.hand.push(SpareParts[sparePartNum]());
-        printer.print(context.player.color + " " + context.player.name + " receives: " + SpareParts[sparePartNum]().name + ".");
+        printer.print(context.player.color + " " + context.player.name + " receives : " + SpareParts[sparePartNum]().name + ".");
     }
 };
 
@@ -569,6 +590,63 @@ module.exports.CThun = function(target, source, context) {
     }
 };
 
+module.exports.NZoth = function(target, source, context) {
+    var deathrattles = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        if(context.player.graveyard[i].type == "minion" && context.player.graveyard[i].hasEffectType("deathrattle")) {
+            deathrattles.push(context.player.graveyard[i]);
+        }
+    }
+    utilities.shuffle(deathrattles);
+    deathrattles.splice(6);
+    printer.print(source.color + " N'Zoth, the Corruptor's battlecry revives the fallen armies of the Old Gods, resummoning " + deathrattles.length + " " + context.player.color + " Deathrattle minions that died this game.");
+    for(i = 0; i < deathrattles.length; i++) {
+        if(context.player.minions.length >= 7) {
+            continue;
+        }
+        printer.print("Tendrils of darkness form into the shape of: " + deathrattles[i].name);
+        utilities.summon(deathrattles[i].card(), context.player, context);
+    }
+};
+
+module.exports.YoggSaron = function(target, source, context) {
+    var spells = 0;
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        if(context.player.graveyard[i].type == "spell") {
+            spells++;
+        }
+    }
+    printer.print(source.color + " Yogg-Saron, Hope's End induces madness, causing a flurry of " + spells + " randomly targeted spells to be launched in every direction.");
+    var spellList = [];
+    var allCards = cardLists.allCards();
+    for (var j = 0; j < allCards.length; j++) {
+        var card = allCards[j];
+        if(card.type == "spell") {
+            spellList.push(card);
+        }
+    }
+    for(i = 0; i < spells; i++) {
+        var spell = spellList[Math.floor(Math.random()*spellList.length)];
+        var target = false;
+        if(spell.filter) {
+            var filtered = spell.filter(context);
+            target = filtered[Math.floor(Math.random()*filtered.length)];
+        }
+        if((!spell.filter || target) && source.getHp() > 0) {
+            context.player.lockedMana += card.overload;
+            spell.ability(target, {
+                player: context.player,
+                foe: context.foe,
+                cause: spell,
+                target: target 
+            });
+            printer.print("Spell: " + spell.name);
+        } else {
+            printer.print("Spell fizzled: " + spell.name + "!");
+        }
+    }
+};
+
 module.exports.EaterofSecrets = function(target, source, context) {
     printer.print(source.color + " Eater of Secrets devours all Secrets of " + context.foe.color + " " + context.foe.name + ", empowering itself for each Secret eaten.");
     var secretList = context.foe.getEffectsName("Secret");
@@ -870,67 +948,74 @@ var WyrmrestAgentBuff = {
 };
 
 var BoomBot = function() {
-    return utilities.makeMinion("Mech", "Goblins vs Gnomes", "Common", false, "Boom Bot", 1, 0, 1, 1, false, false, [effects.sickness, deathrattles.BoomBot_Deathrattle], ais.BoomBot, BoomBot);
+    return utilities.makeMinion("Mech", "Goblins vs Gnomes", "Common", false, "Boom Bot", 1, 0, 1, 1, false, false, false, [effects.sickness, deathrattles.BoomBot_Deathrattle], ais.BoomBot, BoomBot);
 };
 
 var MaptotheGoldenMonkey = function() {
-    return utilities.makeSpell("Special", "League of Explorers", false, "Map to the Golden Monkey", 2, 0, abilities.MaptotheGoldenMonkey, false, ais.MaptotheGoldenMonkey);
+    return utilities.makeSpell("Special", "League of Explorers", false, "Map to the Golden Monkey", 2, 0, abilities.MaptotheGoldenMonkey, false, false, ais.MaptotheGoldenMonkey);
 };
 
 var Mine = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Burrowing Mine", 0, 0, abilities.BurrowingMine, false, "on draw");
+    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Burrowing Mine", 0, 0, abilities.BurrowingMine, false, false, "on draw");
 };
 
 var DruidoftheFlame_FireCat = function(color) {
-    return utilities.makeMinion("Beast", "Common", "Blackrock Mountain", color, "Druid of the Flame", 3, 0, 2, 5, false, false, [effects.sickness], ais.DruidoftheFlame);
+    return utilities.makeMinion("Beast", "Common", "Blackrock Mountain", color, "Druid of the Flame", 3, 0, 2, 5, false, false, false, [effects.sickness], ais.DruidoftheFlame, DruidoftheFlame_FireCat);
 };
 
 var DruidoftheFlame_FireBird = function(color) {
-    return utilities.makeMinion("Beast", "Common", "Blackrock Mountain", color, "Druid of the Flame", 3, 0, 5, 2, false, false, [effects.sickness], ais.DruidoftheFlame);
+    return utilities.makeMinion("Beast", "Common", "Blackrock Mountain", color, "Druid of the Flame", 3, 0, 5, 2, false, false, false, [effects.sickness], ais.DruidoftheFlame, DruidoftheFlame_FireBird);
 };
 
 var Treant = function(color) {
-    return utilities.makeMinion(false, "Common", "Classic", color, "Treant", 2, 0, 2, 2, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider);
+    return utilities.makeMinion(false, "Common", "Classic", color, "Treant", 2, 0, 2, 2, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Treant);
 };
 
 var BloodFury = function() {
-    return utilities.makeWeapon("Legendary", "Classic", "Blood Fury", 5, 0, 3, 8, false, false, [], ais.MurlocRaider, BloodFury);
+    return utilities.makeWeapon("Legendary", "Classic", "Blood Fury", 5, 0, 3, 8, false, false, false, [], ais.MurlocRaider, BloodFury);
 };
 
-var WhirlingBlades = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Whirling Blades", 1, 0, abilities.WhirlingBlades, targetais.WhirlingBlades, ais.WhirlingBlades);
+var WhirlingBlades = module.exports.WhirlingBlades = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Whirling Blades", 1, 0, abilities.WhirlingBlades,
+    targetais.WhirlingBlades, filters.minion, ais.WhirlingBlades, WhirlingBlades, 50);
 };
 
-var ArmorPlating = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Armor Plating", 1, 0, abilities.ArmorPlating, targetais.ArmorPlating, ais.ArmorPlating);
+var ArmorPlating = module.exports.ArmorPlating = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Armor Plating", 1, 0, abilities.ArmorPlating,
+    targetais.ArmorPlating, filters.minion, ais.ArmorPlating, ArmorPlating, 50);
 };
 
-var RustyHorn = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Rusty Horn", 1, 0, abilities.RustyHorn, targetais.RustyHorn, ais.RustyHorn);
+var RustyHorn = module.exports.RustyHorn = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Rusty Horn", 1, 0, abilities.RustyHorn,
+    targetais.RustyHorn, filters.minion, ais.RustyHorn, RustyHorn, 50);
 };
 
-var EmergencyCoolant = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Emergency Coolant", 1, 0, abilities.EmergencyCoolant, targetais.EmergencyCoolant, ais.EmergencyCoolant);
+var EmergencyCoolant = module.exports.EmergencyCoolant = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Emergency Coolant", 1, 0, abilities.EmergencyCoolant,
+    targetais.EmergencyCoolant, filters.minion, ais.EmergencyCoolant, EmergencyCoolant, 50);
 };
 
-var FinickyCloakfield = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Finicky Cloakfield", 1, 0, abilities.FinickyCloakfield, targetais.FinickyCloakfield, ais.FinickyCloakfield);
+var FinickyCloakfield = module.exports.FinickyCloakfield = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Finicky Cloakfield", 1, 0, abilities.FinickyCloakfield,
+    targetais.FinickyCloakfield, filters.minion, ais.FinickyCloakfield, FinickyCloakfield, 50);
 };
 
-var ReversingSwitch = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Reversing Switch", 1, 0, abilities.ReversingSwitch, targetais.ReversingSwitch, ais.ReversingSwitch);
+var ReversingSwitch = module.exports.ReversingSwitch = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Reversing Switch", 1, 0, abilities.ReversingSwitch,
+    targetais.ReversingSwitch, filters.minion, ais.ReversingSwitch, ReversingSwitch, 50);
 };
 
-var TimeRewinder = function() {
-    return utilities.makeSpell("Special", "Goblins vs Gnomes", false, "Time Rewinder", 1, 0, abilities.TimeRewinder, targetais.TimeRewinder, ais.TimeRewinder);
+var TimeRewinder = module.exports.TimeRewinder = function() {
+    return utilities.makeSpell("Basic", "Goblins vs Gnomes", false, "Time Rewinder", 1, 0, abilities.TimeRewinder,
+    targetais.TimeRewinder, filters.minion, ais.TimeRewinder, TimeRewinder, 50);
 };
 
-var SpareParts = [
-    WhirlingBlades,
-    ArmorPlating,
-    RustyHorn,
-    EmergencyCoolant,
-    FinickyCloakfield,
-    ReversingSwitch,
-    TimeRewinder
+var SpareParts = module.exports.SpareParts = [
+    module.exports.WhirlingBlades,
+    module.exports.ArmorPlating,
+    module.exports.RustyHorn,
+    module.exports.EmergencyCoolant,
+    module.exports.FinickyCloakfield,
+    // module.exports.ReversingSwitch,
+    module.exports.TimeRewinder
 ];

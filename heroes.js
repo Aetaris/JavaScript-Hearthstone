@@ -4,6 +4,7 @@ var ais = require('./AIs.js');
 var cardLists = require('./cardlists.js');
 var effects = require('./effects.js');
 var targetais = require('./targetAIs.js');
+var filters = require('./filters.js');
 
 var mage = module.exports.mage = function() {
     return {
@@ -12,7 +13,7 @@ var mage = module.exports.mage = function() {
         ability: abilities.MageFireblast,
         targetai: targetais.MageFireblast,
         deck: decks.basicMimiron(),
-        ai: ais.MageFireblast,
+        ai: ais.MageFireblast, filter: filters.any,
         cardList: cardLists.mage,
         cost: 2, hp: 30, armor: 0
     };
@@ -24,7 +25,7 @@ var warrior = function() {
     type: "basic", tier: 5,
     ability: abilities.WarriorArmorUp,
     deck: decks.basicWarrior(),
-    ai: ais.WarriorArmorUp,
+    ai: ais.WarriorArmorUp, filter: false,
     cardList: cardLists.warrior,
     cost: 2, hp: 30, armor: 0
     };
@@ -36,7 +37,7 @@ var rogue = function() {
     type: "basic", tier: 2,
     ability: abilities.RogueWickedKnife,
     deck: decks.basicRogue(),
-    ai: ais.RogueWickedKnife,
+    ai: ais.RogueWickedKnife, filter: false,
     cardList: cardLists.rogue,
     cost: 2, hp: 30, armor: 0
     };
@@ -48,7 +49,7 @@ var shaman = function() {
     type: "basic", tier: 7,
     ability: abilities.ShamanTotemicCall,
     deck: decks.basicShaman(),
-    ai: ais.ShamanTotemicCall,
+    ai: ais.ShamanTotemicCall, filter: false,
     cardList: cardLists.shaman,
     cost: 2, hp: 30, armor: 0
     };
@@ -60,7 +61,7 @@ var hunter = function() {
     type: "basic", tier: 8,
     ability: abilities.HunterSteadyShot,
     deck: decks.basicHunter(),
-    ai: ais.HunterSteadyShot,
+    ai: ais.HunterSteadyShot, filter: false,
     cardList: cardLists.hunter,
     cost: 2, hp: 30, armor: 0
     };
@@ -72,7 +73,7 @@ var druid = module.exports.druid = function() {
     type: "basic", tier: 4,
     ability: abilities.DruidShapeshift,
     deck: decks.basicDruid(),
-    ai: ais.DruidShapeshift,
+    ai: ais.DruidShapeshift, filter: false,
     cardList: cardLists.druid,
     cost: 2, hp: 30, armor: 0
     };
@@ -84,7 +85,7 @@ var warlock = module.exports.warlock = function() {
     type: "basic", tier: 6,
     ability: abilities.WarlockLifeTap,
     deck: decks.basicWarlock(),
-    ai: ais.WarlockSiphonSoul,
+    ai: ais.WarlockSiphonSoul, filter: false,
     cardList: cardLists.warlock,
     cost: 2, hp: 30, armor: 0
     };
@@ -96,7 +97,7 @@ var paladin = function() {
     type: "basic", tier: 3,
     ability: abilities.PaladinReinforce,
     deck: decks.basicPaladin(),
-    ai: ais.PaladinReinforce,
+    ai: ais.PaladinReinforce, filter: false,
     cardList: cardLists.paladin,
     cost: 2, hp: 30, armor: 0
     };
@@ -108,8 +109,8 @@ var priest = module.exports.priest = function() {
     type: "basic", tier: 9,
     ability: abilities.PriestLesserHeal,
     targetai: targetais.PriestLesserHeal,
-    deck: decks.DragonPriest(),
-    ai: ais.PriestLesserHeal,
+    deck: decks.basicPriest(),
+    ai: ais.PriestLesserHeal, filter: filters.any,
     cardList: cardLists.priest,
     cost: 2, hp: 30, armor: 0
     };
@@ -154,15 +155,42 @@ module.exports.anubrekhan = function() {
     };
 };
 
+module.exports.anubrekhan_heroic = function() {
+    return {
+    name: "Anub'Rekhan [Heroic]",
+    type: "naxxramas",
+    heroic: true,
+    ability: abilities.AnubRekhanSkitter_Heroic,
+    deck: decks.AnubRekhan(),
+    ai: ais.AnubRekhanSkitter,
+    cost: 2,
+    hp: 45,
+    armor: 0
+    };
+};
+
 module.exports.grandwidowfaerlina = function() {
     return {
     name: "Grand Widow Faerlina",
     type: "naxxramas",
     ability: abilities.GrandWidowFaerlinaRainofFire,
-    deck: decks.basicDeck(),
+    deck: decks.GrandWidowFaerlina(),
     ai: ais.GrandWidowFaerlinaRainofFire,
     cost: 2,
     hp: 30,
+    armor: 0
+    };
+};
+
+module.exports.grandwidowfaerlina_heroic = function() {
+    return {
+    name: "Grand Widow Faerlina [Heroic]",
+    type: "naxxramas",
+    ability: abilities.GrandWidowFaerlinaRainofFire,
+    deck: decks.GrandWidowFaerlina_Heroic(),
+    ai: ais.GrandWidowFaerlinaRainofFire,
+    cost: 1,
+    hp: 45,
     armor: 0
     };
 };
@@ -205,7 +233,7 @@ module.exports.C_OrgrimsHammer_Heroic = function() {
         name: "Orgrim's Hammer",
         type: "icecrown",
         ability: abilities.C_GunshipBattle,
-        deck: decks.C_OrgrimsHammer_Heroic,
+        deck: decks.C_OrgrimsHammer_Heroic(),
         ai: ais.true,
         cost: 1,
         hp: 45,
@@ -218,7 +246,7 @@ module.exports.C_Skybreaker_Heroic = function() {
         name: "Skybreaker",
         type: "icecrown",
         ability: abilities.C_GunshipBattle,
-        deck: decks.C_Skybreaker_Heroic,
+        deck: decks.C_Skybreaker_Heroic(),
         ai: ais.true,
         cost: 1,
         hp: 45,

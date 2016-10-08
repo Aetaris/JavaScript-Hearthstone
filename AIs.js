@@ -497,6 +497,50 @@ module.exports.YShaarjRageUnbound = function(context) {
     return true;
 };
 
+module.exports.YoggSaron = function(context) {
+    var spells = 0;
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        if(context.player.graveyard[i].type == "spell") {
+            spells++;
+        }
+    }
+    return spells > 5;
+};
+
+module.exports.NZoth = function(context) {
+    var deathrattles = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        if(context.player.graveyard[i].type == "minion" && context.player.graveyard[i].hasEffectType("deathrattle")) {
+            deathrattles.push(context.player.graveyard[i]);
+        }
+    }
+    return deathrattles.length >= 3 && context.player.minions.length <= 3;
+};
+
+module.exports.ArcaneGiant = function(context) {
+    var spells = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i];
+        if(card.type == "spell") {
+            spells.push(card);
+        }
+    }
+    return (12 - 1 * spells.length <= 8);
+};
+
+module.exports.Resurrect = function(context) {
+    var minions = [];
+    var totalCost = 0;
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i];
+        if(card.type == "minion") {
+            totalCost += card.cost;
+            minions.push(card);
+        }
+    }
+    return (totalCost / minions.length >= 3);
+};
+
 module.exports.Fireball = function(context) {
     var isPowerful = false;
     if (context.foe.minions.length > 0) {
@@ -879,7 +923,7 @@ module.exports.BloodWarriors = function(context) {
             injuredMinions++;
         }
     }
-    if(injuredMinions > 2) {
+    if(injuredMinions >= 2) {
         return true;
     }
     return false;
@@ -1501,12 +1545,7 @@ module.exports.PowerWordShield = function(context) {
             isPowerful = true;
         }
     }
-    if (isPowerful) {
-        return true;
-    }
-    else {
-        return false;
-    }
+    return isPowerful;
 };
 
 module.exports.ShadowWordPain = function(context) {

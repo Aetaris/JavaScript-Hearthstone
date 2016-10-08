@@ -3,6 +3,7 @@ var printer = require('./printer.js')
 var abilities = require('./abilities.js');
 var ais = require('./AIs.js');
 var targetais = require('./targetAIs.js');
+var filters = require('./filters.js');
 var effects = require('./effects.js');
 
 module.exports.frozen = function(source, context) {
@@ -55,9 +56,10 @@ module.exports.AcolyteofPain = function(source, context) {
 };
 
 module.exports.ShadeofNaxxramas = function(source, context) {
-    printer.print(source.color + " Shade of Naxxramas is empowered.");
+    printer.print(source.color + " Shade of Naxxramas is empowered", "results.txt", false);
     source.addEffect(ShadeofNaxxramasHp);
     source.addEffect(ShadeofNaxxramasDamage);
+    printer.print(" up to " + source.getDamage() + "/" + source.getHp() + ".");
 };
 
 var ShadeofNaxxramasHp = {
@@ -215,6 +217,17 @@ var ValidatedDoomsayerBuff = {
     num: 7
 };
 
+module.exports.ArcaneGiant = function(source, context) {
+    var spells = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i];
+        if(card.type == "spell") {
+            spells.push(card);
+        }
+    }
+    return -1 * spells.length;
+};
+
 module.exports.BolvarFordragon = function(source, context) {
     printer.print(context.player.color + " Bolvar Fordragon's righteous fury gives him +1 attack, for a total of " + source.getDamage() + ".");
     source.addEffect(BolvarBuff);
@@ -265,11 +278,11 @@ module.exports.Duplicate = function(source, context) {
     printer.print(source.color + " Secret triggered - Duplicate!");
     for(var i = 0; i < 2; i++) {
         if(source.hand.length < 10) {
-            if(!context.minion || !context.minion.card) {
+            if(!context.cause || !context.cause.card) {
                 console.log("debug");
             }
-            source.hand.push(context.minion.card());
-            printer.print("Card added to hand: " + context.minion.name + ".");
+            source.hand.push(context.cause.card());
+            printer.print("Card added to hand: " + context.cause.name + ".");
         }
         else {
             printer.print("Hand too full! Could not receive new card.");
@@ -277,7 +290,7 @@ module.exports.Duplicate = function(source, context) {
     }
 };
 
-module.exports.IceBlock = function(context) {
+module.exports.IceBlock = function(source, context) {
     if(context.damage >= context.target.getHp()) {
         for(var i = 0; i < context.player.effects.length; i++) {
             if(context.player.effects[i].specificName && context.player.effects[i].specificName === "Ice Block") {
@@ -461,15 +474,15 @@ module.exports.NorthshireCleric = function(source, context) {
 };
 
 var GrimPatron = function(color) {
-    return utilities.makeMinion(false, "Rare", "Blackrock Mountain", color, "Grim Patron", 5, 0, 3, 3, false, false, [sickness, GrimPatronEffect], ais.GrimPatron, GrimPatron);
+    return utilities.makeMinion(false, "Rare", "Blackrock Mountain", color, "Grim Patron", 5, 0, 3, 3, false, false, false, [sickness, GrimPatronEffect], ais.GrimPatron, GrimPatron);
 };
 
 var Gnoll = function(color) {
-    return utilities.makeMinion(false, "Basic", "Whispers of the Old Gods", color, "Gnoll", 2, 0, 2, 2, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Gnoll);
+    return utilities.makeMinion(false, "Basic", "Whispers of the Old Gods", color, "Gnoll", 2, 0, 2, 2, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Gnoll);
 };
 
 var Fireball = function() {
-    return utilities.makeSpell("Basic", "Classic", false, "Fireball", 4, 0, abilities.Fireball, targetais.Fireball, ais.Fireball, Fireball);
+    return utilities.makeSpell("Basic", "Classic", false, "Fireball", 4, 0, abilities.Fireball, targetais.Fireball, filters.any, ais.Fireball, Fireball);
 };
 
 var sickness = {
@@ -479,24 +492,24 @@ var sickness = {
 
 // Custom Sets
 
-module.exports.C_SkybreakerSorcerer = function(context) {
+module.exports.C_SkybreakerSorcerer = function(source, context) {
     context.target.addEffect(effects.frozen);
 };
 
-module.exports.C_CultAdherent = function(context) {
+module.exports.C_CultAdherent = function(source, context) {
     if(context.cause.type === "spell") {
         return 1;
     }
     return 0;
 };
 
-module.exports.LadyDeathwhisperManaBarrier = function(context) {
+module.exports.LadyDeathwhisperManaBarrier = function(source, context) {
     if(context.cause.maxMana > 0) {
-        printer.print(context.cause.color + " Lady Deathwhisper's Mana Barrier prevents lethal damage and restores her to "
-        + context.cause.baseHp + " health at the cost of a Mana Crystal! (" + context.cause.maxMana + " remaining");
         context.cause.maxMana -= 1;
         context.cause.mana -= 1;
         context.cause.damageTaken = 0;
+        printer.print(context.cause.color + " Lady Deathwhisper's Mana Barrier prevents lethal damage and restores her to "
+        + context.cause.baseHp + " health at the cost of a Mana Crystal! Her barrier can withstand " + context.cause.maxMana + " more assaults.");
     }
     else {
         printer.print(context.cause.color + " Lady Deathwhisper's Mana Barrier is depleted! The lethal damage is not prevented.");
@@ -510,6 +523,6 @@ module.exports.LadyDeathwhisperManaBarrier = function(context) {
     }
 };
 
-module.exports.C_DeformedFanatic = function(context) {
+module.exports.C_DeformedFanatic = function(source, context) {
     return 0;
 }

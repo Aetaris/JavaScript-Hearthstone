@@ -172,5 +172,5 @@ module.exports.MurlocKnight_Inspire = {
 };
 
 var WarKodo = function(color) {
-    return utilities.makeMinion("Beast", "Epic", "The Grand Tournament", color, "War Kodo", 3, 0, 5, 3, false, false, [effects.sickness], ais.WarKodo, WarKodo);
+    return utilities.makeMinion("Beast", "Epic", "The Grand Tournament", color, "War Kodo", 3, 0, 5, 3, false, false, false, [effects.sickness], ais.WarKodo, WarKodo);
 };

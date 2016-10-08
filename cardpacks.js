@@ -120,4 +120,4 @@ var openPack = function(set, num) {
     // }
 }
 
-openPack("Classic", 3);
+openPack("Whispers of the Old Gods", 40);

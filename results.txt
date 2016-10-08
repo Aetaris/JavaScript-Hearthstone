@@ -1,1070 +1,200 @@
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-Red: Shaman
-Blue: Warrior
+Red: Lady Deathwhisper
+Blue: Hunter
 
-Blue Warrior draws a Execute.
-Blue Warrior draws a Arcanite Reaper.
-Blue Warrior decides to shuffle Arcanite Reaper back into the deck and draw another card.
-Blue Warrior draws a Frothing Berserker.
-Blue Warrior draws a C'Thun.
-Blue Warrior decides to shuffle C'Thun back into the deck and draw another card.
-Blue Warrior draws a Ragnaros the Firelord.
+Blue Hunter draws a Arcane Shot.
+Blue Hunter draws a Hogger, Scourge of Elwynn.
+Blue Hunter draws a Hunter's Mark.
+Blue Hunter decides to shuffle Arcane Shot back into the deck and draw another card.
+Blue Hunter draws a Twilight Elder.
+Blue Hunter decides to shuffle Hogger, Scourge of Elwynn back into the deck and draw another card.
+Blue Hunter draws a Giant Sandworm.
+Blue Hunter decides to shuffle Hunter's Mark back into the deck and draw another card.
+Blue Hunter draws a Arcane Shot.
 
 
 
-Red Shaman draws a Knife Juggler.
-Red Shaman draws a Sylvanas Windrunner.
-Red Shaman decides to shuffle Sylvanas Windrunner back into the deck and draw another card.
-Red Shaman draws a Feral Spirit.
-Red Shaman draws a Knife Juggler.
-Red Shaman is given The Coin.
+Red Lady Deathwhisper draws a Dark Transformation.
+Red Lady Deathwhisper draws a Cult Adherent.
+Red Lady Deathwhisper draws a Cult Fanatic.
+Red Lady Deathwhisper draws a Cult Adherent.
+Red Lady Deathwhisper is given The Coin.
 
-It is now the Blue Warrior's turn.
+It is now the Blue Hunter's turn.
 
-The Blue Warrior now has 1 Mana Crystals and 27 cards left in their deck.
-Blue Warrior's Health: 30 [120] || Red Shaman's Health: 30 [120].
-The Blue Warrior does not currently have any minions on the board.
-Blue Warrior draws a Whirlwind.
-The Blue Warrior's hand now contains:
-1: Execute
-3: Frothing Berserker
-8: Ragnaros the Firelord
-1: Whirlwind
+The Blue Hunter now has 1 Mana Crystals and 27 cards left in their deck.
+Blue Hunter's Health: 30 || Red Lady Deathwhisper's Health: 12.
+The Blue Hunter does not currently have any minions on the board.
+Blue Hunter draws a Unleash the Hounds.
+The Blue Hunter's hand now contains:
+[1] Twilight Elder - 3
+[2] Giant Sandworm - 8
+[3] Arcane Shot - 1
+[4] Unleash the Hounds - 2
 
-It is now the Red Shaman's turn.
+It is now the Red Lady Deathwhisper's turn.
 
-The Red Shaman now has 1 Mana Crystals and 27 cards left in their deck.
-Red Shaman's Health: 30 [120] || Blue Warrior's Health: 30 [120].
-The Red Shaman does not currently have any minions on the board.
-Red Shaman draws a Al'Akir the Windlord.
-The Red Shaman's hand now contains:
-2: Knife Juggler
-3: Feral Spirit
-2: Knife Juggler
-0: The Coin
-8: Al'Akir the Windlord
-The Red Shaman plays The Coin, gaining 1 mana crystal and bringing their total up to 2.
-The Red Shaman summons Knife Juggler!
+The Red Lady Deathwhisper now has 5 Mana Crystals and 26 cards left in their deck.
+Red Lady Deathwhisper's Health: 12 || Blue Hunter's Health: 30.
+The Red Lady Deathwhisper does not currently have any minions on the board.
+Red Lady Deathwhisper draws a Dark Empowerment.
+The Red Lady Deathwhisper's hand now contains:
+[1] Dark Transformation - 1
+[2] Cult Adherent - 3
+[3] Cult Fanatic - 3
+[4] Cult Adherent - 3
+[5] The Coin - 0
+[6] Dark Empowerment - 1
+The Red Lady Deathwhisper summons Cult Adherent!
+The Red Lady Deathwhisper plays The Coin, gaining 1 mana crystal and bringing their total up to 3.
+The Red Lady Deathwhisper summons Cult Fanatic!
 
-It is now the Blue Warrior's turn.
+It is now the Blue Hunter's turn.
 
-The Blue Warrior now has 2 Mana Crystals and 26 cards left in their deck.
-Blue Warrior's Health: 30 [120] || Red Shaman's Health: 30 [120].
-The Blue Warrior does not currently have any minions on the board.
-Blue Warrior draws a Twilight Elder.
-The Blue Warrior's hand now contains:
-1: Execute
-3: Frothing Berserker
-8: Ragnaros the Firelord
-1: Whirlwind
-3: Twilight Elder
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 122.
+The Blue Hunter now has 2 Mana Crystals and 26 cards left in their deck.
+Blue Hunter's Health: 30 || Red Lady Deathwhisper's Health: 12.
+The Blue Hunter does not currently have any minions on the board.
+Blue Hunter draws a Ragnaros the Firelord.
+The Blue Hunter's hand now contains:
+[1] Twilight Elder - 3
+[2] Giant Sandworm - 8
+[3] Arcane Shot - 2
+[4] Unleash the Hounds - 3
+[5] Ragnaros the Firelord - 8
+The Blue Hunter fires a Steady Shot at the Red Lady Deathwhisper.
+Red Lady Deathwhisper takes 2 damage, reducing them to 10 health.
 
-It is now the Red Shaman's turn.
+It is now the Red Lady Deathwhisper's turn.
 
-The Red Shaman now has 2 Mana Crystals and 26 cards left in their deck.
-Red Shaman's Health: 30 [120] || Blue Warrior's Health: 30 [122].
-The Red Shaman currently has 1 minions on the board:
-[Knife Juggler] - 2/2
-Red Shaman draws a Whirling Zap-o-Matic.
-The Red Shaman's hand now contains:
-3: Feral Spirit
-2: Knife Juggler
-8: Al'Akir the Windlord
-2: Whirling Zap-o-Matic
-The Red Shaman summons Knife Juggler!
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 121 armor and 30 health.
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 119 armor and 30 health.
+The Red Lady Deathwhisper now has 5 Mana Crystals and 25 cards left in their deck.
+Red Lady Deathwhisper's Health: 10 || Blue Hunter's Health: 30.
+The Red Lady Deathwhisper currently has 2 minions on the board:
+[Cult Adherent] - 3/3
+[Cult Fanatic] - 5/3
+Red Lady Deathwhisper draws a Dark Transformation.
+The Red Lady Deathwhisper's hand now contains:
+[1] Dark Transformation - 1
+[2] Cult Adherent - 3
+[3] Dark Empowerment - 1
+[4] Dark Transformation - 1
+Red Lady Deathwhisper casts Dark Transformation, killing a Cult Fanatic and creating a Deformed Fanatic!
+Red Cult Fanatic has been killed!
+Red Lady Deathwhisper casts Dark Empowerment, killing a Cult Adherent and creating an Empowered Adherent!
+Red Cult Adherent has been killed!
+The Red Lady Deathwhisper summons Cult Adherent!
 
-It is now the Blue Warrior's turn.
+It is now the Blue Hunter's turn.
 
-The Blue Warrior now has 3 Mana Crystals and 25 cards left in their deck.
-Blue Warrior's Health: 30 [119] || Red Shaman's Health: 30 [120].
-The Blue Warrior does not currently have any minions on the board.
-Blue Warrior draws a Faceless Manipulator.
-The Blue Warrior's hand now contains:
-1: Execute
-3: Frothing Berserker
-8: Ragnaros the Firelord
-1: Whirlwind
-3: Twilight Elder
-5: Faceless Manipulator
-The Blue Warrior summons Frothing Berserker!
+The Blue Hunter now has 3 Mana Crystals and 25 cards left in their deck.
+Blue Hunter's Health: 30 || Red Lady Deathwhisper's Health: 10.
+The Blue Hunter does not currently have any minions on the board.
+Blue Hunter draws a Validated Doomsayer.
+The Blue Hunter's hand now contains:
+[1] Twilight Elder - 3
+[2] Giant Sandworm - 8
+[3] Arcane Shot - 4
+[4] Unleash the Hounds - 5
+[5] Ragnaros the Firelord - 8
+[6] Validated Doomsayer - 5
+The Blue Hunter summons Twilight Elder!
 
-It is now the Red Shaman's turn.
+It is now the Red Lady Deathwhisper's turn.
 
-The Red Shaman now has 3 Mana Crystals and 25 cards left in their deck.
-Red Shaman's Health: 30 [120] || Blue Warrior's Health: 30 [119].
-The Red Shaman currently has 2 minions on the board:
-[Knife Juggler] - 2/2
-[Knife Juggler] - 2/2
-Red Shaman draws a Kodorider.
-The Red Shaman's hand now contains:
-3: Feral Spirit
-8: Al'Akir the Windlord
-2: Whirling Zap-o-Matic
-6: Kodorider
-The Red Shaman casts Feral Spirit. Overload: 2
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 118 armor and 30 health.
-Red Knife Juggler throws a knife at Blue Frothing Berserker.
-Blue Frothing Berserker takes 1 damage, reducing them to 3 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 3 damage.
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 117 armor and 30 health.
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 116 armor and 30 health.
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 114 armor and 30 health.
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 112 armor and 30 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 4 Mana Crystals and 24 cards left in their deck.
-Blue Warrior's Health: 30 [112] || Red Shaman's Health: 30 [120].
-The Blue Warrior currently has 1 minions on the board:
-[Frothing Berserker] - 3/3
-Blue Warrior draws a Frothing Berserker.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-1: Whirlwind
-3: Twilight Elder
-5: Faceless Manipulator
-3: Frothing Berserker
-The Blue Warrior casts Whirlwind, dealing 1 damage to all minions in play.
-Blue Frothing Berserker takes 1 damage, reducing them to 2 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 4 damage.
-Red Knife Juggler takes 1 damage, reducing them to 1 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 5 damage.
-Red Knife Juggler takes 1 damage, reducing them to 1 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 6 damage.
-Red Spirit Wolf takes 1 damage, reducing them to 2 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 7 damage.
-Red Spirit Wolf takes 1 damage, reducing them to 2 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 8 damage.
-The Blue Warrior summons Frothing Berserker!
-Blue Frothing Berserker attacks Red Shaman.
-Red Shaman blocks 8 damage, reducing them to 112 armor and 30 health.
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 4 Mana Crystals and 24 cards left in their deck.
-Red Shaman's Health: 30 [112] || Blue Warrior's Health: 30 [112].
-The Red Shaman currently has 4 minions on the board:
-[Knife Juggler] - 2/1
-[Knife Juggler] - 2/1
-[Spirit Wolf] - 2/2
-[Spirit Wolf] - 2/2
-Red Shaman draws a Forked Lightning.
-The Red Shaman's hand now contains:
-8: Al'Akir the Windlord
-2: Whirling Zap-o-Matic
-6: Kodorider
-1: Forked Lightning
-The Red Shaman summons Whirling Zap-o-Matic!
-Red Knife Juggler throws a knife at Blue Frothing Berserker.
-Blue Frothing Berserker takes 1 damage, reducing them to 3 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 9 damage.
-Blue Frothing Berserker revels in the bloodshed, reaching 3 damage.
-Red Knife Juggler throws a knife at Blue Frothing Berserker.
-Blue Frothing Berserker takes 1 damage, reducing them to 1 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 10 damage.
-Blue Frothing Berserker revels in the bloodshed, reaching 4 damage.
-The Red Shaman casts Totemic Call, summoning a Stonetalon Totem.
-Red Knife Juggler throws a knife at Blue Frothing Berserker.
-Blue Frothing Berserker takes 1 damage, reducing them to 2 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 11 damage.
-Blue Frothing Berserker revels in the bloodshed, reaching 5 damage.
-Red Knife Juggler throws a knife at Blue Frothing Berserker.
-Blue Frothing Berserker takes 1 damage, reducing them to 0 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 12 damage.
-Blue Frothing Berserker revels in the bloodshed, reaching 6 damage.
-Blue Frothing Berserker has been killed!
-Red Knife Juggler attacks Blue Frothing Berserker.
-Blue Frothing Berserker takes 2 damage, reducing them to 0 health.
-Blue Frothing Berserker revels in the bloodshed, reaching 7 damage.
-Blue Frothing Berserker has been killed!
-Red Knife Juggler takes 7 damage, reducing them to 0 health.
-Red Knife Juggler has been killed!
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 110 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 108 armor and 30 health.
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 106 armor and 30 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 5 Mana Crystals and 23 cards left in their deck.
-Blue Warrior's Health: 30 [106] || Red Shaman's Health: 30 [112].
-The Blue Warrior does not currently have any minions on the board.
-Blue Warrior draws a Twilight Elder.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-3: Twilight Elder
-5: Faceless Manipulator
-3: Twilight Elder
-The Blue Warrior summons Twilight Elder!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 108.
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 7/7!
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 5 Mana Crystals and 23 cards left in their deck.
-Red Shaman's Health: 30 [112] || Blue Warrior's Health: 30 [108].
-The Red Shaman currently has 5 minions on the board:
-[Knife Juggler] - 2/1
-[Spirit Wolf] - 2/2
-[Spirit Wolf] - 2/2
-[Whirling Zap-o-Matic] - 3/2
-[Stonetalon Totem] - 0/2
-Red Shaman draws a Whirling Zap-o-Matic.
-The Red Shaman's hand now contains:
-8: Al'Akir the Windlord
-6: Kodorider
-1: Forked Lightning
-2: Whirling Zap-o-Matic
-The Red Shaman summons Whirling Zap-o-Matic!
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 107 armor and 30 health.
-The Red Shaman casts Totemic Call, summoning a Wrath of Air Totem.
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 106 armor and 30 health.
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 104 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 102 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 100 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 97 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 94 armor and 30 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 6 Mana Crystals and 22 cards left in their deck.
-Blue Warrior's Health: 30 [94] || Red Shaman's Health: 30 [112].
-The Blue Warrior currently has 1 minions on the board:
-[Twilight Elder] - 3/4
-Blue Warrior draws a Polluted Hoarder.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Faceless Manipulator
-3: Twilight Elder
-4: Polluted Hoarder
-The Blue Warrior summons Twilight Elder!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 96.
-Blue Twilight Elder attacks Red Shaman.
-Red Shaman blocks 3 damage, reducing them to 109 armor and 30 health.
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 8/8!
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 9/9!
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 6 Mana Crystals and 22 cards left in their deck.
-Red Shaman's Health: 30 [109] || Blue Warrior's Health: 30 [96].
-The Red Shaman currently has 7 minions on the board:
-[Knife Juggler] - 2/1
-[Spirit Wolf] - 2/2
-[Spirit Wolf] - 2/2
-[Whirling Zap-o-Matic] - 3/2
-[Stonetalon Totem] - 0/2
-[Whirling Zap-o-Matic] - 3/2
-[Wrath of Air Totem] - 0/2
-Red Shaman draws a Validated Doomsayer.
-The Red Shaman's hand now contains:
-8: Al'Akir the Windlord
-6: Kodorider
-1: Forked Lightning
-5: Validated Doomsayer
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 94 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 92 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 90 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 87 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 84 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 81 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 78 armor and 30 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 7 Mana Crystals and 21 cards left in their deck.
-Blue Warrior's Health: 30 [78] || Red Shaman's Health: 30 [109].
-The Blue Warrior currently has 2 minions on the board:
-[Twilight Elder] - 3/4
-[Twilight Elder] - 3/4
-Blue Warrior draws a Piloted Shredder.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Faceless Manipulator
-4: Polluted Hoarder
-4: Piloted Shredder
-The Blue Warrior summons Polluted Hoarder!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 80.
-Blue Twilight Elder attacks Red Shaman.
-Red Shaman blocks 3 damage, reducing them to 106 armor and 30 health.
-Blue Twilight Elder attacks Red Shaman.
-Red Shaman blocks 3 damage, reducing them to 103 armor and 30 health.
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 10/10!
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 11/11!
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 7 Mana Crystals and 21 cards left in their deck.
-Red Shaman's Health: 30 [103] || Blue Warrior's Health: 30 [80].
-The Red Shaman currently has 7 minions on the board:
-[Knife Juggler] - 2/1
-[Spirit Wolf] - 2/2
-[Spirit Wolf] - 2/2
-[Whirling Zap-o-Matic] - 3/2
-[Stonetalon Totem] - 0/2
-[Whirling Zap-o-Matic] - 3/2
-[Wrath of Air Totem] - 0/2
-Red Shaman draws a Piloted Shredder.
-The Red Shaman's hand now contains:
-8: Al'Akir the Windlord
-6: Kodorider
-1: Forked Lightning
-5: Validated Doomsayer
-4: Piloted Shredder
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 78 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 76 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 74 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Polluted Hoarder.
-Blue Polluted Hoarder takes 3 damage, reducing them to 0 health.
-Blue Polluted Hoarder's deathrattle draws a card for Blue Warrior.
-Blue Warrior draws a Acolyte of Pain.
-Blue Polluted Hoarder has been killed!
-Red Whirling Zap-o-Matic takes 4 damage, reducing them to 0 health.
-Red Whirling Zap-o-Matic has been killed!
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 71 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 68 armor and 30 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 8 Mana Crystals and 19 cards left in their deck.
-Blue Warrior's Health: 30 [68] || Red Shaman's Health: 30 [103].
-The Blue Warrior currently has 2 minions on the board:
-[Twilight Elder] - 3/4
-[Twilight Elder] - 3/4
-Blue Warrior draws a Nexus-Champion Saraad.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Faceless Manipulator
-4: Piloted Shredder
-3: Acolyte of Pain
-5: Nexus-Champion Saraad
-The Blue Warrior summons Piloted Shredder!
-The Blue Warrior summons Acolyte of Pain!
-Blue Twilight Elder attacks Red Shaman.
-Red Shaman blocks 3 damage, reducing them to 100 armor and 30 health.
-Blue Twilight Elder attacks Red Shaman.
-Red Shaman blocks 3 damage, reducing them to 97 armor and 30 health.
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 12/12!
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 13/13!
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 8 Mana Crystals and 20 cards left in their deck.
-Red Shaman's Health: 30 [97] || Blue Warrior's Health: 30 [68].
-The Red Shaman currently has 6 minions on the board:
-[Knife Juggler] - 2/1
-[Spirit Wolf] - 2/2
-[Spirit Wolf] - 2/2
-[Stonetalon Totem] - 0/2
-[Whirling Zap-o-Matic] - 3/2
-[Wrath of Air Totem] - 0/2
-Red Shaman draws a Unbound Elemental.
-The Red Shaman's hand now contains:
-8: Al'Akir the Windlord
-6: Kodorider
-1: Forked Lightning
-5: Validated Doomsayer
-4: Piloted Shredder
-3: Unbound Elemental
-The Red Shaman summons Al'Akir the Windlord!
-Red Knife Juggler throws a knife at Blue Acolyte of Pain.
-Blue Acolyte of Pain takes 1 damage, reducing them to 2 health.
-Blue Acolyte of Pain embraces the pain and allows Blue Warrior to draw a card.
-Blue Warrior draws a Grim Patron.
-Red Knife Juggler attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 66 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 64 armor and 30 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 62 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 59 armor and 30 health.
-Red Al'Akir the Windlord attacks Blue Piloted Shredder.
-Blue Piloted Shredder takes 3 damage, reducing them to 0 health.
-Blue Piloted Shredder's deathrattle summons a random 2-cost minion.
-Minion summoned: Mechwarper
-Blue Piloted Shredder has been killed!
-Red Al'Akir the Windlord's Divine Shield is destroyed.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 56 armor and 30 health.
-Red Al'Akir the Windlord attacks Blue Twilight Elder.
-Blue Twilight Elder takes 3 damage, reducing them to 1 health.
-Red Al'Akir the Windlord takes 3 damage, reducing them to 2 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 9 Mana Crystals and 17 cards left in their deck.
-Blue Warrior's Health: 30 [56] || Red Shaman's Health: 30 [97].
-The Blue Warrior currently has 4 minions on the board:
-[Twilight Elder] - 3/1
-[Twilight Elder] - 3/4
-[Acolyte of Pain] - 1/2
-[Mechwarper] - 2/3
-Blue Warrior draws a Arcanite Reaper.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Faceless Manipulator
-5: Nexus-Champion Saraad
-5: Grim Patron
-5: Arcanite Reaper
-The Blue Warrior summons Nexus-Champion Saraad!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 58.
-Blue Nexus-Champion Saraad is Inspired, giving the Blue Warrior a random spell.
-Spell received: Avenging Wrath
-Blue Twilight Elder attacks Red Shaman.
-Red Shaman blocks 3 damage, reducing them to 94 armor and 30 health.
-Blue Twilight Elder attacks Red Al'Akir the Windlord.
-Red Al'Akir the Windlord takes 3 damage, reducing them to 0 health.
-Red Al'Akir the Windlord has been killed!
-Blue Twilight Elder takes 3 damage, reducing them to 1 health.
-Blue Acolyte of Pain attacks Red Spirit Wolf.
-Red Spirit Wolf takes 1 damage, reducing them to 1 health.
-Blue Acolyte of Pain takes 2 damage, reducing them to 0 health.
-Blue Acolyte of Pain embraces the pain and allows Blue Warrior to draw a card.
-Blue Warrior draws a Blood Warriors.
-Blue Acolyte of Pain has been killed!
-Blue Mechwarper attacks Red Spirit Wolf.
-Red Spirit Wolf takes 2 damage, reducing them to 0 health.
-Red Spirit Wolf has been killed!
-Blue Mechwarper takes 2 damage, reducing them to 1 health.
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 14/14!
-Blue Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 15/15!
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 9 Mana Crystals and 19 cards left in their deck.
-Red Shaman's Health: 30 [94] || Blue Warrior's Health: 30 [58].
-The Red Shaman currently has 5 minions on the board:
-[Knife Juggler] - 2/1
-[Spirit Wolf] - 2/2
-[Stonetalon Totem] - 0/2
-[Whirling Zap-o-Matic] - 3/2
-[Wrath of Air Totem] - 0/2
-Red Shaman draws a Feral Spirit.
-The Red Shaman's hand now contains:
-6: Kodorider
-1: Forked Lightning
-5: Validated Doomsayer
-4: Piloted Shredder
-3: Unbound Elemental
-3: Feral Spirit
-The Red Shaman summons Kodorider!
-Red Knife Juggler throws a knife at Blue Warrior.
-Blue Warrior blocks 1 damage, reducing them to 57 armor and 30 health.
-The Red Shaman casts Feral Spirit. Overload: 2
-Red Knife Juggler throws a knife at Blue Twilight Elder.
-Blue Twilight Elder takes 1 damage, reducing them to 0 health.
+The Red Lady Deathwhisper now has 5 Mana Crystals and 24 cards left in their deck.
+Red Lady Deathwhisper's Health: 10 || Blue Hunter's Health: 30.
+The Red Lady Deathwhisper currently has 3 minions on the board:
+[Deformed Fanatic] - 5/4
+[Empowered Adherent] - 4/5
+[Cult Adherent] - 3/3
+Red Lady Deathwhisper draws a Cult Adherent.
+The Red Lady Deathwhisper's hand now contains:
+[1] Dark Transformation - 1
+[2] Cult Adherent - 3
+The Red Lady Deathwhisper summons Cult Adherent!
+Red Deformed Fanatic attacks Blue Twilight Elder.
+Blue Twilight Elder takes 5 damage, reducing them to 0 health.
 Blue Twilight Elder has been killed!
-Could not summon Red Spirit Wolf. Why is it trying to? There are already seven minions!
-Red Knife Juggler attacks Blue Twilight Elder.
-Blue Twilight Elder takes 2 damage, reducing them to 0 health.
-Blue Twilight Elder has been killed!
-Red Knife Juggler takes 3 damage, reducing them to 0 health.
-Red Knife Juggler has been killed!
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 54 armor and 30 health.
-Red Spirit Wolf attacks Blue Mechwarper.
-Blue Mechwarper takes 2 damage, reducing them to 0 health.
-Blue Mechwarper has been killed!
-Red Spirit Wolf takes 2 damage, reducing them to 0 health.
-Red Spirit Wolf has been killed!
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 51 armor and 30 health.
+Red Empowered Adherent attacks Blue Hunter.
+Blue Hunter takes 4 damage, reducing them to 26 health.
+Red Cult Adherent attacks Blue Hunter.
+Blue Hunter takes 3 damage, reducing them to 23 health.
 
-It is now the Blue Warrior's turn.
+It is now the Blue Hunter's turn.
 
-The Blue Warrior now has 10 Mana Crystals and 15 cards left in their deck.
-Blue Warrior's Health: 30 [51] || Red Shaman's Health: 30 [94].
-The Blue Warrior currently has 1 minions on the board:
-[Nexus-Champion Saraad] - 4/5
-Blue Warrior draws a Hogger, Scourge of Elwynn.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Faceless Manipulator
-5: Grim Patron
-5: Arcanite Reaper
-6: Avenging Wrath
-3: Blood Warriors
-7: Hogger, Scourge of Elwynn
-Blue Warrior equips Arcanite Reaper.
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 53.
-Blue Nexus-Champion Saraad is Inspired, giving the Blue Warrior a random spell.
-Spell received: Mirror Entity
-The Blue Warrior casts Mirror Entity, a Secret. It will trigger when an enemy minion is played.
-Blue Warrior attacks Red Shaman.
-Red Shaman blocks 5 damage, reducing them to 89 armor and 30 health.
-Remaining durability on the Blue Warrior's Arcanite Reaper: 1.
-Blue Nexus-Champion Saraad attacks Red Shaman.
-Red Shaman blocks 4 damage, reducing them to 85 armor and 30 health.
+The Blue Hunter now has 4 Mana Crystals and 24 cards left in their deck.
+Blue Hunter's Health: 23 || Red Lady Deathwhisper's Health: 10.
+The Blue Hunter does not currently have any minions on the board.
+Blue Hunter draws a Nexus-Champion Saraad.
+The Blue Hunter's hand now contains:
+[1] Giant Sandworm - 8
+[2] Arcane Shot - 5
+[3] Unleash the Hounds - 6
+[4] Ragnaros the Firelord - 8
+[5] Validated Doomsayer - 5
+[6] Nexus-Champion Saraad - 5
+The Blue Hunter fires a Steady Shot at the Red Lady Deathwhisper.
+Red Lady Deathwhisper takes 2 damage, reducing them to 8 health.
 
-It is now the Red Shaman's turn.
+It is now the Red Lady Deathwhisper's turn.
 
-The Red Shaman now has 10 Mana Crystals and 18 cards left in their deck.
-Red Shaman's Health: 30 [85] || Blue Warrior's Health: 30 [53].
-The Red Shaman currently has 5 minions on the board:
-[Stonetalon Totem] - 0/2
-[Whirling Zap-o-Matic] - 3/2
-[Wrath of Air Totem] - 0/2
-[Kodorider] - 3/5
-[Spirit Wolf] - 2/3
-Red Shaman draws a Twilight Elder.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-5: Validated Doomsayer
-4: Piloted Shredder
-3: Unbound Elemental
-3: Twilight Elder
-The Red Shaman summons Validated Doomsayer!
-Blue Secret triggered - Mirror Entity!
-Blue Warrior summons a copy of Validated Doomsayer!
-The Red Shaman casts Totemic Call, summoning a Healing Totem.
-Red Kodorider is Inspired, and summons a 3/5 War Kodo.
-Red Whirling Zap-o-Matic attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 50 armor and 30 health.
-Red Kodorider attacks Blue Nexus-Champion Saraad.
-Blue Nexus-Champion Saraad takes 3 damage, reducing them to 2 health.
-Red Kodorider takes 4 damage, reducing them to 1 health.
-Red Spirit Wolf attacks Blue Warrior.
-Blue Warrior blocks 2 damage, reducing them to 48 armor and 30 health.
-Red Whirling Zap-o-Matic attacks Blue Nexus-Champion Saraad.
-Blue Nexus-Champion Saraad takes 3 damage, reducing them to 0 health.
-Blue Nexus-Champion Saraad has been killed!
-Red Whirling Zap-o-Matic takes 4 damage, reducing them to 0 health.
-Red Whirling Zap-o-Matic has been killed!
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Stonetalon Totem regains 1 health, bringing them to 2 health.
-Red Wrath of Air Totem regains 1 health, bringing them to 2 health.
-Red Kodorider regains 1 health, bringing them to 2 health.
-Red Spirit Wolf regains 1 health, bringing them to 3 health.
-Blue Validated Doomsayer regains 1 health, bringing them to 7 health.
-Red Healing Totem regains 1 health, bringing them to 2 health.
+The Red Lady Deathwhisper now has 5 Mana Crystals and 23 cards left in their deck.
+Red Lady Deathwhisper's Health: 8 || Blue Hunter's Health: 23.
+The Red Lady Deathwhisper currently has 4 minions on the board:
+[Deformed Fanatic] - 5/4
+[Empowered Adherent] - 4/5
+[Cult Adherent] - 3/3
+[Cult Adherent] - 3/3
+Red Lady Deathwhisper draws a Shadow Bolt.
+The Red Lady Deathwhisper's hand now contains:
+[1] Dark Transformation - 1
+[2] Shadow Bolt - 3
+Red Deformed Fanatic attacks Blue Hunter.
+Blue Hunter takes 5 damage, reducing them to 18 health.
+Red Empowered Adherent attacks Blue Hunter.
+Blue Hunter takes 4 damage, reducing them to 14 health.
+Red Cult Adherent attacks Blue Hunter.
+Blue Hunter takes 3 damage, reducing them to 11 health.
+Red Cult Adherent attacks Blue Hunter.
+Blue Hunter takes 3 damage, reducing them to 8 health.
 
-It is now the Blue Warrior's turn.
+It is now the Blue Hunter's turn.
 
-Blue Validated Doomsayer's Attack is set to 7!
-The Blue Warrior now has 10 Mana Crystals and 14 cards left in their deck.
-Blue Warrior's Health: 30 [48] || Red Shaman's Health: 30 [85].
-The Blue Warrior currently has 1 minions on the board:
-[Validated Doomsayer] - 7/7
-Blue Warrior draws a Corrupted Healbot.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Faceless Manipulator
-5: Grim Patron
-6: Avenging Wrath
-3: Blood Warriors
-7: Hogger, Scourge of Elwynn
-5: Corrupted Healbot
-The Blue Warrior summons Faceless Manipulator!
-Blue Faceless Manipulator's battlecry manipulates reality and transforms it into a copy of the Blue Validated Doomsayer.
-The Blue Warrior summons Corrupted Healbot!
-Blue Warrior attacks Red Shaman.
-Red Shaman blocks 5 damage, reducing them to 80 armor and 30 health.
-Remaining durability on the Blue Warrior's Arcanite Reaper: 0.
-The Blue Warrior's Arcanite Reaper shatters.
-Blue Validated Doomsayer attacks Red Shaman.
-Red Shaman blocks 7 damage, reducing them to 73 armor and 30 health.
+The Blue Hunter now has 5 Mana Crystals and 23 cards left in their deck.
+Blue Hunter's Health: 8 || Red Lady Deathwhisper's Health: 8.
+The Blue Hunter does not currently have any minions on the board.
+Blue Hunter draws a Arcane Giant.
+The Blue Hunter's hand now contains:
+[1] Giant Sandworm - 8
+[2] Arcane Shot - 5
+[3] Unleash the Hounds - 6
+[4] Ragnaros the Firelord - 8
+[5] Validated Doomsayer - 5
+[6] Nexus-Champion Saraad - 5
+[7] Arcane Giant - 12
+The Blue Hunter summons Validated Doomsayer!
 
-It is now the Red Shaman's turn.
+It is now the Red Lady Deathwhisper's turn.
 
-The Red Shaman now has 10 Mana Crystals and 17 cards left in their deck.
-Red Shaman's Health: 30 [73] || Blue Warrior's Health: 30 [48].
-The Red Shaman currently has 6 minions on the board:
-[Stonetalon Totem] - 0/2
-[Wrath of Air Totem] - 0/2
-[Kodorider] - 3/2
-[Spirit Wolf] - 2/3
-[Validated Doomsayer] - 7/7
-[Healing Totem] - 0/2
-Red Shaman draws a Polluted Hoarder.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-4: Piloted Shredder
-3: Unbound Elemental
-3: Twilight Elder
-4: Polluted Hoarder
-The Red Shaman summons Piloted Shredder!
-Red Kodorider attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 45 armor and 30 health.
-Red Spirit Wolf attacks Blue Validated Doomsayer.
-Blue Validated Doomsayer takes 2 damage, reducing them to 5 health.
-Red Spirit Wolf takes 7 damage, reducing them to 0 health.
-Red Spirit Wolf has been killed!
-Blue Validated Doomsayer attacks Blue Warrior.
-Blue Warrior blocks 7 damage, reducing them to 38 armor and 30 health.
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Stonetalon Totem regains 1 health, bringing them to 2 health.
-Red Wrath of Air Totem regains 1 health, bringing them to 2 health.
-Red Kodorider regains 1 health, bringing them to 3 health.
-Blue Validated Doomsayer regains 1 health, bringing them to 6 health.
-Red Healing Totem regains 1 health, bringing them to 2 health.
-Red Piloted Shredder regains 1 health, bringing them to 3 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 10 Mana Crystals and 13 cards left in their deck.
-Blue Warrior's Health: 30 [38] || Red Shaman's Health: 30 [73].
-The Blue Warrior currently has 3 minions on the board:
-[Validated Doomsayer] - 7/6
-[Validated Doomsayer] - 7/7
-[Corrupted Healbot] - 6/6
-Blue Warrior draws a Acolyte of Pain.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Grim Patron
-6: Avenging Wrath
-3: Blood Warriors
-7: Hogger, Scourge of Elwynn
-3: Acolyte of Pain
-The Blue Warrior summons Hogger, Scourge of Elwynn!
-The Blue Warrior summons Acolyte of Pain!
-Blue Validated Doomsayer attacks Red Shaman.
-Red Shaman blocks 7 damage, reducing them to 66 armor and 30 health.
-Blue Corrupted Healbot attacks Red Shaman.
-Red Shaman blocks 6 damage, reducing them to 60 armor and 30 health.
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 10 Mana Crystals and 16 cards left in their deck.
-Red Shaman's Health: 30 [60] || Blue Warrior's Health: 30 [38].
-The Red Shaman currently has 6 minions on the board:
-[Stonetalon Totem] - 0/2
-[Wrath of Air Totem] - 0/2
-[Kodorider] - 3/3
-[Validated Doomsayer] - 7/6
-[Healing Totem] - 0/2
-[Piloted Shredder] - 4/3
-Red Shaman draws a Sylvanas Windrunner.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-3: Unbound Elemental
-3: Twilight Elder
-4: Polluted Hoarder
-6: Sylvanas Windrunner
-The Red Shaman summons Twilight Elder!
-Red Kodorider attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 35 armor and 30 health.
-Blue Validated Doomsayer attacks Blue Corrupted Healbot.
-Blue Corrupted Healbot takes 7 damage, reducing them to 0 health.
-Blue Corrupted Healbot's deathrattle restores Health to the opponent, the Blue Warrior.
-Red Shaman regains 8 health, bringing them to 30 health.
-Blue Corrupted Healbot has been killed!
-Blue Validated Doomsayer takes 6 damage, reducing them to 0 health.
-Blue Validated Doomsayer has been killed!
-Red Piloted Shredder attacks Blue Warrior.
-Blue Warrior blocks 4 damage, reducing them to 31 armor and 30 health.
-Minion killed by Life Check: Validated Doomsayer. You should fix this!
-Blue Validated Doomsayer has been killed!
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Stonetalon Totem regains 1 health, bringing them to 2 health.
-Red Wrath of Air Totem regains 1 health, bringing them to 2 health.
-Red Kodorider regains 1 health, bringing them to 4 health.
-Red Healing Totem regains 1 health, bringing them to 2 health.
-Red Piloted Shredder regains 1 health, bringing them to 3 health.
-Red Twilight Elder regains 1 health, bringing them to 4 health.
-Red Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 7/7!
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 10 Mana Crystals and 12 cards left in their deck.
-Blue Warrior's Health: 30 [31] || Red Shaman's Health: 30 [60].
-The Blue Warrior currently has 3 minions on the board:
-[Validated Doomsayer] - 7/7
-[Hogger, Scourge of Elwynn] - 6/6
-[Acolyte of Pain] - 1/3
-Blue Warrior draws a Beckoner of Evil.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Grim Patron
-6: Avenging Wrath
-3: Blood Warriors
-2: Beckoner of Evil
-The Blue Warrior summons Beckoner of Evil!
-Blue Beckoner of Evil's battlecry empowers their master, giving C'Thun +2/+2!
-C'Thun is empowered up to 17/17!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 33.
-Blue Validated Doomsayer attacks Red Shaman.
-Red Shaman blocks 7 damage, reducing them to 53 armor and 30 health.
-Blue Hogger, Scourge of Elwynn attacks Red Shaman.
-Red Shaman blocks 6 damage, reducing them to 47 armor and 30 health.
-Blue Acolyte of Pain attacks Red Shaman.
-Red Shaman blocks 1 damage, reducing them to 46 armor and 30 health.
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 10 Mana Crystals and 15 cards left in their deck.
-Red Shaman's Health: 30 [46] || Blue Warrior's Health: 30 [33].
-The Red Shaman currently has 6 minions on the board:
-[Stonetalon Totem] - 0/2
-[Wrath of Air Totem] - 0/2
-[Kodorider] - 3/4
-[Healing Totem] - 0/2
-[Piloted Shredder] - 4/3
-[Twilight Elder] - 3/4
-Red Shaman draws a Eater of Secrets.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-3: Unbound Elemental
-4: Polluted Hoarder
-6: Sylvanas Windrunner
-4: Eater of Secrets
-The Red Shaman summons Polluted Hoarder!
-Red Kodorider attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 30 armor and 30 health.
-Red Piloted Shredder attacks Blue Warrior.
-Blue Warrior blocks 4 damage, reducing them to 26 armor and 30 health.
-Red Twilight Elder attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 23 armor and 30 health.
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Stonetalon Totem regains 1 health, bringing them to 2 health.
-Red Wrath of Air Totem regains 1 health, bringing them to 2 health.
-Red Kodorider regains 1 health, bringing them to 5 health.
-Red Healing Totem regains 1 health, bringing them to 2 health.
-Red Piloted Shredder regains 1 health, bringing them to 3 health.
-Red Twilight Elder regains 1 health, bringing them to 4 health.
-Red Polluted Hoarder regains 1 health, bringing them to 2 health.
-Red Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 8/8!
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 10 Mana Crystals and 11 cards left in their deck.
-Blue Warrior's Health: 30 [23] || Red Shaman's Health: 30 [46].
-The Blue Warrior currently has 4 minions on the board:
-[Validated Doomsayer] - 7/7
-[Hogger, Scourge of Elwynn] - 6/6
-[Acolyte of Pain] - 1/3
-[Beckoner of Evil] - 2/3
-Blue Warrior draws a Eater of Secrets.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Grim Patron
-6: Avenging Wrath
-3: Blood Warriors
-4: Eater of Secrets
-Blue Warrior casts Avenging Wrath, dealing 8 damage randomly split among enemies!
-Red Polluted Hoarder is struck by Avenging Wrath.
-Red Polluted Hoarder takes 1 damage, reducing them to 1 health.
-Red Piloted Shredder is struck by Avenging Wrath.
-Red Piloted Shredder takes 1 damage, reducing them to 2 health.
-Red Twilight Elder is struck by Avenging Wrath.
-Red Twilight Elder takes 1 damage, reducing them to 3 health.
-Red Twilight Elder is struck by Avenging Wrath.
-Red Twilight Elder takes 1 damage, reducing them to 2 health.
-Red Kodorider is struck by Avenging Wrath.
-Red Kodorider takes 1 damage, reducing them to 4 health.
-Red Kodorider is struck by Avenging Wrath.
-Red Kodorider takes 1 damage, reducing them to 3 health.
-Red Healing Totem is struck by Avenging Wrath.
-Red Healing Totem takes 1 damage, reducing them to 1 health.
-Red Wrath of Air Totem is struck by Avenging Wrath.
-Red Wrath of Air Totem takes 1 damage, reducing them to 1 health.
-The Blue Warrior summons Eater of Secrets!
-Blue Eater of Secrets devours all Secrets of Red Shaman, empowering itself for each Secret eaten.
-Eater of Secrets found no secrets to consume.
-Blue Validated Doomsayer attacks Red Shaman.
-Red Shaman blocks 7 damage, reducing them to 39 armor and 30 health.
-Blue Hogger, Scourge of Elwynn attacks Red Shaman.
-Red Shaman blocks 6 damage, reducing them to 33 armor and 30 health.
-Blue Acolyte of Pain attacks Red Shaman.
-Red Shaman blocks 1 damage, reducing them to 32 armor and 30 health.
-Blue Beckoner of Evil attacks Red Shaman.
-Red Shaman blocks 2 damage, reducing them to 30 armor and 30 health.
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 10 Mana Crystals and 14 cards left in their deck.
-Red Shaman's Health: 30 [30] || Blue Warrior's Health: 30 [23].
-The Red Shaman currently has 7 minions on the board:
-[Stonetalon Totem] - 0/2
-[Wrath of Air Totem] - 0/1
-[Kodorider] - 3/3
-[Healing Totem] - 0/1
-[Piloted Shredder] - 4/2
-[Twilight Elder] - 3/2
-[Polluted Hoarder] - 4/1
-Red Shaman draws a C'Thun.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-3: Unbound Elemental
-6: Sylvanas Windrunner
-4: Eater of Secrets
-10: C'Thun
-Red Kodorider attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 20 armor and 30 health.
-Red Piloted Shredder attacks Blue Warrior.
-Blue Warrior blocks 4 damage, reducing them to 16 armor and 30 health.
-Red Twilight Elder attacks Blue Warrior.
-Blue Warrior blocks 3 damage, reducing them to 13 armor and 30 health.
-Red Polluted Hoarder attacks Blue Warrior.
-Blue Warrior blocks 4 damage, reducing them to 9 armor and 30 health.
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Stonetalon Totem regains 1 health, bringing them to 2 health.
-Red Wrath of Air Totem regains 1 health, bringing them to 2 health.
-Red Kodorider regains 1 health, bringing them to 4 health.
-Red Healing Totem regains 1 health, bringing them to 2 health.
-Red Piloted Shredder regains 1 health, bringing them to 3 health.
-Red Twilight Elder regains 1 health, bringing them to 3 health.
-Red Polluted Hoarder regains 1 health, bringing them to 2 health.
-Red Twilight Elder conducts a ritual to empower his master, giving C'Thun +1/+1!
-C'Thun is empowered up to 9/9!
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 10 Mana Crystals and 10 cards left in their deck.
-Blue Warrior's Health: 30 [9] || Red Shaman's Health: 30 [30].
-The Blue Warrior currently has 5 minions on the board:
-[Validated Doomsayer] - 7/7
-[Hogger, Scourge of Elwynn] - 6/6
-[Acolyte of Pain] - 1/3
-[Beckoner of Evil] - 2/3
-[Eater of Secrets] - 2/4
-Blue Warrior draws a C'Thun.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Grim Patron
-3: Blood Warriors
-10: C'Thun
-The Blue Warrior summons C'Thun!
-Blue C'Thun's battlecry utterly shatters the bodies and wills of its foes, blasting them apart with 17 damage randomly split among them!
-Red Wrath of Air Totem is struck by the malice of C'Thun.
-Red Wrath of Air Totem takes 1 damage, reducing them to 1 health.
-Red Kodorider is struck by the malice of C'Thun.
-Red Kodorider takes 1 damage, reducing them to 3 health.
-Red Stonetalon Totem is struck by the malice of C'Thun.
-Red Stonetalon Totem takes 1 damage, reducing them to 1 health.
-Red Piloted Shredder is struck by the malice of C'Thun.
-Red Piloted Shredder takes 1 damage, reducing them to 2 health.
-Red Healing Totem is struck by the malice of C'Thun.
-Red Healing Totem takes 1 damage, reducing them to 1 health.
-Red Stonetalon Totem is struck by the malice of C'Thun.
-Red Stonetalon Totem takes 1 damage, reducing them to 0 health.
-Red Stonetalon Totem has been killed!
-Red Kodorider is struck by the malice of C'Thun.
-Red Kodorider takes 1 damage, reducing them to 2 health.
-Red Polluted Hoarder is struck by the malice of C'Thun.
-Red Polluted Hoarder takes 1 damage, reducing them to 1 health.
-Red Piloted Shredder is struck by the malice of C'Thun.
-Red Piloted Shredder takes 1 damage, reducing them to 1 health.
-Red Wrath of Air Totem is struck by the malice of C'Thun.
-Red Wrath of Air Totem takes 1 damage, reducing them to 0 health.
-Red Wrath of Air Totem has been killed!
-Red Polluted Hoarder is struck by the malice of C'Thun.
-Red Polluted Hoarder takes 1 damage, reducing them to 0 health.
-Red Polluted Hoarder's deathrattle draws a card for Red Shaman.
-Red Shaman draws a Unbound Elemental.
-Red Polluted Hoarder has been killed!
-Red Piloted Shredder is struck by the malice of C'Thun.
-Red Piloted Shredder takes 1 damage, reducing them to 0 health.
-Red Piloted Shredder's deathrattle summons a random 2-cost minion.
-Minion summoned: Bloodfen Raptor
-Red Piloted Shredder has been killed!
-Red Shaman is struck by the malice of C'Thun.
-Red Shaman blocks 1 damage, reducing them to 29 armor and 30 health.
-Red Kodorider is struck by the malice of C'Thun.
-Red Kodorider takes 1 damage, reducing them to 1 health.
-Red Kodorider is struck by the malice of C'Thun.
-Red Kodorider takes 1 damage, reducing them to 0 health.
-Red Kodorider has been killed!
-Red Shaman is struck by the malice of C'Thun.
-Red Shaman blocks 1 damage, reducing them to 28 armor and 30 health.
-Red Shaman is struck by the malice of C'Thun.
-Red Shaman blocks 1 damage, reducing them to 27 armor and 30 health.
-Blue Validated Doomsayer attacks Red Shaman.
-Red Shaman blocks 7 damage, reducing them to 20 armor and 30 health.
-Blue Hogger, Scourge of Elwynn attacks Red Shaman.
-Red Shaman blocks 6 damage, reducing them to 14 armor and 30 health.
-Blue Acolyte of Pain attacks Red Twilight Elder.
-Red Twilight Elder takes 1 damage, reducing them to 2 health.
-Blue Acolyte of Pain takes 3 damage, reducing them to 0 health.
-Blue Acolyte of Pain embraces the pain and allows Blue Warrior to draw a card.
-Blue Warrior draws a Blood Warriors.
-Blue Acolyte of Pain has been killed!
-Blue Eater of Secrets attacks Red Twilight Elder.
-Red Twilight Elder takes 2 damage, reducing them to 0 health.
-Red Twilight Elder has been killed!
-Blue Eater of Secrets takes 3 damage, reducing them to 1 health.
-Blue Beckoner of Evil attacks Red Shaman.
-Red Shaman blocks 2 damage, reducing them to 12 armor and 30 health.
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 10 Mana Crystals and 12 cards left in their deck.
-Red Shaman's Health: 30 [12] || Blue Warrior's Health: 30 [9].
-The Red Shaman currently has 2 minions on the board:
-[Healing Totem] - 0/1
-[Bloodfen Raptor] - 3/2
-Red Shaman draws a Emperor Thaurissan.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-3: Unbound Elemental
-6: Sylvanas Windrunner
-4: Eater of Secrets
-10: C'Thun
-3: Unbound Elemental
-6: Emperor Thaurissan
-The Red Shaman summons Sylvanas Windrunner!
-The Red Shaman summons Eater of Secrets!
-Red Eater of Secrets devours all Secrets of Blue Warrior, empowering itself for each Secret eaten.
-Eater of Secrets found no secrets to consume.
-Red Bloodfen Raptor attacks Blue C'Thun.
-Blue C'Thun takes 3 damage, reducing them to 14 health.
-Red Bloodfen Raptor takes 17 damage, reducing them to 0 health.
-Red Bloodfen Raptor has been killed!
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Healing Totem regains 1 health, bringing them to 2 health.
-Red Sylvanas Windrunner regains 1 health, bringing them to 5 health.
-Red Eater of Secrets regains 1 health, bringing them to 4 health.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 10 Mana Crystals and 8 cards left in their deck.
-Blue Warrior's Health: 30 [9] || Red Shaman's Health: 30 [12].
-The Blue Warrior currently has 5 minions on the board:
-[Validated Doomsayer] - 7/7
-[Hogger, Scourge of Elwynn] - 6/6
-[Beckoner of Evil] - 2/3
-[Eater of Secrets] - 2/1
-[C'Thun] - 17/14
-Blue Warrior draws a Grim Patron.
-The Blue Warrior's hand now contains:
-1: Execute
-8: Ragnaros the Firelord
-5: Grim Patron
-3: Blood Warriors
-3: Blood Warriors
-5: Grim Patron
-The Blue Warrior summons Ragnaros the Firelord!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 11.
-Blue Validated Doomsayer attacks Red Sylvanas Windrunner.
-Red Sylvanas Windrunner takes 7 damage, reducing them to 0 health.
-Red Sylvanas Windrunner's deathrattle captures the soul of Blue Beckoner of Evil, taking control of it.
-Red Sylvanas Windrunner has been killed!
-Blue Validated Doomsayer takes 5 damage, reducing them to 2 health.
-Blue Hogger, Scourge of Elwynn attacks Red Shaman.
-Red Shaman blocks 6 damage, reducing them to 6 armor and 30 health.
-Blue Eater of Secrets attacks Red Shaman.
-Red Shaman blocks 2 damage, reducing them to 4 armor and 30 health.
-Blue C'Thun attacks Red Shaman.
-Red Shaman partially blocks 17 damage, reducing them to 0 armor and 17 health.
-Ragnaros: DIE, INSECT!
-Ragnaros hurls a massive fireball at Beckoner of Evil.
-Red Beckoner of Evil takes 8 damage, reducing them to 0 health.
-Red Beckoner of Evil has been killed!
-
-It is now the Red Shaman's turn.
-
-The Red Shaman now has 10 Mana Crystals and 11 cards left in their deck.
-Red Shaman's Health: 17 || Blue Warrior's Health: 30 [11].
-The Red Shaman currently has 2 minions on the board:
-[Healing Totem] - 0/2
-[Eater of Secrets] - 2/4
-Red Shaman draws a Nexus-Champion Saraad.
-The Red Shaman's hand now contains:
-1: Forked Lightning
-3: Unbound Elemental
-10: C'Thun
-3: Unbound Elemental
-6: Emperor Thaurissan
-5: Nexus-Champion Saraad
-The Red Shaman casts Forked Lightning on Eater of Secrets and C'Thun. Overload: 1
-Blue Eater of Secrets takes 2 damage, reducing them to 0 health.
-Blue Eater of Secrets has been killed!
-Blue C'Thun takes 2 damage, reducing them to 12 health.
-The Red Shaman summons Emperor Thaurissan!
-The Red Shaman casts Totemic Call, summoning a Stonetalon Totem.
-Red Eater of Secrets attacks Blue C'Thun.
-Blue C'Thun takes 2 damage, reducing them to 10 health.
-Red Eater of Secrets takes 17 damage, reducing them to 0 health.
-Red Eater of Secrets has been killed!
-Red Healing Totem's Healing Tide restores 1 health to all friendly minions.
-Red Healing Totem regains 1 health, bringing them to 2 health.
-Red Emperor Thaurissan regains 1 health, bringing them to 5 health.
-Red Stonetalon Totem regains 1 health, bringing them to 2 health.
-Red Emperor Thaurissan reduces the cost of the cards in Red Shaman's hand.
-
-It is now the Blue Warrior's turn.
-
-The Blue Warrior now has 10 Mana Crystals and 7 cards left in their deck.
-Blue Warrior's Health: 30 [11] || Red Shaman's Health: 17.
-The Blue Warrior currently has 4 minions on the board:
-[Validated Doomsayer] - 7/2
-[Hogger, Scourge of Elwynn] - 6/6
-[C'Thun] - 17/10
-[Ragnaros the Firelord] - 8/8
-Blue Warrior draws a Validated Doomsayer.
-The Blue Warrior's hand now contains:
-1: Execute
-5: Grim Patron
-3: Blood Warriors
-3: Blood Warriors
-5: Grim Patron
-5: Validated Doomsayer
-The Blue Warrior summons Validated Doomsayer!
-The Blue Warrior casts Armor Up!, gaining 2 Armor for a total of 13.
-Blue Validated Doomsayer attacks Red Shaman.
-Red Shaman takes 7 damage, reducing them to 10 health.
-Blue Hogger, Scourge of Elwynn attacks Red Shaman.
-Red Shaman takes 6 damage, reducing them to 4 health.
-Blue C'Thun attacks Red Shaman.
-Red Shaman takes 17 damage, reducing them to 0 health.
-Ragnaros: DIE, INSECT!
-Ragnaros hurls a massive fireball at Stonetalon Totem.
-Red Stonetalon Totem takes 8 damage, reducing them to 0 health.
-Red Stonetalon Totem has been killed!
-The Red Shaman has been defeated! The Blue Warrior is victorious!
+The Red Lady Deathwhisper now has 5 Mana Crystals and 22 cards left in their deck.
+Red Lady Deathwhisper's Health: 8 || Blue Hunter's Health: 8.
+The Red Lady Deathwhisper currently has 4 minions on the board:
+[Deformed Fanatic] - 5/4
+[Empowered Adherent] - 4/5
+[Cult Adherent] - 3/3
+[Cult Adherent] - 3/3
+Red Lady Deathwhisper draws a Shadow Bolt.
+The Red Lady Deathwhisper's hand now contains:
+[1] Dark Transformation - 1
+[2] Shadow Bolt - 3
+[3] Shadow Bolt - 3
+Red Deformed Fanatic attacks Blue Hunter.
+Blue Hunter takes 5 damage, reducing them to 3 health.
+Red Empowered Adherent attacks Blue Hunter.
+Blue Hunter takes 4 damage, reducing them to 0 health.
+Red Cult Adherent attacks Blue Hunter.
+Blue Hunter takes 3 damage, reducing them to 0 health.
+Red Cult Adherent attacks Blue Hunter.
+Blue Hunter takes 3 damage, reducing them to 0 health.
+The Blue Hunter has been defeated! The Red Lady Deathwhisper is victorious!

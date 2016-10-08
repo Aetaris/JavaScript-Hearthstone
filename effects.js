@@ -187,6 +187,14 @@ module.exports.YShaarj = {
     action: actions.YShaarjRageUnbound
 };
 
+module.exports.ArcaneGiant = {
+    name: "Arcane Giant",
+    type: "buff cost",
+    action: actions.ArcaneGiant
+};
+
+//
+
 module.exports.ManaWyrm = {
     name: "Mana Wyrm Empower",
     type: "spell hunger friend",

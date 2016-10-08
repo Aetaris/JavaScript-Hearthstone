@@ -1,14 +1,45 @@
-module.exports.MageFireblast = function(context) {
+var removeAllies = function(array, color) { // Takes in a targets array, returns a targets array without allies. Useful for purely negative spells.
+    if(!array || !array.slice) {
+        throw new Error("broken");
+    }
+    var originalArray = array.slice();
+    for(var i = 0; i < originalArray.length; i++) {
+        if(originalArray[i].color == color) {
+            array.splice(array.indexOf(originalArray[i]), 1);
+        }
+    }
+    return array;
+};
+
+var removeEnemies = function(array, color) { // Takes in a targets array, returns a targets array without enemies. Useful for purely positive spells.
+    var originalArray = array.slice();
+    for(var i = 0; i < originalArray.length; i++) {
+        if(originalArray[i].color !== color) {
+            array.splice(array.indexOf(originalArray[i]), 1);
+        }
+    }
+    return array;
+};
+
+module.exports.MageFireblast = function(targets, context) {
+    if(!context.player) {
+        throw new Error("broken");
+    }
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() === 1 || (context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) > 5) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(!targets[i].getHp) {
+            throw new Error("broken");
+        }
+        if(targets[i].getHp() === 1 || (targets[i].getHp() + targets[i].getDamage()) > 5) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.PriestLesserHeal = function(context) {
+module.exports.PriestLesserHeal = function(targets, context) {
+    // var targets = removeEnemies(targets, context.player.color);
     var target = context.player;
     var maxHpGap = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -20,7 +51,8 @@ module.exports.PriestLesserHeal = function(context) {
     return target;
 };
 
-module.exports.WhirlingBlades = function(context) {
+module.exports.WhirlingBlades = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     var maxHealth = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -32,7 +64,8 @@ module.exports.WhirlingBlades = function(context) {
     return target;
 };
 
-module.exports.ArmorPlating = function(context) {
+module.exports.ArmorPlating = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     var maxDamage = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -44,7 +77,8 @@ module.exports.ArmorPlating = function(context) {
     return target;
 };
 
-module.exports.RustyHorn = function(context) {
+module.exports.RustyHorn = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     var maxHealth = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -56,19 +90,20 @@ module.exports.RustyHorn = function(context) {
     return target;
 };
 
-module.exports.EmergencyCoolant = function(context) {
+module.exports.EmergencyCoolant = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
     var maxDamage = 0;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getDamage() > maxDamage) {
-            target = context.foe.minions[i];
-            maxDamage = context.foe.minions[i].getDamage();
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getDamage() > maxDamage) {
+            target = targets[i];
+            maxDamage = targets[i].getDamage();
         }
     }
     return target;
 };
 
-module.exports.FinickyCloakfield = function(context) {
+module.exports.FinickyCloakfield = function(targets, context) {
     var target = false;
     var maxDamage = 0;
     var minHealth = 50;
@@ -87,27 +122,41 @@ module.exports.FinickyCloakfield = function(context) {
     return target;
 };
 
-module.exports.ReversingSwitch = function(context) {
+module.exports.ReversingSwitch = function(targets, context) {
     var target = context.foe;
-    var targetRoll = Math.floor((context.foe.minions.length) * Math.random(0, 1));
-    if(targetRoll < context.foe.minions.length) {
-        target = context.foe.minions[targetRoll];
+    var targetRoll = Math.floor((targets.length) * Math.random(0, 1));
+    if(targetRoll < targets.length) {
+        target = targets[targetRoll];
     }
     return target;
 };
 
-module.exports.TimeRewinder = function(context) {
+module.exports.TimeRewinder = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     var hpGap = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
-        if(context.player.minions[i].getHp() < context.player.minions[i].getMaxHp() - hpGap) {
+        if(context.player.minions[i].getHp() < context.player.minions[i].getMaxHp() - hpGap || context.player.minions[i].battlecry) {
             target = context.player.minions[i];
         }
     }
     return target;
 };
+module.exports.AbusiveSergeant = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
+    var target = false;
+    var maxHealth = 0;
+    for(var i = 0; i < context.player.minions.length; i++) {
+        if(context.player.minions[i].getHp() > maxHealth) {
+            target = context.player.minions[i];
+            maxHealth = context.player.minions[i].getHp();
+        }
+    }
+    return target;
+};
 
-module.exports.BlackwingCorruptor = function(context) {
+module.exports.BlackwingCorruptor = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
     var hasDragon = false;
     for(var i = 0; i < context.player.hand.length; i++) {
@@ -117,9 +166,9 @@ module.exports.BlackwingCorruptor = function(context) {
     }
     if(hasDragon) {
         var target = context.foe;
-        for(var i = 0; i < context.foe.minions.length; i++) {
-            if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 4 && context.foe.minions[i].getHp() > 1) {
-                target = context.foe.minions[i];
+        for(var i = 0; i < targets.length; i++) {
+            if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
+                target = targets[i];
             }
         }
         return target;
@@ -127,205 +176,221 @@ module.exports.BlackwingCorruptor = function(context) {
     return target;
 };
 
-module.exports.Fireball = function(context) {
+module.exports.Fireball = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() > 3 && context.foe.minions[i].getDamage() > 2) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() > 3 && targets[i].getDamage() > 2) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Polymorph = function(context) {
+module.exports.Polymorph = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
     var maxDmg = 0;
     var maxHp = 0;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() > 3 || context.foe.minions[i].getHp() > maxHp) || (context.foe.minions[i].getDamage() > 2 || context.foe.minions[i].getDamage() > maxDmg)) {
-            if(context.foe.minions[i].dmg > maxDmg) {
-                maxDmg = context.foe.minions[i].dmg;
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() > 3 || targets[i].getHp() > maxHp) || (targets[i].getDamage() > 2 || targets[i].getDamage() > maxDmg)) {
+            if(targets[i].dmg > maxDmg) {
+                maxDmg = targets[i].dmg;
             }
-            if(context.foe.minions[i].getHp() > maxHp) {
-                maxHp = context.foe.minions[i].getHp();
+            if(targets[i].getHp() > maxHp) {
+                maxHp = targets[i].getHp();
             }
-            target = context.foe.minions[i];
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Frostbolt = function(context) {
+module.exports.Frostbolt = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 4 && context.foe.minions[i].getHp() > 1) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.ConeofCold = function(context) {
+module.exports.ConeofCold = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 5 || (context.foe.minions[i].getHp() < 2 && i > 0)) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 5 || (targets[i].getHp() < 2 && i > 0)) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Execute = function(context) {
+module.exports.Execute = function(targets, context) {
     var target = false;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() < context.foe.minions[i].getMaxHp() && ((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 10 || !target)) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() < targets[i].getMaxHp() && ((targets[i].getHp() + targets[i].getDamage()) >= 10 || !target)) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Backstab = function(context) {
+module.exports.Backstab = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() === context.foe.minions[i].getMaxHp() && ((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 4) || !target || target.getHp() <= 2) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() === targets[i].getMaxHp() && ((targets[i].getHp() + targets[i].getDamage()) >= 4) || !target || target.getHp() <= 2) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Sap = function(context) {
+module.exports.Sap = function(targets, context) {
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) > (target.getHp() + target.getDamage()) || target === context.foe) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) > (target.getHp() + target.getDamage()) || target === context.foe) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Shiv = function(context) {
+module.exports.Shiv = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() === 1 && (context.foe.minions[i].getDamage() >= target.getDamage() || target === context.foe)) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() === 1 && (targets[i].getDamage() >= target.getDamage() || target === context.foe)) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Crackle = function(context) {
+module.exports.Crackle = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) > (target.getHp() + target.getDamage()) && context.foe.minions[i].getHp() <= 6 ) || target === context.foe) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(((targets[i].getHp() + targets[i].getDamage()) > (target.getHp() + target.getDamage()) && targets[i].getHp() <= 6 ) || target === context.foe) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.LavaBurst = function(context) {
+module.exports.LavaBurst = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 5 && context.foe.minions[i].getHp() > 2) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 5 && targets[i].getHp() > 2) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.ExplosiveShot = function(context) {
+module.exports.ExplosiveShot = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 5 && context.foe.minions[i].getHp() > 2) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 5 && targets[i].getHp() > 2) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.ArcaneShot = function(context) {
+module.exports.ArcaneShot = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() === 2 || (context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) > 4) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() === 2 || (targets[i].getHp() + targets[i].getDamage()) > 4) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.CobraShot = function(context) {
+module.exports.CobraShot = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 4 && context.foe.minions[i].getHp() > 1) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.HuntersMark = function(context) {
+module.exports.HuntersMark = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() > target.getHp() || target === context.foe) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() > target.getHp() || target === context.foe) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Swipe = function(context) {
+module.exports.Swipe = function(targets, context) {
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() > 2 && (context.foe.minions[i].getDamage() > target.getDamage() && target.type !== "hero")) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() > 2 && (targets[i].getDamage() > target.getDamage() && target.type !== "hero")) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Moonfire = function(context) {
+module.exports.Moonfire = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() === 1 || (context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) > 5) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() === 1 || (targets[i].getHp() + targets[i].getDamage()) > 5) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-var Darkbomb = module.exports.Darkbomb = function(context) {
+var Darkbomb = module.exports.Darkbomb = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 4 && context.foe.minions[i].getHp() > 1) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.ShadowBolt = function(context) {
+module.exports.ShadowBolt = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for (var i = 0; i < context.foe.minions.length; i++) {
-        if (context.foe.minions[i].getHp() <= 4 && context.foe.minions[i].getDamage() >= 3) {
-            target = context.foe.minions[i];
+    for (var i = 0; i < targets.length; i++) {
+        if (targets[i].getHp() <= 4 && targets[i].getDamage() >= 3) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.MortalCoil = function(context) {
+module.exports.MortalCoil = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) > 1 && context.foe.minions[i].getHp() === 1) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) > 1 && targets[i].getHp() === 1) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Shadowflame = function(context) {
+module.exports.Shadowflame = function(targets, context) {
     var target = context.foe;
     for(var i = 0; i < context.player.minions.length; i++) {
         if(context.player.minions[i].getDamage() > target.getDamage() || target === context.foe) {
@@ -335,7 +400,8 @@ module.exports.Shadowflame = function(context) {
     return target;
 };
 
-module.exports.BlessingofKings = function(context) {
+module.exports.BlessingofKings = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     var highestValue = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -346,57 +412,62 @@ module.exports.BlessingofKings = function(context) {
     return target;
 };
 
-module.exports.HammerofWrath = function(context) {
+module.exports.HammerofWrath = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
+    for(var i = 0; i < targets.length; i++) {
         if(target.getHp() === 3 || (target.getHp() < 9 && target.getDamage() > 2)) {
-            target = context.foe.minions[i];
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.PowerWordShield = function(context) {
+module.exports.PowerWordShield = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
-    for(var i = 0; i < context.player.minions.length; i++) {
-        if(context.player.minions[i].getDamage() > 1 && context.player.minions[i].getHp() < 3) {
+    for (var i = 0; i < context.player.minions.length; i++) {
+        if (context.player.minions[i].getDamage() >= 6 && context.player.minions[i].getHp() <= 3) {
             target = context.player.minions[i];
         }
     }
     return target;
 };
 
-module.exports.ShadowWordPain = function(context) {
+module.exports.ShadowWordPain = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getDamage() <= 3) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getDamage() <= 3) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.ShadowWordDeath = function(context) {
+module.exports.ShadowWordDeath = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = false;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getDamage() >= 5 && context.foe.minions[i].getHp() > 3) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getDamage() >= 5 && targets[i].getHp() > 3) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.Entomb = function(context) {
+module.exports.Entomb = function(targets, context) {
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if(context.foe.minions[i].getHp() > 3 && context.foe.minions[i].getDamage() > 2) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() > 3 && targets[i].getDamage() > 2) {
+            target = targets[i];
         }
     }
     return target;
 };
 
-module.exports.VelensChosen = function(context) {
+module.exports.VelensChosen = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     for(var i = 0; i < context.player.minions.length; i++) {
         if(!target || (context.player.minions[i].getHp() < target.getHp() && context.player.minions[i].getDamage() >= 2)) {
@@ -408,7 +479,8 @@ module.exports.VelensChosen = function(context) {
 
 // Custom Sets
 
-module.exports.C_DarkEmpowerment = function(context) {
+module.exports.C_DarkEmpowerment = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     for(var i = 0; i < context.player.minions.length; i++) {
         if(context.player.minions[i].name === "Cult Adherent") {
@@ -420,7 +492,8 @@ module.exports.C_DarkEmpowerment = function(context) {
     return target;
 };
 
-module.exports.C_DarkTransformation = function(context) {
+module.exports.C_DarkTransformation = function(targets, context) {
+    var targets = removeEnemies(targets, context.player.color);
     var target = false;
     for(var i = 0; i < context.player.minions.length; i++) {
         if(context.player.minions[i].name === "Cult Fanatic") {
@@ -432,11 +505,12 @@ module.exports.C_DarkTransformation = function(context) {
     return target;
 };
 
-var Darkbomb = module.exports.C_CannonBlast = function(context) {
+var C_CannonBlast = module.exports.C_CannonBlast = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
-    for(var i = 0; i < context.foe.minions.length; i++) {
-        if((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 4 && context.foe.minions[i].getHp() > 1) {
-            target = context.foe.minions[i];
+    for(var i = 0; i < targets.length; i++) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
+            target = targets[i];
         }
     }
     return target;

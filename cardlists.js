@@ -95,6 +95,7 @@ var neutral = module.exports.neutral = [
     cards.ValidatedDoomsayer,
     cards.HoggerScourgeofElwynn,
     cards.YShaarjRageUnbound,
+    cards.ArcaneGiant,
     
     cards.CThun,
     cards.BeckonerofEvil,
@@ -215,6 +216,8 @@ var priest = module.exports.priest = [
     cards.Entomb,
     cards.VelensChosen,
     cards.HolyFire,
+    cards.Resurrect,
+    cards.Shadowform,
     cards.NorthshireCleric,
     cards.TwilightWhelp,
     cards.WyrmrestAgent
