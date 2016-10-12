@@ -207,30 +207,37 @@ var dealDamage = module.exports.dealDamage = function(target, damage, context) {
         dealDamage(target.scenario, damage, {player: target.scenario, foe: target.scenario, cause: context.cause});
         if(target.scenario.getHp() <= 0) {
             printer.print(target.scenario.endOfMatch.line);
+            printer.print("");
             target.scenario.endOfMatch.action(context.player, context.foe);
         }
     }
     if (target.getHp() <= 0 && target.type !== "hero") {
-        if(target.owner === context.foe) {
-            module.exports.kill(target, {
-                player: context.foe,
-                foe: context.player,
-                cause: context.cause
-            });
+        if(target.hasEffectType("death interrupt")) {
+            damage = target.triggerEffectType("death interrupt", {player: context.player, foe: context.foe, cause: target, damage: damage});
         }
-        if(target.owner === context.player) {
-            module.exports.kill(target, {
-                player: context.player,
-                foe: context.foe,
-                cause: context.cause
-            });
+        if(target.getHp() - damage <= 0) {
+            if(target.owner === context.foe) {
+                module.exports.kill(target, {
+                    player: context.foe,
+                    foe: context.player,
+                    cause: context.cause
+                });
+            }
+            if(target.owner === context.player) {
+                module.exports.kill(target, {
+                    player: context.player,
+                    foe: context.foe,
+                    cause: context.cause
+                });
+            }
         }
-        
         return true;
     }
     if (target.getHp() <= 0 && target.type === "hero" && target) {
-        target.triggerEffectType("death interrupt", {player: context.player, foe: context.foe, cause: target});
-        if(target.getHp() <= 0 && target.endOfMatch && target.endOfMatch.line) {
+        if(target.hasEffectType("death interrupt")) {
+            damage = target.triggerEffectType("death interrupt", {player: context.player, foe: context.foe, cause: target, damage: damage});
+        }
+        if(target.getHp() - damage <= 0 && target.endOfMatch && target.endOfMatch.line) {
             printer.print("");
             printer.print(target.endOfMatch.line);
             target.endOfMatch.line = false;
@@ -649,7 +656,7 @@ var Attack = module.exports.Attack = function(source, target, context) {
         var damageDealt = source.getDamage();
         for(var i = 0; i < target.effects.length; i++) {
             if(target.effects[i].type === "self defense") {
-                damageDealt = target.effects[i].action( {player: context.foe, foe: context.player, source: target, cause: source, damage: damageDealt} );
+                damageDealt = target.effects[i].action(target, {player: context.foe, foe: context.player, source: target, cause: source, damage: damageDealt} );
             }
         }
         dealDamage(target, damageDealt, {player: context.player, foe: context.foe, cause: source});
@@ -657,7 +664,7 @@ var Attack = module.exports.Attack = function(source, target, context) {
             var damageDealt = target.getDamage();
             for(var i = 0; i < source.effects.length; i++) {
                 if(source.effects[i].type === "self defense") {
-                    damageDealt = source.effects[i].action( {player: context.player, foe: context.foe, source: source, cause: target, damage: damageDealt} );
+                    damageDealt = source.effects[i].action(source, {player: context.player, foe: context.foe, source: source, cause: target, damage: damageDealt} );
                 }
             }
             dealDamage(source, damageDealt, {
@@ -791,7 +798,11 @@ var genHp = module.exports.genHp = function(minion) {
     if (isNaN(minion.damageTaken)) {
         printer.print("WARNING: damageTaken is NaN in: " + minion.name);
     }
-    return genMaxHp(minion) - minion.damageTaken;
+    var hp = genMaxHp(minion) - minion.damageTaken;
+    if(minion.damageTaken < 0) {
+        return maxHp;
+    }
+    return hp;
 };
 
 
@@ -847,6 +858,9 @@ var genMaxDamage = module.exports.genMaxDamage = function(minion) {
     if (minion.type === "minion") {
         if (minion.owner) {
             for (var i = 0; i < minion.owner.minions.length; i++) {
+                if(!minion.owner.minions[i].effects) {
+                    throw("");
+                }
                 for (var q = 0; q < minion.owner.minions[i].effects.length; q++) {
                     var effect = minion.owner.minions[i].effects[q];
                     if (effect.type === "aura buff damage" && minion.owner.minions[i] !== minion) {
@@ -905,7 +919,11 @@ var genMaxDamage = module.exports.genMaxDamage = function(minion) {
 };
 
 var genDamage = module.exports.genDamage = function(minion) {
-    return genMaxDamage(minion) - minion.damageLost;
+    var dmg = genMaxDamage(minion) - minion.damageLost;
+    if(minion.damageLost < 0) {
+        return genMaxDamage(minion);
+    }
+    return dmg;
 };
 
 module.exports.reverseStats = function(minion) {
@@ -925,7 +943,7 @@ module.exports.reverseStats = function(minion) {
 var AttackAI = module.exports.AttackAI = function(attacker, context) {
     var targetables = filters.Attack(context);
 
-    var friendShielded = attacker.hasEffectName("Divine Shield");
+    var friendShielded = attacker.getEffectsName("Divine Shield");
 
     var bestMinion = null;
     var bestDesirability = 0;

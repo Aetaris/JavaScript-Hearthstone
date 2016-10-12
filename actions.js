@@ -55,6 +55,13 @@ module.exports.AcolyteofPain = function(source, context) {
     utilities.drawCard(context.player, context);
 };
 
+module.exports.CultMaster = function(source, context) {
+    if(context.cause != source) {
+        printer.print(source.color + " " + source.name + " revels in their ally's death, allowing " + context.player.color + " " + context.player.name + " to draw a card.");
+        utilities.drawCard(context.player, context);
+    }
+};
+
 module.exports.ShadeofNaxxramas = function(source, context) {
     printer.print(source.color + " Shade of Naxxramas is empowered", "results.txt", false);
     source.addEffect(ShadeofNaxxramasHp);
@@ -510,6 +517,7 @@ module.exports.LadyDeathwhisperManaBarrier = function(source, context) {
         context.cause.damageTaken = 0;
         printer.print(context.cause.color + " Lady Deathwhisper's Mana Barrier prevents lethal damage and restores her to "
         + context.cause.baseHp + " health at the cost of a Mana Crystal! Her barrier can withstand " + context.cause.maxMana + " more assaults.");
+        return 0;
     }
     else {
         printer.print(context.cause.color + " Lady Deathwhisper's Mana Barrier is depleted! The lethal damage is not prevented.");
@@ -521,8 +529,35 @@ module.exports.LadyDeathwhisperManaBarrier = function(source, context) {
             }
         }
     }
+    return context.damage;
 };
 
 module.exports.C_DeformedFanatic = function(source, context) {
     return 0;
-}
+};
+
+module.exports.Arthas_DwarvenRifleman = function(source, context) {
+    if(context.player.turn == true && context.foe.turn == false) {
+        return 0;
+    }
+    return context.damage;
+};
+
+module.exports.Arthas_MortarTeam = function(source, context) {
+    var targets = context.foe.minions;
+    if(targets.length == 0) {
+        var target = context.foe;
+    } else {
+        target = targets[Math.floor(Math.random() * targets.length)];
+    }
+    printer.print(source.color + " " + source.name + " fires a mortar blast at " + target.color + " " + target.name + ", dealing " + source.getDamage() + " damage.");
+    utilities.dealDamage(target, source.getDamage(), context);
+};
+
+module.exports.Arthas_SteamEngine = function(source, context) {
+    var dmg = context.damage - 3;
+    if(dmg <= 0) {
+        return 0;
+    }
+    return dmg;
+};

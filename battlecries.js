@@ -35,7 +35,7 @@ module.exports.NoviceEngineer = function(target, source, context) {
 
 module.exports.AbusiveSergeant = function(target, source, context) {
     if(target) {
-        printer.print(source.color + " Abusive Sergeant's battlecry 'inspires' a friendly minion, giving them +2 Attack this turn.");
+        printer.print(source.color + " Abusive Sergeant's battlecry 'inspires' " + target.color + " " + target.name + ", giving them +2 Attack this turn.");
         target.effects.push(AbusiveSergeantBuff);
     }
 };
@@ -594,7 +594,7 @@ module.exports.NZoth = function(target, source, context) {
     var deathrattles = [];
     for(var i = 0; i < context.player.graveyard.length; i++) {
         if(context.player.graveyard[i].type == "minion" && context.player.graveyard[i].hasEffectType("deathrattle")) {
-            deathrattles.push(context.player.graveyard[i]);
+            deathrattles.push(context.player.graveyard[i].card());
         }
     }
     utilities.shuffle(deathrattles);
@@ -1019,3 +1019,41 @@ var SpareParts = module.exports.SpareParts = [
     // module.exports.ReversingSwitch,
     module.exports.TimeRewinder
 ];
+
+var Arthas_ValiantFootmanBuff = {
+    name: "Blocking",
+    type: "buff health",
+    num: 2
+};
+
+var Arthas_ValiantFootmanBlock = function(source, context) {
+    printer.print(source.color + " " + source.name + " raises their shield, gaining +2 Health and Taunt.");
+    source.effects.push(effects.taunt);
+    source.effects.push(Arthas_ValiantFootmanBuff);
+    for(var i in source.effects) {
+        if(source.effects[i] && source.effects[i].name == "Prep For Block") {
+            source.effects.splice(i, 1);
+        }
+    }
+};
+
+var Arthas_ValiantFootmanPrepForBlock = {
+    name: "Prep For Block",
+    type: "start of turn friend",
+    action: Arthas_ValiantFootmanBlock
+};
+
+module.exports.Arthas_ValiantFootman = function(target, source, context) {
+    source.effects.push(Arthas_ValiantFootmanPrepForBlock);
+};
+
+module.exports.Arthas_BladeofWrath = function(target, source, context) {
+    var totalDamage = context.player.damageTaken;
+    for(var i in context.player.minions) {
+        totalDamage += context.player.minions[i].damageTaken;
+    }
+    var explosion = Math.floor(totalDamage / 3);
+    
+    printer.print("The " + context.player.color + " " + context.player.name + "'s " + source.name + " blasts " + target.color + " " + target.name + ", dealing damage based on " + context.player.name + "'s wounds.");
+    utilities.dealSpellDamage(target, explosion, context);
+};

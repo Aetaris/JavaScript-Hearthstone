@@ -60,8 +60,33 @@ module.exports.setScenario = function(scenario, red, blue) {
     return scenario;
 };
 
+var attackWave = function(red, blue, self) {
+    var target = Math.random() > 0.5 ? (red.getHp() > 0 ? red : blue) : (blue.getHp() > 0 ? blue : red);
+    for(var i = 0; i < self.minions.length; i++) {
+        var canAttack = true;
+        for(var j in self.minions[i].effects) {
+            if(self.minions[i].effects[j]) {
+                if(self.minions[i].effects[j].name == "Summoning Sickness" || self.minions[i].effects[j].name == "Can't Attack" || self.minions[i].effects[j].name == "Frozen" || self.minions[i].effects[j].name == "Permanently Frozen") {
+                    canAttack = false;
+                    if(self.minions[i].effects[j].name == "Summoning Sickness") {
+                        self.minions[i].effects.splice(j, 1);
+                        j--;
+                    }
+                }
+            }
+        }
+        if(self.minions[i].getDamage() <= 0) {
+            canAttack = false;
+        }
+        if(canAttack == true) {
+            utilities.Attack(self.minions[i], utilities.AttackAI(self.minions[i], {player: self, foe: target}), {player: self, foe: target});
+        }
+    }
+};
+
 module.exports.Zakazj = function() {
     return utilities.withEffects({
+        scenarioName: "Zakazj the Corruptor",
         name: "Zakazj the Corruptor",
         startOfMatch: {
             line: "Zakazj the Corruptor: I will feast upon your souls!",
@@ -75,6 +100,8 @@ module.exports.Zakazj = function() {
         },
         abilities: [SummonTentacles, VoidBurst, Forgetfulness, InduceMadness, GrowingMadness],
         
+        turn: false,
+
         attackTarget: true,
         minionLifelink: false,
         mustDefeatBoth: false,
@@ -310,6 +337,7 @@ var ShadowArmorSpell = function(target, context) {
 
 module.exports.Murozond = function() {
     return utilities.withEffects({
+        scenarioName: "Madness of Murozond",
         name: "Murozond",
         startOfMatch: {
             line: "Murozond: I can see now... the Hour of Twilight is nigh, and you will not stand against it!",
@@ -323,6 +351,8 @@ module.exports.Murozond = function() {
         },
         abilities: [InfiniteFlight, RecallMemories, RunningOutofTime, SandBreath],
         
+        turn: false,
+
         attackTarget: true,
         minionLifelink: false,
         mustDefeatBoth: true,
@@ -376,13 +406,6 @@ var murozond_greeting = function(player) {
     }
 };
 
-var attackWave = function(red, blue, self) {
-    var target = Math.random() > 0.5 ? (red.getHp() > 0 ? red : blue) : (blue.getHp() > 0 ? blue : red);
-    for(var i = 0; i < self.minions.length; i++) {
-        utilities.Attack(self.minions[i], utilities.AttackAI(self.minions[i], {player: self, foe: target}), {player: self, foe: target});
-    }
-};
-
 var InfiniteFlight = function(red, blue, self) {
     printer.print(self.name + ": Come to me, my flight!");
     printer.print(self.name + " summons two deadly Infinite Drakes.");
@@ -421,12 +444,12 @@ var RecallMemories = function(red, blue, self) {
         }
         if(!memory) {
             memory = false;
-            printer.print("No memory found -- a Sand Illusion has been created.");
+            printer.print("A Sand Illusion has been created in place of a Memory.");
             utilities.summon(SandIllusion(self, self), self, {player: self});;
         }
         else {
             printer.print("Memory formed: " + memory.name);
-            utilities.summon(memory, self, {player: self});
+            utilities.summon(memory.card(), self, {player: self});
         }
     }
     
@@ -480,6 +503,7 @@ var SandIllusion = function(player, creator) {
 
 module.exports.Mimiron = function() {
     return utilities.withEffects({
+        scenarioName: "Mimiron",
         name: "Mimiron",
         startOfMatch: {
             line: "Mimiron: You're just in time for testing!",
@@ -497,6 +521,8 @@ module.exports.Mimiron = function() {
         cannonAbilities: [LaserBurst, LaunchRockets, SummonAssaultBots],
         commandUnitAbilities: [PlasmaBarrage],
         
+        turn: false,
+
         attackTarget: true,
         minionLifelink: false,
         mustDefeatBoth: true,
@@ -795,32 +821,301 @@ var AssaultBot = function(player, creator) {
     return minion;
 };
 
-// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-module.exports.Kaelthas = function() {
+// SAD MYSTERY BOSSES
+
+module.exports.BlackrockBlademaster = function() {
     return utilities.withEffects({
-        name: "Kael'thas Sunstrider",
+        scenarioName: "Blackrock & Roll",
+        name: "Blademaster",
         startOfMatch: {
-            line: "Kael'thas: Greetings.",
-            greeting: kael_greeting,
-            action: kael_action
+            line:  "Uther the Lightbringer: The Blackrock orcs that destroyed Strahnbrad have a base somewhere nearby. I'm entrusting you with leading the attack.\nArthas Menethil: I won't let you down, Uther.\nArthas Menethil: Come with me. Let's slay these beasts.",
+            greeting: false,
+            action: BlackrockBlademaster_Action
         },
         endOfMatch: {
-            line: "Kael'thas: Merely... a setback.",
-            victory: "Kael'thas: An admirable, if short-lived, display.",
+            line: "Uther the Lightbringer: Well done, lad. A sound victory!\n",
+            victory: "Arthas Menethil: Fall back! The orcs are too much for us...",
             action: endMatch
         },
-        abilities: [Summon_Thaladred, Flamestrike, GravityLapse, Fireball, Fireball, Fireball],
+        abilities: [Blackrock_Turn],
+        defaultAbils: [Blackrock_Reinforce, Blackrock_Reinforce, Blackrock_Bombard, Blackrock_Assassinate],
         
+        phase: 1,
+        bombardTimer: 4,
+        
+        turn: false,
+
         attackTarget: true,
         minionLifelink: false,
         mustDefeatBoth: true,
         coop: true,
         
         type: "hero",
-        color: "Sin'dorei",
+        color: "Blackrock",
         hero: {},
-        baseHp: 80,
+        baseHp: 15,
+        damageTaken: 0,
+        baseDamage: 0,
+        damageLost: 0,
+        armor: 15,
+        maxMana: 0,
+        mana: 0,
+        lockedMana: 0,
+        fatigue: 0,
+        effects: [Blackrock_MirrorImage],
+        isPlayer: false,
+        minions: [],
+        hand: [],
+        deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
+        graveyard: [],
+
+        getMaxHp: function() {
+            return utilities.genMaxHp(this);
+        },
+        getHp: function() {
+            return utilities.genHp(this);
+        },
+        getMaxDamage: function() {
+            return utilities.genMaxDamage(this);
+        },
+        getDamage: function() {
+            return utilities.genDamage(this);
+        }
+    });
+};
+
+var BlackrockBlademaster_Action = function(red, blue, self) {
+    for(var i = 0; i < 3; i++) {
+        utilities.summon(Blackrock_WatchTower(), self, {player: self, foe: red});
+    }
+};
+
+var Blackrock_Turn = function(red, blue, self) {
+    self.phase++;
+    if(self.phase == 6) {
+        printer.print("Feranor Steeltoe: Well met! Would you care to join in our hunt?\nArthas Menethil: What are you dwarves hunting?\nFeranor Steeltoe: We're on the trail of a black drake named Searinox! If you bring us back his heart, we can grant you a fiery enchantment.\nFeranor Steeltoe: I'll tag along. Nothing like the thrill of a dragon hunt!\n");
+        utilities.summon(Blackrock_Feranor(), red, {player: red, foe: self});
+    }
+    if(self.phase == 14) {
+        printer.print("The black dragon Searinox descends from the sky with a mighty roar. If you slay the creature, the dwarves can give you some sort of reward.\n");
+        utilities.summon(Searinox(), self, {player: self, foe: red});
+    }
+    else {
+        var num = Math.floor(Math.random() * self.defaultAbils.length);
+        if(self.bombardTimer == 0) {
+            Blackrock_Bombard(red, blue, self);
+            self.bombardTimer = 4;
+        } else {
+            self.defaultAbils[num](red, blue, self);
+            if(self.defaultAbils[num] != Blackrock_Bombard) {
+                self.bombardTimer--;
+            } else {
+                self.bombardTimer = 4;
+            }
+        }
+        
+        num = 0;
+        for(var i in self.minions) {
+            if(self.minions[i].name == "Watch Tower") {
+                num++;
+            }
+        }
+        
+        if(num < 6 && self.phase % 10 == 0) {
+            if(num < 3) {
+                printer.print("Blackrock Blademaster: Rebuild one of those watch towers!\nThe Blackrock orcs repair one of the damaged watch towers. It is ready to start assaulting your forces.");
+            } else {
+                printer.print("Blackrock Blademaster: Peons, construct a new watch tower!\nThe Blackrock orcs construct a new watch tower, ready to start assaulting your forces.");
+            }
+            utilities.summon(Blackrock_WatchTower(), self, {player: self, foe: red});
+        }
+        attackWave(red, blue, self);
+    }
+};
+
+var Feranor_ByeAction = function(source, context) {
+    printer.print("\nFeranor Steeltoe: Ach! It's getting a bit too intense for me... I'll just stay back with the others!\n");
+    source.owner.minions.splice(source.owner.minions.indexOf(source), 1);
+    return 0;
+};
+
+var Feranor_Bye = {
+    name: "Ach!",
+    type: "death interrupt",
+    action: Feranor_ByeAction
+}
+
+var Blackrock_Feranor = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Feranor Steeltoe", 3, 0, 3, 4, false, false, false, [effects.sickness, effects.Arthas_MortarTeam, Feranor_Bye, effects.cantattack], ais.true, Blackrock_Feranor);
+};
+
+var Blackrock_Reinforce = function(red, blue, self) {
+    var num = 2;
+    num += Math.floor(self.phase / 10);
+    printer.print(num + " Blackrock Grunts emerge from a barracks, ready for battle.");
+    for(var i = 0; i < num; i++) {
+        utilities.summon(Blackrock_Grunt(), self, {player: self, foe: red});
+    }
+};
+
+var Blackrock_Bombard = function(red, blue, self) {
+    var num = 0;
+    for(var i in self.minions) {
+        if(self.minions[i].name == "Watch Tower") {
+            num++;
+        }
+    }
+    if(num > 0) {
+        var player = Math.random() > 0.5 ? red : blue;
+        var string = "Blackrock Blademaster: Fire!\n" + num + " massive fireball";
+        if(num == 1) {
+            string += " is launched";
+        } else {
+            string += "s are launched";
+        }
+        string += " from Blackrock Watch Towers towards " + player.color + " " + player.name + " and their troops.";
+        printer.print(string);
+        for(var i = 0; i < num; i++) {
+            var targetList = player.minions.slice();
+            targetList.push(player);
+            var target = targetList[Math.floor(targetList.length * Math.random())];
+            printer.print("A fireball strikes " + target.color + " " + target.name + ".");
+            if(target.getHp() > 0) {
+                utilities.dealDamage(target, 2, {player: player, foe: self, cause: self});
+            }
+        }
+    }
+};
+
+var Blackrock_Assassinate = function(red, blue, self) {
+    var filter = [];
+    for(var k = 0; k < 2; k++) {
+        var player = k == 0 ? red : blue;
+        for(var i = 0; i < player.minions.length; i++) {
+            filter.push(player.minions[i]);
+        }
+    }
+    
+    var target = filter[Math.floor(Math.random() * filter.length)];
+    if(target) {
+        printer.print("Blackrock Blademaster emerges from darkness, slashing at " + target.color + " " + target.name + " viciously, then fades back into the shadows.");
+        utilities.dealDamage(target, 6, {player: target.owner, foe: self, cause: self});
+    } else {
+        if(self.armor > 0) {
+            Blackrock_Reinforce(red, blue, self);
+        } else {
+            Blackrock_Bombard(red, blue, self);
+        }
+    }
+};
+
+var Blackrock_MirrorImage_Action = function(source, context) {
+    if(source.armor - context.damage <= 0) {
+        printer.print("\nBlackrock Blademaster: Paladin fool!\nThree images of the Blackrock Blademaster appear.\n");
+        for(var i = 0; i < 3; i++) {
+            utilities.summon(Blackrock_MirrorImage_Unit(), source, {player: source, foe: context.foe, cause: source});
+        }
+        for(var i in source.effects) {
+            if(source.effects[i] && source.effects[i].name == "Mirror Image") {
+                source.effects.splice(i, 1);
+            }
+        }
+        source.abilities.push(Blackrock_Assassinate);
+        return context.damage;
+    }
+    return context.damage;
+};
+
+var Blackrock_MirrorImage = {
+    name: "Mirror Image",
+    type: "self defense",
+    action: Blackrock_MirrorImage_Action
+};
+
+var Searinox = function() {
+    return utilities.makeMinion("Dragon", "Uncollectible", "Sad Mystery", "Black", "Searinox", 6, 0, 16, 4, false, false, false, [effects.sickness, effects.taunt, Searinox_Deathrattle], ais.true, Searinox);
+};
+
+var Searinox_RattleEffect = function(source, context) {
+    printer.print("\nFeranor Steeltoe: Nice job! We can use the beast's heart to forge a fiery enchantment you can unleash upon your enemies.\n" + context.foe.color + " " + context.foe.name + " has received a use of the Heart of Searinox.\n");
+    if(context.foe.hand.length < 10) {
+        context.foe.hand.push(HeartofSearinox());
+    }
+};
+
+var Searinox_Deathrattle = {
+    name: "Searinox",
+    type: "deathrattle",
+    action: Searinox_RattleEffect
+};
+
+var Blackrock_Grunt = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Grunt", 2, 0, 2, 2, false, false, false, [effects.sickness, effects.taunt], ais.true, Blackrock_Grunt);
+};
+
+var Blackrock_WatchTower = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Watch Tower", 4, 0, 12, 0, false, false, false, [effects.taunt, effects.cantattack], ais.true, Blackrock_WatchTower);
+};
+
+var Blackrock_MirrorImage_Unit = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Mirror Image", 3, 0, 5, 2, false, false, false, [effects.sickness, effects.taunt], ais.true, Blackrock_MirrorImage_Unit);
+};
+
+var HeartofSearinox = function() {
+    return utilities.makeSpell("Uncollectible", "Sad Mystery", false, "Heart of Searinox", 4, 0, HeartofSearinox_Ability, false, false, ais.Flamestrike, HeartofSearinox);
+};
+
+var HeartofSearinox_Ability = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " unleashes the searing fury of the Heart of Searinox, dealing 20 damage to an enemy Watch Tower. and 2 damage to all other enemy minions.");
+    var hasDamagedTower = false;
+    for(var i in context.foe.minions) {
+        if(context.foe.minions[i].name == "Watch Tower" && hasDamagedTower == false) {
+            utilities.dealSpellDamage(context.foe.minions[i], 20, context);
+            hasDamagedTower = true;
+        }
+        else {
+            utilities.dealSpellDamage(context.foe.minions[i], 2, context);
+        }
+    }
+};
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+module.exports.PlaguedVillages = function() {
+    return utilities.withEffects({
+        scenarioName: "Plagued Villages",
+        name: "Village",
+        startOfMatch: {
+            line:  "Jaina Proudmoore: Those reports of plague appear to have been right... that granary looks like it's spreading it.\nArthas Menethil: Then let's destroy it.",
+            greeting: PlaguedVillages_Greeting,
+            action: PlaguedVillages_Action
+        },
+        endOfMatch: {
+            line: "Jaina Proudmoore: What was that monstrosity? And who was that mage in black robes?\nArthas Menethil: I don't know. But I suspect we'll find out in Andorhal.",
+            victory: "Arthas Menethil: Blasted undead! Retreat!",
+            action: endMatch
+        },
+        abilities: [PlaguedVillages_Turn],
+        defaultAbils: [PlaguedVillages_Zombies],
+        
+        phase: 1,
+        necroSummoned: false,
+        
+        turn: false,
+
+        attackTarget: true,
+        minionLifelink: true,
+        mustDefeatBoth: true,
+        coop: true,
+        
+        type: "hero",
+        color: "Plagued",
+        hero: {},
+        baseHp: 165,
         damageTaken: 0,
         baseDamage: 0,
         damageLost: 0,
@@ -851,106 +1146,268 @@ module.exports.Kaelthas = function() {
     });
 };
 
-var kael_action = function(red, blue, self) {
+var PlaguedVillages_Action = function(red, blue, self) {
+    printer.print("An ominous calm hangs over the village.");
+    utilities.summon(PlaguedVillages_PlaguedGranary(), self, {player: self, foe: red, cause: self});
+};
+
+var PlaguedVillages_Greeting = function(player) {
+    
+};
+
+var PlaguedVillages_Turn = function(red, blue, self) {
+    self.phase++;
+    if(self.phase < 6) {
+        
+    }
+    else if(self.phase == 6) {
+        printer.print("Arthas Menethil: There! A group of undead! Destroy them!\nA group of shambling creatures emerge from one of the buildings and attack!");
+        for(var i = 0; i < 4; i++) {
+            utilities.summon(PlaguedVillages_Zombie(), self, {player: self, foe: self, cause: self});
+        }
+    }
+    else if(self.phase == 14) {
+        printer.print("Arthas Menethil: A dwarven mortar team! What are you men shooting at?\nMortar Team: Undead, sir! The village is crawling with 'em!\nThe Mortar Team has joined " + red.name + "'s forces!");
+        utilities.summon(cards.Arthas_MortarTeam(), red, {player: red, foe: self, cause: red});
+        for(i = 0; i < 4; i++) {
+            utilities.summon(PlaguedVillages_Zombie2(), self, {player: self, foe: self, cause: self});
+        }
+    } else if(self.phase == 24) {
+        printer.print("A massive behemoth of twisted flesh emerges from behind the granary.\nArthas Menethil: What the-- kill it!");
+        utilities.summon(PlaguedVillages_Abomination(), self, {player: self, foe: red, cause: self});
+    } else if(self.phase == 36) {
+        printer.print("A figure clad in black robes appears. He seems to be orchestrating things from the background.");
+        utilities.summon(PlaguedVillages_KelThuzad(), self, {player: self, foe: red, cause: self});
+        self.necroSummoned = true;
+    }
+    else {
+        var num = Math.floor(Math.random() * self.defaultAbils.length);
+        self.defaultAbils[num](red, blue, self);
+    }
+    var abomAlive = false;
+    var granaryAlive = false;
+    for(i in self.minions) {
+        if(self.minions[i].name == "Abomination") {
+            abomAlive = true;
+        } else if(self.minions[i].name == "Granary") {
+            granaryAlive = true;
+        }
+    }
+    if(abomAlive == false) {
+        var grave = false;
+        for(i in self.graveyard) {
+            if(self.graveyard[i].name == "Abomination") {
+                grave = true;
+            }
+        }
+    }
+    if(abomAlive == false && grave == false && self.phase > 24) {
+        printer.print("\nAnother abomination lurches out of the fog.");
+        utilities.summon(PlaguedVillages_Abomination(), self, {player: self, foe: red, cause: self});
+    }
+    var necroPresent = false;
+    for(i in self.minions) {
+        if(self.minions[i].name == "Kel'Thuzad") {
+            necroPresent = true;
+            PlaguedVillages_RaiseDead(red, blue, self);
+        }
+    }
+    if(!abomAlive && grave == true && granaryAlive == false && necroPresent == false && self.necroSummoned == true) {
+        printer.print("The plague appears to have lifted from this village.");
+        self.damageTaken = 5000;
+    }
+    attackWave(red, blue, self);
+};
+
+var PlaguedVillages_Zombies = function(red, blue, self) {
+    var num = 2;
+    num += Math.floor(self.phase / 10);
+    if(self.phase > 40) {
+        num += 3;
+    } else if(self.phase > 20) {
+        num -= 2;
+    }
+    printer.print("A group of " + num + " shambling creatures emerge from one of the buildings and attack!");
+    for(var i = 0; i < num; i++) {
+        utilities.summon(self.phase > 20 ? PlaguedVillages_Zombie2() : PlaguedVillages_Zombie(), self, {player: self, foe: self, cause: self});
+    }
+};
+
+var PlaguedVillages_RaiseDead = function(red, blue, self) {
+    var graveyard = [];
+    for(var i in red.graveyard) {
+        if(red.graveyard[i].type == "minion") {
+            graveyard.push(red.graveyard[i]);
+        }
+    }
+    for(i in blue.graveyard) {
+        if(blue.graveyard[i].type == "minion") {
+            graveyard.push(blue.graveyard[i]);
+        }
+    }
+    var zombie = graveyard[Math.floor(Math.random() * graveyard.length)];
+    if(zombie) {
+        printer.print("Kel'Thuzad: Rise, minion!\nThe corpse of " + zombie.name + " rises at the necromancer's call.");
+        zombie["race"] == "Undead";
+        utilities.summon(zombie.card(), self, {player: self, foe: red, cause: self});
+    }
+};
+
+var PlaguedVillages_Zombie = function() {
+    return utilities.makeMinion("Undead", "Uncollectible", "Sad Mystery", false, "Zombie", 1, 0, 3, 1, false, false, false, [effects.sickness, effects.taunt], ais.true, PlaguedVillages_Zombie);
+};
+
+var PlaguedVillages_Zombie2 = function() {
+    return utilities.makeMinion("Undead", "Uncollectible", "Sad Mystery", false, "Zombie", 1, 0, 5, 2, false, false, false, [effects.sickness, effects.taunt], ais.true, PlaguedVillages_Zombie);
+};
+
+var PlaguedVillages_PlaguedGranary = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Granary", 3, 0, 45, 0, false, false, false, [effects.cantattack, effects.taunt], ais.true, PlaguedVillages_PlaguedGranary);
+};
+
+var PlaguedVillages_KTByeAction = function(source, context) {
+    printer.print("\nKel'Thuzad: Quite impressive, young prince. We will meet again in Andorhal...\nKel'Thuzad vanishes.\n");
+    source.owner.minions.splice(source.owner.minions.indexOf(source), 1);
+    return 0;
+};
+
+var PlaguedVillages_KTBye = {
+    name: "Kel'Thuzad Bye",
+    type: "death interrupt",
+    action: PlaguedVillages_KTByeAction
+};
+
+var PlaguedVillages_KelThuzad = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", "Necromancer", "Kel'Thuzad", 4, 0, 45, 5, false, false, false, [effects.sickness, effects.taunt, PlaguedVillages_KTBye], ais.true, PlaguedVillages_KelThuzad);
+};
+
+var PlaguedVillages_Abomination = function() {
+    return utilities.makeMinion("Undead", "Uncollectible", "Sad Mystery", false, "Abomination", 6, 0, 45, 6, false, false, false, [effects.sickness, effects.taunt], ais.true, PlaguedVillages_Abomination);
+};
+
+module.exports.KelThuzad = function() {
+    return utilities.withEffects({
+        scenarioName: "The Necromancer Kel'Thuzad",
+        name: "Kel'Thuzad",
+        startOfMatch: {
+            line:  "Arthas Menethil: We've reached Andorhal... there! The necromancer who was leading the undead!\nKel'Thuzad: Greetings, Prince Arthas. You were expected.",
+            greeting: KelThuzad_Greeting,
+            action: KelThuzad_Action
+        },
+        endOfMatch: {
+            line: "Kel'Thuzad: My death means nothing... the scourging of this land begins...\nArthas Menethil: There's some greater force behind the plague? Quickly, we need to reach Stratholme and put an end to this!\n",
+            victory: "Kel'Thuzad: It seems you were overestimated, prince Arthas.",
+            action: endMatch
+        },
+        abilities: [KelThuzad_Turn],
+        defaultAbils: [KelThuzad_ShadowBolt, KelThuzad_Frenzy],
+        
+        phase: 1,
+        
+        turn: false,
+
+        attackTarget: true,
+        minionLifelink: true,
+        mustDefeatBoth: true,
+        coop: true,
+        
+        type: "hero",
+        color: "Dark",
+        hero: {},
+        baseHp: 65,
+        damageTaken: 0,
+        baseDamage: 0,
+        damageLost: 0,
+        armor: 0,
+        maxMana: 0,
+        mana: 0,
+        lockedMana: 0,
+        fatigue: 0,
+        effects: [],
+        isPlayer: false,
+        minions: [],
+        hand: [],
+        deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
+        graveyard: [],
+
+        getMaxHp: function() {
+            return utilities.genMaxHp(this);
+        },
+        getHp: function() {
+            return utilities.genHp(this);
+        },
+        getMaxDamage: function() {
+            return utilities.genMaxDamage(this);
+        },
+        getDamage: function() {
+            return utilities.genDamage(this);
+        }
+    });
+};
+
+var KelThuzad_Action = function(red, blue, self) {
+    printer.print("\nKel'Thuzad: witness the power of the Scourge I bring!\nKel'Thuzad reanimates four corpses.");
+    for(var i = 0; i < 4; i++) {
+        utilities.summon(PlaguedVillages_Zombie(), self, {player: self, foe: red, cause: self});
+    }
     red.baseHp += 20;
     blue.baseHp += 20;
 };
 
-var kael_greeting = function(player) {
+var KelThuzad_Greeting = function(player) {
     
 };
 
-var Telonicus = function(player, creator) {
-    var minion = utilities.makeMinion(false, "Boss", "Custom", "Master Engineer", "Telonicus", 3, 0, 10, 4, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Telonicus);
-    minion["scenario"] = creator;
-    return minion;
-};
-
-var Summon_Telonicus = function(red, blue, self) {
-    printer.print(self.name + " summons one of his advisors, Master Engineer Telonicus.");
-    utilities.summon(Telonicus(self, self), self, {player: self});
-    self.abilities.splice(self.abilities.indexOf(Summon_Telonicus), 1);
-    
-    attackWave(red, blue, self);
-
-};
-
-var Capernian = function(player, creator) {
-    var minion = utilities.makeMinion(false, "Boss", "Custom", "Grand Astromancer", "Capernian", 3, 0, 8, 3, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Capernian);
-    minion["scenario"] = creator;
-    return minion;
-};
-
-var Summon_Capernian = function(red, blue, self) {
-    printer.print(self.name + " summons one of his advisors, Grand Astromancer Capernian.");
-    utilities.summon(Capernian(self, self), self, {player: self});
-    self.abilities.splice(self.abilities.indexOf(Summon_Capernian), 1);
-    self.abilities.push(Summon_Telonicus);
-    
+var KelThuzad_Turn = function(red, blue, self) {
+    self.phase++;
+    if(self.phase > 24 && (self.getHp() >= 20 || (red.getHp() <= 4 || blue.getHp() <= 4))) {
+        KelThuzad_Enrage(red, blue, self);
+    }
+    else if(self.phase < 8 && self.phase % 2 == 0) {
+        printer.print("Kel'Thuzad reanimates a weak zombie.");
+        utilities.summon(PlaguedVillages_Zombie(), self, {player: self, foe: red, cause: self});
+    }
+    else {
+        var num = Math.floor(Math.random() * self.defaultAbils.length);
+        self.defaultAbils[num](red, blue, self);
+    }
+    printer.print("");
+    if(self.phase % 3 == 0) {
+        PlaguedVillages_RaiseDead(red, blue, self);
+        printer.print("");
+    }
+    else if(self.phase % 8 == 0) {
+        KelThuzad_BoneServants(red, blue, self);
+        printer.print("");
+    }
     attackWave(red, blue, self);
 };
 
-var Sanguinar = function(player, creator) {
-    var minion = utilities.makeMinion(false, "Boss", "Custom", "Lord", "Sanguinar", 3, 0, 6, 2, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Sanguinar);
-    minion["scenario"] = creator;
-    return minion;
-};
-
-var Summon_Sanguinar = function(red, blue, self) {
-    printer.print(self.name + " summons one of his advisors, Lord Sanguinar.");
-    utilities.summon(Sanguinar(self, self), self, {player: self});
-    self.abilities.splice(self.abilities.indexOf(Summon_Sanguinar), 1);
-    self.abilities.push(Summon_Capernian);
-    
-    attackWave(red, blue, self);
-};
-
-var Thaladred = function(player, creator) {
-    var minion = utilities.makeMinion(false, "Boss", "Custom", "Thaladred", "the Darkener", 3, 0, 4, 1, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Thaladred);
-    minion["scenario"] = creator;
-    return minion;
-};
-
-var Summon_Thaladred = function(red, blue, self) {
-    printer.print(self.name + " summons one of his advisors, Thaladred the Darkener.");
-    utilities.summon(Thaladred(self, self), self, {player: self});
-    self.abilities.splice(self.abilities.indexOf(Summon_Thaladred), 1);
-    self.abilities.push(Summon_Sanguinar);
-    
-    attackWave(red, blue, self);
-};
-
-var Flamestrike = function(red, blue, self) {
-    printer.print(self.name + " summons a powerful Flamestrike, dealing immense damage to all enemy minions.");
-    for(var j = 0; j < 3; j++) {
-        for(var k = 0; k < 2; k++) {
-            var target = k == 0 ? red : blue;
-            for(var i = 0; i < target.minions.length; i++) {
-                utilities.dealDamage(target.minions[i], 3 - j, {player: target, foe: self, cause: self});
-            }
+var KelThuzad_Enrage = function(red, blue, self) {
+    if(self.phase == 25) {
+        printer.print("Kel'Thuzad: The master must have been wrong about you... you are no threat to me, or to our cause... and certainly no future champion.\nKel'Thuzad releases a wave of darkness, tearing at the souls of all enemies.");
+    } else {
+        printer.print("Kel'Thuzad releases a wave of darkness, tearing at the souls of all enemies.");
+    }
+    var filter = [red, blue];
+    for(var k = 0; k < 2; k++) {
+        var player = k == 0 ? red : blue;
+        for(var i = 0; i < player.minions.length; i++) {
+            filter.push(player.minions[i]);
         }
     }
-    
-    attackWave(red, blue, self);
+    for(var i in filter) {
+        utilities.dealDamage(filter[i], 4, {player: self, foe: filter[i].owner, cause: self});
+    }
 };
 
-var GravityLapse = function(red, blue, self) {
-    printer.print("Kael'thas: Let us see how you fare when your world turns upside down!");
-    printer.print(self.name + " inverts gravity, damaging all minions and swapping their ownership to the other player.");
-    var initialRed = red.minions.slice();
-    red.minions = blue.minions;
-    blue.minions = initialRed;
-    for(var i = 0; i < red.minions.length; i++) {
-        utilities.dealDamage(red.minions[i], 1, { player: red, foe: blue, cause: red });
-    }
-    for(i = 0; i < blue.minions.length; i++) {
-        utilities.dealDamage(blue.minions[i], 1, { player: blue, foe: red, cause: red });
-    }
-    
-    attackWave(red, blue, self);
+var KelThuzad_ShadowBoltDebuff = {
+    name: "Debuff",
+    type: "buff damage",
+    num: -2
 };
 
-var Fireball = function(red, blue, self) {
+var KelThuzad_ShadowBolt = function(red, blue, self) {
     var filter = [red, blue];
     for(var k = 0; k < 2; k++) {
         var player = k == 0 ? red : blue;
@@ -960,8 +1417,144 @@ var Fireball = function(red, blue, self) {
     }
     
     var target = filter[Math.floor(Math.random() * filter.length)];
-    printer.print(self.name + " shoots a fireball at " + target.color + " " + target.name + ".");
-    utilities.dealDamage(target, 6, {player: target.owner, foe: self, cause: self});
+    printer.print("Kel'Thuzad launches a bolt of darkess at " + target.color + " " + target.name + ", damaging and weakening them.");
+    utilities.dealDamage(target, 4, {player: target.owner, foe: self, cause: self});
+    target.effects.push(KelThuzad_ShadowBoltDebuff);
+};
+
+var KelThuzad_FrenzyResistAction = function(source, context) {
+    if(source.getHp() == 1 || context.damage <= 0) {
+        return 0;
+    }
+    return 1;
+};
+
+var KelThuzad_FrenzyResist = {
+    name: "Frenzy Resistance",
+    type: "self defense",
+    action: KelThuzad_FrenzyResistAction
+};
+
+var KelThuzad_Frenzy = function(red, blue, self) {
+    var minion;
+    for(var i in self.minions) {
+        if(!minion || self.minions[i].getDamage() > minion.getDamage()) {
+            minion = self.minions[i];
+        }
+    }
+    if(minion) {
+        printer.print("Kel'Thuzad: Slay them!\nKel'Thuzad drives " + minion.name + " into a frenzy, causing them to attack " + red.name + " and all of their minions.");
+        minion.effects.unshift(KelThuzad_FrenzyResist);
+        utilities.Attack(minion, red, {player: self, foe: red, cause: self});
+        for(i in red.minions) {
+            utilities.Attack(minion, red.minions[i], {player: self, foe: red, cause: self});
+        }
+        for(i in minion.effects) {
+            if(minion.effects[i] && minion.effects[i].name == "Frenzy Resistance") {
+                minion.effects.splice(i, 1);
+            }
+        }
+    }
+    else {
+        KelThuzad_ShadowBolt(red, blue, self);
+    }
+};
+
+var KelThuzad_BoneServants = function(red, blue, self) {
+    printer.print("Kel'Thuzad: Rise, and let the living beware!\nKel'Thuzad summons two skeletal warriors.");
+    for(var i = 0; i < 2; i++) {
+        var stat = Math.round(self.phase / 4);
+        if(self.phase > 24) {
+            stat += Math.round((self.phase-24) / 3);
+        }
+        utilities.summon(KelThuzad_SkeletalWarrior(stat), self, {player: self, foe: red, cause: self});
+    }
+};
+
+var KelThuzad_SkeletalWarrior = function(stat) {
+    return utilities.makeMinion("Undead", "Uncollectible", "Sad Mystery", false, "Skeletal Warrior", 2, 0, stat, stat, false, false, false, [effects.sickness], ais.true, KelThuzad_SkeletalWarrior);
+};
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+module.exports.Stratholme = function() {
+    return utilities.withEffects({
+        scenarioName: "The Purging of Stratholme",
+        name: "Mal'Ganis",
+        startOfMatch: {
+            line:  "Arthas Menethil: No... Stratholme has been infected. We have to kill these citizens before they turn to undead...",
+            greeting: Stratholme_Greeting,
+            action: Stratholme_Action
+        },
+        endOfMatch: {
+            line: "Mal'Ganis: Impressively done, boy. But we have unfinished business between us. Meet me in Northrend... there shall your fate be revealed.\n",
+            victory: "With the defeat of Arthas and his forces, the city of Stratholme has fallen to Mal'Ganis.",
+            action: endMatch
+        },
+        abilities: [KelThuzad_Turn],
+        defaultAbils: [KelThuzad_ShadowBolt, KelThuzad_Frenzy],
+        
+        phase: 1,
+        
+        malganisScore: 0,
+        arthasScore: 0,
+        
+        turn: false,
+
+        attackTarget: true,
+        minionLifelink: true,
+        mustDefeatBoth: true,
+        coop: true,
+        
+        type: "hero",
+        color: "Unholy",
+        hero: {},
+        baseHp: 40,
+        damageTaken: 0,
+        baseDamage: 0,
+        damageLost: 0,
+        armor: 0,
+        maxMana: 0,
+        mana: 0,
+        lockedMana: 0,
+        fatigue: 0,
+        effects: [Stratholme_MalganisAvoidDeath],
+        isPlayer: false,
+        minions: [],
+        hand: [],
+        deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
+        graveyard: [],
+
+        getMaxHp: function() {
+            return utilities.genMaxHp(this);
+        },
+        getHp: function() {
+            return utilities.genHp(this);
+        },
+        getMaxDamage: function() {
+            return utilities.genMaxDamage(this);
+        },
+        getDamage: function() {
+            return utilities.genDamage(this);
+        }
+    });
+};
+
+var Stratholme_Action = function(red, blue, self) {
     
+};
+
+var Stratholme_Greeting = function(player) {
+    
+};
+
+var Stratholme_Turn = function(red, blue, self) {
+    self.phase++;
+    if(self.phase == 4) {
+        
+    } else {
+        var num = Math.floor(Math.random() * self.defaultAbils.length);
+        self.defaultAbils[num](red, blue, self);
+    }
     attackWave(red, blue, self);
 };

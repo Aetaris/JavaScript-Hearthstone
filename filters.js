@@ -74,6 +74,15 @@ module.exports.minion = function(context) { // Can target any minion
     return finalize(array, context);
 };
 
+module.exports.ally = function(context) { // Can target any friendly character
+    var array = [context.player];
+    for(var i = 0; i < context.player.minions.length; i++) {
+        var minion = context.player.minions[i];
+        array.push(minion);
+    }
+    return finalize(array, context);
+}
+
 module.exports.allyMinion = function(context) { // Can target friendly minions
     var array = [];
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -230,6 +239,24 @@ module.exports.Deathwhisper_DarkEmpowerment = function(context) { // Can only ta
         minion = context.foe.minions[i];
         if(minion.name == "Cult Adherent") {
             array.push(minion);
+        }
+    }
+    return finalize(array, context);
+};
+
+module.exports.Arthas_FlashofLight = function(context) { // Can target allies or enemy Undead
+    var array = [];
+    if(!context.player.race || context.player.race != "Undead") {
+        array.push(context.player);
+    }
+    for(i in context.player.minions) {
+        if(context.player.minions[i].race != "Undead") {
+            array.push(context.player.minions[i]);
+        }
+    }
+    for(var i in context.foe.minions) {
+        if(context.foe.minions[i].race == "Undead") {
+            array.push(context.foe.minions[i]);
         }
     }
     return finalize(array, context);

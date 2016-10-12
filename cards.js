@@ -8,11 +8,11 @@ var abilities = require('./abilities.js');
 
     var ais = require('./AIs.js');
     var targetais = require('./targetAIs.js');
-    // If you want to make your own alternate version of this simulator, you can plug in any two files here to use your own AIs. They need to have the right names, though,
-    // not every AI is named the exact same thing as the card. I'm intending to set up a way to use different AIs for each player in the future, at which point I'd love
-    // to receive a second set of AI and targetAI files to use :)
+    // If you want to make your own alternate version of this simulator, you can plug in any two files here to use your own AIs. They need to have the right names, though, not every AI is named the exact same thing as the card. I'm intending to set up a way to use different AIs for each player in the future, at which point I'd love to receive a second set of AI and targetAI files to use :)
 
 var filters = require('./filters.js');
+// This one should not be changed. This is what forces things like Execute to only targt damaged enemy minions; changing this would have very significant consequences.
+
 var utilities = require('./utilities.js');
 var printer = require('./printer.js');
 
@@ -132,6 +132,11 @@ var AcolyteofPain = module.exports.AcolyteofPain = function() {
     [effects.sickness, effects.AcolyteofPain], ais.AcolyteofPain, AcolyteofPain, 59);
 };
 
+var CultMaster = module.exports.CultMaster = function() {
+    return utilities.makeMinion(false, "Classic", "Common", false, "Cult Master", 4, 0, 2, 4, false, false, false,
+    [effects.sickness, effects.CultMaster], ais.CultMaster, CultMaster, 60);
+};
+
 var HarvestGolem = module.exports.HarvestGolem = function() {
     return utilities.makeMinion("Mech", "Classic", "Common", false, "Harvest Golem", 3, 0, 3, 2, false, false, false,
     [effects.sickness, deathrattles.HarvestGolem_Deathrattle], ais.HarvestGolem, HarvestGolem, 68);
@@ -154,7 +159,7 @@ var Spellbreaker = module.exports.Spellbreaker = function() {
 // Rares
 
 var Abomination = module.exports.Abomination = function() {
-    return utilities.makeMinion(false, "Rare", "Classic", false, "Abomination", 5, 0, 4, 4, false, false, false,
+    return utilities.makeMinion("Undead", "Rare", "Classic", false, "Abomination", 5, 0, 4, 4, false, false, false,
     [effects.sickness, effects.taunt, deathrattles.Abomination_Deathrattle], ais.MurlocRaider, Abomination, 42);
 };
 
@@ -168,7 +173,7 @@ var AzureDrake = module.exports.AzureDrake = function() {
 };
 
 var CrazedAlchemist = module.exports.CrazedAlchemist = function() {
-    return utilities.makeMinion(false, "Rare", "Classic", false, "Crazed Alchemist", 2, 0, 2, 2, battlecries.CrazedAlchemist, targetais.ReversingSwitch, filters.minion, [effects.sickness], ais.MurlocRaider, CrazedAlchemist, 53);
+    return utilities.makeMinion("Undead", "Rare", "Classic", false, "Crazed Alchemist", 2, 0, 2, 2, battlecries.CrazedAlchemist, targetais.ReversingSwitch, filters.minion, [effects.sickness], ais.MurlocRaider, CrazedAlchemist, 53);
 };
 
 var KnifeJuggler = module.exports.KnifeJuggler = function() {
@@ -196,7 +201,7 @@ var Alexstrasza = module.exports.Alexstrasza = function() {
 };
 
 var BloodmageThalnos = module.exports.BloodmageThalnos = function() {
-    return utilities.makeMinion(false, "Legendary", "Classic", false, "Bloodmage Thalnos", 2, 0, 1, 1, false, false, false,
+    return utilities.makeMinion("Undead", "Legendary", "Classic", false, "Bloodmage Thalnos", 2, 0, 1, 1, false, false, false,
     [effects.sickness, effects.spelldamage1, deathrattles.BloodmageThalnos_Deathrattle], ais.BloodmageThalnos, BloodmageThalnos, 55);
 };
 
@@ -211,7 +216,7 @@ var Ragnaros = module.exports.Ragnaros = function() {
 };
 
 var Sylvanas = module.exports.Sylvanas = function() {
-    return utilities.makeMinion(false, "Legendary", "Classic", false, "Sylvanas Windrunner", 6, 0, 5, 5, false, false, false,
+    return utilities.makeMinion("Undead", "Legendary", "Classic", false, "Sylvanas Windrunner", 6, 0, 5, 5, false, false, false,
     [effects.sickness, deathrattles.Sylvanas_Deathrattle], ais.Sylvanas, Sylvanas, 87);
 };
 
@@ -228,11 +233,15 @@ var LocustSwarm = module.exports.LocustSwarm = function() {
 // Minions
 
 var Deathcharger = module.exports.Deathcharger = function() {
-    return utilities.makeMinion(false, "Common", "Uncollectible", false, "Deathcharger", 1, 0, 3, 2, false, false, false,
+    return utilities.makeMinion("Undead", "Common", "Uncollectible", false, "Deathcharger", 1, 0, 3, 2, false, false, false,
     [deathrattles.Deathcharger_Deathrattle], ais.MurlocRaider, Deathcharger);
 };
 
 // Commons
+
+var DancingSwords = module.exports.DancingSwords = function() {
+    return utilities.makeMinion(false, "Common", "Naxxramas", false, "Dancing Swords", 3, 0, 4, 4, false, false, false, [effects.sickness, deathrattles.DancingSwords_Deathrattle], ais.DancingSwords, DancingSwords, 40);
+};
 
 var HauntedCreeper = module.exports.HauntedCreeper = function() {
     return utilities.makeMinion("Beast", "Common", "Naxxramas", false, "Haunted Creeper", 2, 0, 2, 1, false, false, false,
@@ -252,7 +261,7 @@ var StoneskinGargoyle = module.exports.StoneskinGargoyle = function() {
 // Rares
 
 var Deathlord = module.exports.Deathlord = function() {
-    return utilities.makeMinion(false, "Rare", "Naxxramas", false, "Deathlord", 3, 0, 8, 2, false, false, false,
+    return utilities.makeMinion("Undead", "Rare", "Naxxramas", false, "Deathlord", 3, 0, 8, 2, false, false, false,
     [effects.sickness, effects.taunt, deathrattles.Deathlord_Deathrattle], ais.MurlocRaider, Deathlord, 52);
 };
 
@@ -262,14 +271,14 @@ var NerubianEgg = module.exports.NerubianEgg = function() {
 };
 
 var SludgeBelcher = module.exports.SludgeBelcher = function() {
-    return utilities.makeMinion(false, "Rare", "Naxxramas", false, "Sludge Belcher", 5, 0, 5, 3, false, false, false,
+    return utilities.makeMinion("Undead", "Rare", "Naxxramas", false, "Sludge Belcher", 5, 0, 5, 3, false, false, false,
     [effects.sickness, effects.taunt, deathrattles.SludgeBelcher_Deathrattle], ais.SludgeBelcher, SludgeBelcher, 82);
 };
 
 // Epics
 
 var ShadeofNaxxramas = module.exports.ShadeofNaxxramas = function() {
-    return utilities.makeMinion(false, "Epic", "Naxxramas", false, "Shade of Naxxramas", 3, 0, 2, 2, false, false, false,
+    return utilities.makeMinion("Undead", "Epic", "Naxxramas", false, "Shade of Naxxramas", 3, 0, 2, 2, false, false, false,
     [effects.sickness, effects.stealth, effects.ShadeofNaxxramas], ais.MurlocRaider, ShadeofNaxxramas, 65);
 };
 
@@ -753,7 +762,7 @@ var Sprint = module.exports.Sprint = function() {
 // Commons
 
 var AnubarAmbusher = module.exports.AnubarAmbusher = function() {
-    return utilities.makeMinion(false, "Naxxramas", "Common", false, "Anub'ar Ambusher", 4, 0, 5, 5, false, false, false,
+    return utilities.makeMinion("Undead", "Naxxramas", "Common", false, "Anub'ar Ambusher", 4, 0, 5, 5, false, false, false,
     [effects.sickness, deathrattles.AnubarAmbusher_Deathrattle], ais.MurlocRaider, AnubarAmbusher, 56);
 };
 
@@ -1258,4 +1267,58 @@ var C_Reload = module.exports.C_Reload = function() {
 
 var C_BoardingParty = module.exports.C_BoardingParty = function() {
     return utilities.makeSpell("Boss", "Uncollectible", false, "Boarding Party", 3, 0, abilities.C_BoardingParty, false, false, ais.true, C_BoardingParty);
+};
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+var Arthas_ValiantFootman = module.exports.Arthas_ValiantFootman = function() {
+    return utilities.makeMinion(false, "Arthas", "Uncollectible", false, "Valiant Footman", 2, 0, 3, 2, battlecries.Arthas_ValiantFootman, false, false, [effects.sickness], ais.true, Arthas_ValiantFootman);
+};
+
+var Arthas_DwarvenRifleman = module.exports.Arthas_DwarvenRifleman = function() {
+    return utilities.makeMinion(false, "Arthas", "Uncollectible", false, "Dwarven Rifleman", 3, 0, 2, 3, false, false, false, [effects.sickness, effects.Arthas_DwarvenRifleman], ais.true, Arthas_DwarvenRifleman);
+};
+
+var Arthas_Knight = module.exports.Arthas_Knight = function() {
+    return utilities.makeMinion(false, "Arthas", "Uncollectible", false, "Knight", 5, 0, 6, 4, false, false, false, [effects.taunt], ais.true, Arthas_Knight);
+};
+
+var Arthas_MortarTeam = module.exports.Arthas_MortarTeam = function() {
+    return utilities.makeMinion(false, "Arthas", "Uncollectible", false, "Mortar Team", 4, 0, 3, 3, false, false, false, [effects.sickness, effects.cantattack, effects.Arthas_MortarTeam], ais.true, Arthas_MortarTeam);
+};
+
+var Arthas_ElvenPriest = module.exports.Arthas_ElvenPriest = function() {
+    return utilities.makeMinion(false, "Arthas", "Uncollectible", false, "Elven Priest", 3, 0, 4, 2, false, false, false, [effects.sickness, inspires.Arthas_ElvenPriest_Inspire], ais.Arthas_ElvenPriest, Arthas_ElvenPriest);
+};
+
+var Arthas_Sorceress = module.exports.Arthas_Sorceress = function() {
+    return utilities.makeMinion(false, "Arthas", "Uncollectible", false, "Sorceress", 3, 0, 4, 2, false, false, false, [effects.sickness, inspires.Arthas_Sorceress_Inspire], ais.Arthas_Sorceress, Arthas_Sorceress);
+};
+
+var Arthas_Gyrocopter = module.exports.Arthas_Gyrocopter = function() {
+    return utilities.makeMinion("Mech", "Arthas", "Uncollectible", false, "Gyrocopter", 4, 0, 4, 3, false, false, false, [effects.windfury], ais.true, Arthas_Gyrocopter);
+};
+
+var Arthas_SteamEngine = module.exports.Arthas_SteamEngine = function() {
+    return utilities.makeMinion("Mech", "Arthas", "Uncollectible", false, "Steam Engine", 6, 0, 8, 5, false, false, false, [effects.Arthas_SteamEngine], ais.true, Arthas_SteamEngine);
+};
+
+var Arthas_Devotion = module.exports.Arthas_Devotion = function() {
+    return utilities.makeSpell("Arthas", "Uncollectible", false, "Devotion", 2, 0, abilities.Arthas_Devotion, false, false, ais.Arthas_Devotion, Arthas_Devotion);
+};
+
+var Arthas_HolyLight = module.exports.Arthas_HolyLight = function() {
+    return utilities.makeSpell("Arthas", "Uncollectible", false, "Holy Light", 1, 0, abilities.Arthas_HolyLight, targetais.Arthas_HolyLight, filters.Arthas_FlashofLight, ais.Arthas_HolyLight, Arthas_HolyLight);
+};
+
+var Arthas_Retribution = module.exports.Arthas_Retribution = function() {
+    return utilities.makeSpell("Arthas", "Uncollectible", false, "Retribution", 2, 0, abilities.Arthas_Retribution, false, false, ais.Arthas_Retribution, Arthas_Retribution);
+};
+
+var Arthas_HammerofJustice = module.exports.Arthas_HammerofJustice = function() {
+    return utilities.makeWeapon("Uncollectible", "Arthas", "Hammer of Justice", 3, 0, 3, 4, false, false, false, [], ais.Arthas_HammerofJustice, Arthas_HammerofJustice);
+};
+
+var Arthas_BladeofWrath = module.exports.Arthas_BladeofWrath = function() {
+    return utilities.makeWeapon("Uncollectible", "Arthas", "Blade of Wrath", 5, 0, 5, 2, battlecries.Arthas_BladeofWrath, targetais.Arthas_BladeofWrath, filters.any, [], ais.Arthas_BladeofWrath, Arthas_BladeofWrath);
 };

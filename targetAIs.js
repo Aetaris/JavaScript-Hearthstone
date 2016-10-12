@@ -307,7 +307,7 @@ module.exports.ArcaneShot = function(targets, context) {
     var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
     for(var i = 0; i < targets.length; i++) {
-        if(targets[i].getHp() === 2 || (targets[i].getHp() + targets[i].getDamage()) > 4) {
+        if(targets[i].getHp() <= 2 || ((targets[i].getHp() + targets[i].getDamage()) > 6 && targets[i].getHp() < 5)) {
             target = targets[i];
         }
     }
@@ -416,7 +416,7 @@ module.exports.HammerofWrath = function(targets, context) {
     var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
     for(var i = 0; i < targets.length; i++) {
-        if(target.getHp() === 3 || (target.getHp() < 9 && target.getDamage() > 2)) {
+        if(targets[i].getHp() === 3 || (targets[i].getHp() < 9 && targets[i].getDamage() > 2)) {
             target = targets[i];
         }
     }
@@ -512,6 +512,87 @@ var C_CannonBlast = module.exports.C_CannonBlast = function(targets, context) {
         if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
             target = targets[i];
         }
+    }
+    return target;
+};
+
+module.exports.Arthas_FlashofLight = function(targets, context) {
+    var enemies = [];
+    for(var i in targets) {
+        if(context.foe.minions.indexOf(targets[i]) > 0) {
+            enemies.push(targets[i]);
+        }
+    }
+    
+    if(enemies.length > 0) {
+        var target = context.foe;
+        for(i in enemies) {
+            if(enemies[i].getHp() <= 2 || ((enemies[i].getHp() + enemies[i].getDamage()) > 6 && enemies[i].getHp() < 5)) {
+                target = enemies[i];
+            }
+        }
+        return target;
+    }
+    else {
+        var target;
+        var maxHpGap = 0;
+        for(i in targets) {
+            if(targets[i].getHp() < targets[i].getMaxHp() - maxHpGap) {
+                target = targets[i];
+                maxHpGap = targets[i].getMaxHp() - targets[i].getHp();
+            }
+        }
+        return target;
+    }
+};
+
+module.exports.Arthas_HolyLight = function(targets, context) {
+    var target;
+    var enemies = [];
+    for(var i in targets) {
+        if(context.foe.minions.indexOf(targets[i]) > 0) {
+            enemies.push(targets[i]);
+        }
+    }
+    if(enemies.length > 0) {
+        for(i in enemies) {
+            if(enemies[i].getHp() <= 3 || ((enemies[i].getHp() + enemies[i].getDamage()) > 6 && enemies[i].getHp() < 5)) {
+                target = enemies[i];
+            }
+        }
+        return target;
+    }
+    
+    var mostDmg = 0;
+    for(i in targets) {
+        if(targets[i].damageTaken > 3) {
+            target = targets[i];
+        }
+        else if(targets[i].damageTaken > 1 && targets[i].getDamage() >= 2 && targets[i].getDamage() > mostDmg) {
+            target = targets[i];
+            mostDmg = targets[i].getDamage();
+        }
+    }
+    return target;
+};
+
+module.exports.Arthas_BladeofWrath = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
+    var target = context.foe;
+    
+    var totalDamage = context.player.damageTaken;
+    for(var i in context.player.minions) {
+        totalDamage += context.player.minions[i].damageTaken;
+    }
+    var explosion = Math.floor(totalDamage / 3);
+    
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() <= explosion && targets[i].getDamage() >= 4) {
+            target = targets[i];
+        }
+    }
+    if(context.foe.getHp() <= explosion) {
+        return context.foe;
     }
     return target;
 };

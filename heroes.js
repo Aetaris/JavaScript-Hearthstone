@@ -12,7 +12,7 @@ var mage = module.exports.mage = function() {
         type: "basic", tier: 1,
         ability: abilities.MageFireblast,
         targetai: targetais.MageFireblast,
-        deck: decks.basicMimiron(),
+        deck: decks.basicMechMage(),
         ai: ais.MageFireblast, filter: filters.any,
         cardList: cardLists.mage,
         cost: 2, hp: 30, armor: 0
@@ -142,7 +142,7 @@ module.exports.LordJaraxxus = function() {
     };
 };
 
-module.exports.anubrekhan = function() {
+module.exports.AnubRekhan = function() {
     return {
     name: "Anub'Rekhan",
     type: "naxxramas",
@@ -155,7 +155,7 @@ module.exports.anubrekhan = function() {
     };
 };
 
-module.exports.anubrekhan_heroic = function() {
+module.exports.AnubRekhan_Heroic = function() {
     return {
     name: "Anub'Rekhan [Heroic]",
     type: "naxxramas",
@@ -169,7 +169,7 @@ module.exports.anubrekhan_heroic = function() {
     };
 };
 
-module.exports.grandwidowfaerlina = function() {
+module.exports.GrandWidowFaerlina = function() {
     return {
     name: "Grand Widow Faerlina",
     type: "naxxramas",
@@ -182,7 +182,7 @@ module.exports.grandwidowfaerlina = function() {
     };
 };
 
-module.exports.grandwidowfaerlina_heroic = function() {
+module.exports.GrandWidowFaerlina_Heroic = function() {
     return {
     name: "Grand Widow Faerlina [Heroic]",
     type: "naxxramas",
@@ -251,5 +251,21 @@ module.exports.C_Skybreaker_Heroic = function() {
         cost: 1,
         hp: 45,
         armor: 45
+    };
+};
+
+// ++++++++++++++++++++++++++++++++++++++++++
+
+module.exports.Arthas = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FlashofLight,
+        targetai: targetais.Arthas_FlashofLight,
+        deck: decks.Arthas1(),
+        ai: ais.Arthas_FlashofLight, filter: filters.Arthas_FlashofLight,
+        cost: 2,
+        hp: 30,
+        armor: 15
     };
 };

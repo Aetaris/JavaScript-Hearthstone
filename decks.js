@@ -21,6 +21,8 @@ module.exports.basicDeck = function() {
         cards.PollutedHoarder(),
         cards.CorruptedHealbot(),
         cards.ValidatedDoomsayer(),
+        cards.AbusiveSergeant(),
+        cards.AbusiveSergeant()
     ];
 };
 
@@ -339,7 +341,7 @@ module.exports.basicPriest = function() {
     ];
 };
 
-module.exports.basicMimiron = function() {
+module.exports.basicMechMage = function() {
     return [
         cards.ClockworkGnome(),
         cards.ClockworkGnome(),
@@ -452,9 +454,9 @@ module.exports.GrandWidowFaerlina = function() {
         cards.AcolyteofPain(),
         cards.BattleRage(),
         cards.BattleRage(),
-        // cards.CultMaster(),
-        // cards.DancingSwords(),
-        // cards.DancingSwords(),
+        cards.CultMaster(),
+        cards.DancingSwords(),
+        cards.DancingSwords(),
         cards.DarkCultist(),
         cards.DarkCultist(),
         cards.Deathcharger(),
@@ -487,9 +489,9 @@ module.exports.GrandWidowFaerlina_Heroic = function() {
         cards.AcolyteofPain(),
         cards.BattleRage(),
         cards.BattleRage(),
-        // cards.CultMaster(),
-        // cards.DancingSwords(),
-        // cards.DancingSwords(),
+        cards.CultMaster(),
+        cards.DancingSwords(),
+        cards.DancingSwords(),
         cards.DarkCultist(),
         cards.DarkCultist(),
         cards.Deathcharger(),
@@ -584,82 +586,7 @@ module.exports.SpidersSpidersEverywhere = function() {
     ];
 };
 
-module.exports.TwilightsHammer = function() {
-    return [
-        cards.YoggSaronHopesEnd(),
-        cards.BeckonerofEvil(),
-        cards.BeckonerofEvil(),
-        cards.BeckonerofEvil(),
-        cards.BeckonerofEvil(),
-        cards.BeckonerofEvil(),
-        cards.BeckonerofEvil(),
-        cards.BeckonerofEvil(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.CThunsChosen(),
-        cards.CThunsChosen(),
-        cards.CThunsChosen(),
-        cards.CThunsChosen(),
-        cards.KlaxxiAmberWeaver(),
-        cards.KlaxxiAmberWeaver(),
-        cards.KlaxxiAmberWeaver(),
-        cards.KlaxxiAmberWeaver(),
-        cards.CThun()
-    ];
-};
-
-module.exports.FullWotOG = function() {
-    return [
-        cards.YoggSaronHopesEnd(),
-        cards.BeckonerofEvil(),
-        cards.TwilightElder(),
-        cards.TwilightElder(),
-        cards.CThunsChosen(),
-        cards.CThunsChosen(),
-        cards.ArcaneGiant(),
-        cards.ArcaneGiant(),
-        cards.KlaxxiAmberWeaver(),
-        cards.KlaxxiAmberWeaver(),
-        cards.YShaarjRageUnbound(),
-        cards.PollutedHoarder(),
-        cards.CorruptedHealbot(),
-        cards.CorruptedHealbot(),
-        cards.ValidatedDoomsayer(),
-        cards.ValidatedDoomsayer(),
-        cards.StandAgainstDarkness(),
-        cards.StandAgainstDarkness(),
-        cards.HoggerScourgeofElwynn(),
-        cards.GiantSandworm(),
-        cards.GiantSandworm(),
-        cards.CThun()
-    ];
-};
-
-module.exports.Weapons = function() {
-    return [
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-        cards.WickedKnife(),
-    ];
-};
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Custom Sets
 
@@ -770,73 +697,41 @@ module.exports.C_Skybreaker_Heroic = function() {
     ];
 };
 
-module.exports.mulligantest = function() {
-    return [
-        cards.LeperGnome(),
-        cards.LeperGnome(),
-        cards.LeperGnome(),
-        cards.LeperGnome(),
-        cards.LeperGnome(),
-        cards.TinkertownTechnician()
-    ];
-};
+// ++++++++++++++++++++++++++++++++++++++++++++
 
-module.exports.nzoth = function() {
-    return [
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.PilotedShredder(),
-        cards.NZoththeCorruptor(),
-        cards.NZoththeCorruptor(),
-        cards.NZoththeCorruptor(),
-        cards.NZoththeCorruptor(),
-        ];
-};
+// Sad Mystery
 
-module.exports.Yogg = function() {
+module.exports.Arthas1 = function() {
     return [
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.ArcaneShot(),
-        cards.YoggSaronHopesEnd(),
-        cards.YoggSaronHopesEnd(),
-        cards.YoggSaronHopesEnd(),
-        cards.YoggSaronHopesEnd()
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_Devotion(),
+        cards.Arthas_Devotion(),
+        cards.Arthas_Devotion(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_Retribution(),
+        cards.Arthas_HammerofJustice(),
+        cards.Arthas_HammerofJustice(),
+        cards.Arthas_HammerofJustice(),
+        cards.Arthas_HammerofJustice(),
+        cards.Arthas_BladeofWrath()
     ];
 };

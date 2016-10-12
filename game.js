@@ -57,10 +57,26 @@ var playCard = function(card, handPos, context) {
     if (card.type === "weapon") {
         printer.print(context.player.color + " " + context.player.name + " equips " + card.name + ".");
         utilities.Equip(card, context);
+        if (card.battlecry) {
+            if(card.targetai) {
+                if(typeof card.filter !== "function") {
+                    throw new Error("broken");
+                }
+                if(context.player.isPlayer) {
+                    card.battlecry(playerModule.command_target(context.player, card.filter, context), card, {player: context.player, foe: context.foe, source: card});
+                }
+                else {
+                    card.battlecry(card.targetai(card.filter(context), context), card, {player: context.player, foe: context.foe, source: card, cause: card});
+                }
+            }
+            else {
+                card.battlecry(false, card, context);
+            }
+        }
     }
     if (card.type === "spell") {
         if(card.targetai) {
-            if(typeof card.filter !== "function") {
+            if(typeof card.filter != "function") {
                 throw new Error("Filter not function");
             }
             if(context.player.isPlayer == true) {
@@ -196,36 +212,81 @@ var MinionsAttack = function(context) {
 
 var runTurn = function(player, foe) {
     
-    if(player.isPlayer || foe.isPlayer) {
-        if(player.isPlayer == true) {
-            console.log("It is now your turn.");
-        } else {
-            console.log("The " + player.color + " " + player.name + " is now taking their turn.");
-        }
-        console.log("");
-    }
+    /** if there's no scenario
+     *      * if both are alive
+     ** if there's a scenario
+     *      * if scenario is alive
+     *      * if the player is alive
+     *          * if mustDefeatBoth is true and other player is alive
+    */
     
-    if(scenario && scenario.startOfMatch.greeting && (turnNum == 0 || turnNum == 0.5)) {
-        printer.print("");
-        scenario.startOfMatch.greeting(player);
-        // printer.print("");
-    }
-    
-    if(scenario && scenario.abilities) {
-        printer.print("");
-        var ability = scenario.abilities[Math.floor(Math.random() * scenario.abilities.length)];
-        if(turnNum % 1 == 0 || turnNum == 0) {
-            ability(player, foe, scenario);
-        }
-        else {
-            if(!ability) {
-                throw new Error("Scenario has no ability");
+    var takeTurn = false;
+    if(!scenario && player.getHp() > 0 && foe.getHp() > 0) {
+        takeTurn = true;
+    } else if(scenario) {
+        if(scenario.getHp() > 0) {
+            if(player.getHp() > 0) {
+                if(scenario.mustDefeatBoth == true || foe.getHp() > 0) {
+                    takeTurn = true;
+                }
             }
-            ability(foe, player, scenario);
         }
     }
     
-    if (player.getHp() > 0 && foe.getHp() > 0) {
+    if(takeTurn == true) {
+        
+        if(scenario) {
+            scenario.turn = true;
+        }
+        if(scenario && scenario.startOfMatch.greeting && (turnNum == 0 || turnNum == 0.5)) {
+            printer.print("");
+            scenario.startOfMatch.greeting(player);
+            // printer.print("");
+        }
+        
+        if(scenario && scenario.abilities) {
+            printer.print("");
+            var ability = scenario.abilities[Math.floor(Math.random() * scenario.abilities.length)];
+            if(turnNum % 1 == 0 || turnNum == 0) {
+                ability(player, foe, scenario);
+            }
+            else {
+                if(!ability) {
+                    throw new Error("Scenario has no ability");
+                }
+                ability(foe, player, scenario);
+            }
+        }
+        
+        if(scenario) {
+            scenario.turn = false;
+        }
+    }
+    
+    takeTurn = false;
+    if(!scenario && player.getHp() > 0 && foe.getHp() > 0) {
+        takeTurn = true;
+    } else if(scenario) {
+        if(scenario.getHp() > 0) {
+            if(player.getHp() > 0) {
+                if(scenario.mustDefeatBoth == true || foe.getHp() > 0) {
+                    takeTurn = true;
+                }
+            }
+        }
+    }
+    
+    if(takeTurn == true) {
+        
+        if(player.isPlayer || foe.isPlayer) {
+            if(player.isPlayer == true) {
+                console.log("It is now your turn.");
+            } else {
+                console.log("The " + player.color + " " + player.name + " is now taking their turn.");
+            }
+            console.log("");
+        }
+        
         player.turn = true;
         foe.turn = false;
         turnNum += 0.5;
@@ -440,9 +501,6 @@ var runTurn = function(player, foe) {
                 if(!response.action) {
                     stillPlaying = false;
                 }
-                if(player.getHp() <= 0 || foe.getHp() <= 0) {
-                    stillPlaying = false;
-                }
             }
         }
         
@@ -456,9 +514,7 @@ var runTurn = function(player, foe) {
                 cause: false
             });
         }
-        if(player.getHp() <= 0 || foe.getHp() <= 0) {
-            return;
-        }
+        
         if(!player.isPlayer && player.ability) {
             if (player.mana >= player.cost && player.ai && player.ai({
                     player: player,
@@ -496,9 +552,7 @@ var runTurn = function(player, foe) {
                 }
             }
         }
-        if(player.getHp() <= 0 || foe.getHp() <= 0) {
-            return;
-        }
+        
         if(!player.isPlayer) {
             checkCards({
                 player: player,
@@ -506,9 +560,7 @@ var runTurn = function(player, foe) {
                 cause: false
             });
         }
-        if(player.getHp() <= 0 || foe.getHp() <= 0) {
-            return;
-        }
+        
         if (player.getDamage() > 0) {
             var faceTarget = utilities.AttackAI(player, {
                 player: player,
@@ -520,9 +572,7 @@ var runTurn = function(player, foe) {
                 utilities.Attack(player, faceTarget, {player: player, foe: scenario && scenario.attackTarget ? scenario : foe, scenario: scenario});
             }
         }
-        if(player.getHp() <= 0 || foe.getHp() <= 0) {
-            return;
-        }
+        
         utilities.checkForLife({
             player: player,
             foe: scenario && scenario.attackTarget ? scenario : foe,
@@ -552,12 +602,12 @@ var runTurn = function(player, foe) {
             if (minion.effects) {
                 effects = minion.effects.slice();
                 // and start building an array of elements to DELETE
-                minion.triggerEffectType("end of turn", {player: player, foe: scenario && scenario.attackTarget ? scenario : foe, cause: minion});
-                // for(var m = 0; m < effects.length; m++) {
-                //     if(effects[m].type === "end of turn" || effects[m].type === "end of turn friend") {
-                //         effects[m].action(minion, { player: player, foe: scenario && scenario.attackTarget ? scenario : foe, scenario: scenario, cause: minion });
-                //     }
-                // }
+                // minion.triggerEffectType("end of turn", {player: player, foe: scenario && scenario.attackTarget ? scenario : foe, cause: minion});
+                for(var m = 0; m < effects.length; m++) {
+                    if(effects[m].type === "end of turn" || effects[m].type === "end of turn friend") {
+                        effects[m].action(minion, { player: player, foe: scenario && scenario.attackTarget ? scenario : foe, scenario: scenario, cause: minion });
+                    }
+                }
                 toDelete = {};
                 if(minion.hasEffectName("Frozen")) {
                     minion.removeEffect(effectsModule.frozen);
@@ -572,74 +622,147 @@ var runTurn = function(player, foe) {
                 cause: "Life Check"
             });
         }
-        if(player.getHp() <= 0 || foe.getHp() <= 0) {
+    } else {
+        /**
+         * if scenario
+         *      * if mustDefeatBoth is true
+         *          * if foe is alive
+         */
+         
+        var endMatch = true;
+        if(!scenario) {
+            endMatch = true;
+        } else if(scenario) {
+            if(scenario.mustDefeatBoth == true) {
+                if(foe.getHp() > 0 || player.getHp() > 0) {
+                    endMatch = false;
+                }
+            }
+        }
+        if(endMatch == true) {
             return;
         }
     }
 };
 
 var turnLoop = function() {
-    while (red.getHp() > 0 && blue.getHp() > 0 && turnNum <= 45 && (!scenario || !scenario.coop || scenario.getHp() > 0)) {
+    var takeTurn = false;
+    if(!scenario && first.getHp() > 0 && second.getHp() > 0) {
+        takeTurn = true;
+    } else if(scenario) {
+        if(scenario.getHp() > 0) {
+            if(scenario.mustDefeatBoth == true && (first.getHp() > 0 || second.getHp() > 0)) {
+                takeTurn = true;
+            }
+        }
+    }
+    
+    while(takeTurn == true && (!scenario || scenario.getHp() > 0) && (first.getHp() > 0 || second.getHp() > 0)) {
         runTurn(first, second);
         runTurn(second, first);
     }
     // if we get here, the combat has ended
-    if (red.getHp() <= 0 && blue.getHp() > 0) {
-        if(scenario && scenario.endOfMatch.victory) {
-            printer.print("");
-            printer.print(scenario.endOfMatch.victory);
-            console.log("Scenario failed.");
-        }
-        else {
-            printer.print("The " + red.color + " " + red.name + " has been defeated! The " + blue.color + " " + blue.name + " is victorious!");
-            console.log("Winner: " + blue.color + " " + blue.name);
-            return "blue";
-        }
+    
+    // defeated scenario
+    
+    if(scenario && scenario.getHp() <= 0) {
+        printer.print("");
+        printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " have prevailed against " + scenario.name + "!");
+        console.log("Scenario completed on turn " + turnNum + "!");
     }
-    else if (blue.getHp() <= 0 && red.getHp() > 0) {
-        if(scenario && scenario.endOfMatch.victory) {
-            printer.print("");
-            printer.print(scenario.endOfMatch.victory);
-            console.log("Scenario failed.");
-        }
-        else {
-            printer.print("The " + blue.color + " " + blue.name + " has been defeated! The " + red.color + " " + red.name + " is victorious!");
-            console.log("Winner: " + red.color + " " + red.name);
-        }
+    
+    // scenario won
+    
+    else if(scenario && scenario.getHp() > 0) {
+        printer.print("");
+        printer.print(scenario.endOfMatch.victory);
+        console.log("Scenario failed on turn " + turnNum + ".");
+    }
+    
+    // red victory
+    
+    else if((!scenario || scenario.coop == false) && red.getHp() >= 0 && blue.getHp() <= 0) {
+        printer.print("The " + blue.color + " " + blue.name + " has been defeated! The " + red.color + " " + red.name + " is victorious!");
+        console.log("Winner: " + red.color + " " + red.name);
         return "red";
     }
-    else if ((blue.getHp() <= 0 && red.getHp() <= 0) || turnNum > 45 || (scenario && scenario.getHp() <= 0)) {
-        if(scenario && scenario.getHp() <= 0) {
-            printer.print("");
-            printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " have prevailed against " + scenario.name + "!");
-            console.log("Scenario completed!");
-        }
-        else {
-            printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " were both defeated, resulting in a tie!");
-        }
+    
+    // blue victory
+    
+    else if((!scenario || scenario.coop == false) && blue.getHp() >= 0 && red.getHp() <= 0) {
+        printer.print("The " + red.color + " " + red.name + " has been defeated! The " + blue.color + " " + blue.name + " is victorious!");
+        console.log("Winner: " + blue.color + " " + blue.name);
+        return "blue";
+    }
+    
+    // tie or other weird thing
+    
+    else if((!scenario || scenario.coop == false) && blue.getHp() <= 0 && red.getHp() <= 0) {
+        printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " were both defeated, resulting in a tie!");
         return false;
     }
     else {
         printer.print("Huh? No sane combat conclusion identified! Red/Blue = [" + red.getHp() + "/" + blue.getHp() + "]");
         return false;
     }
+    
+    // if (red.getHp() <= 0 && blue.getHp() > 0 && (!scenario || scenario.mustDefeatBoth == false)) {
+    //     if(scenario && scenario.endOfMatch.victory) {
+    //         printer.print("");
+    //         printer.print(scenario.endOfMatch.victory);
+    //         console.log("Scenario failed on turn " + turnNum + ".");
+    //     }
+    //     else {
+    //         printer.print("The " + red.color + " " + red.name + " has been defeated! The " + blue.color + " " + blue.name + " is victorious!");
+    //         console.log("Winner: " + blue.color + " " + blue.name);
+    //         return "blue";
+    //     }
+    // }
+    // else if (blue.getHp() <= 0 && red.getHp() > 0 && (!scenario || scenario.mustDefeatBoth == false)) {
+    //     if(scenario && scenario.endOfMatch.victory) {
+    //         printer.print("");
+    //         printer.print(scenario.endOfMatch.victory);
+    //         console.log("Scenario failed on turn " + turnNum + ".");
+    //     }
+    //     else {
+    //         printer.print("The " + blue.color + " " + blue.name + " has been defeated! The " + red.color + " " + red.name + " is victorious!");
+    //         console.log("Winner: " + red.color + " " + red.name);
+    //     }
+    //     return "red";
+    // }
+    // else if ((blue.getHp() <= 0 && red.getHp() <= 0) || turnNum > 45 || (scenario && scenario.getHp() <= 0)) {
+    //     if(scenario && scenario.getHp() <= 0) {
+    //         printer.print("");
+    //         printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " have prevailed against " + scenario.name + "!");
+    //         console.log("Scenario completed on turn " + turnNum + "!");
+    //     }
+    //     else {
+    //         printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " were both defeated, resulting in a tie!");
+    //         console.log("Scenario failed on turn " + turnNum + ".");
+    //     }
+    //     return false;
+    // }
+    // else {
+    //     printer.print("Huh? No sane combat conclusion identified! Red/Blue = [" + red.getHp() + "/" + blue.getHp() + "]");
+    //     return false;
+    // }
 };
 
 printer.print("");
-printer.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+printer.print("-----------------------------------------------------------------------------------------------------------------------------------------------");
 printer.print("");
 
 var red = setup.hero('Red');
 var blue = setup.hero('Blue');
 
 setup.randomizeHero(red);
-// setup.setHero(red, heroes.LadyDeathwhisper_Normal());
+// setup.setHero(red, heroes.GrandWidowFaerlina());
 setup.randomizeHero(blue);
-// setup.setHero(blue, heroes.grandwidowfaerlina());
+setup.setHero(blue, heroes.Arthas());
 
-// scenario = adventures.setScenario(adventures.Murozond());
+scenario = adventures.setScenario(adventures.BlackrockBlademaster());
 
-red.isPlayer = playerModule.requestControl(red);
+// red.isPlayer = playerModule.requestControl(red);
 
 var randomNum = Math.round(Math.random(0, 1));
 if (randomNum === 0) {
@@ -694,7 +817,7 @@ var runGame = module.exports.runGame = function(redClass, redDeck, blueClass, bl
     }
     
     if(scenario) {
-        console.log("Scenario: " + scenario.name);
+        console.log("Scenario: " + scenario.scenarioName);
         printer.print(scenario.startOfMatch.line);
         scenario.startOfMatch.action(red, blue, scenario);
         printer.print("");

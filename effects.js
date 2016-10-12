@@ -109,6 +109,12 @@ module.exports.AcolyteofPain = {
     action: actions.AcolyteofPain
 };
 
+module.exports.CultMaster = {
+    name: "Cult Master",
+    type: "death hunger friend",
+    action: actions.CultMaster
+};
+
 module.exports.ShadeofNaxxramas = {
     name: "Shade of Naxxramas",
     type: "start of turn friend",
@@ -391,4 +397,22 @@ module.exports.C_DeformedFanatic = {
     name: "Deformed Fanatic Block",
     type: "self defense",
     action: actions.C_DeformedFanatic
+};
+
+module.exports.Arthas_DwarvenRifleman = {
+    name: "Dwarven Rifleman",
+    type: "self defense",
+    action: actions.Arthas_DwarvenRifleman
+};
+
+module.exports.Arthas_MortarTeam = {
+    name: "Mortar Team",
+    type: "start of turn friend",
+    action: actions.Arthas_MortarTeam
+};
+
+module.exports.Arthas_SteamEngine = {
+    name: "Steam Engine",
+    type: "self defense",
+    action: actions.Arthas_SteamEngine
 };

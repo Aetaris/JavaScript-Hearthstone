@@ -748,13 +748,11 @@ module.exports.AvengingWrath = function(target, context) {
             target = context.foe;
         }
         if(target.getHp() > 0) {
-            printer.print(target.color + " " + target.name + " is struck by Avenging Wrath.");
             utilities.dealDamage(target, 1, context);
         }
         if(target.getHp() < 0) {
             i -= 1;
         }
-        utilities.checkForLife( { player: context.player, foe: context.foe, cause: "Life Check" });
     }
 };
 
@@ -844,7 +842,7 @@ module.exports.HolyFire = function(target, context) {
 module.exports.Resurrect = function(target, context) {
     var minions = [];
     for(var i = 0; i < context.player.graveyard.length; i++) {
-        var card = context.player.graveyard[i];
+        var card = context.player.graveyard[i].card();
         if(card.type == "minion") {
             minions.push(card);
         }
@@ -891,7 +889,7 @@ module.exports.LocustSwarm = function(target, context) {
 };
 
 module.exports.GrandWidowFaerlinaRainofFire = function(target, context) {
-    printer.print("The " + context.player.color + " " + context.player.color + " casts Rain of Fire, shooting a missile for each card in the " + context.foe.color + " " + context.foe.name + "'s hand.");
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Rain of Fire, shooting " + context.foe.hand.length + " missiles in the direction of " + context.foe.color + " " + context.foe.name + ".");
     for(var i = 0; i < context.foe.hand.length; i++) {
         target = context.foe;
         var targetRoll = Math.floor((context.foe.minions.length + 1) * Math.random(0, 1));
@@ -902,7 +900,6 @@ module.exports.GrandWidowFaerlinaRainofFire = function(target, context) {
             target = context.foe;
         }
         if(target.getHp() > 0) {
-            printer.print("The " + context.player.color + " " + context.player.name + " shoots a blast of fire at " + target.name + ".");
             utilities.dealDamage(target, 1, context);
         }
         if(target.getHp() < 0) {
@@ -1050,4 +1047,83 @@ module.exports.C_Reload = function(target, context) {
 
 var C_CannonBlast =  function() {
     return utilities.makeSpell("Boss", "Uncollectible", false, "Cannon Blast", 1, 0, C_CannonBlast, targetais.C_CannonBlast, filters.any, ais.C_CannonBlast, C_CannonBlast);
+};
+
+module.exports.Arthas_FlashofLight = function(target, context) {
+    if(context.foe.minions.indexOf(target) != -1) {
+        printer.print(context.player.color + " " + context.player.name + " smites " + target.color + " " + target.name + " with a flash of light, dealing 2 damage.");
+        utilities.dealDamage(target, 2, context);
+    }
+    else if(context.player.minions.indexOf(target) != -1) {
+        printer.print(context.player.color + " " + context.player.name + " blesses " + target.color + " " + target.name + " with the Light, restoring 2 Health.");
+        utilities.healDamage(target, 2, context);
+    }
+};
+
+var Arthas_DevotionAction = function(source, context) {
+    return context.damage -= 2;
+};
+
+var Arthas_DevotionBuff = {
+    name: "Devotion",
+    type: "self defense",
+    action: Arthas_DevotionAction
+};
+
+var Arthas_DevotionToggle = function(source, context) {
+    for(var i in source.effects) {
+        if(source.effects[i] && (source.effects[i].name == "Devotion Toggle" || source.effects[i].name == "Devotion")) {
+            source.effects.splice(i, 1);
+        }
+    }
+};
+
+var Arthas_DevotionTurnOff = {
+    name: "Devotion Toggle",
+    type: "start of turn friend",
+    action: Arthas_DevotionToggle
+};
+
+module.exports.Arthas_Devotion = function(target, context) {
+    printer.print(context.player.color + " " + context.player.name + " inspires his soldiers with Devotion, granting them resistance to damage until his next turn.");
+    for(var i in context.player.minions) {
+        context.player.minions[i].effects.push(Arthas_DevotionBuff);
+        context.player.minions[i].effects.push(Arthas_DevotionTurnOff);
+    }
+};
+
+var Arthas_HolyLightBuff = {
+    name: "Holy Light",
+    type: "buff damage",
+    num: 2
+};
+
+var Arthas_HolyLight = module.exports.Arthas_HolyLight = function(target, context) {
+    if(context.foe.minions.indexOf(target) != -1) {
+        printer.print(context.player.color + " " + context.player.name + " smites " + target.color + " " + target.name + " with the Holy Light, dealing 3 damage.");
+        utilities.dealDamage(target, 3, context);
+    }
+    else if(context.player.minions.indexOf(target) != -1) {
+        printer.print(context.player.color + " " + context.player.name + " blesses " + target.color + " " + target.name + " with Holy Light, restoring 3 Health and granting +2 Attack.");
+        utilities.healDamage(target, 3, context);
+        target.effects.push(Arthas_HolyLightBuff);
+    }
+};
+
+module.exports.Arthas_Retribution = function(target, context) {
+    var totalDamage = context.player.damageTaken;
+    for(var i in context.player.minions) {
+        totalDamage += context.player.minions[i].damageTaken;
+    }
+    var explosion = Math.floor(totalDamage / 4);
+    
+    printer.print("The " + context.player.color + " " + context.player.name + " invokes Retribution, searing all of his enemies with the damage he and his minions have been dealt.");
+    utilities.dealSpellDamage(context.foe, explosion, context);
+    for(i in context.foe.minions) {
+        utilities.dealSpellDamage(context.foe.minions[i], explosion, context);
+    }
+};
+
+var Arthas_HolyLightCard = function() {
+    return utilities.makeSpell("Arthas", "Uncollectible", false, "Holy Light", 1, 0, Arthas_HolyLight, targetais.Arthas_HolyLight, filters.allyMinion, ais.Arthas_HolyLight, Arthas_HolyLightCard);
 };

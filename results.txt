@@ -1,200 +1,515 @@
 
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------
 
-Red: Lady Deathwhisper
-Blue: Hunter
+Red: Priest
+Blue: Arthas
 
-Blue Hunter draws a Arcane Shot.
-Blue Hunter draws a Hogger, Scourge of Elwynn.
-Blue Hunter draws a Hunter's Mark.
-Blue Hunter decides to shuffle Arcane Shot back into the deck and draw another card.
-Blue Hunter draws a Twilight Elder.
-Blue Hunter decides to shuffle Hogger, Scourge of Elwynn back into the deck and draw another card.
-Blue Hunter draws a Giant Sandworm.
-Blue Hunter decides to shuffle Hunter's Mark back into the deck and draw another card.
-Blue Hunter draws a Arcane Shot.
+Uther the Lightbringer: The Blackrock orcs that destroyed Strahnbrad have a base somewhere nearby. I'm entrusting you with leading the attack.
+Arthas Menethil: I won't let you down, Uther.
+Arthas Menethil: Come with me. Let's slay these beasts.
+
+Blue Arthas draws a Dwarven Rifleman.
+Blue Arthas draws a Dwarven Rifleman.
+Blue Arthas draws a Holy Light.
+Blue Arthas mulligans Dwarven Rifleman.
+Blue Arthas draws a Valiant Footman.
+Blue Arthas mulligans Dwarven Rifleman.
+Blue Arthas draws a Devotion.
+Blue Arthas mulligans Holy Light.
+Blue Arthas draws a Valiant Footman.
 
 
 
-Red Lady Deathwhisper draws a Dark Transformation.
-Red Lady Deathwhisper draws a Cult Adherent.
-Red Lady Deathwhisper draws a Cult Fanatic.
-Red Lady Deathwhisper draws a Cult Adherent.
-Red Lady Deathwhisper is given The Coin.
+Red Priest draws a Shadowform.
+Red Priest draws a Y'Shaarj, Rage Unbound.
+Red Priest draws a Arcane Giant.
+Red Priest draws a Corrupted Healbot.
+Red Priest mulligans Y'Shaarj, Rage Unbound.
+Red Priest draws a Arcane Giant.
+Red Priest mulligans Arcane Giant.
+Red Priest draws a Validated Doomsayer.
+Red Priest is given The Coin.
 
-It is now the Blue Hunter's turn.
+2 Blackrock Grunts emerge from a barracks, ready for battle.
 
-The Blue Hunter now has 1 Mana Crystals and 27 cards left in their deck.
-Blue Hunter's Health: 30 || Red Lady Deathwhisper's Health: 12.
-The Blue Hunter does not currently have any minions on the board.
-Blue Hunter draws a Unleash the Hounds.
-The Blue Hunter's hand now contains:
-[1] Twilight Elder - 3
-[2] Giant Sandworm - 8
-[3] Arcane Shot - 1
-[4] Unleash the Hounds - 2
+It is now the Blue Arthas's turn.
 
-It is now the Red Lady Deathwhisper's turn.
+The Blue Arthas now has 1 Mana Crystals and 27 cards left in their deck.
+Blue Arthas's Health: 30 [15] || Red Priest's Health: 30.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Hammer of Justice.
+The Blue Arthas's hand now contains:
+[1] Valiant Footman - 2
+[2] Devotion - 2
+[3] Valiant Footman - 2
+[4] Hammer of Justice - 3
 
-The Red Lady Deathwhisper now has 5 Mana Crystals and 26 cards left in their deck.
-Red Lady Deathwhisper's Health: 12 || Blue Hunter's Health: 30.
-The Red Lady Deathwhisper does not currently have any minions on the board.
-Red Lady Deathwhisper draws a Dark Empowerment.
-The Red Lady Deathwhisper's hand now contains:
-[1] Dark Transformation - 1
-[2] Cult Adherent - 3
-[3] Cult Fanatic - 3
-[4] Cult Adherent - 3
+2 Blackrock Grunts emerge from a barracks, ready for battle.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 28 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 26 health.
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 1 Mana Crystals and 26 cards left in their deck.
+Red Priest's Health: 26 || Blue Arthas's Health: 30 [15].
+Blademaster's Health: 15[15]
+The Red Priest does not currently have any minions on the board.
+Red Priest draws a Nexus-Champion Saraad.
+The Red Priest's hand now contains:
+[1] Shadowform - 3
+[2] Corrupted Healbot - 5
+[3] Arcane Giant - 12
+[4] Validated Doomsayer - 5
 [5] The Coin - 0
-[6] Dark Empowerment - 1
-The Red Lady Deathwhisper summons Cult Adherent!
-The Red Lady Deathwhisper plays The Coin, gaining 1 mana crystal and bringing their total up to 3.
-The Red Lady Deathwhisper summons Cult Fanatic!
-
-It is now the Blue Hunter's turn.
-
-The Blue Hunter now has 2 Mana Crystals and 26 cards left in their deck.
-Blue Hunter's Health: 30 || Red Lady Deathwhisper's Health: 12.
-The Blue Hunter does not currently have any minions on the board.
-Blue Hunter draws a Ragnaros the Firelord.
-The Blue Hunter's hand now contains:
-[1] Twilight Elder - 3
-[2] Giant Sandworm - 8
-[3] Arcane Shot - 2
-[4] Unleash the Hounds - 3
-[5] Ragnaros the Firelord - 8
-The Blue Hunter fires a Steady Shot at the Red Lady Deathwhisper.
-Red Lady Deathwhisper takes 2 damage, reducing them to 10 health.
-
-It is now the Red Lady Deathwhisper's turn.
-
-The Red Lady Deathwhisper now has 5 Mana Crystals and 25 cards left in their deck.
-Red Lady Deathwhisper's Health: 10 || Blue Hunter's Health: 30.
-The Red Lady Deathwhisper currently has 2 minions on the board:
-[Cult Adherent] - 3/3
-[Cult Fanatic] - 5/3
-Red Lady Deathwhisper draws a Dark Transformation.
-The Red Lady Deathwhisper's hand now contains:
-[1] Dark Transformation - 1
-[2] Cult Adherent - 3
-[3] Dark Empowerment - 1
-[4] Dark Transformation - 1
-Red Lady Deathwhisper casts Dark Transformation, killing a Cult Fanatic and creating a Deformed Fanatic!
-Red Cult Fanatic has been killed!
-Red Lady Deathwhisper casts Dark Empowerment, killing a Cult Adherent and creating an Empowered Adherent!
-Red Cult Adherent has been killed!
-The Red Lady Deathwhisper summons Cult Adherent!
-
-It is now the Blue Hunter's turn.
-
-The Blue Hunter now has 3 Mana Crystals and 25 cards left in their deck.
-Blue Hunter's Health: 30 || Red Lady Deathwhisper's Health: 10.
-The Blue Hunter does not currently have any minions on the board.
-Blue Hunter draws a Validated Doomsayer.
-The Blue Hunter's hand now contains:
-[1] Twilight Elder - 3
-[2] Giant Sandworm - 8
-[3] Arcane Shot - 4
-[4] Unleash the Hounds - 5
-[5] Ragnaros the Firelord - 8
-[6] Validated Doomsayer - 5
-The Blue Hunter summons Twilight Elder!
-
-It is now the Red Lady Deathwhisper's turn.
-
-The Red Lady Deathwhisper now has 5 Mana Crystals and 24 cards left in their deck.
-Red Lady Deathwhisper's Health: 10 || Blue Hunter's Health: 30.
-The Red Lady Deathwhisper currently has 3 minions on the board:
-[Deformed Fanatic] - 5/4
-[Empowered Adherent] - 4/5
-[Cult Adherent] - 3/3
-Red Lady Deathwhisper draws a Cult Adherent.
-The Red Lady Deathwhisper's hand now contains:
-[1] Dark Transformation - 1
-[2] Cult Adherent - 3
-The Red Lady Deathwhisper summons Cult Adherent!
-Red Deformed Fanatic attacks Blue Twilight Elder.
-Blue Twilight Elder takes 5 damage, reducing them to 0 health.
-Blue Twilight Elder has been killed!
-Red Empowered Adherent attacks Blue Hunter.
-Blue Hunter takes 4 damage, reducing them to 26 health.
-Red Cult Adherent attacks Blue Hunter.
-Blue Hunter takes 3 damage, reducing them to 23 health.
-
-It is now the Blue Hunter's turn.
-
-The Blue Hunter now has 4 Mana Crystals and 24 cards left in their deck.
-Blue Hunter's Health: 23 || Red Lady Deathwhisper's Health: 10.
-The Blue Hunter does not currently have any minions on the board.
-Blue Hunter draws a Nexus-Champion Saraad.
-The Blue Hunter's hand now contains:
-[1] Giant Sandworm - 8
-[2] Arcane Shot - 5
-[3] Unleash the Hounds - 6
-[4] Ragnaros the Firelord - 8
-[5] Validated Doomsayer - 5
 [6] Nexus-Champion Saraad - 5
-The Blue Hunter fires a Steady Shot at the Red Lady Deathwhisper.
-Red Lady Deathwhisper takes 2 damage, reducing them to 8 health.
 
-It is now the Red Lady Deathwhisper's turn.
+2 Blackrock Grunts emerge from a barracks, ready for battle.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 24 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 22 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 20 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 18 health.
 
-The Red Lady Deathwhisper now has 5 Mana Crystals and 23 cards left in their deck.
-Red Lady Deathwhisper's Health: 8 || Blue Hunter's Health: 23.
-The Red Lady Deathwhisper currently has 4 minions on the board:
-[Deformed Fanatic] - 5/4
-[Empowered Adherent] - 4/5
-[Cult Adherent] - 3/3
-[Cult Adherent] - 3/3
-Red Lady Deathwhisper draws a Shadow Bolt.
-The Red Lady Deathwhisper's hand now contains:
-[1] Dark Transformation - 1
-[2] Shadow Bolt - 3
-Red Deformed Fanatic attacks Blue Hunter.
-Blue Hunter takes 5 damage, reducing them to 18 health.
-Red Empowered Adherent attacks Blue Hunter.
-Blue Hunter takes 4 damage, reducing them to 14 health.
-Red Cult Adherent attacks Blue Hunter.
-Blue Hunter takes 3 damage, reducing them to 11 health.
-Red Cult Adherent attacks Blue Hunter.
-Blue Hunter takes 3 damage, reducing them to 8 health.
+It is now the Blue Arthas's turn.
 
-It is now the Blue Hunter's turn.
+The Blue Arthas now has 2 Mana Crystals and 26 cards left in their deck.
+Blue Arthas's Health: 30 [15] || Red Priest's Health: 18.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Holy Light.
+The Blue Arthas's hand now contains:
+[1] Valiant Footman - 2
+[2] Devotion - 2
+[3] Valiant Footman - 2
+[4] Hammer of Justice - 3
+[5] Holy Light - 1
+The Blue Arthas summons Valiant Footman!
 
-The Blue Hunter now has 5 Mana Crystals and 23 cards left in their deck.
-Blue Hunter's Health: 8 || Red Lady Deathwhisper's Health: 8.
-The Blue Hunter does not currently have any minions on the board.
-Blue Hunter draws a Arcane Giant.
-The Blue Hunter's hand now contains:
-[1] Giant Sandworm - 8
-[2] Arcane Shot - 5
-[3] Unleash the Hounds - 6
-[4] Ragnaros the Firelord - 8
-[5] Validated Doomsayer - 5
+Blackrock Blademaster emerges from darkness, slashing at Blue Valiant Footman viciously, then fades back into the shadows.
+Blue Valiant Footman takes 6 damage, reducing them to 0 health.
+Blue Valiant Footman has been killed!
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 13 armor and 30 health.
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 11 armor and 30 health.
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 9 armor and 30 health.
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 7 armor and 30 health.
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 2 Mana Crystals and 25 cards left in their deck.
+Red Priest's Health: 18 || Blue Arthas's Health: 30 [7].
+Blademaster's Health: 15[15]
+The Red Priest does not currently have any minions on the board.
+Red Priest draws a Power Word: Shield.
+The Red Priest's hand now contains:
+[1] Shadowform - 3
+[2] Corrupted Healbot - 5
+[3] Arcane Giant - 12
+[4] Validated Doomsayer - 5
+[5] The Coin - 0
 [6] Nexus-Champion Saraad - 5
-[7] Arcane Giant - 12
-The Blue Hunter summons Validated Doomsayer!
+[7] Power Word: Shield - 1
+The Red Priest plays The Coin, gaining 1 mana crystal and bringing their total up to 3.
+The Red Priest casts Shadowform, transforming their Hero Power into a 2-damage spike of shadow magic.
 
-It is now the Red Lady Deathwhisper's turn.
+Feranor Steeltoe: Well met! Would you care to join in our hunt?
+Arthas Menethil: What are you dwarves hunting?
+Feranor Steeltoe: We're on the trail of a black drake named Searinox! If you bring us back his heart, we can grant you a fiery enchantment.
+Feranor Steeltoe: I'll tag along. Nothing like the thrill of a dragon hunt!
 
-The Red Lady Deathwhisper now has 5 Mana Crystals and 22 cards left in their deck.
-Red Lady Deathwhisper's Health: 8 || Blue Hunter's Health: 8.
-The Red Lady Deathwhisper currently has 4 minions on the board:
-[Deformed Fanatic] - 5/4
-[Empowered Adherent] - 4/5
-[Cult Adherent] - 3/3
-[Cult Adherent] - 3/3
-Red Lady Deathwhisper draws a Shadow Bolt.
-The Red Lady Deathwhisper's hand now contains:
-[1] Dark Transformation - 1
-[2] Shadow Bolt - 3
-[3] Shadow Bolt - 3
-Red Deformed Fanatic attacks Blue Hunter.
-Blue Hunter takes 5 damage, reducing them to 3 health.
-Red Empowered Adherent attacks Blue Hunter.
-Blue Hunter takes 4 damage, reducing them to 0 health.
-Red Cult Adherent attacks Blue Hunter.
-Blue Hunter takes 3 damage, reducing them to 0 health.
-Red Cult Adherent attacks Blue Hunter.
-Blue Hunter takes 3 damage, reducing them to 0 health.
-The Blue Hunter has been defeated! The Red Lady Deathwhisper is victorious!
+Blackrock Blademaster: Fire!
+3 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
+A fireball strikes Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 5 armor and 30 health.
+A fireball strikes Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 3 armor and 30 health.
+A fireball strikes Blue Feranor Steeltoe.
+Blue Feranor Steeltoe takes 2 damage, reducing them to 1 health.
+Blackrock Grunt attacks Blue Feranor Steeltoe.
+Blue Feranor Steeltoe takes 2 damage, reducing them to 0 health.
+
+Feranor Steeltoe: Ach! It's getting a bit too intense for me... I'll just stay back with the others!
+
+Blackrock Grunt takes 4 damage, reducing them to 0 health.
+Blackrock Grunt has been killed!
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas blocks 2 damage, reducing them to 1 armor and 30 health.
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas partially blocks 2 damage, reducing them to 0 armor and 29 health.
+
+It is now the Blue Arthas's turn.
+
+The Blue Arthas now has 3 Mana Crystals and 25 cards left in their deck.
+Blue Arthas's Health: 29 || Red Priest's Health: 18.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Holy Light.
+The Blue Arthas's hand now contains:
+[1] Devotion - 2
+[2] Valiant Footman - 2
+[3] Hammer of Justice - 3
+[4] Holy Light - 1
+[5] Holy Light - 1
+The Blue Arthas summons Valiant Footman!
+
+Blackrock Blademaster: Fire!
+3 massive fireballs are launched from Blackrock Watch Towers towards Red Priest and their troops.
+A fireball strikes Red Priest.
+Red Priest takes 2 damage, reducing them to 16 health.
+A fireball strikes Red Priest.
+Red Priest takes 2 damage, reducing them to 14 health.
+A fireball strikes Red Priest.
+Red Priest takes 2 damage, reducing them to 12 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 10 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 8 health.
+Blackrock Grunt attacks Red Priest.
+Red Priest takes 2 damage, reducing them to 6 health.
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 3 Mana Crystals and 24 cards left in their deck.
+Red Priest's Health: 6 || Blue Arthas's Health: 29.
+Blademaster's Health: 15[15]
+The Red Priest does not currently have any minions on the board.
+Red Priest draws a Beckoner of Evil.
+The Red Priest's hand now contains:
+[1] Corrupted Healbot - 5
+[2] Arcane Giant - 10
+[3] Validated Doomsayer - 5
+[4] Nexus-Champion Saraad - 5
+[5] Power Word: Shield - 1
+[6] Beckoner of Evil - 2
+The Red Priest summons Beckoner of Evil!
+Red Beckoner of Evil's battlecry empowers their master, giving C'Thun +2/+2!
+C'Thun is empowered up to 8/8!
+
+Blackrock Blademaster: Fire!
+3 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
+A fireball strikes Blue Valiant Footman.
+Blue Valiant Footman takes 2 damage, reducing them to 1 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 27 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 25 health.
+Blackrock Grunt attacks Blue Valiant Footman.
+Blue Valiant Footman takes 2 damage, reducing them to 0 health.
+Blue Valiant Footman has been killed!
+Blackrock Grunt takes 2 damage, reducing them to 0 health.
+Blackrock Grunt has been killed!
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 23 health.
+
+It is now the Blue Arthas's turn.
+
+The Blue Arthas now has 4 Mana Crystals and 24 cards left in their deck.
+Blue Arthas's Health: 23 || Red Priest's Health: 6.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Dwarven Rifleman.
+The Blue Arthas's hand now contains:
+[1] Devotion - 2
+[2] Hammer of Justice - 3
+[3] Holy Light - 1
+[4] Holy Light - 1
+[5] Dwarven Rifleman - 3
+Blue Arthas equips Hammer of Justice.
+Blue Arthas attacks Blackrock Grunt.
+Blackrock Grunt takes 3 damage, reducing them to 0 health.
+Blackrock Grunt has been killed!
+Blue Arthas takes 2 damage, reducing them to 21 health.
+Remaining durability on the Blue Arthas's Hammer of Justice: 3.
+
+2 Blackrock Grunts emerge from a barracks, ready for battle.
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 19 health.
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 4 Mana Crystals and 23 cards left in their deck.
+Red Priest's Health: 6 || Blue Arthas's Health: 19.
+Blademaster's Health: 15[15]
+The Red Priest currently has 1 minions on the board:
+[Beckoner of Evil] - 2/3
+Red Priest draws a C'Thun.
+The Red Priest's hand now contains:
+[1] Corrupted Healbot - 5
+[2] Arcane Giant - 10
+[3] Validated Doomsayer - 5
+[4] Nexus-Champion Saraad - 5
+[5] Power Word: Shield - 1
+[6] C'Thun - 10
+The Red Priest casts Mind Spike on Grunt, dealing 2 damage.
+Blackrock Grunt takes 2 damage, reducing them to 0 health.
+Blackrock Grunt has been killed!
+Red Beckoner of Evil attacks Blackrock Grunt.
+Blackrock Grunt takes 2 damage, reducing them to 0 health.
+Blackrock Grunt has been killed!
+Red Beckoner of Evil takes 2 damage, reducing them to 1 health.
+
+Blackrock Blademaster emerges from darkness, slashing at Red Beckoner of Evil viciously, then fades back into the shadows.
+Red Beckoner of Evil takes 6 damage, reducing them to 0 health.
+Red Beckoner of Evil has been killed!
+Blackrock Blademaster: Peons, construct a new watch tower!
+The Blackrock orcs construct a new watch tower, ready to start assaulting your forces.
+Blackrock Grunt attacks Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 17 health.
+
+It is now the Blue Arthas's turn.
+
+The Blue Arthas now has 5 Mana Crystals and 23 cards left in their deck.
+Blue Arthas's Health: 17 || Red Priest's Health: 6.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Devotion.
+The Blue Arthas's hand now contains:
+[1] Devotion - 2
+[2] Holy Light - 1
+[3] Dwarven Rifleman - 3
+[4] Devotion - 2
+The Blue Arthas summons Dwarven Rifleman!
+Blue Arthas attacks Blackrock Grunt.
+Blackrock Grunt takes 3 damage, reducing them to 0 health.
+Blackrock Grunt has been killed!
+Blue Arthas takes 2 damage, reducing them to 15 health.
+Remaining durability on the Blue Arthas's Hammer of Justice: 2.
+
+Blackrock Blademaster: Fire!
+4 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 13 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 11 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 9 health.
+A fireball strikes Blue Dwarven Rifleman.
+Blue Dwarven Rifleman takes 2 damage, reducing them to 0 health.
+Blue Dwarven Rifleman has been killed!
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 5 Mana Crystals and 22 cards left in their deck.
+Red Priest's Health: 6 || Blue Arthas's Health: 9.
+Blademaster's Health: 15[15]
+The Red Priest does not currently have any minions on the board.
+Red Priest draws a Northshire Cleric.
+The Red Priest's hand now contains:
+[1] Corrupted Healbot - 5
+[2] Arcane Giant - 10
+[3] Validated Doomsayer - 5
+[4] Nexus-Champion Saraad - 5
+[5] Power Word: Shield - 1
+[6] C'Thun - 10
+[7] Northshire Cleric - 1
+The Red Priest summons Corrupted Healbot!
+
+Blackrock Blademaster: Fire!
+4 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 7 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 5 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 3 health.
+A fireball strikes Blue Arthas.
+Blue Arthas takes 2 damage, reducing them to 1 health.
+
+It is now the Blue Arthas's turn.
+
+The Blue Arthas now has 6 Mana Crystals and 22 cards left in their deck.
+Blue Arthas's Health: 1 || Red Priest's Health: 6.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Valiant Footman.
+The Blue Arthas's hand now contains:
+[1] Devotion - 2
+[2] Devotion - 2
+[3] Valiant Footman - 2
+The Blue Arthas summons Valiant Footman!
+Blue Arthas attacks Blackrock Watch Tower.
+Blackrock Watch Tower takes 3 damage, reducing them to 9 health.
+Remaining durability on the Blue Arthas's Hammer of Justice: 1.
+
+Blackrock Blademaster emerges from darkness, slashing at Blue Valiant Footman viciously, then fades back into the shadows.
+Blue Valiant Footman takes 6 damage, reducing them to 0 health.
+Blue Valiant Footman has been killed!
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 6 Mana Crystals and 21 cards left in their deck.
+Red Priest's Health: 6 || Blue Arthas's Health: 1.
+Blademaster's Health: 15[15]
+The Red Priest currently has 1 minions on the board:
+[Corrupted Healbot] - 6/6
+Red Priest draws a Holy Nova.
+The Red Priest's hand now contains:
+[1] Arcane Giant - 10
+[2] Validated Doomsayer - 5
+[3] Nexus-Champion Saraad - 5
+[4] Power Word: Shield - 1
+[5] C'Thun - 10
+[6] Northshire Cleric - 1
+[7] Holy Nova - 5
+The Red Priest summons Validated Doomsayer!
+The Red Priest summons Northshire Cleric!
+Red Corrupted Healbot attacks Blackrock Watch Tower.
+Blackrock Watch Tower takes 6 damage, reducing them to 3 health.
+
+The black dragon Searinox descends from the sky with a mighty roar. If you slay the creature, the dwarves can give you some sort of reward.
+
+
+It is now the Blue Arthas's turn.
+
+The Blue Arthas now has 7 Mana Crystals and 21 cards left in their deck.
+Blue Arthas's Health: 1 || Red Priest's Health: 6.
+Blademaster's Health: 15[15]
+The Blue Arthas does not currently have any minions on the board.
+Blue Arthas draws a Valiant Footman.
+The Blue Arthas's hand now contains:
+[1] Devotion - 2
+[2] Devotion - 2
+[3] Valiant Footman - 2
+The Blue Arthas summons Valiant Footman!
+Blue Arthas attacks Blackrock Watch Tower.
+Blackrock Watch Tower takes 3 damage, reducing them to 0 health.
+Blackrock Watch Tower has been killed!
+Remaining durability on the Blue Arthas's Hammer of Justice: 0.
+The Blue Arthas's Hammer of Justice shatters.
+
+Blackrock Blademaster emerges from darkness, slashing at Red Northshire Cleric viciously, then fades back into the shadows.
+Red Northshire Cleric takes 6 damage, reducing them to 0 health.
+Red Northshire Cleric has been killed!
+
+It is now the Red Priest's turn.
+
+Red Validated Doomsayer's Attack is set to 7!
+The Red Priest now has 7 Mana Crystals and 20 cards left in their deck.
+Red Priest's Health: 6 || Blue Arthas's Health: 1.
+Blademaster's Health: 15[15]
+The Red Priest currently has 2 minions on the board:
+[Corrupted Healbot] - 6/6
+[Validated Doomsayer] - 7/7
+Red Priest draws a Resurrect.
+The Red Priest's hand now contains:
+[1] Arcane Giant - 10
+[2] Nexus-Champion Saraad - 5
+[3] Power Word: Shield - 1
+[4] C'Thun - 10
+[5] Holy Nova - 5
+[6] Resurrect - 2
+The Red Priest summons Nexus-Champion Saraad!
+The Red Priest casts Mind Spike on Blademaster, dealing 2 damage.
+Blackrock Blademaster blocks 2 damage, reducing them to 13 armor and 15 health.
+Red Nexus-Champion Saraad is Inspired, giving the Red Priest a random spell.
+Spell received: Forked Lightning
+Red Corrupted Healbot attacks Black Searinox.
+Black Searinox takes 6 damage, reducing them to 10 health.
+Red Corrupted Healbot takes 4 damage, reducing them to 2 health.
+Red Validated Doomsayer attacks Black Searinox.
+Black Searinox takes 7 damage, reducing them to 3 health.
+Red Validated Doomsayer takes 4 damage, reducing them to 3 health.
+
+Blackrock Blademaster emerges from darkness, slashing at Red Validated Doomsayer viciously, then fades back into the shadows.
+Red Validated Doomsayer takes 6 damage, reducing them to 0 health.
+Red Validated Doomsayer has been killed!
+Black Searinox attacks Blue Arthas.
+Blue Arthas takes 4 damage, reducing them to 0 health.
+
+Blackrock Blademaster: Fire!
+3 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
+A fireball strikes Blue Valiant Footman.
+Blue Valiant Footman takes 2 damage, reducing them to 1 health.
+A fireball strikes Blue Arthas.
+A fireball strikes Blue Arthas.
+Black Searinox attacks Red Priest.
+Red Priest takes 4 damage, reducing them to 2 health.
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 8 Mana Crystals and 19 cards left in their deck.
+Red Priest's Health: 2 || Blue Arthas's Health: 0.
+Blademaster's Health: 15[13]
+The Red Priest currently has 2 minions on the board:
+[Corrupted Healbot] - 6/2
+[Nexus-Champion Saraad] - 4/5
+Red Priest draws a Knife Juggler.
+The Red Priest's hand now contains:
+[1] Arcane Giant - 10
+[2] Power Word: Shield - 1
+[3] C'Thun - 10
+[4] Holy Nova - 5
+[5] Resurrect - 2
+[6] Forked Lightning - 1
+[7] Knife Juggler - 2
+The Red Priest casts Power Word: Shield on Corrupted Healbot, increasing their health by 2 and drawing a card.
+Red Priest draws a Arcane Giant.
+The Red Priest summons Knife Juggler!
+The Red Priest casts Mind Spike on Searinox, dealing 2 damage.
+Black Searinox takes 2 damage, reducing them to 1 health.
+Red Nexus-Champion Saraad is Inspired, giving the Red Priest a random spell.
+Spell received: Darkbomb
+The Red Priest casts a Darkbomb on Watch Tower.
+Blackrock Watch Tower takes 3 damage, reducing them to 9 health.
+Red Corrupted Healbot attacks Black Searinox.
+Black Searinox takes 6 damage, reducing them to 0 health.
+Black Searinox has been killed!
+
+Feranor Steeltoe: Nice job! We can use the beast's heart to forge a fiery enchantment you can unleash upon your enemies.
+Red Priest has received a use of the Heart of Searinox.
+
+Red Corrupted Healbot takes 4 damage, reducing them to 0 health.
+Red Corrupted Healbot has been killed!
+Red Corrupted Healbot's deathrattle restores Health to the opponent, the Blackrock Blademaster.
+Red Nexus-Champion Saraad attacks Blackrock Watch Tower.
+Blackrock Watch Tower takes 4 damage, reducing them to 8 health.
+
+Blackrock Blademaster emerges from darkness, slashing at Blue Valiant Footman viciously, then fades back into the shadows.
+Blue Valiant Footman takes 6 damage, reducing them to 0 health.
+Blue Valiant Footman has been killed!
+
+It is now the Red Priest's turn.
+
+The Red Priest now has 9 Mana Crystals and 17 cards left in their deck.
+Red Priest's Health: 2 || Blue Arthas's Health: 0.
+Blademaster's Health: 15[13]
+The Red Priest currently has 2 minions on the board:
+[Nexus-Champion Saraad] - 4/5
+[Knife Juggler] - 2/2
+Red Priest draws a Piloted Shredder.
+The Red Priest's hand now contains:
+[1] Arcane Giant - 8
+[2] C'Thun - 10
+[3] Holy Nova - 5
+[4] Resurrect - 2
+[5] Forked Lightning - 1
+[6] Arcane Giant - 8
+[7] Heart of Searinox - 4
+[8] Piloted Shredder - 4
+The Red Priest summons Arcane Giant!
+Red Knife Juggler throws a knife at Blackrock Watch Tower.
+Blackrock Watch Tower takes 1 damage, reducing them to 8 health.
+Red Nexus-Champion Saraad attacks Blackrock Watch Tower.
+Blackrock Watch Tower takes 4 damage, reducing them to 4 health.
+Red Knife Juggler attacks Blackrock Watch Tower.
+Blackrock Watch Tower takes 2 damage, reducing them to 2 health.
+
+Blackrock Blademaster: Fire!
+3 massive fireballs are launched from Blackrock Watch Towers towards Red Priest and their troops.
+A fireball strikes Red Arcane Giant.
+Red Arcane Giant takes 2 damage, reducing them to 6 health.
+A fireball strikes Red Arcane Giant.
+Red Arcane Giant takes 2 damage, reducing them to 4 health.
+A fireball strikes Red Priest.
+Red Priest takes 2 damage, reducing them to 0 health.
+
+Arthas Menethil: Fall back! The orcs are too much for us...

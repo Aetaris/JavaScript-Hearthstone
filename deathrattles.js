@@ -19,6 +19,11 @@ var HauntedCreeper = function(source, context) {
     utilities.summon(SpectralSpider(context.player.color), context.player, context);
 };
 
+var DancingSwords = function(source, context) {
+    printer.print(source.color + " " + source.name + "'s deathrattle allows the " + context.foe.color + " " + context.foe.name + " to draw a card.");
+    utilities.drawCard(context.foe, {player: context.foe, foe: context.player, cause: source});
+};
+
 var NerubianEgg = function(source, context) {
     printer.print(context.player.color + " Nerubian Egg's deathrattle summons a " + context.player.color + " 4/4 Nerubian.");
     utilities.summon(EggNerubian(context.player.color), context.player, context);
@@ -418,6 +423,12 @@ module.exports.LeperGnome_Deathrattle = {
     name: "Leper Gnome",
     type: "deathrattle",
     action: LeperGnome
+};
+
+module.exports.DancingSwords_Deathrattle = {
+    name: "Dancing Swords",
+    type: "deathrattle",
+    action: DancingSwords
 };
 
 module.exports.HauntedCreeper_Deathrattle = {

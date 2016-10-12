@@ -262,6 +262,10 @@ module.exports.AcolyteofPain = function(context) {
     return true;
 };
 
+module.exports.CultMaster = function(context) {
+    return context.player.minions.length >= 2;
+};
+
 module.exports.BigGameHunter = function(context) {
     for(var i = 0; i < context.foe.minions.length; i++) {
         if(context.foe.minions[i].getDamage() >= 7) {
@@ -290,6 +294,10 @@ module.exports.FacelessManipulator = function(context) {
     }
     return false;
 };
+
+module.exports.DancingSwords = function(context) {
+    return true;
+}
 
 module.exports.Maexxna = function(context) {
     return true;
@@ -1157,10 +1165,9 @@ module.exports.ExplosiveShot = function(context) {
 };
 
 module.exports.ArcaneShot = function(context) {
-    var isTarget = false;
     for (var i = 0; i < context.foe.minions.length; i++) {
         if (context.foe.minions[i].getHp() <= 2 && (context.foe.minions[i].getDamage() > 1 || context.foe.minions[i].effects.length > 0)) {
-            isTarget = true;
+            return true;
         }
     }
 };
@@ -1453,8 +1460,13 @@ module.exports.Equality = function(context) {
             value += (context.foe.minions[i].getHp() + context.foe.minions[i].getDamage());
         }
     }
-    if (value > 1) {
+    if (value >= 7) {
         return true;
+    }
+    for(var i in context.player.hand) {
+        if(context.player.mana >= 6 && context.player.hand[i].name == "Consecration") {
+            return true;
+        }
     }
     return false;
 };
@@ -1746,4 +1758,60 @@ module.exports.C_IncineratingBlast = function(context) {
     else {
         return false;
     }
+};
+
+module.exports.Arthas_FlashofLight = function(context) {
+    if (context.player.minions.length > 0) {
+        return true;
+    }
+    for(var i in context.foe.minions) {
+        if(context.foe.minions[i].race == "Undead") {
+            return true;
+        }
+    }
+    return false;
+};
+
+module.exports.Arthas_Devotion = function(context) {
+    return context.player.minions.length >= 2 && context.foe.minions.length > 0;
+};
+
+module.exports.Arthas_HolyLight = function(context) {
+    for(var i in context.foe.minions) {
+        if(context.foe.minions[i].race == "Undead" && context.foe.minions[i].getHp() <= 5) {
+            return true;
+        }
+    }
+    for(i in context.player.minions) {
+        if(context.player.minions[i].damageTaken > 3) {
+            return true;
+        }
+        else if(context.player.minions[i].damageTaken > 1 && context.player.minions[i].getDamage() >= 2) {
+            return true;
+        }
+    }
+    if(context.player.damageTaken > 3 || context.player.getHp() <= 20) {
+        return true;
+    }
+    return false;
+};
+
+module.exports.Arthas_Retribution = function(context) {
+    var totalDamage = context.player.damageTaken;
+    for(var i in context.player.minions) {
+        totalDamage += context.player.minions[i].damageTaken;
+    }
+    return (Math.floor(totalDamage / 4) >= 2 && context.foe.minions.length >= 2) || Math.floor(totalDamage / 4) >= context.foe.getHp();
+};
+
+module.exports.Arthas_HammerofJustice = function(context) {
+    return context.player.weapon == false;
+};
+
+module.exports.Arthas_BladeofWrath = function(context) {
+    var totalDamage = context.player.damageTaken;
+    for(var i in context.player.minions) {
+        totalDamage += context.player.minions[i].damageTaken;
+    }
+    return Math.floor(totalDamage / 4) >= 2 || Math.floor(totalDamage / 4) >= context.foe.getHp();
 };
