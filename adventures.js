@@ -124,7 +124,7 @@ module.exports.Zakazj = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -375,7 +375,7 @@ module.exports.Murozond = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -550,7 +550,7 @@ module.exports.Mimiron = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.EmergencyCoolant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -598,7 +598,7 @@ var endMatch_mimiron = function(red, blue, self) {
 
 var MimironPreventDeath_Action = function(source, context) {
     if(source.leviathanDmg < source.unitBaseHp || source.cannonDmg < source.unitBaseHp || source.commandUnitDmg < source.unitBaseHp) {
-        printer.print("The " + source.name + " has been destroyed! ", "results.txt", false);
+        printer.print("The " + source.name + " has been destroyed! ", "results.md", false);
         ActivateRandomOther(red, blue, source);
     }
 };
@@ -871,7 +871,7 @@ module.exports.BlackrockBlademaster = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1129,7 +1129,7 @@ module.exports.PlaguedVillages = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1328,7 +1328,7 @@ module.exports.KelThuzad = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1491,13 +1491,15 @@ module.exports.Stratholme = function() {
             victory: "With the defeat of Arthas and his forces, the city of Stratholme has fallen to Mal'Ganis.",
             action: endMatch
         },
-        abilities: [KelThuzad_Turn],
-        defaultAbils: [KelThuzad_ShadowBolt, KelThuzad_Frenzy],
+        abilities: [Stratholme_Turn],
+        defaultAbils: [Stratholme_VampiricBite, Stratholme_Reinforcements, Stratholme_Sleep],
         
         phase: 1,
         
         malganisScore: 0,
-        arthasScore: 0,
+        arthasScore: 30,
+        enabled: true,
+        enableTimer: 0,
         
         turn: false,
 
@@ -1509,7 +1511,7 @@ module.exports.Stratholme = function() {
         type: "hero",
         color: "Unholy",
         hero: {},
-        baseHp: 40,
+        baseHp: 30,
         damageTaken: 0,
         baseDamage: 0,
         damageLost: 0,
@@ -1523,7 +1525,7 @@ module.exports.Stratholme = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [],
+        graveyard: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1545,16 +1547,241 @@ var Stratholme_Action = function(red, blue, self) {
 };
 
 var Stratholme_Greeting = function(player) {
-    
+    if(player.name == "Paladin") {
+        printer.print("Arthas Menethil: I'm glad to see you understand, Uther. I was worried you would refuse to help me.");
+    }
+    if(player.name == "Mage") {
+        printer.print("Arthas Menethil: Jaina... thank you. I need your help right now.");
+    }
 };
 
 var Stratholme_Turn = function(red, blue, self) {
-    self.phase++;
-    if(self.phase == 4) {
-        
-    } else {
-        var num = Math.floor(Math.random() * self.defaultAbils.length);
-        self.defaultAbils[num](red, blue, self);
+    if(self.malganisScore >= 30 || self.arthasScore >= 30) {
+        if(self.malganisScore >= 30) {
+            printer.print("Mal'Ganis: Perfect. I have the army I need. Now to wipe out the kingdom of Lordaeron...");
+            endMatch(red, blue, self);
+        } else {
+            printer.print("Arthas Menethil: These villagers will not be your minions in death, demon!");
+            self.removeEffect(Stratholme_MalganisAvoidDeath);
+            // utilities.dealDamage(self, 10000, {player: self, foe: red, cause: self});
+        }
     }
-    attackWave(red, blue, self);
+    else {
+        printer.print("Arthas Score: " + self.arthasScore + " | Mal'Ganis Score: " + self.malganisScore);
+        if(self.enabled) {
+            self.phase++;
+            
+            var num = Math.floor(Math.random() * self.defaultAbils.length);
+            if(self.defaultAbils[num]) {
+                self.defaultAbils[num](red, blue, self);
+            }
+            
+            attackWave(red, blue, self);
+            for(var i in self.minions) {
+                    if(self.minions[i].name == "Villager") {
+                        if(self.minions[i].timer <= 0) {
+                            printer.print("Mal'Ganis claims a Villager, transforming them into a zombie!");
+                            utilities.kill(self.minions[i], {player: self, foe: red, cause: self});
+                            utilities.summon(PlaguedVillages_Zombie(), self, {player: self, foe: red});
+                        }
+                        self.minions[i].timer--;
+                    }
+                }
+        } else {
+            if(self.enableTimer <= 0) {
+                var taunts = [
+                    "You thought yourself rid of me?",
+                    "My work is not yet complete."
+                ];
+                printer.print("\nMal'Ganis: " + taunts[Math.floor(Math.random() * taunts.length)] + "\n");
+                for(var i in self.minions) {
+                    if(self.minions[i].name == "Villager") {
+                        self.minions[i].removeEffect(effects.taunt);
+                        self.minions[i].addEffect(effects.stealth);
+                    }
+                }
+                self.enabled = true;
+                self.damageTaken = 0;
+                self.removeEffect(effects.immune);
+                self.removeEffect(effects.stealth);
+            }
+            self.enableTimer--;
+        }
+        Stratholme_PeopleOfStratholme(red, blue, self);
+    }
+};
+
+var Stratholme_VampiricBite = function(red, blue, self) {
+    var filter = [red, blue];
+    for(var k = 0; k < 2; k++) {
+        var player = k == 0 ? red : blue;
+        for(var i = 0; i < player.minions.length; i++) {
+            filter.push(player.minions[i]);
+        }
+    }
+    
+    var target = filter[Math.floor(Math.random() * filter.length)];
+    printer.print(self.name + " bites " + target.color + " " + target.name + ", dealing damage and regaining health.");
+    
+    if(target.type == "hero") {
+        utilities.dealDamage(target, 5, {player: target, foe: self, cause: self});
+        utilities.healDamage(self, 10, {player: self, foe: target, cause: self});
+    } else {
+        var num = Math.floor(target.getMaxHp()) - 1;
+        utilities.dealDamage(target, num, {player: target.owner, foe: self, cause: self});
+        utilities.healDamage(self, num*2, {player: self, foe: target.owner, cause: self});
+    }
+};
+
+var Stratholme_Reinforcements = function(red, blue, self) {
+    printer.print("A group of undead appear to aid Mal'Ganis.");
+    for(var i = 0; i < 2; i++) {
+        utilities.summon(cards.Arthas_Ghoul(), self, {player: self, foe: red});
+    }
+    if(self.phase >= 16) {
+        utilities.summon(cards.Arthas_FesteringAbomination(), self, {player: self, foe: red});
+    }
+};
+
+var Stratholme_SleepWakeUp = function(source, context) {
+    printer.print(source.color + " " + source.name + " wakes up.");
+    context.player.minions.splice(context.player.minions.indexOf(source), 1);
+    source.owner.minions.push(source);
+    source.removeEffect(effects.cantattack);
+    source.removeEffect(Stratholme_Sleep_Effect);
+    source.removeEffect(Stratholme_Sleep_ReduceDmg);
+    source.removeEffect(Stratholme_Sleep_Countdown);
+    source.color = source.originalColor;
+};
+
+var Stratholme_Sleep_ReduceDmgAction = function(source, context) {
+    return 1;
+};
+
+var Stratholme_Sleep_ReduceDmg = {
+    name: "Psst, wake up",
+    type: "self defense",
+    action: Stratholme_Sleep_ReduceDmgAction
+};
+
+var Stratholme_Sleep_Effect = {
+    name: "Wha?",
+    type: "pain",
+    action: Stratholme_SleepWakeUp
+};
+
+var Stratholme_Sleep_BuffHp = {
+    name: "Dreadlord Domination",
+    type: "buff health",
+    num: 4
+};
+
+var Stratholme_Sleep_BuffDmg = {
+    name: "Dreadlord Domination",
+    type: "buff damage",
+    num: 4
+};
+
+var Stratholme_SleepTimerAction = function(source, context) {
+    if(source.sleeptimer <= 1) {
+        printer.print(source.color + " " + source.name + "'s mind is taken over by Mal'Ganis.");
+        source.addEffect(Stratholme_Sleep_BuffHp);
+        source.addEffect(Stratholme_Sleep_BuffDmg);
+        source.removeEffect(effects.cantattack);
+        source.removeEffect(Stratholme_Sleep_Effect);
+        source.removeEffect(Stratholme_Sleep_ReduceDmg);
+        source.removeEffect(Stratholme_Sleep_Countdown);
+    } else {
+        source.sleeptimer--;
+        printer.print(source.color + " " + source.name + " is drifting deeper into Mal'Ganis' control! Timer now at " + source.sleeptimer + ".");
+    }
+};
+
+var Stratholme_Sleep_Countdown = {
+    name: "Tick tock",
+    type: "start of turn",
+    action: Stratholme_SleepTimerAction
+};
+
+var Stratholme_Sleep = function(red, blue, self) {
+    var filter = [];
+    for(var k = 0; k < 2; k++) {
+        var player = k == 0 ? red : blue;
+        for(var i = 0; i < player.minions.length; i++) {
+            filter.push(player.minions[i]);
+        }
+    }
+    
+    var target = filter[Math.floor(Math.random() * filter.length)];
+    if(target) {
+        printer.print(self.name + " puts " + target.color + " " + target.name + " to sleep, pacifying and controlling them temporarily.");
+        target.owner.minions.splice(target.owner.minions.indexOf(target), 1);
+        self.minions.push(target);
+        target.effects.push(Stratholme_Sleep_Effect);
+        target.effects.push(Stratholme_Sleep_ReduceDmg);
+        target.effects.push(Stratholme_Sleep_Countdown);
+        target.effects.push(effects.cantattack);
+        target["sleeptimer"] = 4;
+        target["originalColor"] = target.color;
+        target.color = "Entranced";
+    } else {
+        Stratholme_VampiricBite(red, blue, self);
+    }
+};
+
+var Stratholme_PeopleOfStratholme = function(red, blue, self) {
+    for(var i = 0; i < 2; i++) {
+        var villager = Stratholme_Villager();
+        villager["malganis"] = self;
+        villager["timer"] = 6;
+        utilities.summon(villager, self, {player: self, foe: red});
+    }
+};
+
+var Stratholme_MalganisDisable = function(source, context) {
+    var taunts = [
+        "A curse upon you, Prince Arthas!",
+        "I will return soon enough...",
+        "Merely a setback!",
+        "The soul of a demon never dies."
+    ];
+    printer.print("\nMal'Ganis: " + taunts[Math.floor(Math.random() * taunts.length)] + "\n");
+    source.enabled = false;
+    source.enableTimer = 6;
+    source.addEffect(effects.immune);
+    source.addEffect(effects.stealth);
+    source.damageTaken = source.getMaxHp() - 1;
+    for(var i in source.minions) {
+        if(source.minions[i].name == "Villager") {
+            source.minions[i].addEffect(effects.taunt);
+            source.minions[i].removeEffect(effects.stealth);
+        }
+    }
+    return 0;
+};
+
+var Stratholme_MalganisAvoidDeath = {
+    name: "Avoid Death",
+    type: "death interrupt",
+    action: Stratholme_MalganisDisable
+};
+
+var Stratholme_VillagerRattleAction = function(source, context) {
+    if(source.malganis) {
+        if(context.cause.color == source.malganis.color) {
+            source.malganis.malganisScore++;
+        } else {
+            source.malganis.arthasScore++;
+        }
+    }
+};
+
+var Stratholme_Villager_Deathrattle = {
+    name: "You Get a Point!",
+    type: "deathrattle",
+    action: Stratholme_VillagerRattleAction
+};
+
+var Stratholme_Villager = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", "Helpless", "Villager", 1, 0, 1, 0, false, false, false, [effects.sickness, effects.stealth, Stratholme_Villager_Deathrattle], ais.true, Stratholme_Villager);
 };

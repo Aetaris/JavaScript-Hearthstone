@@ -37,11 +37,14 @@ var Deathlord = function(source, context) {
             targetList.push(context.foe.deck[i]);
         }
     }
-    var targetRoll = Math.floor(targetList.length * Math.random(0, 1));
-    var target = targetList[targetRoll];
-    printer.print(context.player.color + " Deathlord's deathrattle summons " + context.foe.color + " " + target.name + " from the " + context.foe.color + " " + context.foe.name + "'s deck.");
-    utilities.summon(target, context.foe, { player: context.foe, foe: context.player, cause: false } );
-    context.foe.deck.splice(context.foe.deck.indexOf(target), 1);
+    target = targetList[Math.floor(Math.random()*targetList.length)];
+    if(target) {
+        printer.print(context.player.color + " Deathlord's deathrattle summons " + context.foe.color + " " + target.name + " from the " + context.foe.color + " " + context.foe.name + "'s deck.");
+        utilities.summon(target, context.foe, { player: context.foe, foe: context.player, cause: false } );
+        context.foe.deck.splice(context.foe.deck.indexOf(target), 1);
+    } else {
+        printer.print(context.player.color + " Deathlord's deathrattle found no minions in the " + context.foe.color + " " + context.foe.name + "'s deck.");
+    }
 };
 
 var SludgeBelcher = function(source, context) {
@@ -99,66 +102,24 @@ var MechanicalYeti = function(source, context) {
 
 var PilotedShredder = function(source, context) {
     var minionList = [];
-    for(var b = 0; b < cardLists.neutral.length; b++) {
-        if(cardLists.neutral[b]().type === "minion" && cardLists.neutral[b]().cost === 2) {
-            minionList.push(cardLists.neutral[b]);
+    var cardList = cardLists.allCards();
+    for(var i in cardList) {
+        var card = cardList[i]();
+        if(card.type == "minion" && card.cost == 2) {
+            minionList.push(card);
         }
     }
-    for(var b = 0; b < cardLists.mage.length; b++) {
-        if(cardLists.mage[b]().type === "minion" && cardLists.mage[b]().cost === 2) {
-            minionList.push(cardLists.mage[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.shaman.length; b++) {
-        if(cardLists.shaman[b]().type === "minion" && cardLists.shaman[b]().cost === 2) {
-            minionList.push(cardLists.shaman[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.warrior.length; b++) {
-        if(cardLists.warrior[b]().type === "minion" && cardLists.warrior[b]().cost === 2) {
-            minionList.push(cardLists.warrior[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.rogue.length; b++) {
-        if(cardLists.rogue[b]().type === "minion" && cardLists.rogue[b]().cost === 2) {
-            minionList.push(cardLists.rogue[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.hunter.length; b++) {
-        if(cardLists.hunter[b]().type === "minion" && cardLists.hunter[b]().cost === 2) {
-            minionList.push(cardLists.hunter[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.druid.length; b++) {
-        if(cardLists.druid[b]().type === "minion" && cardLists.druid[b]().cost === 2) {
-            minionList.push(cardLists.druid[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.warlock.length; b++) {
-        if(cardLists.warlock[b]().type === "minion" && cardLists.warlock[b]().cost === 2) {
-            minionList.push(cardLists.warlock[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.paladin.length; b++) {
-        if(cardLists.paladin[b]().type === "minion" && cardLists.paladin[b]().cost === 2) {
-            minionList.push(cardLists.paladin[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.priest.length; b++) {
-        if(cardLists.priest[b]().type === "minion" && cardLists.priest[b]().cost === 2) {
-            minionList.push(cardLists.priest[b]);
-        }
-    }
-    var randomNum = minionList.length;
-    var minion = Math.floor(randomNum * Math.random(0, 1));
+    
+    var minion = minionList[Math.floor(Math.random()*minionList.length)];
     printer.print(source.color + " " + source.name + "'s deathrattle summons a random 2-cost minion.");
-    if(context.player.minions.length < 7) {
-        var newMinion = minionList[minion]();
-        utilities.summon(newMinion, context.player, context);
-        printer.print("Minion summoned: " + newMinion.name);
+    if(context.player.minions.length < 7 && minion) {
+        utilities.summon(minion, context.player, context);
+        printer.print("Minion summoned: " + minion.name);
     }
-    else {
+    else if (minion) {
         printer.print("Board too full! Could not summon minion.");
+    } else {
+        printer.print("No valid minions! That... shouldn't happen.");
     }
 };
 
@@ -201,7 +162,7 @@ var Sylvanas = function(source, context) {
 };
 
 var BloodmageThalnos = function(source, context) {
-    printer.print(source.color + "Bloodmage Thalnos' deathrattle draws a card for " + context.player.color + " " + context.player.name + ".");
+    printer.print(source.color + " Bloodmage Thalnos' deathrattle draws a card for " + context.player.color + " " + context.player.name + ".");
     utilities.drawCard(context.player, context);
 };
 
@@ -213,6 +174,12 @@ var CorruptedHealbot = function(source, context) {
 var PollutedHoarder = function(source, context) {
     printer.print(source.color + " Polluted Hoarder's deathrattle draws a card for " + context.player.color + " " + context.player.name + ".");
     utilities.drawCard(context.player, context);
+};
+
+var AyaBlackpaw = function(source, context) {
+    var golem = utilities.jadeSetup(JadeGolem(), context.player);
+    printer.print(source.color + " " + source.name + "'s deathrattle summons a " + golem.baseDamage + "/" + golem.baseHp + " " + golem.name + ".");
+    utilities.summon(golem, context.player, context);
 };
 
 var Rhonin = function(source, context) {
@@ -227,101 +194,43 @@ var ArcaneMissiles = function() {
 };
 
 var AnubarAmbusher = function(source, context) {
-    var target = false;
-    var targetRoll = Math.floor(context.player.minions.length * Math.random(0, 1));
-    if(targetRoll < context.player.minions.length) {
-        target = context.player.minions[targetRoll];
-    }
-    if(target) {
-        printer.print(source.color + "Anub'ar Ambusher's deathrattle returns " + target.name + " to " + context.player.color + " " + context.player.name + "'s hand.");
-        target.damageTaken = 0;
-        target.damageLost = 0;
-        context.player.hand.push(target);
-        context.player.minions.splice(context.player.minions.indexOf(target), 1);
-    }
-};
-
-var Leokk = function(source, context) {
+    var targets = [];
     for(var i = 0; i < context.player.minions.length; i++) {
-        context.player.minions[i].damage -= 1;
+        if(context.player.minions[i] != source) {
+            targets.push(context.player.minions[i]);
+        }
+    }
+    var target = targets[Math.floor(Math.random()*targets.length)];
+    if(target) {
+        printer.print(source.color + " Anub'ar Ambusher's deathrattle returns " + target.name + " to " + context.player.color + " " + context.player.name + "'s hand.");
+        if(!target.card || typeof target.card != "function") {
+            throw new Error("lol oops");
+        }
+        context.player.hand.push(target.card());
+        context.player.minions.splice(context.player.minions.indexOf(target), 1);
     }
 };
 
 var Webspinner = function(source, context) {
     var beastList = [];
-    for(var b = 0; b < cardLists.neutral.length; b++) {
-        if(cardLists.neutral[b]().type === "minion") {
-            if(cardLists.neutral[b]().race === "Beast") {
-                beastList.push(cardLists.neutral[b]);
-            }
+    var allCards = cardLists.allCards();
+    for(var i in allCards) {
+        var card = allCards[i]();
+        if(card.type == "minion" && card.race == "Beast") {
+            beastList.push(card);
         }
     }
-    for(var b = 0; b < cardLists.warrior.length; b++) {
-        if(cardLists.warrior[b]().type === "minion") {
-            if(cardLists.warrior[b]().race === "Beast") {
-                beastList.push(cardLists.warrior[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.rogue.length; b++) {
-        if(cardLists.rogue[b]().type === "minion") {
-            if(cardLists.rogue[b]().race === "Beast") {
-                beastList.push(cardLists.rogue[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.hunter.length; b++) {
-        if(cardLists.hunter[b]().type === "minion") {
-            if(cardLists.hunter[b]().race === "Beast") {
-                beastList.push(cardLists.hunter[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.shaman.length; b++) {
-        if(cardLists.shaman[b]().type === "minion") {
-            if(cardLists.shaman[b]().race === "Beast") {
-                beastList.push(cardLists.shaman[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.druid.length; b++) {
-        if(cardLists.druid[b]().type === "minion") {
-            if(cardLists.druid[b]().race === "Beast") {
-                beastList.push(cardLists.druid[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.warlock.length; b++) {
-        if(cardLists.warlock[b]().type === "minion") {
-            if(cardLists.warlock[b]().race === "Beast") {
-                beastList.push(cardLists.warlock[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.paladin.length; b++) {
-        if(cardLists.paladin[b]().type === "minion") {
-            if(cardLists.paladin[b]().race === "Beast") {
-                beastList.push(cardLists.paladin[b]);
-            }
-        }
-    }
-    for(var b = 0; b < cardLists.priest.length; b++) {
-        if(cardLists.priest[b]().type === "minion") {
-            if(cardLists.priest[b]().race === "Beast") {
-                beastList.push(cardLists.priest[b]);
-            }
-        }
-    }
-    var randomNum = beastList.length;
-    var beastNum = Math.floor(randomNum * Math.random(0, 1));
-    var beast = beastList[beastNum]();
+    
+    var beast = beastList[Math.floor(Math.random() * beastList.length)];
     printer.print(source.color + " " + source.name + "'s deathrattle adds a random Beast to the " + context.player.color + " " + context.player.name + "'s hand.");
-    if(context.player.hand.length < 10) {
+    if(context.player.hand.length < 10 && beast) {
         printer.print("Beast received: " + beast.name);
         context.player.hand.push(beast);
     }
-    else {
+    else if (beast) {
         printer.print("Hand too full! Could not receive card.");
+    } else {
+        printer.print("There are no beasts in this gamemode! Which means Webspinner is not in this gamemode. I think you've got some problems with your code, mate.");
     }
 };
 
@@ -348,6 +257,15 @@ var DarkCultist = function(source, context) {
     }
 };
 
+var SergeantSally = function(source, context) {
+    var dmg = source.getDamage();
+    printer.print(source.color + " Sergeant Sally's deathrattle deals " + dmg + " damage to all enemy minions.");
+    var enemyMinions = context.foe.minions.slice();
+    for(var i = 0; i < enemyMinions.length; i++) {
+        utilities.dealDamage(enemyMinions[i], dmg, context);
+    }
+};
+
 var DarkCultistBuff = {
     name: "Dark Cultist",
     type: "buff health",
@@ -368,6 +286,10 @@ var BelcherSlime = function(color) {
 
 var DamagedGolem = function(color) {
     return utilities.makeMinion("Mech", "Common", "Classic", color, "Damaged Golem", 2, 0, 1, 2, false, false, false, [effects.sickness], ais.MurlocRaider, DamagedGolem);
+};
+
+var JadeGolem = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Mean Streets of Gadgetzan", ["Neutral"], "Jade Golem", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.true, JadeGolem);
 };
 
 var WhirlingBlades = module.exports.WhirlingBlades = function() {
@@ -555,4 +477,34 @@ module.exports.DarkCultist_Deathrattle = {
     name: "Dark Cultist",
     type: "deathrattle",
     action: DarkCultist
+};
+
+module.exports.SergeantSally_Deathrattle = {
+    name: "Sergeant Sally",
+    type: "deathrattle",
+    action: SergeantSally
+};
+
+module.exports.AyaBlackpaw_Deathrattle = {
+    name: "Aya Blackpaw",
+    type: "deathrattle",
+    action: AyaBlackpaw
+};
+
+var Arthas_Banshee = function(source, context) {
+    var target = context.cause;
+    if(target && context.cause.type == "minion" && (context.cause.getHp() + context.cause.getDamage() < 8)) {
+        if(target.getHp() > 0) {
+            printer.print(source.color + " " + source.name + "'s deathrattle captures the soul of " + target.color + " " + target.name + ", taking control of it.");
+            target.color = source.color;
+            utilities.summon(target, context.player, context);
+            context.foe.minions.splice(context.foe.minions.indexOf(target), 1);
+        }
+    }
+};
+
+module.exports.Arthas_Banshee_Deathrattle = {
+    name: "Banshee",
+    type: "deathrattle",
+    action: Arthas_Banshee
 };

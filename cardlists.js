@@ -1,41 +1,7 @@
 var cards = require('./cards.js');
 
-module.exports.allCards = function() {
-    var list = [];
-    for(var i = 0; i < neutral.length; i++) {
-        list.push(neutral[i]());
-    }
-    for(var i = 0; i < mage.length; i++) {
-        list.push(mage[i]());
-    }
-    for(var i = 0; i < warrior.length; i++) {
-        list.push(warrior[i]());
-    }
-    for(var i = 0; i < rogue.length; i++) {
-        list.push(rogue[i]());
-    }
-    for(var i = 0; i < shaman.length; i++) {
-        list.push(shaman[i]());
-    }
-    for(var i = 0; i < hunter.length; i++) {
-        list.push(hunter[i]());
-    }
-    for(var i = 0; i < druid.length; i++) {
-        list.push(druid[i]());
-    }
-    for(var i = 0; i < warlock.length; i++) {
-        list.push(warlock[i]());
-    }
-    for(var i = 0; i < paladin.length; i++) {
-        list.push(paladin[i]());
-    }
-    for(var i = 0; i < priest.length; i++) {
-        list.push(priest[i]());
-    }
-    return list;
-}
-
-var neutral = module.exports.neutral = [
+var allCards = module.exports.allCards = function() {
+    return [
     cards.BloodfenRaptor,
     cards.BoulderfistOgre,
     cards.MagmaRager,
@@ -52,6 +18,7 @@ var neutral = module.exports.neutral = [
     cards.Spellbreaker,
     cards.ArgentCommander,
     cards.AzureDrake,
+    cards.GadgetzanAuctioneer,
     cards.KnifeJuggler,
     cards.CrazedAlchemist,
     cards.AcolyteofPain,
@@ -80,7 +47,7 @@ var neutral = module.exports.neutral = [
     cards.Sylvanas,
     cards.Toshley,
     cards.EmperorThaurissan,
-    // cards.Nefarian,
+    cards.Nefarian,
     cards.DrBoom,
     cards.Ragnaros,
     cards.Alexstrasza,
@@ -95,17 +62,21 @@ var neutral = module.exports.neutral = [
     cards.ValidatedDoomsayer,
     cards.HoggerScourgeofElwynn,
     cards.YShaarjRageUnbound,
-    cards.ArcaneGiant,
-    
     cards.CThun,
     cards.BeckonerofEvil,
     cards.CThunsChosen,
     cards.TwilightElder,
+    cards.ArcaneGiant,
+    cards.SergeantSally,
     
-    // cards.C_CultAdherent
-];
+    cards.DonHanCho,
+    
+    cards.JadeSpirit,
+    cards.LotusAgents,
+    cards.AyaBlackpaw,
+    
+    cards.KabalChemist,
 
-var mage = module.exports.mage = [
     cards.Fireball,
     cards.ArcaneMissiles,
     cards.Polymorph,
@@ -122,10 +93,8 @@ var mage = module.exports.mage = [
     cards.Flamecannon,
     cards.FrostNova,
     cards.MirrorImage,
-    cards.ArchmageAntonidas
-];
+    cards.ArchmageAntonidas,
 
-var warrior = module.exports.warrior = [
     cards.Execute,
     cards.Whirlwind,
     cards.ArcaniteReaper,
@@ -134,9 +103,7 @@ var warrior = module.exports.warrior = [
     cards.BattleRage,
     cards.Cleave,
     cards.BloodWarriors,
-];
 
-var rogue = module.exports.rogue = [
     cards.IronSensei,
     cards.Backstab,
     cards.Sap,
@@ -144,19 +111,15 @@ var rogue = module.exports.rogue = [
     cards.FanofKnives,
     cards.Sprint,
     cards.AnubarAmbusher,
-];
 
-var shaman = module.exports.shaman = [
     cards.Crackle,
     cards.LavaBurst,
     cards.WhirlingZapoMatic,
     cards.FeralSpirit,
     cards.ForkedLightning,
     cards.UnboundElemental,
-    cards.AlAkirtheWindlord
-];
+    cards.AlAkirtheWindlord,
 
-var hunter = module.exports.hunter = [
     cards.AnimalCompanion,
     cards.MultiShot,
     cards.UnleashTheHounds,
@@ -169,21 +132,27 @@ var hunter = module.exports.hunter = [
     cards.CoreRager,
     cards.GiantSandworm,
     cards.KingKrush,
-    cards.Gahzrilla
-];
+    cards.Gahzrilla,
 
-var druid = module.exports.druid = [
     cards.Innervate,
-    cards.DruidoftheFlame,
     cards.Swipe,
     cards.Moonfire,
-    cards.KlaxxiAmberWeaver,
+    cards.WildGrowth,
+    cards.JadeBlossom,
+    cards.LivingRoots,
+    cards.RavenIdol,
+    cards.Wrath,
+    cards.JadeIdol,
+    cards.Nourish,
     cards.TreeofLife,
+    cards.DruidoftheFlame,
+    cards.JadeBehemoth,
+    cards.KlaxxiAmberWeaver,
+    cards.AncientofLore,
+    cards.AncientofWar,
     cards.Cenarius,
-    cards.Malorne
-];
+    cards.Malorne,
 
-var warlock = module.exports.warlock = [
     cards.Darkbomb,
     cards.ShadowBolt,
     cards.MortalCoil,
@@ -191,10 +160,8 @@ var warlock = module.exports.warlock = [
     cards.Succubus,
     cards.Shadowflame,
     cards.LordJaraxxus,
-    cards.MalGanis
-];
+    cards.MalGanis,
 
-var paladin = module.exports.paladin = [
     cards.StandAgainstDarkness,
     cards.AldorPeacekeeper,
     cards.Equality,
@@ -205,10 +172,8 @@ var paladin = module.exports.paladin = [
     cards.HammerofWrath,
     cards.MurlocKnight,
     cards.TirionFordring,
-    // cards.BolvarFordragon
-];
+    // cards.BolvarFordragon,
 
-var priest = module.exports.priest = [
     cards.PowerWordShield,
     cards.ShadowWordDeath,
     cards.ShadowWordPain,
@@ -220,5 +185,24 @@ var priest = module.exports.priest = [
     cards.Shadowform,
     cards.NorthshireCleric,
     cards.TwilightWhelp,
-    cards.WyrmrestAgent
-];
+    cards.WyrmrestAgent,
+    
+    ];
+};
+
+var classCards = module.exports.classCards = function(className) {
+    var cardList = [];
+    var allCardsList = allCards();
+    for(var i in allCardsList) {
+        var card = allCardsList[i]();
+        if(card.cardClass) {
+            for(var j in card.cardClass) {
+                var cardClass = card.cardClass[j];
+                if(cardClass == className) {
+                    cardList.push(card.card);
+                }
+            }
+        }
+    }
+    return cardList;
+};

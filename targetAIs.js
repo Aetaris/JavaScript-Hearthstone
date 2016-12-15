@@ -339,15 +339,18 @@ module.exports.HuntersMark = function(targets, context) {
 module.exports.Swipe = function(targets, context) {
     var target = context.foe;
     for(var i = 0; i < targets.length; i++) {
-        if(targets[i].getHp() > 2 && (targets[i].getDamage() > target.getDamage() && target.type !== "hero")) {
+        if(targets[i].getHp() > 2 && (targets[i].getDamage() > target.getDamage() || target.type !== "hero")) {
             target = targets[i];
         }
+    }
+    if(context.foe.getHp() <= 4) {
+        return context.foe;
     }
     return target;
 };
 
 module.exports.Moonfire = function(targets, context) {
-    var targets = removeAllies(targets, context.player.color);
+    targets = removeAllies(targets, context.player.color);
     var target = context.foe;
     for(var i = 0; i < targets.length; i++) {
         if(targets[i].getHp() === 1 || (targets[i].getHp() + targets[i].getDamage()) > 5) {
@@ -357,8 +360,45 @@ module.exports.Moonfire = function(targets, context) {
     return target;
 };
 
-var Darkbomb = module.exports.Darkbomb = function(targets, context) {
+module.exports.LivingRoots = function(targets, context) {
     var targets = removeAllies(targets, context.player.color);
+    var target = context.foe;
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() <= 2 || ((targets[i].getHp() + targets[i].getDamage()) > 6 && targets[i].getHp() < 5)) {
+            target = targets[i];
+        }
+    }
+    return target;
+};
+
+module.exports.Wrath = function(targets, context) {
+    targets = removeAllies(targets, context.player.color);
+    var target = context.foe;
+    for(var i = 0; i < targets.length; i++) {
+        if(context.choice==1 || context.choice==2 && (targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() <= 3 && targets[i].getHp() > 1) {
+            target = targets[i];
+        } else if(context.choice==0 && targets[i].getHp() == 1 && targets[i].getDamage() >= 2) {
+            target = targets[i];
+        }
+    }
+    return target;
+};
+
+module.exports.AncientofLore = function(targets, context) {
+    targets = removeEnemies(targets, context.player.color);
+    var target = context.player;
+    var maxHpGap = 0;
+    for(var i = 0; i < context.player.minions.length; i++) {
+        if(context.player.minions[i].getHp() < context.player.minions[i].getMaxHp() - maxHpGap) {
+            target = context.player.minions[i];
+            maxHpGap = context.player.minions[i].getMaxHp() - context.player.minions[i].getHp();
+        }
+    }
+    return target;
+};
+
+module.exports.Darkbomb = function(targets, context) {
+    targets = removeAllies(targets, context.player.color);
     var target = context.foe;
     for(var i = 0; i < targets.length; i++) {
         if((targets[i].getHp() + targets[i].getDamage()) >= 4 && targets[i].getHp() > 1) {
@@ -587,12 +627,23 @@ module.exports.Arthas_BladeofWrath = function(targets, context) {
     var explosion = Math.floor(totalDamage / 3);
     
     for(var i = 0; i < targets.length; i++) {
-        if(targets[i].getHp() <= explosion && targets[i].getDamage() >= 4) {
+        if((targets[i].getHp() <= explosion && targets[i].getDamage() >= 3) || targets[i].getDamage() >= 5) {
             target = targets[i];
         }
     }
     if(context.foe.getHp() <= explosion) {
         return context.foe;
+    }
+    return target;
+};
+
+module.exports.Arthas_DeathboundNerubian = function(targets, context) {
+    var targets = removeAllies(targets, context.player.color);
+    var target = context.foe;
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() <= 2 || ((targets[i].getHp() + targets[i].getDamage()) > 6 && targets[i].getHp() < 5)) {
+            target = targets[i];
+        }
     }
     return target;
 };

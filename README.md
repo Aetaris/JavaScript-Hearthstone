@@ -41,3 +41,9 @@ Feel free to try them out.
 ... And that should be it! Anything I missed, email me. Hope you enjoy the simulator!
 
 # TL;DR email me literally anything to do with this, I'd love to hear what people are interested in having added.
+
+# TO BE ADDED
+
+- Better attack AI
+- Better Choose One system
+- Effects like Brann and Rivendare

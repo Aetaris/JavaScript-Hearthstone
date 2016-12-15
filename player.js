@@ -183,7 +183,7 @@ var command_action = module.exports.command_action = function(player, context) {
 
     else if (response.substr(0, 6) == "attack" && response.length >= 8) {
       index = Number(response.substr(7)) - 1;
-      if (player.minions[index] != undefined && player.minions[index].hasEffectName("Summoning Sickness") == false) {
+      if (player.minions[index] && player.minions[index].hasEffectName("Summoning Sickness") == false) {
         return {
           action: "attack",
           minion: player.minions[index]

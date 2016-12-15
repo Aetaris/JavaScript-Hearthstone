@@ -536,6 +536,15 @@ module.exports.ArcaneGiant = function(context) {
     return (12 - 1 * spells.length <= 8);
 };
 
+module.exports.GrimyGoons = function(context) { // A general AI that returns true if there's a minion in your hand that you can buff
+    for(var i = 0; i < context.player.hand.length; i++) {
+        if(context.player.hand[i].type == "minion") {
+            return true;
+        }
+    }
+    return false;
+};
+
 module.exports.Resurrect = function(context) {
     var minions = [];
     var totalCost = 0;
@@ -1770,6 +1779,14 @@ module.exports.Arthas_FlashofLight = function(context) {
         }
     }
     return false;
+};
+
+module.exports.Arthas_ElvenPriest = function(context) {
+    return true;
+};
+
+module.exports.Arthas_Sorceress = function(context) {
+    return true;
 };
 
 module.exports.Arthas_Devotion = function(context) {

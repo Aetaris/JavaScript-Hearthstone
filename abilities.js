@@ -56,9 +56,9 @@ module.exports.DruidShapeshift = function(target, context) {
 };
 
 module.exports.WarlockLifeTap = function(target, context) {
-        context.player.damageTaken += 2;
         printer.print("The " + context.player.color + " " + context.player.name + " casts Life Tap, drawing a card at the cost of 2 Health and reducing them to "
         + context.player.getHp() + " remaining health.");
+        utilities.dealDamage(context.player, 2, context);
         utilities.drawCard(context.player, context);
         return context.player.hand[context.player.hand.length - 1];
 };
@@ -196,67 +196,24 @@ module.exports.Frostbolt = function(target, context) {
 
 module.exports.UnstablePortal = function(target, context) {
     var minionList = [];
-    for(var b = 0; b < cardLists.neutral.length; b++) {
-        if(cardLists.neutral[b]().type === "minion") {
-            minionList.push(cardLists.neutral[b]);
+    var allCards = cardLists.allCards();
+    for(var i in allCards) {
+        var card = allCards[i]();
+        if(card.type === "minion") {
+            minionList.push(card);
         }
     }
-    for(var b = 0; b < cardLists.mage.length; b++) {
-        if(cardLists.mage[b]().type === "minion") {
-            minionList.push(cardLists.mage[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.shaman.length; b++) {
-        if(cardLists.shaman[b]().type === "minion") {
-            minionList.push(cardLists.shaman[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.warrior.length; b++) {
-        if(cardLists.warrior[b]().type === "minion") {
-            minionList.push(cardLists.warrior[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.rogue.length; b++) {
-        if(cardLists.rogue[b]().type === "minion") {
-            minionList.push(cardLists.rogue[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.rogue.length; b++) {
-        if(cardLists.hunter[b]().type === "minion") {
-            minionList.push(cardLists.rogue[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.druid.length; b++) {
-        if(cardLists.druid[b]().type === "minion") {
-            minionList.push(cardLists.druid[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.warlock.length; b++) {
-        if(cardLists.warlock[b]().type === "minion") {
-            minionList.push(cardLists.warlock[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.paladin.length; b++) {
-        if(cardLists.paladin[b]().type === "minion") {
-            minionList.push(cardLists.paladin[b]);
-        }
-    }
-    for(var b = 0; b < cardLists.priest.length; b++) {
-        if(cardLists.priest[b]().type === "minion") {
-            minionList.push(cardLists.priest[b]);
-        }
-    }
-    var randomNum = minionList.length;
-    var minion = Math.floor(randomNum * Math.random(0, 1));
+    var minion = minionList[Math.floor(Math.random()*minionList.length)];
     printer.print(context.player.color + " " + context.player.name + " casts Unstable Portal, giving them a random minion.");
-    if(context.player.hand.length < 10) {
-        var newMinion = minionList[minion]();
-        newMinion.cost -= 3;
-        context.player.hand.push(newMinion);
-        printer.print("Card received: " + newMinion.name);
+    if(context.player.hand.length < 10 && minion) {
+        minion.cost -= 3;
+        context.player.hand.push(minion);
+        printer.print("Card received: " + minion.name);
     }
-    else {
+    else if (minion) {
         printer.print("Hand too full! Could not receive new card.");
+    } else {
+        printer.print("There are no spells in this gamemode.");
     }
 };
 
@@ -659,6 +616,124 @@ module.exports.Moonfire = function(target, context) {
     utilities.dealSpellDamage(target, 1, context);
 };
 
+module.exports.WildGrowth = function(target, context) {
+    printer.print(context.player.color + " " + context.player.name + " casts Wild Growth, gaining an empty mana crystal.");
+    if(context.player.maxMana < 10) {
+        context.player.maxMana++;
+    } else {
+        printer.print("Already at 10 mana: instead providing Excess Mana.");
+        if(context.player.hand.length < 10) {
+            context.player.hand.push(ExcessMana());
+        } else {
+            printer.print("No room to add Excess Mana.");
+        }
+    }
+};
+
+var ExcessMana = function(target, context) {
+    printer.print(context.player.color + " " + context.player.name + " casts Excess Mana, drawing a card.");
+    utilities.drawCard(context.player, context);
+};
+
+module.exports.JadeBlossom = function(target, context) {
+    var golem = utilities.jadeSetup(JadeGolem(), context.player);
+    printer.print(context.player.color + " " + context.player.name + " casts Jade Blossom, gaining an empty mana crystal and summoning a " + golem.baseDamage + "/" + golem.baseHp + " " + golem.name + ".");
+    context.player.maxMana++;
+    utilities.summon(golem, context.player, context);
+};
+
+module.exports.LivingRoots = function(target, context) {
+    if(context.choice==0 || context.choice==2) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Living Roots, summoning two 1/1 Saplings.");
+        for(var i = 0; i < 2; i++) {
+            utilities.summon(Sapling(), context.player, context);
+        }
+    } if(context.choice==1 || context.choice==2) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Living Roots on " + target.name + ".");
+        utilities.dealSpellDamage(target, 2, context);
+    }
+};
+
+module.exports.RavenIdol = function(target, context) {
+    var allCards = cardLists.allCards();
+    if(context.choice==0 || context.choice==2) {
+        var validArray = [];
+        for(var i in allCards) {
+            var card = allCards[i]();
+            if(card.type == "minion" && (card.cardClass.indexOf("Druid")>=0 || card.cardClass.indexOf("Neutral")>=0)) {
+                validArray.push(card);
+            }
+        }
+        printer.print(context.player.color + " " + context.player.name + " casts Raven Idol, discovering a minion.");
+        var options = utilities.Discover(validArray);
+        var result = utilities.discoverChoose(options, context.player);
+        if(context.player.hand.length < 10) {
+            context.player.hand.push(result);
+            printer.print("Card chosen: " + result.name);
+        } else {
+            printer.print("No room in your hand for that card.");
+        }
+    }
+    if(context.choice==1 || context.choice==2) {
+        validArray = [];
+        for(i in allCards) {
+            card = allCards[i]();
+            if(card.type == "spell" && (card.cardClass.indexOf("Druid")>=0 || card.cardClass.indexOf("Neutral")>=0)) {
+                validArray.push(card);
+            }
+        }
+        printer.print(context.player.color + " " + context.player.name + " casts Raven Idol, discovering a spell.");
+        options = utilities.Discover(validArray);
+        result = utilities.discoverChoose(options, context.player);
+        if(context.player.hand.length < 10) {
+            context.player.hand.push(result);
+            printer.print("Card chosen: " + result.name);
+        } else {
+            printer.print("No room in your hand for that card.");
+        }
+    }
+};
+
+module.exports.Wrath = function(target, context) {
+    if(context.choice==0 || context.choice==2) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Wrath on " + target.name + ", dealing 1 damage and drawing a card.");
+        utilities.dealSpellDamage(target, 1, context);
+        utilities.drawCard(context.player, context);
+    } if(context.choice==1 || context.choice==2) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Wrath on " + target.name + ", dealing 3 damage.");
+        utilities.dealSpellDamage(target, 3, context);
+    }
+};
+
+module.exports.JadeIdol = function(target, context) {
+    if(context.choice==0 || context.choice==2) {
+        var golem = utilities.jadeSetup(JadeGolem(), context.player);
+        printer.print(context.player.color + " " + context.player.name + " casts Jade Idol, summoning a " + golem.baseDamage + "/" + golem.baseHp + " " + golem.name + ".");
+        utilities.summon(golem, context.player, context);
+    } if (context.choice==1 || context.choice==2) {
+        printer.print(context.player.color + " " + context.player.name + " casts Jade Idol, shuffling 3 more Jade Idols into their deck.");
+        for(var i = 0; i < 3; i++) {
+            var randomNum = Math.floor(context.player.deck.length * Math.random(0, 1));
+        context.player.deck.splice(randomNum, 0, context.cause.card());
+        }
+    }
+};
+
+module.exports.Nourish = function(target, context) {
+    if(context.choice==0 || context.choice==2) {
+        printer.print(context.player.color + " " + context.player.name + " casts Nourish, gaining 2 mana crystals.");
+        for(var i = 0; i < 2; i++) {
+            context.player.maxMana++;
+            context.player.mana++;
+        }
+    } if (context.choice==1 || context.choice==2) {
+        printer.print(context.player.color + " " + context.player.name + " casts Nourish, drawing 3 cards.");
+        for(i = 0; i < 3; i++) {
+            utilities.drawCard(context.player, context);
+        }
+    }
+};
+
 module.exports.TreeofLife = function(target, context) {
     printer.print(context.player.name + " casts Tree of Life, restoring all characters to full health.");
     context.player.damageTaken = 0;
@@ -910,71 +985,83 @@ module.exports.GrandWidowFaerlinaRainofFire = function(target, context) {
 };
 
 var WickedKnife = function() {
-    return utilities.makeWeapon("Basic", "Basic", "Wicked Knife", 2, 0, 1, 2, false, false, false, [], ais.MurlocRaider, WickedKnife);
+    return utilities.makeWeapon("Basic", "Basic", ["Rogue"], "Wicked Knife", 2, 0, 1, 2, false, false, false, [], ais.MurlocRaider, WickedKnife);
 };
 
-var StonetalonTotem = function(color) {
-    return utilities.makeMinion("Totem", "Special", "Basic", color, "Stonetalon Totem", 2, 0, 2, 0, false, false, false, [effects.sickness, effects.taunt], ais.Totem, StonetalonTotem);
+var StonetalonTotem = function() {
+    return utilities.makeMinion("Totem", "Special", "Basic", ["Shaman"], "Stonetalon Totem", 2, 0, 2, 0, false, false, false, [effects.sickness, effects.taunt], ais.Totem, StonetalonTotem);
 };
 
-var HealingTotem = function(color) {
-    return utilities.makeMinion("Totem", "Special", "Basic", color, "Healing Totem", 2, 0, 2, 0, false, false, false, [effects.sickness, effects.HealingTideTotem], ais.Totem, HealingTotem);
+var HealingTotem = function() {
+    return utilities.makeMinion("Totem", "Special", "Basic", ["Shaman"], "Healing Totem", 2, 0, 2, 0, false, false, false, [effects.sickness, effects.HealingTideTotem], ais.Totem, HealingTotem);
 };
 
-var WrathofAirTotem = function(color) {
-    return utilities.makeMinion("Totem", "Special", "Basic", color, "Wrath of Air Totem", 2, 0, 2, 0, false, false, false, [effects.sickness], ais.Totem, WrathofAirTotem);
+var WrathofAirTotem = function() {
+    return utilities.makeMinion("Totem", "Special", "Basic", ["Shaman"], "Wrath of Air Totem", 2, 0, 2, 0, false, false, false, [effects.sickness], ais.Totem, WrathofAirTotem);
 };
 
-var SearingTotem = function(color) {
-    return utilities.makeMinion("Totem", "Special", "Basic", color, "Searing Totem", 2, 0, 1, 1, false, false, false, [effects.sickness], ais.Totem, SearingTotem);
+var SearingTotem = function() {
+    return utilities.makeMinion("Totem", "Special", "Basic", ["Shaman"], "Searing Totem", 2, 0, 1, 1, false, false, false, [effects.sickness], ais.Totem, SearingTotem);
 };
 
-var SilverHandRecruit = function(color) {
-    return utilities.makeMinion(false, "Special", "Basic", color, "Silver Hand Recruit", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.MurlocRaider, SilverHandRecruit);
+var SilverHandRecruit = function() {
+    return utilities.makeMinion(false, "Special", "Basic", ["Paladin"], "Silver Hand Recruit", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.MurlocRaider, SilverHandRecruit);
 };
 
-var GoldenMonkey = function(color) {
-    return utilities.makeMinion(false, "Special", "League of Explorers", color, "The Golden Monkey", 4, 0, 6, 6, battlecries.GoldenMonkey, false, false, [effects.sickness, effects.taunt], ais.GoldenMonkey, GoldenMonkey);
+var GoldenMonkey = function() {
+    return utilities.makeMinion(false, "Special", "League of Explorers", ["Neutral"], "The Golden Monkey", 4, 0, 6, 6, battlecries.GoldenMonkey, false, false, [effects.sickness, effects.taunt], ais.GoldenMonkey, GoldenMonkey);
 };
 
-var Sheep = function(color) {
-    return utilities.makeMinion("Pet", "Basic", "Basic", color, "Sheep", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.MurlocRaider, Sheep);
+var JadeGolem = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Mean Streets of Gadgetzan", ["Neutral"], "Jade Golem", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.true, JadeGolem);
 };
 
-var MirrorImage = function(color) {
-    return utilities.makeMinion(false, "Basic", "Basic", color, "Mirror Image", 0, 0, 2, 0, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, MirrorImage);
+var Sheep = function() {
+    return utilities.makeMinion("Beast", "Basic", "Basic", ["Neutral"], "Sheep", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.MurlocRaider, Sheep);
+};
+
+var MirrorImage = function() {
+    return utilities.makeMinion(false, "Basic", "Basic", ["Mage"], "Mirror Image", 0, 0, 2, 0, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, MirrorImage);
 };
 
 var SpiritWolf = function() {
-    return utilities.makeMinion(false, "Rare", "Classic", false, "Spirit Wolf", 2, 0, 3, 2, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, SpiritWolf);
+    return utilities.makeMinion(false, "Rare", "Classic", ["Shaman"], "Spirit Wolf", 2, 0, 3, 2, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, SpiritWolf);
 };
 
 var Misha = function() {
-    return utilities.makeMinion("Beast", "Basic", "Basic", false, "Misha", 3, 0, 4, 4, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Misha);
+    return utilities.makeMinion("Beast", "Basic", "Basic", ["Hunter"], "Misha", 3, 0, 4, 4, false, false, false, [effects.sickness, effects.taunt], ais.MurlocRaider, Misha);
 };
 
 var Huffer = function() {
-    return utilities.makeMinion("Beast", "Basic", "Basic", false, "Huffer", 2, 0, 2, 4, false, false, false, [], ais.MurlocRaider, Huffer);
+    return utilities.makeMinion("Beast", "Basic", "Basic", ["Hunter"], "Huffer", 2, 0, 2, 4, false, false, false, [], ais.MurlocRaider, Huffer);
 };
 
 var Leokk = function() {
-    return utilities.makeMinion("Beast", "Basic", "Basic", false, "Leokk", 2, 0, 4, 2, false, false, false, [effects.sickness, effects.Leokk], ais.MurlocRaider, Leokk);
+    return utilities.makeMinion("Beast", "Basic", "Basic", ["Hunter"], "Leokk", 2, 0, 4, 2, false, false, false, [effects.sickness, effects.Leokk], ais.MurlocRaider, Leokk);
 };
 
-var Hound = function(color) {
-    return utilities.makeMinion("Beast", "Common", "Classic", color, "Hound", 1, 0, 1, 1, false, false, false, [], ais.MurlocRaider, Hound);
+var Hound = function() {
+    return utilities.makeMinion("Beast", "Common", "Classic", ["Hunter"], "Hound", 1, 0, 1, 1, false, false, false, [], ais.MurlocRaider, Hound);
 };
 
-var Infernal = function(color) {
-    return utilities.makeMinion("Demon", "Special", "Classic", color, "Infernal", 6, 0, 6, 6, false, false, false, [effects.sickness], ais.MurlocRaider, Infernal);
+var ExcessMana = function() {
+    return utilities.makeSpell("Uncollectible", "Basic", ["Neutral"], "Excess Mana", 0, 0, ExcessMana, false, false, ais.true, ExcessMana);
 };
 
-var AnubRekhanNerubian = function(color) {
-    return utilities.makeMinion(false, "Special", "Uncollectible", color, "Nerubian", 2, 0, 1, 3, false, false, false, [effects.sickness], ais.MurlocRaider, AnubRekhanNerubian);
+var Sapling = function() {
+    return utilities.makeMinion(false, "Basic", "The Grand Tournament", ["Druid"], "Sapling", 1, 0, 1, 1, false, false, false, [effects.sickness], ais.MurlocRaider, Sapling);
 };
 
-var AnubRekhanNerubianH = function(color) {
-    return utilities.makeMinion(false, "Special", "Uncollectible", color, "Nerubian", 2, 0, 4, 4, false, false, false, [effects.sickness], ais.MurlocRaider, AnubRekhanNerubianH);
+var Infernal = function() {
+    return utilities.makeMinion("Demon", "Special", "Classic", ["Warlock"], "Infernal", 6, 0, 6, 6, false, false, false, [effects.sickness], ais.MurlocRaider, Infernal);
+};
+
+var AnubRekhanNerubian = function() {
+    return utilities.makeMinion(false, "Special", "Uncollectible", ["Boss"], "Nerubian", 2, 0, 1, 3, false, false, false, [effects.sickness], ais.MurlocRaider, AnubRekhanNerubian);
+};
+
+var AnubRekhanNerubianH = function() {
+    return utilities.makeMinion(false, "Special", "Uncollectible", ["Boss"], "Nerubian", 2, 0, 4, 4, false, false, false, [effects.sickness], ais.MurlocRaider, AnubRekhanNerubianH);
 };
 
 // Custom Sets

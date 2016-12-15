@@ -1,10 +1,11 @@
-var printer = require('./arenaprinter.js');
+var printer = require('./printer.js');
 var game = require('./game.js');
 var heroes = require('./heroes.js');
 var lists = require('./cardlists.js');
 var utilities = require('./utilities.js');
 
 printer.kill("drafts.txt");
+printer.file("drafts.txt");
 
 var getDraft = module.exports.draft = function() {
 

@@ -12,9 +12,9 @@ var mage = module.exports.mage = function() {
         type: "basic", tier: 1,
         ability: abilities.MageFireblast,
         targetai: targetais.MageFireblast,
-        deck: decks.basicMechMage(),
+        deck: decks.MechMage(),
         ai: ais.MageFireblast, filter: filters.any,
-        cardList: cardLists.mage,
+        cardList: cardLists.classCards("Mage"),
         cost: 2, hp: 30, armor: 0
     };
 };
@@ -26,7 +26,7 @@ var warrior = function() {
     ability: abilities.WarriorArmorUp,
     deck: decks.basicWarrior(),
     ai: ais.WarriorArmorUp, filter: false,
-    cardList: cardLists.warrior,
+    cardList: cardLists.classCards("Warrior"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -38,7 +38,7 @@ var rogue = function() {
     ability: abilities.RogueWickedKnife,
     deck: decks.basicRogue(),
     ai: ais.RogueWickedKnife, filter: false,
-    cardList: cardLists.rogue,
+    cardList: cardLists.classCards("Rogue"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -50,7 +50,7 @@ var shaman = function() {
     ability: abilities.ShamanTotemicCall,
     deck: decks.basicShaman(),
     ai: ais.ShamanTotemicCall, filter: false,
-    cardList: cardLists.shaman,
+    cardList: cardLists.classCards("Shaman"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -62,7 +62,7 @@ var hunter = function() {
     ability: abilities.HunterSteadyShot,
     deck: decks.basicHunter(),
     ai: ais.HunterSteadyShot, filter: false,
-    cardList: cardLists.hunter,
+    cardList: cardLists.classCards("Hunter"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -72,9 +72,9 @@ var druid = module.exports.druid = function() {
     name: "Druid",
     type: "basic", tier: 4,
     ability: abilities.DruidShapeshift,
-    deck: decks.basicDruid(),
+    deck: decks.JadeDruid(),
     ai: ais.DruidShapeshift, filter: false,
-    cardList: cardLists.druid,
+    cardList: cardLists.classCards("Druid"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -86,7 +86,7 @@ var warlock = module.exports.warlock = function() {
     ability: abilities.WarlockLifeTap,
     deck: decks.basicWarlock(),
     ai: ais.WarlockSiphonSoul, filter: false,
-    cardList: cardLists.warlock,
+    cardList: cardLists.classCards("Warlock"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -98,7 +98,7 @@ var paladin = function() {
     ability: abilities.PaladinReinforce,
     deck: decks.basicPaladin(),
     ai: ais.PaladinReinforce, filter: false,
-    cardList: cardLists.paladin,
+    cardList: cardLists.classCards("Paladin"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -111,7 +111,7 @@ var priest = module.exports.priest = function() {
     targetai: targetais.PriestLesserHeal,
     deck: decks.basicPriest(),
     ai: ais.PriestLesserHeal, filter: filters.any,
-    cardList: cardLists.priest,
+    cardList: cardLists.classCards("Priest"),
     cost: 2, hp: 30, armor: 0
     };
 };
@@ -135,7 +135,7 @@ module.exports.LordJaraxxus = function() {
     ability: abilities.LordJaraxxusInferno,
     deck: decks.basicWarlock(),
     ai: ais.MageFireblast,
-    cardList: cardLists.warlock,
+    cardList: cardLists.classCards("Warlock"),
     cost: 2,
     hp: 15,
     armor: 0
@@ -256,7 +256,7 @@ module.exports.C_Skybreaker_Heroic = function() {
 
 // ++++++++++++++++++++++++++++++++++++++++++
 
-module.exports.Arthas = function() {
+module.exports.Arthas1 = function() {
     return {
         name: "Arthas",
         type: "sad mystery",
@@ -267,5 +267,107 @@ module.exports.Arthas = function() {
         cost: 2,
         hp: 30,
         armor: 15
+    };
+};
+
+module.exports.Arthas2 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FlashofLight,
+        targetai: targetais.Arthas_FlashofLight,
+        deck: decks.Arthas2(),
+        ai: ais.Arthas_FlashofLight, filter: filters.Arthas_FlashofLight,
+        cost: 2,
+        hp: 30,
+        armor: 15
+    };
+};
+
+module.exports.Arthas3 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FlashofLight,
+        targetai: targetais.Arthas_FlashofLight,
+        deck: decks.Arthas3(),
+        ai: ais.Arthas_FlashofLight, filter: filters.Arthas_FlashofLight,
+        cost: 2,
+        hp: 30,
+        armor: 15
+    };
+};
+
+module.exports.Arthas4 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FrostmourneHungers,
+        targetai: targetais.Arthas_FrostmourneHungers,
+        deck: decks.Arthas4(),
+        ai: ais.Arthas_FrostmourneHungers, filter: filters.minion,
+        cost: 2,
+        hp: 30,
+        armor: 15
+    };
+};
+
+module.exports.Arthas5 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FrostmourneHungers,
+        targetai: targetais.Arthas_FrostmourneHungers,
+        deck: decks.Arthas5(),
+        ai: ais.Arthas_FrostmourneHungers, filter: filters.minion,
+        cost: 2,
+        hp: 45,
+        armor: 0,
+        startEffects: [effects.Arthas_UnholyPresence_Start]
+    };
+};
+
+module.exports.Arthas6 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FrostmourneHungers,
+        targetai: targetais.Arthas_FrostmourneHungers,
+        deck: decks.Arthas6(),
+        ai: ais.Arthas_FrostmourneHungers, filter: filters.minion,
+        cost: 2,
+        hp: 45,
+        armor: 0,
+        startEffects: [effects.Arthas_UnholyPresence_Start]
+    };
+};
+
+module.exports.Arthas7 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FrostmourneHungers,
+        targetai: targetais.Arthas_FrostmourneHungers,
+        deck: decks.Arthas7(),
+        ai: ais.Arthas_FrostmourneHungers, filter: filters.minion,
+        cost: 2,
+        hp: 45,
+        armor: 0,
+        startEffects: [effects.Arthas_UnholyPresence_Start, effects.Arthas_BloodPresence_Start]
+    };
+};
+
+module.exports.Arthas8 = function() {
+    return {
+        name: "Arthas",
+        type: "sad mystery",
+        ability: abilities.Arthas_FrostmourneHungers,
+        targetai: targetais.Arthas_FrostmourneHungers,
+        deck: decks.Arthas8(),
+        ai: ais.Arthas_FrostmourneHungers, filter: filters.minion,
+        cost: 2,
+        hp: 45,
+        armor: 0,
+        startEffects: [effects.Arthas_UnholyPresence_Start, effects.Arthas_BloodPresence_Start, effects.Arthas_FrostPresence_Start]
     };
 };

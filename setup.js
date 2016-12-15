@@ -35,7 +35,7 @@ var player = module.exports.player = function (color) {
         minions: [],
         hand: [],
         deck: decks.basicDeck(),
-        graveyard: [],
+        graveyard: [], discarded: [],
         taunts: {
             start: false,
             heropower: false,

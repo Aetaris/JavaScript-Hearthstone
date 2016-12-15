@@ -27,7 +27,10 @@ var finalize = function(array, context) { // Removes stealthed minions from the 
 };
 
 module.exports.Attack = function(context) { // Used for attacking minions (except things like Icehowl)
-    var targetables = [context.foe];
+    var targetables = [];
+    if(!context.foe.hasEffectName("Stealth")) {
+        targetables.push(context.foe);
+    }
     var hasTaunt = false;
     var taunts = [];
     for(var i = 0; i < context.foe.minions.length; i++) {
@@ -46,6 +49,20 @@ module.exports.Attack = function(context) { // Used for attacking minions (excep
         targetables = taunts;
     }
     return targetables;
+};
+
+module.exports.ChooseOne = function(context) {
+    var array = [0, 1];
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        for(var j in minion.effects) {
+            var effect = minion.effects[j];
+            if(effect.name == "Double Choose One") {
+                array = [2, 2];
+            }
+        }
+    }
+    return array;
 };
 
 module.exports.any = function(context) { // Can target any player or minion
@@ -110,6 +127,39 @@ module.exports.Execute = function(context) { // Can only target damaged enemy mi
     var array = [];
     for(var i = 0; i < context.foe.minions.length; i++) {
         var minion = context.foe.minions[i];
+        if(minion.damageTaken > 0) {
+            array.push(minion);
+        }
+    }
+    return finalize(array, context);
+};
+
+module.exports.damagedEnemy_noFinalize = function(context) { // Can only target damaged enemy minions
+    var array = [];
+    for(var i = 0; i < context.foe.minions.length; i++) {
+        var minion = context.foe.minions[i];
+        if(minion.damageTaken > 0) {
+            array.push(minion);
+        }
+    }
+    return array;
+};
+
+module.exports.damagedFriendly_noFinalize = function(context) { // Can only target damaged friendly minions
+    var array = [];
+    for(var i = 0; i < context.player.minions.length; i++) {
+        var minion = context.player.minions[i];
+        if(minion.damageTaken > 0) {
+            array.push(minion);
+        }
+    }
+    return array;
+};
+
+module.exports.damagedFriendly = function(context) { // Can only target damaged friendly minions
+    var array = [];
+    for(var i = 0; i < context.player.minions.length; i++) {
+        var minion = context.player.minions[i];
         if(minion.damageTaken > 0) {
             array.push(minion);
         }

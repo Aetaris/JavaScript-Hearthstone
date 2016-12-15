@@ -341,7 +341,7 @@ module.exports.basicPriest = function() {
     ];
 };
 
-module.exports.basicMechMage = function() {
+module.exports.MechMage = function() {
     return [
         cards.ClockworkGnome(),
         cards.ClockworkGnome(),
@@ -513,6 +513,146 @@ module.exports.GrandWidowFaerlina_Heroic = function() {
         // cards.WorshipperH(),
         // cards.WorshipperH(),
         // cards.WorshipperH()
+    ];
+};
+
+module.exports.ItsTheFuzz = function() {
+    return [
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+        cards.SergeantSally(),
+    ];
+};
+
+module.exports.CrimeGoneMad = function() {
+    return [
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+        cards.DonHanCho(),
+    ];
+};
+
+module.exports.WhooshingSounds = function() {
+    return [
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.JadeIdol(),
+        cards.JadeIdol(),
+        cards.JadeIdol(),
+        cards.JadeIdol(),
+        cards.JadeIdol(),
+        cards.JadeBlossom(),
+        cards.JadeBlossom(),
+        cards.JadeBlossom(),
+        cards.JadeBlossom(),
+        cards.JadeBlossom(),
+        cards.JadeBehemoth(),
+        cards.JadeBehemoth(),
+        cards.JadeBehemoth(),
+        cards.JadeBehemoth(),
+        cards.JadeBehemoth(),
+        cards.AyaBlackpaw(),
+        cards.AyaBlackpaw(),
+        cards.AyaBlackpaw(),
+        cards.AyaBlackpaw(),
+        cards.AyaBlackpaw(),
+    ];
+};
+
+module.exports.JadeDruid = function() {
+    return [
+        cards.Innervate(),
+        cards.Innervate(),
+        cards.LivingRoots(),
+        cards.JadeIdol(),
+        cards.JadeIdol(),
+        cards.RavenIdol(),
+        cards.RavenIdol(),
+        cards.WildGrowth(),
+        cards.WildGrowth(),
+        cards.Wrath(),
+        cards.Wrath(),
+        cards.LotusAgents(),
+        cards.LotusAgents(),
+        cards.JadeBlossom(),
+        cards.JadeBlossom(),
+        cards.FandralStaghelm(),
+        cards.Swipe(),
+        cards.Swipe(),
+        cards.Nourish(),
+        cards.Nourish(),
+        cards.JadeBehemoth(),
+        cards.JadeBehemoth(),
+        cards.AncientofWar(),
+        cards.AncientofWar(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.AzureDrake(),
+        cards.AzureDrake(),
+        cards.AyaBlackpaw(),
+        cards.GadgetzanAuctioneer(),
     ];
 };
 
@@ -701,7 +841,7 @@ module.exports.C_Skybreaker_Heroic = function() {
 
 // Sad Mystery
 
-module.exports.Arthas1 = function() {
+module.exports.Arthas1 = function() { // missions 1-3
     return [
         cards.Arthas_ValiantFootman(),
         cards.Arthas_ValiantFootman(),
@@ -732,6 +872,41 @@ module.exports.Arthas1 = function() {
         cards.Arthas_HammerofJustice(),
         cards.Arthas_HammerofJustice(),
         cards.Arthas_HammerofJustice(),
+        cards.Arthas_BladeofWrath()
+    ];
+};
+
+module.exports.Arthas2 = function() { // missions 4-5
+    return [
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_ValiantFootman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_DwarvenRifleman(),
+        cards.Arthas_Knight(),
+        cards.Arthas_Knight(),
+        cards.Arthas_Knight(),
+        cards.Arthas_Knight(),
+        cards.Arthas_ElvenPriest(),
+        cards.Arthas_ElvenPriest(),
+        cards.Arthas_ElvenPriest(),
+        cards.Arthas_Sorceress(),
+        cards.Arthas_Sorceress(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_HolyLight(),
+        cards.Arthas_Devotion(),
+        cards.Arthas_Retribution(),
+        cards.Arthas_Retribution(),
+        cards.Arthas_BladeofWrath(),
         cards.Arthas_BladeofWrath()
     ];
 };

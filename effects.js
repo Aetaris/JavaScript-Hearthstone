@@ -97,6 +97,12 @@ module.exports.ReversingSwitchDamage = {
     num: actions.ReversingSwitchDamage
 };
 
+module.exports.GadgetzanAuctioneer = {
+    name: "Best Deals Anywhere",
+    type: "spell hunger friend",
+    action: actions.GadgetzanAuctioneer
+};
+
 module.exports.KnifeJuggler = {
     name: "Knife Juggler",
     type: "summon hunger friend",
@@ -313,6 +319,11 @@ module.exports.CenariusBuffDamage = {
     num: 2
 };
 
+module.exports.FandralStaghelm = {
+    name: "Double Choose One",
+    type: "passive"
+};
+
 module.exports.MalGanisBuffHp = {
     name: "Mal'Ganis Buff Health",
     type: "aura buff health",
@@ -415,4 +426,16 @@ module.exports.Arthas_SteamEngine = {
     name: "Steam Engine",
     type: "self defense",
     action: actions.Arthas_SteamEngine
+};
+
+module.exports.Arthas_Necromancer = {
+    name: "Necromancy",
+    type: "death hunger",
+    action: actions.Arthas_Necromancer
+};
+
+module.exports.Arthas_FesteringAbomination = {
+    name: "Festering Abomination",
+    type: "self defense",
+    action: actions.Arthas_FesteringAbomination
 };

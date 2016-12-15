@@ -33,6 +33,11 @@ module.exports.tempstealth = function(source, context) {
     }
 };
 
+module.exports.GadgetzanAuctioneer = function(source, context) {
+    printer.print(source.color + " " + source.name + " offers " + context.player.color + " " + context.player.name + " a deal and draws a card.");
+    utilities.drawCard(context.player, context);
+};
+
 module.exports.KnifeJuggler = function(source, context) {
     if(context.cause !== source) {
         var target = context.foe;
@@ -63,10 +68,9 @@ module.exports.CultMaster = function(source, context) {
 };
 
 module.exports.ShadeofNaxxramas = function(source, context) {
-    printer.print(source.color + " Shade of Naxxramas is empowered", "results.txt", false);
     source.addEffect(ShadeofNaxxramasHp);
     source.addEffect(ShadeofNaxxramasDamage);
-    printer.print(" up to " + source.getDamage() + "/" + source.getHp() + ".");
+    printer.print(source.color + " Shade of Naxxramas is empowered up to " + source.getDamage() + "/" + source.getHp() + ".");
 };
 
 var ShadeofNaxxramasHp = {
@@ -560,4 +564,23 @@ module.exports.Arthas_SteamEngine = function(source, context) {
         return 0;
     }
     return dmg;
+};
+
+module.exports.Arthas_Necromancer = function(source, context) {
+    if(context.cause.race != "Undead" && context.cause.race != "Mech" && context.cause != source && context.cause.corpse == true) {
+        printer.print(source.color + " " + source.name + " reanimates the fallen " + context.cause.name + " as a Skeletal Warrior under their control.");
+        context.cause["corpse"] == false;
+        utilities.summon(Arthas_Necromancer_SkeletalWarrior);
+    }
+};
+
+var Arthas_Necromancer_SkeletalWarrior = function() {
+    return utilities.makeMinion("Undead", "Uncollectible", "Arthas", false, "Skeletal Warrior", 1, 0, 2, 1, false, false, false, [effects.sickness], ais.true, Arthas_Necromancer_SkeletalWarrior);
+};
+
+module.exports.Arthas_FesteringAbomination = function(source, context) {
+    if(Math.random() > 0.5) {
+        return context.damage * 2;
+    }
+    return context.damage;
 };

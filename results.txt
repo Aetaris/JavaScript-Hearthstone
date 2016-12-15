@@ -1,515 +1,484 @@
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-Red: Priest
-Blue: Arthas
+Red: Druid
+Blue: Druid
 
-Uther the Lightbringer: The Blackrock orcs that destroyed Strahnbrad have a base somewhere nearby. I'm entrusting you with leading the attack.
-Arthas Menethil: I won't let you down, Uther.
-Arthas Menethil: Come with me. Let's slay these beasts.
-
-Blue Arthas draws a Dwarven Rifleman.
-Blue Arthas draws a Dwarven Rifleman.
-Blue Arthas draws a Holy Light.
-Blue Arthas mulligans Dwarven Rifleman.
-Blue Arthas draws a Valiant Footman.
-Blue Arthas mulligans Dwarven Rifleman.
-Blue Arthas draws a Devotion.
-Blue Arthas mulligans Holy Light.
-Blue Arthas draws a Valiant Footman.
+Blue Druid draws a Ancient of War.
+Blue Druid draws a Aya Blackpaw.
+Blue Druid draws a Azure Drake.
+Blue Druid mulligans Ancient of War.
+Blue Druid draws a Raven Idol.
+Blue Druid mulligans Aya Blackpaw.
+Blue Druid draws a Jade Idol.
+Blue Druid mulligans Azure Drake.
+Blue Druid draws a Wrath.
 
 
 
-Red Priest draws a Shadowform.
-Red Priest draws a Y'Shaarj, Rage Unbound.
-Red Priest draws a Arcane Giant.
-Red Priest draws a Corrupted Healbot.
-Red Priest mulligans Y'Shaarj, Rage Unbound.
-Red Priest draws a Arcane Giant.
-Red Priest mulligans Arcane Giant.
-Red Priest draws a Validated Doomsayer.
-Red Priest is given The Coin.
+Red Druid draws a Wrath.
+Red Druid draws a Jade Spirit.
+Red Druid draws a Lotus Agents.
+Red Druid draws a Raven Idol.
+Red Druid mulligans Lotus Agents.
+Red Druid draws a Ancient of War.
+Red Druid is given The Coin.
 
-2 Blackrock Grunts emerge from a barracks, ready for battle.
+It is now the Blue Druid's turn.
 
-It is now the Blue Arthas's turn.
+The Blue Druid now has 1 Mana Crystals and 27 cards left in their deck.
+Blue Druid's Health: 30 || Red Druid's Health: 30
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Nourish.
+The Blue Druid's hand now contains:
+[1] Raven Idol - 1
+[2] Jade Idol - 1
+[3] Wrath - 2
+[4] Nourish - 5
+Blue Druid casts Raven Idol, discovering a minion.
+Options: Beckoner of Evil, Malorne, Nexus-Champion Saraad.
+Card chosen: Nexus-Champion Saraad
 
-The Blue Arthas now has 1 Mana Crystals and 27 cards left in their deck.
-Blue Arthas's Health: 30 [15] || Red Priest's Health: 30.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Hammer of Justice.
-The Blue Arthas's hand now contains:
-[1] Valiant Footman - 2
-[2] Devotion - 2
-[3] Valiant Footman - 2
-[4] Hammer of Justice - 3
+It is now the Red Druid's turn.
 
-2 Blackrock Grunts emerge from a barracks, ready for battle.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 28 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 26 health.
-
-It is now the Red Priest's turn.
-
-The Red Priest now has 1 Mana Crystals and 26 cards left in their deck.
-Red Priest's Health: 26 || Blue Arthas's Health: 30 [15].
-Blademaster's Health: 15[15]
-The Red Priest does not currently have any minions on the board.
-Red Priest draws a Nexus-Champion Saraad.
-The Red Priest's hand now contains:
-[1] Shadowform - 3
-[2] Corrupted Healbot - 5
-[3] Arcane Giant - 12
-[4] Validated Doomsayer - 5
+The Red Druid now has 1 Mana Crystals and 26 cards left in their deck.
+Red Druid's Health: 30 || Blue Druid's Health: 30
+The Red Druid does not currently have any minions on the board.
+Red Druid draws a Aya Blackpaw.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Jade Spirit - 4
+[3] Raven Idol - 1
+[4] Ancient of War - 7
 [5] The Coin - 0
-[6] Nexus-Champion Saraad - 5
+[6] Aya Blackpaw - 6
+Red Druid casts Raven Idol, discovering a minion.
+Options: North Sea Kraken, Gadgetzan Auctioneer, Twilight Elder.
+Card chosen: North Sea Kraken
 
-2 Blackrock Grunts emerge from a barracks, ready for battle.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 24 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 22 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 20 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 18 health.
+It is now the Blue Druid's turn.
 
-It is now the Blue Arthas's turn.
-
-The Blue Arthas now has 2 Mana Crystals and 26 cards left in their deck.
-Blue Arthas's Health: 30 [15] || Red Priest's Health: 18.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Holy Light.
-The Blue Arthas's hand now contains:
-[1] Valiant Footman - 2
-[2] Devotion - 2
-[3] Valiant Footman - 2
-[4] Hammer of Justice - 3
-[5] Holy Light - 1
-The Blue Arthas summons Valiant Footman!
-
-Blackrock Blademaster emerges from darkness, slashing at Blue Valiant Footman viciously, then fades back into the shadows.
-Blue Valiant Footman takes 6 damage, reducing them to 0 health.
-Blue Valiant Footman has been killed!
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 13 armor and 30 health.
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 11 armor and 30 health.
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 9 armor and 30 health.
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 7 armor and 30 health.
-
-It is now the Red Priest's turn.
-
-The Red Priest now has 2 Mana Crystals and 25 cards left in their deck.
-Red Priest's Health: 18 || Blue Arthas's Health: 30 [7].
-Blademaster's Health: 15[15]
-The Red Priest does not currently have any minions on the board.
-Red Priest draws a Power Word: Shield.
-The Red Priest's hand now contains:
-[1] Shadowform - 3
-[2] Corrupted Healbot - 5
-[3] Arcane Giant - 12
-[4] Validated Doomsayer - 5
-[5] The Coin - 0
-[6] Nexus-Champion Saraad - 5
-[7] Power Word: Shield - 1
-The Red Priest plays The Coin, gaining 1 mana crystal and bringing their total up to 3.
-The Red Priest casts Shadowform, transforming their Hero Power into a 2-damage spike of shadow magic.
-
-Feranor Steeltoe: Well met! Would you care to join in our hunt?
-Arthas Menethil: What are you dwarves hunting?
-Feranor Steeltoe: We're on the trail of a black drake named Searinox! If you bring us back his heart, we can grant you a fiery enchantment.
-Feranor Steeltoe: I'll tag along. Nothing like the thrill of a dragon hunt!
-
-Blackrock Blademaster: Fire!
-3 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
-A fireball strikes Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 5 armor and 30 health.
-A fireball strikes Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 3 armor and 30 health.
-A fireball strikes Blue Feranor Steeltoe.
-Blue Feranor Steeltoe takes 2 damage, reducing them to 1 health.
-Blackrock Grunt attacks Blue Feranor Steeltoe.
-Blue Feranor Steeltoe takes 2 damage, reducing them to 0 health.
-
-Feranor Steeltoe: Ach! It's getting a bit too intense for me... I'll just stay back with the others!
-
-Blackrock Grunt takes 4 damage, reducing them to 0 health.
-Blackrock Grunt has been killed!
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas blocks 2 damage, reducing them to 1 armor and 30 health.
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas partially blocks 2 damage, reducing them to 0 armor and 29 health.
-
-It is now the Blue Arthas's turn.
-
-The Blue Arthas now has 3 Mana Crystals and 25 cards left in their deck.
-Blue Arthas's Health: 29 || Red Priest's Health: 18.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Holy Light.
-The Blue Arthas's hand now contains:
-[1] Devotion - 2
-[2] Valiant Footman - 2
-[3] Hammer of Justice - 3
-[4] Holy Light - 1
-[5] Holy Light - 1
-The Blue Arthas summons Valiant Footman!
-
-Blackrock Blademaster: Fire!
-3 massive fireballs are launched from Blackrock Watch Towers towards Red Priest and their troops.
-A fireball strikes Red Priest.
-Red Priest takes 2 damage, reducing them to 16 health.
-A fireball strikes Red Priest.
-Red Priest takes 2 damage, reducing them to 14 health.
-A fireball strikes Red Priest.
-Red Priest takes 2 damage, reducing them to 12 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 10 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 8 health.
-Blackrock Grunt attacks Red Priest.
-Red Priest takes 2 damage, reducing them to 6 health.
-
-It is now the Red Priest's turn.
-
-The Red Priest now has 3 Mana Crystals and 24 cards left in their deck.
-Red Priest's Health: 6 || Blue Arthas's Health: 29.
-Blademaster's Health: 15[15]
-The Red Priest does not currently have any minions on the board.
-Red Priest draws a Beckoner of Evil.
-The Red Priest's hand now contains:
-[1] Corrupted Healbot - 5
-[2] Arcane Giant - 10
-[3] Validated Doomsayer - 5
+The Blue Druid now has 2 Mana Crystals and 26 cards left in their deck.
+Blue Druid's Health: 30 || Red Druid's Health: 30
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Jade Behemoth.
+The Blue Druid's hand now contains:
+[1] Jade Idol - 1
+[2] Wrath - 2
+[3] Nourish - 5
 [4] Nexus-Champion Saraad - 5
-[5] Power Word: Shield - 1
-[6] Beckoner of Evil - 2
-The Red Priest summons Beckoner of Evil!
-Red Beckoner of Evil's battlecry empowers their master, giving C'Thun +2/+2!
-C'Thun is empowered up to 8/8!
+[5] Jade Behemoth - 6
+Blue Druid casts Jade Idol, summoning a 1/1 Crude Jade Golem.
 
-Blackrock Blademaster: Fire!
-3 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
-A fireball strikes Blue Valiant Footman.
-Blue Valiant Footman takes 2 damage, reducing them to 1 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 27 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 25 health.
-Blackrock Grunt attacks Blue Valiant Footman.
-Blue Valiant Footman takes 2 damage, reducing them to 0 health.
-Blue Valiant Footman has been killed!
-Blackrock Grunt takes 2 damage, reducing them to 0 health.
-Blackrock Grunt has been killed!
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 23 health.
+It is now the Red Druid's turn.
 
-It is now the Blue Arthas's turn.
+The Red Druid now has 2 Mana Crystals and 25 cards left in their deck.
+Red Druid's Health: 30 || Blue Druid's Health: 30
+The Red Druid does not currently have any minions on the board.
+Red Druid draws a Innervate.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Jade Spirit - 4
+[3] Ancient of War - 7
+[4] The Coin - 0
+[5] Aya Blackpaw - 6
+[6] North Sea Kraken - 9
+[7] Innervate - 0
+The Red Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
+Red Druid attacks Blue Crude Jade Golem.
+Blue Crude Jade Golem takes 1 damage, reducing them to 0 health.
+Blue Crude Jade Golem has been killed!
+Red Druid blocks 1 damage, reducing them to 0 armor and 30 health.
 
-The Blue Arthas now has 4 Mana Crystals and 24 cards left in their deck.
-Blue Arthas's Health: 23 || Red Priest's Health: 6.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Dwarven Rifleman.
-The Blue Arthas's hand now contains:
-[1] Devotion - 2
-[2] Hammer of Justice - 3
-[3] Holy Light - 1
-[4] Holy Light - 1
-[5] Dwarven Rifleman - 3
-Blue Arthas equips Hammer of Justice.
-Blue Arthas attacks Blackrock Grunt.
-Blackrock Grunt takes 3 damage, reducing them to 0 health.
-Blackrock Grunt has been killed!
-Blue Arthas takes 2 damage, reducing them to 21 health.
-Remaining durability on the Blue Arthas's Hammer of Justice: 3.
+It is now the Blue Druid's turn.
 
-2 Blackrock Grunts emerge from a barracks, ready for battle.
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 19 health.
-
-It is now the Red Priest's turn.
-
-The Red Priest now has 4 Mana Crystals and 23 cards left in their deck.
-Red Priest's Health: 6 || Blue Arthas's Health: 19.
-Blademaster's Health: 15[15]
-The Red Priest currently has 1 minions on the board:
-[Beckoner of Evil] - 2/3
-Red Priest draws a C'Thun.
-The Red Priest's hand now contains:
-[1] Corrupted Healbot - 5
-[2] Arcane Giant - 10
-[3] Validated Doomsayer - 5
-[4] Nexus-Champion Saraad - 5
-[5] Power Word: Shield - 1
-[6] C'Thun - 10
-The Red Priest casts Mind Spike on Grunt, dealing 2 damage.
-Blackrock Grunt takes 2 damage, reducing them to 0 health.
-Blackrock Grunt has been killed!
-Red Beckoner of Evil attacks Blackrock Grunt.
-Blackrock Grunt takes 2 damage, reducing them to 0 health.
-Blackrock Grunt has been killed!
-Red Beckoner of Evil takes 2 damage, reducing them to 1 health.
-
-Blackrock Blademaster emerges from darkness, slashing at Red Beckoner of Evil viciously, then fades back into the shadows.
-Red Beckoner of Evil takes 6 damage, reducing them to 0 health.
-Red Beckoner of Evil has been killed!
-Blackrock Blademaster: Peons, construct a new watch tower!
-The Blackrock orcs construct a new watch tower, ready to start assaulting your forces.
-Blackrock Grunt attacks Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 17 health.
-
-It is now the Blue Arthas's turn.
-
-The Blue Arthas now has 5 Mana Crystals and 23 cards left in their deck.
-Blue Arthas's Health: 17 || Red Priest's Health: 6.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Devotion.
-The Blue Arthas's hand now contains:
-[1] Devotion - 2
-[2] Holy Light - 1
-[3] Dwarven Rifleman - 3
-[4] Devotion - 2
-The Blue Arthas summons Dwarven Rifleman!
-Blue Arthas attacks Blackrock Grunt.
-Blackrock Grunt takes 3 damage, reducing them to 0 health.
-Blackrock Grunt has been killed!
-Blue Arthas takes 2 damage, reducing them to 15 health.
-Remaining durability on the Blue Arthas's Hammer of Justice: 2.
-
-Blackrock Blademaster: Fire!
-4 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 13 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 11 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 9 health.
-A fireball strikes Blue Dwarven Rifleman.
-Blue Dwarven Rifleman takes 2 damage, reducing them to 0 health.
-Blue Dwarven Rifleman has been killed!
-
-It is now the Red Priest's turn.
-
-The Red Priest now has 5 Mana Crystals and 22 cards left in their deck.
-Red Priest's Health: 6 || Blue Arthas's Health: 9.
-Blademaster's Health: 15[15]
-The Red Priest does not currently have any minions on the board.
-Red Priest draws a Northshire Cleric.
-The Red Priest's hand now contains:
-[1] Corrupted Healbot - 5
-[2] Arcane Giant - 10
-[3] Validated Doomsayer - 5
-[4] Nexus-Champion Saraad - 5
-[5] Power Word: Shield - 1
-[6] C'Thun - 10
-[7] Northshire Cleric - 1
-The Red Priest summons Corrupted Healbot!
-
-Blackrock Blademaster: Fire!
-4 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 7 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 5 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 3 health.
-A fireball strikes Blue Arthas.
-Blue Arthas takes 2 damage, reducing them to 1 health.
-
-It is now the Blue Arthas's turn.
-
-The Blue Arthas now has 6 Mana Crystals and 22 cards left in their deck.
-Blue Arthas's Health: 1 || Red Priest's Health: 6.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Valiant Footman.
-The Blue Arthas's hand now contains:
-[1] Devotion - 2
-[2] Devotion - 2
-[3] Valiant Footman - 2
-The Blue Arthas summons Valiant Footman!
-Blue Arthas attacks Blackrock Watch Tower.
-Blackrock Watch Tower takes 3 damage, reducing them to 9 health.
-Remaining durability on the Blue Arthas's Hammer of Justice: 1.
-
-Blackrock Blademaster emerges from darkness, slashing at Blue Valiant Footman viciously, then fades back into the shadows.
-Blue Valiant Footman takes 6 damage, reducing them to 0 health.
-Blue Valiant Footman has been killed!
-
-It is now the Red Priest's turn.
-
-The Red Priest now has 6 Mana Crystals and 21 cards left in their deck.
-Red Priest's Health: 6 || Blue Arthas's Health: 1.
-Blademaster's Health: 15[15]
-The Red Priest currently has 1 minions on the board:
-[Corrupted Healbot] - 6/6
-Red Priest draws a Holy Nova.
-The Red Priest's hand now contains:
-[1] Arcane Giant - 10
-[2] Validated Doomsayer - 5
+The Blue Druid now has 3 Mana Crystals and 25 cards left in their deck.
+Blue Druid's Health: 30 || Red Druid's Health: 30
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Azure Drake.
+The Blue Druid's hand now contains:
+[1] Wrath - 2
+[2] Nourish - 5
 [3] Nexus-Champion Saraad - 5
-[4] Power Word: Shield - 1
-[5] C'Thun - 10
-[6] Northshire Cleric - 1
-[7] Holy Nova - 5
-The Red Priest summons Validated Doomsayer!
-The Red Priest summons Northshire Cleric!
-Red Corrupted Healbot attacks Blackrock Watch Tower.
-Blackrock Watch Tower takes 6 damage, reducing them to 3 health.
+[4] Jade Behemoth - 6
+[5] Azure Drake - 5
+The Blue Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
+Blue Druid attacks Red Druid.
+Red Druid takes 1 damage, reducing them to 29 health.
 
-The black dragon Searinox descends from the sky with a mighty roar. If you slay the creature, the dwarves can give you some sort of reward.
+It is now the Red Druid's turn.
 
+The Red Druid now has 3 Mana Crystals and 24 cards left in their deck.
+Red Druid's Health: 29 || Blue Druid's Health: 30 [1]
+The Red Druid does not currently have any minions on the board.
+Red Druid draws a Jade Behemoth.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Jade Spirit - 4
+[3] Ancient of War - 7
+[4] The Coin - 0
+[5] Aya Blackpaw - 6
+[6] North Sea Kraken - 9
+[7] Innervate - 0
+[8] Jade Behemoth - 6
+The Red Druid plays The Coin, gaining 1 mana crystal and bringing their total up to 4.
+The Red Druid summons Jade Spirit!
+Red Jade Spirit's battlecry summons a 1/1 Crude Jade Golem.
 
-It is now the Blue Arthas's turn.
+It is now the Blue Druid's turn.
 
-The Blue Arthas now has 7 Mana Crystals and 21 cards left in their deck.
-Blue Arthas's Health: 1 || Red Priest's Health: 6.
-Blademaster's Health: 15[15]
-The Blue Arthas does not currently have any minions on the board.
-Blue Arthas draws a Valiant Footman.
-The Blue Arthas's hand now contains:
-[1] Devotion - 2
-[2] Devotion - 2
-[3] Valiant Footman - 2
-The Blue Arthas summons Valiant Footman!
-Blue Arthas attacks Blackrock Watch Tower.
-Blackrock Watch Tower takes 3 damage, reducing them to 0 health.
-Blackrock Watch Tower has been killed!
-Remaining durability on the Blue Arthas's Hammer of Justice: 0.
-The Blue Arthas's Hammer of Justice shatters.
+The Blue Druid now has 4 Mana Crystals and 24 cards left in their deck.
+Blue Druid's Health: 30 [1] || Red Druid's Health: 29
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Azure Drake.
+The Blue Druid's hand now contains:
+[1] Wrath - 2
+[2] Nourish - 5
+[3] Nexus-Champion Saraad - 5
+[4] Jade Behemoth - 6
+[5] Azure Drake - 5
+[6] Azure Drake - 5
+The Blue Druid casts Wrath on Crude Jade Golem, dealing 3 damage.
+Red Crude Jade Golem takes 3 damage, reducing them to 0 health.
+Red Crude Jade Golem has been killed!
+The Blue Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
+Blue Druid attacks Red Jade Spirit.
+Red Jade Spirit takes 1 damage, reducing them to 2 health.
+Blue Druid blocks 2 damage, reducing them to 0 armor and 30 health.
 
-Blackrock Blademaster emerges from darkness, slashing at Red Northshire Cleric viciously, then fades back into the shadows.
-Red Northshire Cleric takes 6 damage, reducing them to 0 health.
-Red Northshire Cleric has been killed!
+It is now the Red Druid's turn.
 
-It is now the Red Priest's turn.
+The Red Druid now has 4 Mana Crystals and 23 cards left in their deck.
+Red Druid's Health: 29 || Blue Druid's Health: 30
+The Red Druid currently has 1 minions on the board:
+[Jade Spirit] - 2/2
+Red Druid draws a Azure Drake.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Ancient of War - 7
+[3] Aya Blackpaw - 6
+[4] North Sea Kraken - 9
+[5] Innervate - 0
+[6] Jade Behemoth - 6
+[7] Azure Drake - 5
+The Red Druid casts Innervate, gaining 2 additional mana crystals (a total of 6) this turn.
+The Red Druid summons Azure Drake!
+Red Azure Drake's battlecry draws a card for Red Druid.
+Red Druid draws a Nourish.
+Red Jade Spirit attacks Blue Druid.
+Blue Druid takes 2 damage, reducing them to 28 health.
 
-Red Validated Doomsayer's Attack is set to 7!
-The Red Priest now has 7 Mana Crystals and 20 cards left in their deck.
-Red Priest's Health: 6 || Blue Arthas's Health: 1.
-Blademaster's Health: 15[15]
-The Red Priest currently has 2 minions on the board:
-[Corrupted Healbot] - 6/6
-[Validated Doomsayer] - 7/7
-Red Priest draws a Resurrect.
-The Red Priest's hand now contains:
-[1] Arcane Giant - 10
+It is now the Blue Druid's turn.
+
+The Blue Druid now has 5 Mana Crystals and 23 cards left in their deck.
+Blue Druid's Health: 28 || Red Druid's Health: 29
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Jade Spirit.
+The Blue Druid's hand now contains:
+[1] Nourish - 5
 [2] Nexus-Champion Saraad - 5
-[3] Power Word: Shield - 1
-[4] C'Thun - 10
-[5] Holy Nova - 5
-[6] Resurrect - 2
-The Red Priest summons Nexus-Champion Saraad!
-The Red Priest casts Mind Spike on Blademaster, dealing 2 damage.
-Blackrock Blademaster blocks 2 damage, reducing them to 13 armor and 15 health.
-Red Nexus-Champion Saraad is Inspired, giving the Red Priest a random spell.
-Spell received: Forked Lightning
-Red Corrupted Healbot attacks Black Searinox.
-Black Searinox takes 6 damage, reducing them to 10 health.
-Red Corrupted Healbot takes 4 damage, reducing them to 2 health.
-Red Validated Doomsayer attacks Black Searinox.
-Black Searinox takes 7 damage, reducing them to 3 health.
-Red Validated Doomsayer takes 4 damage, reducing them to 3 health.
+[3] Jade Behemoth - 6
+[4] Azure Drake - 5
+[5] Azure Drake - 5
+[6] Jade Spirit - 4
+Blue Druid casts Nourish, drawing 3 cards.
+Blue Druid draws a Innervate.
+Blue Druid draws a Nourish.
+Blue Druid draws a Wild Growth.
 
-Blackrock Blademaster emerges from darkness, slashing at Red Validated Doomsayer viciously, then fades back into the shadows.
-Red Validated Doomsayer takes 6 damage, reducing them to 0 health.
-Red Validated Doomsayer has been killed!
-Black Searinox attacks Blue Arthas.
-Blue Arthas takes 4 damage, reducing them to 0 health.
+It is now the Red Druid's turn.
 
-Blackrock Blademaster: Fire!
-3 massive fireballs are launched from Blackrock Watch Towers towards Blue Arthas and their troops.
-A fireball strikes Blue Valiant Footman.
-Blue Valiant Footman takes 2 damage, reducing them to 1 health.
-A fireball strikes Blue Arthas.
-A fireball strikes Blue Arthas.
-Black Searinox attacks Red Priest.
-Red Priest takes 4 damage, reducing them to 2 health.
+The Red Druid now has 5 Mana Crystals and 21 cards left in their deck.
+Red Druid's Health: 29 || Blue Druid's Health: 28
+The Red Druid currently has 2 minions on the board:
+[Jade Spirit] - 2/2
+[Azure Drake] - 4/4
+Red Druid draws a Ancient of War.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Ancient of War - 7
+[3] Aya Blackpaw - 6
+[4] North Sea Kraken - 9
+[5] Jade Behemoth - 6
+[6] Nourish - 5
+[7] Ancient of War - 7
+Red Druid casts Nourish, drawing 3 cards.
+Red Druid draws a Jade Behemoth.
+Red Druid draws a Raven Idol.
+Red Druid draws a Innervate.
+The Red Druid casts Innervate, gaining 2 additional mana crystals (a total of 2) this turn.
+Red Druid casts Raven Idol, discovering a minion.
+Options: Master Jouster, Beckoner of Evil, Nightblade.
+Card chosen: Master Jouster
+Red Jade Spirit attacks Blue Druid.
+Blue Druid takes 2 damage, reducing them to 26 health.
+Red Azure Drake attacks Blue Druid.
+Blue Druid takes 4 damage, reducing them to 22 health.
 
-It is now the Red Priest's turn.
+It is now the Blue Druid's turn.
 
-The Red Priest now has 8 Mana Crystals and 19 cards left in their deck.
-Red Priest's Health: 2 || Blue Arthas's Health: 0.
-Blademaster's Health: 15[13]
-The Red Priest currently has 2 minions on the board:
-[Corrupted Healbot] - 6/2
-[Nexus-Champion Saraad] - 4/5
-Red Priest draws a Knife Juggler.
-The Red Priest's hand now contains:
-[1] Arcane Giant - 10
-[2] Power Word: Shield - 1
-[3] C'Thun - 10
-[4] Holy Nova - 5
-[5] Resurrect - 2
-[6] Forked Lightning - 1
-[7] Knife Juggler - 2
-The Red Priest casts Power Word: Shield on Corrupted Healbot, increasing their health by 2 and drawing a card.
-Red Priest draws a Arcane Giant.
-The Red Priest summons Knife Juggler!
-The Red Priest casts Mind Spike on Searinox, dealing 2 damage.
-Black Searinox takes 2 damage, reducing them to 1 health.
-Red Nexus-Champion Saraad is Inspired, giving the Red Priest a random spell.
-Spell received: Darkbomb
-The Red Priest casts a Darkbomb on Watch Tower.
-Blackrock Watch Tower takes 3 damage, reducing them to 9 health.
-Red Corrupted Healbot attacks Black Searinox.
-Black Searinox takes 6 damage, reducing them to 0 health.
-Black Searinox has been killed!
+The Blue Druid now has 6 Mana Crystals and 19 cards left in their deck.
+Blue Druid's Health: 22 || Red Druid's Health: 29
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Lotus Agents.
+The Blue Druid's hand now contains:
+[1] Nexus-Champion Saraad - 5
+[2] Jade Behemoth - 6
+[3] Azure Drake - 5
+[4] Azure Drake - 5
+[5] Jade Spirit - 4
+[6] Innervate - 0
+[7] Nourish - 5
+[8] Wild Growth - 2
+[9] Lotus Agents - 5
+The Blue Druid summons Nexus-Champion Saraad!
+The Blue Druid casts Innervate, gaining 2 additional mana crystals (a total of 3) this turn.
+Blue Druid casts Wild Growth, gaining an empty mana crystal.
 
-Feranor Steeltoe: Nice job! We can use the beast's heart to forge a fiery enchantment you can unleash upon your enemies.
-Red Priest has received a use of the Heart of Searinox.
+It is now the Red Druid's turn.
 
-Red Corrupted Healbot takes 4 damage, reducing them to 0 health.
-Red Corrupted Healbot has been killed!
-Red Corrupted Healbot's deathrattle restores Health to the opponent, the Blackrock Blademaster.
-Red Nexus-Champion Saraad attacks Blackrock Watch Tower.
-Blackrock Watch Tower takes 4 damage, reducing them to 8 health.
+The Red Druid now has 6 Mana Crystals and 17 cards left in their deck.
+Red Druid's Health: 29 || Blue Druid's Health: 22
+The Red Druid currently has 2 minions on the board:
+[Jade Spirit] - 2/2
+[Azure Drake] - 4/4
+Red Druid draws a Jade Idol.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Ancient of War - 7
+[3] Aya Blackpaw - 6
+[4] North Sea Kraken - 9
+[5] Jade Behemoth - 6
+[6] Ancient of War - 7
+[7] Jade Behemoth - 6
+[8] Master Jouster - 6
+[9] Jade Idol - 1
+The Red Druid summons Aya Blackpaw!
+Red Aya Blackpaw's battlecry summons a 2/2 Crude Jade Golem.
+Red Jade Spirit attacks Blue Nexus-Champion Saraad.
+Blue Nexus-Champion Saraad takes 2 damage, reducing them to 3 health.
+Red Jade Spirit takes 4 damage, reducing them to 0 health.
+Red Jade Spirit has been killed!
+Red Azure Drake attacks Blue Nexus-Champion Saraad.
+Blue Nexus-Champion Saraad takes 4 damage, reducing them to 0 health.
+Blue Nexus-Champion Saraad has been killed!
+Red Azure Drake takes 4 damage, reducing them to 0 health.
+Red Azure Drake has been killed!
 
-Blackrock Blademaster emerges from darkness, slashing at Blue Valiant Footman viciously, then fades back into the shadows.
-Blue Valiant Footman takes 6 damage, reducing them to 0 health.
-Blue Valiant Footman has been killed!
+It is now the Blue Druid's turn.
 
-It is now the Red Priest's turn.
+The Blue Druid now has 8 Mana Crystals and 18 cards left in their deck.
+Blue Druid's Health: 22 || Red Druid's Health: 29
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Jade Idol.
+The Blue Druid's hand now contains:
+[1] Jade Behemoth - 6
+[2] Azure Drake - 5
+[3] Azure Drake - 5
+[4] Jade Spirit - 4
+[5] Nourish - 5
+[6] Lotus Agents - 5
+[7] Jade Idol - 1
+The Blue Druid summons Jade Behemoth!
+Blue Jade Behemoth's battlecry summons a 2/2 Crude Jade Golem.
+Blue Druid casts Jade Idol, shuffling 3 more Jade Idols into their deck.
 
-The Red Priest now has 9 Mana Crystals and 17 cards left in their deck.
-Red Priest's Health: 2 || Blue Arthas's Health: 0.
-Blademaster's Health: 15[13]
-The Red Priest currently has 2 minions on the board:
-[Nexus-Champion Saraad] - 4/5
-[Knife Juggler] - 2/2
-Red Priest draws a Piloted Shredder.
-The Red Priest's hand now contains:
-[1] Arcane Giant - 8
-[2] C'Thun - 10
-[3] Holy Nova - 5
-[4] Resurrect - 2
-[5] Forked Lightning - 1
-[6] Arcane Giant - 8
-[7] Heart of Searinox - 4
-[8] Piloted Shredder - 4
-The Red Priest summons Arcane Giant!
-Red Knife Juggler throws a knife at Blackrock Watch Tower.
-Blackrock Watch Tower takes 1 damage, reducing them to 8 health.
-Red Nexus-Champion Saraad attacks Blackrock Watch Tower.
-Blackrock Watch Tower takes 4 damage, reducing them to 4 health.
-Red Knife Juggler attacks Blackrock Watch Tower.
-Blackrock Watch Tower takes 2 damage, reducing them to 2 health.
+It is now the Red Druid's turn.
 
-Blackrock Blademaster: Fire!
-3 massive fireballs are launched from Blackrock Watch Towers towards Red Priest and their troops.
-A fireball strikes Red Arcane Giant.
-Red Arcane Giant takes 2 damage, reducing them to 6 health.
-A fireball strikes Red Arcane Giant.
-Red Arcane Giant takes 2 damage, reducing them to 4 health.
-A fireball strikes Red Priest.
-Red Priest takes 2 damage, reducing them to 0 health.
+The Red Druid now has 7 Mana Crystals and 16 cards left in their deck.
+Red Druid's Health: 29 || Blue Druid's Health: 22
+The Red Druid currently has 2 minions on the board:
+[Aya Blackpaw] - 5/3
+[Crude Jade Golem] - 2/2
+Red Druid draws a Jade Blossom.
+The Red Druid's hand now contains:
+[1] Wrath - 2
+[2] Ancient of War - 7
+[3] North Sea Kraken - 9
+[4] Jade Behemoth - 6
+[5] Ancient of War - 7
+[6] Jade Behemoth - 6
+[7] Master Jouster - 6
+[8] Jade Idol - 1
+[9] Jade Blossom - 3
+The Red Druid casts Wrath on Crude Jade Golem, dealing 3 damage.
+Blue Crude Jade Golem takes 3 damage, reducing them to 0 health.
+Blue Crude Jade Golem has been killed!
+Red Druid casts Jade Idol, summoning a 3/3 Crude Jade Golem.
+Red Druid casts Jade Blossom, gaining an empty mana crystal and summoning a 4/4 Elaborate Jade Golem.
+Red Aya Blackpaw attacks Blue Jade Behemoth.
+Blue Jade Behemoth takes 5 damage, reducing them to 1 health.
+Red Aya Blackpaw takes 3 damage, reducing them to 0 health.
+Red Aya Blackpaw has been killed!
+Red Aya Blackpaw's deathrattle summons a 5/5 Elaborate Jade Golem.
+Red Crude Jade Golem attacks Blue Jade Behemoth.
+Blue Jade Behemoth takes 2 damage, reducing them to 0 health.
+Blue Jade Behemoth has been killed!
+Red Crude Jade Golem takes 3 damage, reducing them to 0 health.
+Red Crude Jade Golem has been killed!
 
-Arthas Menethil: Fall back! The orcs are too much for us...
+It is now the Blue Druid's turn.
+
+The Blue Druid now has 9 Mana Crystals and 20 cards left in their deck.
+Blue Druid's Health: 22 || Red Druid's Health: 29
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Jade Idol.
+The Blue Druid's hand now contains:
+[1] Azure Drake - 5
+[2] Azure Drake - 5
+[3] Jade Spirit - 4
+[4] Nourish - 5
+[5] Lotus Agents - 5
+[6] Jade Idol - 1
+The Blue Druid summons Azure Drake!
+Blue Azure Drake's battlecry draws a card for Blue Druid.
+Blue Druid draws a Jade Spirit.
+The Blue Druid summons Jade Spirit!
+Blue Jade Spirit's battlecry summons a 3/3 Crude Jade Golem.
+
+It is now the Red Druid's turn.
+
+The Red Druid now has 9 Mana Crystals and 15 cards left in their deck.
+Red Druid's Health: 29 || Blue Druid's Health: 22
+The Red Druid currently has 3 minions on the board:
+[Crude Jade Golem] - 3/3
+[Elaborate Jade Golem] - 4/4
+[Elaborate Jade Golem] - 5/5
+Red Druid draws a Gadgetzan Auctioneer.
+The Red Druid's hand now contains:
+[1] Ancient of War - 7
+[2] North Sea Kraken - 9
+[3] Jade Behemoth - 6
+[4] Ancient of War - 7
+[5] Jade Behemoth - 6
+[6] Master Jouster - 6
+[7] Gadgetzan Auctioneer - 6
+The Red Druid summons Ancient of War!
+Red Ancient of War's battlecry sinks roots deep into the earth, gaining +5 Health and Taunt.
+The Red Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
+Red Druid attacks Blue Azure Drake.
+Blue Azure Drake takes 1 damage, reducing them to 3 health.
+Red Druid partially blocks 4 damage, reducing them to 0 armor and 26 health.
+Red Crude Jade Golem attacks Blue Jade Spirit.
+Blue Jade Spirit takes 3 damage, reducing them to 0 health.
+Blue Jade Spirit has been killed!
+Red Crude Jade Golem takes 2 damage, reducing them to 1 health.
+Red Elaborate Jade Golem attacks Blue Azure Drake.
+Blue Azure Drake takes 4 damage, reducing them to 0 health.
+Blue Azure Drake has been killed!
+Red Elaborate Jade Golem takes 4 damage, reducing them to 0 health.
+Red Elaborate Jade Golem has been killed!
+Red Elaborate Jade Golem attacks Blue Crude Jade Golem.
+Blue Crude Jade Golem takes 5 damage, reducing them to 0 health.
+Blue Crude Jade Golem has been killed!
+Red Elaborate Jade Golem takes 3 damage, reducing them to 2 health.
+
+It is now the Blue Druid's turn.
+
+The Blue Druid now has 10 Mana Crystals and 18 cards left in their deck.
+Blue Druid's Health: 22 || Red Druid's Health: 26
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Living Roots.
+The Blue Druid's hand now contains:
+[1] Azure Drake - 5
+[2] Nourish - 5
+[3] Lotus Agents - 5
+[4] Jade Idol - 1
+[5] Jade Spirit - 4
+[6] Living Roots - 1
+The Blue Druid summons Azure Drake!
+Blue Azure Drake's battlecry draws a card for Blue Druid.
+Blue Druid draws a Jade Blossom.
+The Blue Druid summons Lotus Agents!
+Blue Lotus Agents's battlecry offers the Blue Druid a Druid, Rogue and Shaman card to choose from.
+Options: Ancient of Lore, Backstab, Whirling Zap-o-Matic.
+Card chosen: Backstab
+
+It is now the Red Druid's turn.
+
+The Red Druid now has 10 Mana Crystals and 14 cards left in their deck.
+Red Druid's Health: 26 || Blue Druid's Health: 22
+The Red Druid currently has 3 minions on the board:
+[Crude Jade Golem] - 3/1
+[Elaborate Jade Golem] - 5/2
+[Ancient of War] - 5/10
+Red Druid draws a Wrath.
+The Red Druid's hand now contains:
+[1] North Sea Kraken - 9
+[2] Jade Behemoth - 6
+[3] Ancient of War - 7
+[4] Jade Behemoth - 6
+[5] Master Jouster - 6
+[6] Gadgetzan Auctioneer - 6
+[7] Wrath - 2
+The Red Druid summons North Sea Kraken!
+The Red North Sea Kraken spits a jet of water at Lotus Agents.
+Blue Lotus Agents takes 4 damage, reducing them to 0 health.
+Blue Lotus Agents has been killed!
+Red Crude Jade Golem attacks Blue Druid.
+Blue Druid takes 3 damage, reducing them to 19 health.
+Red Elaborate Jade Golem attacks Blue Azure Drake.
+Blue Azure Drake takes 5 damage, reducing them to 0 health.
+Blue Azure Drake has been killed!
+Red Elaborate Jade Golem takes 4 damage, reducing them to 0 health.
+Red Elaborate Jade Golem has been killed!
+Red Ancient of War attacks Blue Druid.
+Blue Druid takes 5 damage, reducing them to 14 health.
+
+It is now the Blue Druid's turn.
+
+The Blue Druid now has 10 Mana Crystals and 16 cards left in their deck.
+Blue Druid's Health: 14 || Red Druid's Health: 26
+The Blue Druid does not currently have any minions on the board.
+Blue Druid draws a Swipe.
+The Blue Druid's hand now contains:
+[1] Nourish - 5
+[2] Jade Idol - 1
+[3] Jade Spirit - 4
+[4] Living Roots - 1
+[5] Jade Blossom - 3
+[6] Backstab - 0
+[7] Swipe - 4
+Blue Druid casts Nourish, drawing 3 cards.
+Blue Druid draws a Jade Blossom.
+Blue Druid draws a Jade Idol.
+Blue Druid draws a Raven Idol.
+The Blue Druid summons Jade Spirit!
+Blue Jade Spirit's battlecry summons a 4/4 Elaborate Jade Golem.
+Blue Druid casts Jade Idol, summoning a 5/5 Elaborate Jade Golem.
+
+It is now the Red Druid's turn.
+
+The Red Druid now has 10 Mana Crystals and 13 cards left in their deck.
+Red Druid's Health: 26 || Blue Druid's Health: 14
+The Red Druid currently has 3 minions on the board:
+[Crude Jade Golem] - 3/1
+[Ancient of War] - 5/10
+[North Sea Kraken] - 9/7
+Red Druid draws a Azure Drake.
+The Red Druid's hand now contains:
+[1] Jade Behemoth - 6
+[2] Ancient of War - 7
+[3] Jade Behemoth - 6
+[4] Master Jouster - 6
+[5] Gadgetzan Auctioneer - 6
+[6] Wrath - 2
+[7] Azure Drake - 5
+The Red Druid summons Jade Behemoth!
+Red Jade Behemoth's battlecry summons a 6/6 Elaborate Jade Golem.
+The Red Druid casts Wrath on Elaborate Jade Golem, dealing 3 damage.
+Blue Elaborate Jade Golem takes 3 damage, reducing them to 2 health.
+The Red Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
+Red Druid attacks Blue Elaborate Jade Golem.
+Blue Elaborate Jade Golem takes 1 damage, reducing them to 1 health.
+Red Druid partially blocks 5 damage, reducing them to 0 armor and 22 health.
+Red Crude Jade Golem attacks Blue Elaborate Jade Golem.
+Blue Elaborate Jade Golem takes 3 damage, reducing them to 0 health.
+Blue Elaborate Jade Golem has been killed!
+Red Crude Jade Golem takes 5 damage, reducing them to 0 health.
+Red Crude Jade Golem has been killed!
+Red North Sea Kraken attacks Blue Druid.
+Blue Druid takes 9 damage, reducing them to 5 health.
+Red Ancient of War attacks Blue Druid.
+Blue Druid takes 5 damage, reducing them to 0 health.
+The Blue Druid has been defeated! The Red Druid is victorious!

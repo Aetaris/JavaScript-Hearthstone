@@ -1,5 +1,6 @@
 var printer = require('./printer.js');
 var filters = require('./filters.js');
+const readline = require('readline-sync');
 
 module.exports.Equip = function(weapon, context) {
     context.player.weapon = weapon;
@@ -330,6 +331,9 @@ module.exports.kill = function(target, context) {
     
     context.player.minions.splice(context.player.minions.indexOf(target), 1);
     
+    if(!context.cause) {
+        throw new Error("welp...");
+    }
     if(context.cause.owner === target.owner) {
         if(context.cause.triggerEffectType) {
             context.cause.triggerEffectType("victory", {player: context.player, foe: context.foe, cause: target});
@@ -453,10 +457,8 @@ module.exports.Joust = function(player, foe) {
             foeMinions.push(foe.deck[b]);
         }
     }
-    var randomNum = Math.floor(playerMinions.length * Math.random(0, 1));
-    var playerMinion = playerMinions[randomNum];
-    randomNum = Math.floor(foeMinions.length * Math.random(0, 1));
-    var foeMinion = foeMinions[randomNum];
+    var playerMinion = playerMinions[Math.floor(playerMinions.length * Math.random(0, 1))];
+    var foeMinion = foeMinions[Math.floor(foeMinions.length * Math.random(0, 1))];
     printer.print("JOUST: " + player.color + " " + player.name + " versus " + foe.color + " " + foe.name + ".");
     if (playerMinions.length > 0) {
         printer.print(player.color + " " + player.name + "'s challenger: " + playerMinion.name + " (" + playerMinion.cost + ").");
@@ -513,6 +515,9 @@ module.exports.drawCard = function(player, context) {
     var card = player.deck[0];
     if (player.deck.length > 0 && player.hand.length < 10) {
         if(player.isPlayer || !context.foe.isPlayer) {
+            if(!player.deck[0]) {
+                throw new Error("");
+            }
             printer.print(player.color + " " + player.name + " draws a " + player.deck[0].name + ".");
         } else {
             printer.print(player.color + " " + player.name + " draws a card.");
@@ -554,6 +559,131 @@ module.exports.drawCard = function(player, context) {
     }
     if (card) {
         return card;
+    }
+};
+
+module.exports.discardCard = function(player, context) {
+    if(player.hand.length > 0) {
+        var discardNum = Math.floor(player.hand.length * Math.random(0, 1));
+        var card = player.hand[discardNum];
+        if(card) {
+            printer.print(player.color + " " + player.name + " discards " + card.name + ".");
+            player.hand.splice(discardNum, 1);
+            player.discarded.push(card.card());
+            card.triggerEffectType("discarded", {player: player, foe: context.foe, cause: context.cause, source: card});
+            for(var i in player.minions) {
+                player.minions[i].triggerEffectType("discard hunger", {player: player, foe: context.foe, cause: context.cause, source: player.minions[i]});
+                player.minions[i].triggerEffectType("discard hunger friend", {player: player, foe: context.foe, cause: context.cause, source: player.minions[i]});
+            }
+            for(var i in context.foe.minions) {
+                context.foe.minions[i].triggerEffectType("discard hunger", {player: context.foe, foe: player, cause: context.cause, source: context.foe.minions[i]});
+                context.foe.minions[i].triggerEffectType("discard hunger foe", {player: context.foe, foe: player, cause: context.cause, source: context.foe.minions[i]});
+            }
+        }
+    }
+    else {
+        printer.print(player.color + " " + player.name + "'s hand is empty, and nothing is discarded.");
+    }
+};
+
+module.exports.jadeSetup = function(golem, player) {
+    var buffNum = 0;
+    if(player.jadeBuff && player.jadeBuff > 0) {
+        buffNum = player.jadeBuff;
+    }
+    if(buffNum >= 30) {
+        buffNum = 29;
+    }
+    golem.baseHp += buffNum;
+    golem.baseDamage += buffNum;
+    golem.cost += buffNum;
+    if(golem.cost > 10) {
+        golem.cost = 10;;
+    }
+    if(buffNum <= 2) {
+        golem.name = "Crude " + golem.name;
+    } else if(buffNum <= 5) {
+        golem.name = "Elaborate " + golem.name;
+    } else if(buffNum <= 18) {
+        golem.name = "Mighty " + golem.name;
+    } else {
+        golem.name = "Titanic " + golem.name;
+    }
+    var golemCard = function() {
+    return makeMinion(false, "Uncollectible", "Mean Streets of Gadgetzan", ["Neutral"], golem.name, golem.cost, 0, golem.baseHp, golem.baseDamage, false, false, false, golem.effects, golem.ai, golemCard);
+    };
+    golem.card = golemCard;
+    
+    if(!player.jadeBuff) {
+        player.jadeBuff = 0;
+    }
+    player.jadeBuff++;
+    
+    return golem;
+};
+
+module.exports.Discover = function(cardList, cardList2, cardList3, allowCopies) {
+    var isCopy = true;
+    
+    if(!cardList2) {
+        cardList2 = cardList;
+    }
+    if(!cardList3) {
+        cardList3 = cardList;
+    }
+    while(isCopy) {
+        var card1 = cardList[Math.floor(Math.random()*cardList.length)];
+        if(typeof card1 == "function") {
+            card1 = card1();
+        }
+        isCopy = false;
+    }
+    isCopy = true;
+    while(isCopy) {
+        var card2 = cardList2[Math.floor(Math.random()*cardList2.length)];
+        if(typeof card2 == "function") {
+            card2 = card2();
+        }
+        if(card2 != card1 || allowCopies) {
+            isCopy = false;
+        }
+    }
+    isCopy = true;
+    while(isCopy) {
+        var card3 = cardList3[Math.floor(Math.random()*cardList3.length)];
+        if(typeof card3 == "function") {
+            card3 = card3();
+        }
+        if((card3 != card1 && card3 != card2) || allowCopies) {
+            isCopy = false;
+        }
+    }
+    printer.print("Options: " + card1.name + ", " + card2.name + ", " + card3.name + ".");
+    return [card1, card2, card3];
+};
+
+module.exports.discoverChoose = function(options, player) {
+    if(player.isPlayer) {
+        console.log("Options: [1] " + options[0].name + ", [2] " + options[1].name + ", [3] " + options[2].name + ".");
+        while(!response) {
+            var response = readline.question(player.color + " " + player.name + ", choose an option: ");
+            if(response.parseInt() > 0 && response.parseInt() <= 3) {
+                return options[response.parseInt()-1];
+            } else {
+                console.log("Invalid input.");
+                response = false;
+            }
+        }
+    } else {
+        var highestTier = 0;
+        var bestCard = false;
+        for(var i in options) {
+            if(options[i].tier && options[i].tier > highestTier) {
+                highestTier = options[i].tier;
+                bestCard = options[i];
+            }
+        }
+        return bestCard;
     }
 };
 
@@ -680,6 +810,11 @@ var Attack = module.exports.Attack = function(source, target, context) {
             if (source.weapon.durability <= 0) {
                 BreakWeapon(source, context);
                 printer.print("The " + source.color + " " + source.name + "'s " + WeaponName + " shatters.");
+            }
+        }
+        for(var i in source.effects) {
+            if(source.effects[i].type == "on attack") {
+                source.effects[i].action(source, {player: context.player, foe: context.foe, cause: source, target: target, damage: damageDealt});
             }
         }
     }
@@ -818,6 +953,9 @@ var genMaxDamage = module.exports.genMaxDamage = function(minion) {
                 throw new Error ("cannot compute yo");
             }
             for (var i = 0; i < minion.weapon.effects.length; i++) {
+                if(!minion.weapon.effects[i]) {
+                    throw new Error ("Broken, weapon=" + minion.weapon + ", effects=" + minion.weapon.effects);
+                }
                 if (minion.weapon.effects[i].type === "buff damage") {
                     if (typeof(minion.weapon.effects[i].num) === "function") {
                         maxDamage += minion.weapon.effects[i].num(minion.weapon, maxDamage);
@@ -924,6 +1062,21 @@ var genDamage = module.exports.genDamage = function(minion) {
         return genMaxDamage(minion);
     }
     return dmg;
+};
+
+module.exports.checkForDuplicates = function(player, source) {
+    printer.print(source.color + " " + source.name + " checks to see if there are any duplicates in " + player.color + " " + player.name + "'s deck.");
+    var deckCards = [];
+    for (var i = 0; i < context.player.deck.length; i++) {
+        var card = context.player.deck[i];
+        for (var m = 0; m < deckCards.length; m++) {
+            if (card.card === deckCards[m].card) {
+                return false;
+            }
+        }
+        deckCards.push(card);
+    }
+    return true;
 };
 
 module.exports.reverseStats = function(minion) {
@@ -1048,6 +1201,9 @@ var withEffects = module.exports.withEffects = function (obj) {
         var effects = obj.getEffectsName(name);
         effects.forEach(function (effect) {
             if(!effect || !effect.action) {
+                console.log("triggerEffectName() [effect.name=" + effect.name +
+                ", effect.type=" + effect.type + ", effect action=" + effect.action +
+                ", obj name=" + obj.name + ", object=" + obj + "]");
                 throw new Error("Can't trigger action that doesn't exist");
             }
             else {
@@ -1072,12 +1228,20 @@ var withEffects = module.exports.withEffects = function (obj) {
     return obj;
 };
 
-module.exports.makeSpell = function(rarity, cardSet, color, name, cost, overload, ability, targetai, filter, ai, card, tier) {
+module.exports.initialize = function(minion, owner) {
+    minion.owner = owner;
+    if(!minion.color && owner.color) {
+        minion.color = owner.color;
+    }
+};
+
+module.exports.makeSpell = function(rarity, cardSet, cardClass, name, cost, overload, ability, targetai, filter, ai, card, tier) {
     return withEffects ({
         type: "spell",
         rarity: rarity,
         cardSet: cardSet,
-        color: color,
+        color: false,
+        cardClass: cardClass,
         name: name,
         cost: cost,
         ability: ability,
@@ -1090,12 +1254,13 @@ module.exports.makeSpell = function(rarity, cardSet, color, name, cost, overload
     });
 };
 
-module.exports.makeWeapon = function(rarity, cardSet, name, cost, overload, baseDamage, durability, battlecry, targetai, filter, effects, ai, card, tier) {
+module.exports.makeWeapon = function(rarity, cardSet, cardClass, name, cost, overload, baseDamage, durability, battlecry, targetai, filter, effects, ai, card, tier) {
     return withEffects ({
         type: "weapon",
         rarity: rarity,
         cardSet: cardSet,
         color: false,
+        cardClass: cardClass,
         name: name,
         cost: cost,
         overload: overload,
@@ -1111,13 +1276,14 @@ module.exports.makeWeapon = function(rarity, cardSet, name, cost, overload, base
     });
 };
 
-module.exports.makeMinion = function(race, rarity, cardSet, color, name, cost, overload, maxHp, baseDamage, battlecry, targetai, filter, effects, ai, card, tier) {
+var makeMinion = module.exports.makeMinion = function(race, rarity, cardSet, cardClass, name, cost, overload, maxHp, baseDamage, battlecry, targetai, filter, effects, ai, card, tier) {
     return withEffects({
         type: "minion",
         rarity: rarity,
         cardSet: cardSet,
         race: race,
-        color: color,
+        color: false,
+        cardClass: cardClass,
         name: name,
         cost: cost,
         baseHp: maxHp,
