@@ -1,5 +1,5 @@
 var heroes = require('./heroes.js');
-// var cards = require('./cards.js');
+var cards = require('./cards.js');
 var effectsModule = require('./effects.js');
 //var abilities = require('./abilities.js');
 var utilities = require('./utilities.js');
@@ -8,6 +8,9 @@ var decks = require('./decks.js');
 var setup = require('./setup.js');
 var adventures = require('./adventures.js');
 var filters = require('./filters.js');
+var cardLists = require('./cardlists.js');
+
+var deckbuilder = require('./deckbuilder.js'); // creates dcks in a variety of templates
 
 var playerModule= require('./player.js');
 
@@ -17,8 +20,6 @@ var first;
 var second;
 
 var scenario = false;
-
-var turnNum = 0.5;
 
 printer.shred("results.txt");
 
@@ -54,11 +55,11 @@ var playCard = function(card, handPos, context) {
                     card.battlecry(playerModule.command_target(context.player, card.filter, context), card, {player: context.player, foe: context.foe, source: card, choice: choice});
                 }
                 else {
-                    card.battlecry(card.targetai(card.filter({player: context.player, foe: context.foe, choice: choice}), context), card, {player: context.player, foe: context.foe, source: card, choice: choice});
+                    card.battlecry(card.targetai(card.filter({player: context.player, foe: context.foe, choice: choice}), context), card, {player: context.player, foe: context.foe, source: card, choice: choice, cause: card});
                 }
             }
             else {
-                card.battlecry(false, card, {player: context.player, foe: context.foe, source: card, choice: choice});
+                card.battlecry(false, card, {player: context.player, foe: context.foe, cause: card, choice: choice});
             }
         }
     }
@@ -93,7 +94,7 @@ var playCard = function(card, handPos, context) {
         }
         if(card.targetai) {
             if(typeof card.filter != "function") {
-                throw new Error("Filter not function");
+                throw new Error("Filter not function, card=" + card + ", card name=" + card.name);
             }
             if(context.player.isPlayer == true) {
                 var target = playerModule.command_target(context.player, card.filter, {player: context.player, foe: context.foe, scenario: scenario, cause: card, choice: choice});
@@ -137,8 +138,9 @@ var playCard = function(card, handPos, context) {
         if(typeof card.card !== "function") {
         throw new Error("This spell's 'card' is not a function.");
     }
-        context.player.graveyard.push(card.card());
+        context.player.shallowGraves.push(card.card());
     }
+    context.player.cardsPlayed.push(card.card());
 };
 
 var checkCards = function(context) {
@@ -190,38 +192,49 @@ var checkCards = function(context) {
 };
 
 var MinionsAttack = function(context) {
-    var CanAttack;
+    var num = 1;
     var stillAttacking = true;
-    while(stillAttacking) {
-        stillAttacking = false;
+    while(stillAttacking) { // while we don't know if things can still attack
+        stillAttacking = false; // defaults to "no, nothing's attacking"
         for (var i = 0; i < context.player.minions.length; i++) {
-            CanAttack = true;
             var minion = context.player.minions[i];
-            // Effects that prevent attacking prevent attacks.
-            if(minion.hasEffectName("Can't Attack") || minion.hasEffectName("Frozen") || minion.hasEffectName("Permanently Frozen")) {
-                CanAttack = false;
-            }
-            if(minion.getDamage() <= 0) {
-                CanAttack = false;
-            }
-            var sicknessStacks = minion.getEffectsName("Summoning Sickness").length;
-            if(sicknessStacks >= 1 && !minion.hasEffectName("Windfury")) {
-                CanAttack = false;
-            }
-            if(sicknessStacks >= 2 && !minion.hasEffectName("Mega-Windfury")) {
-                CanAttack = false;
-            }
-            if(sicknessStacks >= 4) {
-                CanAttack = false;
-            }
-            if (CanAttack) {
-                stillAttacking = true;
-                utilities.Attack(context.player.minions[i], utilities.AttackAI(context.player.minions[i], {player: context.player, foe: scenario && scenario.attackTarget ? scenario : context.foe, cause: context.player.minions[i]}), {
-                    player: context.player,
-                    foe: scenario && scenario.attackTarget ? scenario : context.foe,
-                    cause: context.player.minions[i]
-                });
-                minion.addEffect(effectsModule.sickness);
+            if(minion.isAlive()) {
+                var CanAttack = true; // defaults to being able to attack
+                // Effects that prevent attacking prevent attacks.
+                if(minion.hasEffectName("Can't Attack") || minion.hasEffectName("Frozen") || minion.hasEffectName("Permanently Frozen")) {
+                    CanAttack = false;
+                }
+                if(minion.getDamage() <= 0) { // 0-attack or less can't attack
+                    CanAttack = false;
+                }
+                var sicknessStacks = minion.getEffectsName("Summoning Sickness").length; // how much summoning sickness does it have?
+                if(!sicknessStacks && sicknessStacks != 0) {
+                    throw new Error("Summoning Sickness is undefined in " + minion.name + ".");
+                }
+                var maxSickness = 0; // if it has sickness it can't attack
+                if(minion.hasEffectName("Windfury")) { // with windfury, one stack is ok
+                    maxSickness = 1;
+                }
+                if(minion.hasEffectName("Mega-Windfury")) { // with mega-windfury, three stacks are ok
+                    maxSickness = 3;
+                }
+                if(sicknessStacks > maxSickness) {
+                    CanAttack = false;
+                }
+                if (CanAttack) {
+                    stillAttacking = true; // now something's attacked, so stillAttacking is true
+                    utilities.Attack(minion, utilities.AttackAI(minion, {player: context.player, foe: scenario && scenario.attackTarget ? scenario : context.foe, cause: context.player.minions[i]}), {
+                        player: context.player,
+                        foe: scenario && scenario.attackTarget ? scenario : context.foe,
+                        cause: minion
+                    }); // attack time!
+                    minion.addEffect(effectsModule.sickness); // gives it a new sickness stack
+                }
+                if(!minion.isAlive()) {
+                    i--; // if it's dead we go back in the array
+                }
+                // console.log(minion.name + " #" + num);
+                num++;
             }
         }
     }
@@ -288,7 +301,7 @@ var runTurn = function(player, foe) {
             if(scenario.minions) {
                 for (var i = 0; i < scenario.minions.length; i++) {
                     minion = scenario.minions[i];    
-                    minion.triggerEffectType("end of turn", {player: scenario, first, cause: minion});
+                    minion.triggerEffectType("end of turn", {player: scenario, foe: first, cause: minion});
                     minion.triggerEffectType("end of turn friend", {player: scenario, foe: first, cause: minion});
                 }
             }
@@ -316,9 +329,9 @@ var runTurn = function(player, foe) {
         
         if(player.isPlayer || foe.isPlayer) {
             if(player.isPlayer == true) {
-                console.log("It is now your turn.");
+                console.log("It is now turn " + Math.floor(turnNum) + ", your turn.");
             } else {
-                console.log("The " + player.color + " " + player.name + " is now taking their turn.");
+                console.log("It is now turn " + Math.floor(turnNum) + ". The " + player.color + " " + player.name + " is taking their turn.");
             }
             console.log("");
         }
@@ -327,7 +340,7 @@ var runTurn = function(player, foe) {
         foe.turn = false;
         turnNum += 0.5;
         printer.print("");
-        printer.print("It is now the " + player.color + " " + player.name + "'s turn.");
+        printer.print("It is now turn " + Math.floor(turnNum) + ", the " + player.color + " " + player.name + "'s turn.");
         printer.print("");
         
         for (i = 0; i < player.minions.length; i++) {
@@ -410,11 +423,6 @@ var runTurn = function(player, foe) {
             printer.print("Next draw fatigues for " + player.fatigue + ".");
         }
         player.lockedMana = 0;
-        utilities.checkForLife({
-            player: player,
-            foe: scenario && scenario.attackTarget ? scenario : foe,
-            cause: "Life Check"
-        });
         var playerHealth = player.getHp();
         if(player.armor > 0) {
             playerHealth = playerHealth + " [" + player.armor + "]";
@@ -523,7 +531,7 @@ var runTurn = function(player, foe) {
                     player.ability(target, {player: player, foe: scenario && scenario.attackTarget ? scenario : foe, scenario: scenario});
                     for (var c = 0; c < player.minions.length; c++) {
                         for (var d = 0; d < player.minions[c].effects.length; d++) {
-                            if (player.minions[c].effects[d].type === "inspire") {
+                            if (player.minions[c].effects[d].type === "inspire" || player.minions[c].effects[d].type == "hero power hunger") {
                                 player.minions[c].effects[d].action(player.minions[c], {
                                     player: player,
                                     foe: scenario && scenario.attackTarget ? scenario : foe,
@@ -531,6 +539,11 @@ var runTurn = function(player, foe) {
                                 });
                             }
                         }
+                    }
+                    for(c in context.foe.minions) {
+                        var minion = context.foe.minions[c];
+                        minion.triggerEffectType("hero power hunger", {player: context.foe, foe: context.player, cause: context.player, source: minion});
+                        minion.triggerEffectType("anti inspire", {player: context.foe, foe: context.player, cause: context.player, source: minion});
                     }
                 }
                 
@@ -609,11 +622,6 @@ var runTurn = function(player, foe) {
             }
         }
         
-        utilities.checkForLife({
-            player: player,
-            foe: scenario && scenario.attackTarget ? scenario : foe,
-            cause: "Life Check"
-        });
         if(!player.isPlayer) {
             MinionsAttack({
                 player: player,
@@ -652,11 +660,9 @@ var runTurn = function(player, foe) {
             else {
                 printer.print("Minion " + minion.name + " has no Effects array.");
             }
-            utilities.checkForLife({
-                player: player,
-                foe: scenario && scenario.attackTarget ? scenario : foe,
-                cause: "Life Check"
-            });
+            utilities.checkForLife({player: player, foe: foe, cause: "Life Check"});
+            player.shallowGraves = [];
+            foe.shallowGraves = [];
         }
         return true;
     } else {
@@ -667,9 +673,9 @@ var runTurn = function(player, foe) {
          */
          
         var endMatch = true;
-        if(scenario) {
+        if(scenario && scenario.getHp() > 0) {
             if(scenario.mustDefeatBoth == true) {
-                if(foe.getHp() > 0 || player.getHp() > 0 && scenario.getHp() > 0) {
+                if(foe.getHp() > 0 || player.getHp() > 0) {
                     endMatch = false;
                 }
             }
@@ -686,8 +692,10 @@ var turnLoop = function() {
     var stillGoing = true;
     
     while(stillGoing == true) {
-        stillGoing = runTurn(first, second);
-        stillGoing = runTurn(second, first);
+        // setTimeout(function() {stillGoing = runTurn(first, second)}, 500);
+        stillGoing = runTurn(first, second)
+        // setTimeout(function() {stillGoing = runTurn(second, first)}, 500);
+        stillGoing = runTurn(second, first)
     }
     // if we get here, the combat has ended
     
@@ -697,6 +705,7 @@ var turnLoop = function() {
         printer.print("");
         printer.print("The " + red.color + " " + red.name + " and the " + blue.color + " " + blue.name + " have prevailed against " + scenario.name + "!");
         console.log("Scenario completed on turn " + Math.floor(turnNum) + "!");
+        return true;
     }
     
     // scenario won
@@ -705,6 +714,7 @@ var turnLoop = function() {
         printer.print("");
         printer.print(scenario.endOfMatch.victory);
         console.log("Scenario failed on turn " + Math.floor(turnNum) + ".");
+        return false;
     }
     
     // red victory
@@ -736,46 +746,19 @@ var turnLoop = function() {
     }
 };
 
-printer.print("");
-printer.print("-----------------------------------------------------------------------------------------------------------------------------------------------");
-printer.print("");
-
-var red = setup.hero('Red');
-var blue = setup.hero('Blue');
-
-setup.randomizeHero(red);
-setup.setHero(red, heroes.druid());
-setup.randomizeHero(blue);
-setup.setHero(blue, heroes.druid());
-
-// scenario = adventures.setScenario(adventures.Mimiron());
-
-// red.isPlayer = playerModule.requestControl(red);
-
-var randomNum = Math.round(Math.random(0, 1));
-if (randomNum === 0) {
-    first = red;
-    second = blue;
-}
-if (randomNum === 1) {
-    first = blue;
-    second = red;
-}
-
 var runGame = module.exports.runGame = function(redClass, redDeck, blueClass, blueDeck) {
-    red.hero = redClass;
+    red.foe = blue;
     red.name = redClass.name;
     red.ability = redClass.ability;
     red.cost = redClass.cost;
     red.ai = redClass.ai;
     red.deck = redDeck.slice();
-    // red.deck = decks.WhooshingSounds();
+    blue.foe = red;
     blue.name = blueClass.name;
     blue.ability = blueClass.ability;
     blue.cost = blueClass.cost;
     blue.ai = blueClass.ai;
     blue.deck = blueDeck.slice();
-    // blue.deck = decks.WhooshingSounds();
     utilities.shuffle(red.deck);
     utilities.shuffle(blue.deck);
     for(var i in red.deck) {
@@ -786,8 +769,8 @@ var runGame = module.exports.runGame = function(redClass, redDeck, blueClass, bl
     }
     // red.maxMana = 5;
     // red.baseHp = 12;
-    // red.armor = 1800;
-    // blue.armor = 1800;
+    // red.armor = 180;
+    // blue.armor = 180;
     printer.print(red.color + ": " + red.name);
     printer.print(blue.color + ": " + blue.name);
     console.log(red.color + ": " + red.name);
@@ -822,5 +805,51 @@ var runGame = module.exports.runGame = function(redClass, redDeck, blueClass, bl
     turnLoop();
 };
 
-runGame(red.hero, red.deck, blue.hero, blue.deck);
+printer.print("");
+printer.print("-----------------------------------------------------------------------------------------------------------------------------------------------");
+printer.print("");
+
+var score = 0;
+var displayScore = 
+    // true;
+    false;
+var num = 1; // Set this to the number of runs you want. Usually it's just 1.
+for(var i = 0; i < num; i++) {
+    console.log("");
+    var red = setup.hero('Red');
+    var blue = setup.hero('Blue');
+    var turnNum = 0.5;
+    
+    var gamemode = 0; // 0 = Wild, 1 = Standard
+    
+    setup.randomizeHero(red);
+    // setup.setHero(red, heroes.Arthas2()); // If you want to force a red class
+    red.deck = deckbuilder.buildDeck(red, gamemode == 0 ? 3 : 4); // If you want a random deck
+    // red.deck = decks.Arthas2(); // If you want to force a red deck
+    setup.randomizeHero(blue);
+    // setup.setHero(blue, heroes.warrior()); // If you want to force a blue class
+    blue.deck = deckbuilder.buildDeck(blue, gamemode == 0 ? 3 : 4);
+    // blue.deck = decks.Nerzhul(); // If you want to force a blue deck
+    
+    scenario =
+        adventures.setScenario(adventures.Diablo20_Diablo());
+        false;
+    
+    red.isPlayer =
+        //playerModule.requestControl(red);
+        false;
+    
+    var result = runGame(red.hero, red.deck, blue.hero, blue.deck);
+    if(result) {
+        score++;
+    }
+}
+
+if(displayScore) {
+    console.log("");
+    console.log("Final Result: " + score + "/" + num);
+}
+
+console.log(cardLists.setCards("Icecrown Citadel").length);
+
 process.exit();

@@ -1,5 +1,6 @@
 var utilities = require('./utilities.js');
 var printer = require('./printer.js')
+// var cards = require('./cards.js');
 var deathrattles = require('./deathrattles.js');
 var abilities = require('./abilities.js');
 var weapons = require('./weapons.js');
@@ -56,17 +57,21 @@ var Squire = function() {
 };
 
 module.exports.Spellbreaker = function(target, source, context) {
-    printer.print(context.player.color + " Spellbreaker's battlecry nullifies all magic surrounding " + target.color + " " + target.name + ", silencing them.");
-    utilities.dispel(target, context);
+    if(target) {
+        printer.print(context.player.color + " Spellbreaker's battlecry nullifies all magic surrounding " + target.color + " " + target.name + ", silencing them.");
+        utilities.dispel(target, context);
+    }
 };
 
 module.exports.BigGameHunter = function(target, source, context) {
-    printer.print(source.color + " " + source.name + "'s battlecry shoots " + target.name + " with a very large gun.");
-    utilities.kill(target, {
-        player: context.foe,
-        foe: context.player,
-        cause: source
-    });
+    if(target) {
+        printer.print(source.color + " " + source.name + "'s battlecry shoots " + target.name + " with a very large gun.");
+        utilities.kill(target, {
+            player: context.foe,
+            foe: context.player,
+            cause: source
+        });
+    }
 };
 
 module.exports.FacelessManipulator = function(target, source, context) {
@@ -149,9 +154,9 @@ module.exports.TinkertownTechnician = function(target, source, context) {
         printer.print(context.player.color + " Tinkertown Technician's battlecry empowers him and gives " + context.player.color + " " + context.player.name + " a Spare Part.");
         source.addEffect(effects.TinkertownTechnicianHp);
         source.addEffect(effects.TinkertownTechnicianDamage);
-        var sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
-        context.player.hand.push(SpareParts[sparePartNum]());
-        printer.print(context.player.color + " " + context.player.name + " receives : " + SpareParts[sparePartNum]().name + ".");
+        var sparePart = SpareParts[Math.floor(Math.random()*SpareParts.length)]();
+        utilities.addCard(sparePart, context.player, context);
+        printer.print(context.player.color + " " + context.player.name + " receives : " + sparePart.name + ".");
     }
 };
 
@@ -184,7 +189,7 @@ module.exports.Toshley = function(target, source, context) {
     printer.print(context.player.color + " Toshley warps into the battlefield and provides " + context.player.color + " " + context.player.name + " with a Spare Part card.");
     var sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
     var part = SpareParts[sparePartNum]();
-    context.player.hand.push(part);
+    utilities.addCard(part, context.player, context);
     printer.print(context.player.color + " " + context.player.name + " receives: " + part.name + ".");
 };
 
@@ -263,20 +268,21 @@ module.exports.Nefarian = function(target, source, context) {
     }
     var spellList = [];
     for(var i in cards) {
-        var card = cards[i]();
+        var card = cards[i];
+        if(typeof cards[i] == "function") {
+            var card = card();
+        }
+        if(!card) {
+            throw new Error("No card");
+        }
         if(card.type == "spell") {
             spellList.push(card);
         }
     }
     for (i = 0; i < 2; i++) {
         var spell = spellList[Math.floor(Math.random()*spellList.length)];
-        if (context.player.hand.length < 10) {
-            printer.print("Spell received: " + spell.name);
-            context.player.hand.push(spell);
-        }
-        else {
-            printer.print("Hand too full! Could not receive card.");
-        }
+        printer.print("Spell received: " + spell.name);
+        utilities.addCard(spell, context.player, context);
     }
 };
 
@@ -331,6 +337,35 @@ module.exports.NorthSeaKraken = function(target, source, context) {
     });
 };
 
+module.exports.ArchThiefRafaam = function(target, source, context) {
+    printer.print(source.color + " Arch-Thief Rafaam's battlecry steals one of three magnificent artifacts.");
+    var artif = Artifacts();
+    var options = utilities.Discover(artif[0], artif[1], artif[2]);
+    var result = utilities.discoverChoose(options, context.player);
+    printer.print("Card chosen: " + result.name);
+    utilities.addCard(result, context.player, context);
+};
+
+var Artifacts = function() {
+    return [
+        [LanternofPower()],
+        [MirrorofDoom()],
+        [TimepieceofHorror()]
+    ];
+};
+
+var LanternofPower = function() {
+    return utilities.makeSpell("Uncollectible", "League of Explorers", ["Neutral"], "Lantern of Power", 10, 0, abilities.LanternofPower, targetais.BlessingofKings, filters.minion, ais.BlessingofKings, LanternofPower, 420);
+};
+
+var MirrorofDoom = function() {
+    return utilities.makeSpell("Uncollectible", "League of Explorers", ["Neutral"], "Mirror of Doom", 10, 0, abilities.MirrorofDoom, false, false, ais.MirrorofDoom, MirrorofDoom, 420);
+};
+
+var TimepieceofHorror = function() {
+    return utilities.makeSpell("Uncollectible", "League of Explorers", ["Neutral"], "Timepiece of Horror", 10, 0, abilities.TimepieceofHorror, false, false, ais.AvengingWrath, TimepieceofHorror, 420);
+};
+
 module.exports.EliseStarseeker = function(target, source, context) {
     printer.print(source.color + " Elise Starseeker's research identifies the location of a 'Map to the Golden Monkey' somewhere inside the " + context.player.color + " " + context.player.name + "'s deck.");
     var randomNum = Math.floor(context.player.deck.length * Math.random(0, 1));
@@ -343,12 +378,18 @@ module.exports.GoldenMonkey = function(target, source, context) {
     var legendList = [];
     var cardList = cardLists.allCards();
     for (var i in cardList) {
+        if(typeof cardList[i] == "function") {
+            cardList[i] = cardList[i]();
+        }
         if (cardList[i].rarity == "Legendary" && cardList[i].type == "minion") {
             legendList.push(cardList[i]);
         }
     }
     for (i = 0; i < context.player.hand.length; i++) {
         var randomNum = Math.floor(legendList.length * Math.random(0, 1));
+        if(!legendList[randomNum]) {
+            throw new Error("");
+        }
         context.player.hand[i] = legendList[randomNum].card();
     }
     for (i = 0; i < context.player.deck.length; i++) {
@@ -365,7 +406,7 @@ module.exports.GoldenMonkey = function(target, source, context) {
 module.exports.RenoJackson = function(target, source, context) {
     if (utilities.checkForDuplicates(context.player, source)) {
         printer.print(source.color + " Reno Jackson is gonna be rich! He restores " + context.player.color + " " + context.player.name + "'s health to its maximum!");
-        context.player.damageTaken = 0;
+        utilities.healDamage(context.player, context.player.getMaxHp(), context);
     }
     else {
         printer.print(source.color + " Reno Jackson's battlecry does not trigger. There are multiple copies of at least one card in " + context.player.color + " " + context.player.name + "'s deck.");
@@ -574,6 +615,36 @@ var EaterofSecretsDmg = {
     num: 1
 };
 
+module.exports.GrimestreetSmuggler = function(target, source, context) {
+    var targets = [];
+    for (var i = 0; i < context.player.hand.length; i++) {
+        if (context.player.hand[i].type == "minion") {
+            targets.push(context.player.hand[i]);
+        }
+    }
+    target = targets[Math.floor(Math.random() * targets.length)];
+    if (target) {
+        target.addEffect(GrimestreetSmugglerHp);
+        target.addEffect(GrimestreetSmugglerDmg);
+        printer.print(source.color + " Grimestreet Smuggler's battlecry gives smuggled equipment to " + target.name + " in " + context.player.color + " " + context.player.name + "'s hand, giving them +1/+1 (up to " + target.getDamage() + "/" + target.getHp() + ").");
+    }
+    else {
+        printer.print(source.color + " Grimestreet Smuggler has smuggled goods, but no one for her battlecry to give them to...");
+    }
+};
+
+var GrimestreetSmugglerHp = {
+    name: "Smuggling",
+    type: "buff health",
+    num: 1
+};
+
+var GrimestreetSmugglerDmg = {
+    name: "Smuggling",
+    type: "buff damage",
+    num: 1
+};
+
 module.exports.DonHanCho = function(target, source, context) {
     var targets = [];
     for (var i = 0; i < context.player.hand.length; i++) {
@@ -585,7 +656,7 @@ module.exports.DonHanCho = function(target, source, context) {
     if (target) {
         target.addEffect(DonHanChoHp);
         target.addEffect(DonHanChoDmg);
-        printer.print(source.color + " Don Han'Cho's battlecry gives smuggled equipment to " + target.name + " in " + context.player.color + " " + context.player.name + "'s hand, giving them +5/+5 (up to " + target.getDamage() + "/" + target.getHp() + ".");
+        printer.print(source.color + " Don Han'Cho's battlecry gives smuggled equipment to " + target.name + " in " + context.player.color + " " + context.player.name + "'s hand, giving them +5/+5 (up to " + target.getDamage() + "/" + target.getHp() + ").");
     }
     else {
         printer.print(source.color + " Don Han'Cho has smuggled goods, but no one for his battlecry to give them to...");
@@ -615,7 +686,7 @@ module.exports.LotusAgents = function(target, source, context) {
     var options = utilities.Discover(cardLists.classCards("Druid"), cardLists.classCards("Rogue"), cardLists.classCards("Shaman"));
     var result = utilities.discoverChoose(options, context.player);
     if(context.player.hand.length < 10) {
-        context.player.hand.push(result);
+        utilities.addCard(result, context.player, context);
         printer.print("Card chosen: " + result.name);
     } else {
         printer.print("No room in your hand for that card.");
@@ -634,10 +705,430 @@ module.exports.KabalChemist = function(target, source, context) {
     printer.print(source.color + " " + source.name + "'s battlecry gives " + context.player.color + " " + context.player.name + " a random potion.");
     var spell = potionList[Math.floor(Math.random() * potionList.length)];
     if (context.player.hand.length < 10 && spell) {
-        context.player.hand.push(potion);
-        printer.print(context.player.color + " " + context.player.name + " receives spell: " + potion.name);
+        utilities.addCard(spell, context.player, context);
+        printer.print(context.player.color + " " + context.player.name + " receives spell: " + spell.name);
     } else if(!spell) {
         printer.print("No potions exist in this gamemode!");
+    }
+};
+
+var DeathspeakerDiscipleHp = {
+    name: "Temporary Buff",
+    type: "buff health",
+    num: 2
+};
+
+var DeathspeakerDiscipleDmg = {
+    name: "Temporary Buff",
+    type: "buff damage",
+    num: 3
+};
+
+module.exports.DeathspeakerDisciple = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + "'s battlecry infuses " + target.color + " " + target.name + " with dark power, giving them +3/+2 this turn.");
+        target.addEffect(DeathspeakerDiscipleHp);
+        target.addEffect(DeathspeakerDiscipleDmg);
+        target.addEffect(effects.removeTempBuff);
+    }
+};
+
+module.exports.FrostWyrm = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + "'s battlecry strikes " + target.color + " " + target.name + " with bone-chilling cold, dealing damage and freezing them.");
+        utilities.dealDamage(target, 2, context);
+        target.addEffect(effects.frozen);
+    }
+};
+
+module.exports.YmirjarHuntress = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + "'s battlecry hurls a spear at " + target.color + " " + target.name + ", dealing 2 damage.");
+        utilities.dealDamage(target, 2, context);
+    }
+};
+
+module.exports.RavenousGeist = function(target, source, context) {
+    var targets = [context.player];
+    for(var i in context.player.minions) {
+        if(context.player.minions[i] != source) {
+            targets.push(context.player.minions[i]);
+        }
+    }
+    target = targets[Math.floor(Math.random()*targets.length)];
+    printer.print(source.color + " " + source.name + "'s battlecry mindlessly lashes out at " + target.color + " " + target.name + ".");
+    utilities.Attack(source, target, context);
+};
+
+module.exports.Historian = function(target, source, context) {
+    printer.print(source.color + " " + source.name + "'s battlecry discovers the location of an Artifact and shuffles it into your deck.");
+    var artif = Artifacts();
+    var options = utilities.Discover(artif[0], artif[1], artif[2]);
+    var result = utilities.discoverChoose(options, context.player);
+    printer.print("Card chosen: " + result.name);
+    context.player.deck.push(result);
+    utilities.shuffle(context.player.deck);
+};
+
+module.exports.CryptFiend = function(target, source, context) {
+    if (target) {
+        printer.print(source.color + " " + source.name + " releases their skitterlings to attack " + target.color + " " + target.name + ".");
+        for (var i = 0; i < 2; i++) {
+            var skitter = CryptFiendSkitterling();
+            utilities.summon(skitter, context.player, context);
+            skitter.owner = context.player;
+            skitter.color = context.player.color;
+            utilities.Attack(skitter, target, context);
+        }
+    }
+};
+
+var CryptFiendSkitterling = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Icecrown Citadel", ["Neutral"], "Skitterling", 0, 0, 1, 1, false, false, false, [effects.sickness], ais.true, CryptFiendSkitterling);
+};
+
+var DarkfallenKnightAction = function(source, context) {
+    printer.print(source.color + " " + source.name + "'s bloodlink deals " + context.damage + " damage to " + source.bloodLink.color + " " + source.bloodLink.name + ".");
+    utilities.dealDamage(source.bloodLink, context.damage, context);
+};
+
+var DarkfallenKnightEffect = {
+    name: "Darkfallen Knight",
+    type: "pain",
+    action: DarkfallenKnightAction
+};
+
+module.exports.DarkfallenKnight = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + " establishes a bloodlink with " + target.color + " " + target.name + ", mirroring damage taken to the target.");
+        source.bloodLink = target;
+        source.addEffect(DarkfallenKnightEffect);
+    }
+};
+
+module.exports.SkybreakerVindicator = function(target, source, context) {
+    if(target) {
+        if(target.owner == context.foe || target == context.foe) {
+            printer.print(source.color + " " + source.name + " throws a blessed shield at " + target.color + " " + target.name + ", dealing 2 damage.");
+            utilities.dealDamage(target, 2, context);
+        }
+        else {
+            printer.print(source.color + " " + source.name + " grants " + target.color + " " + target.name + " a Divine Shield.");
+            target.addEffect(effects.divineshield);
+        }
+    }
+};
+
+module.exports.DeathspeakerAttendant = function(target, source, context) {
+    printer.print(source.color + " " + source.name + "'s battlecry purges effects from all minions without Deathrattles.");
+    for(var i in context.player.minions) {
+        if(!context.player.minions[i].hasEffectType("deathrattle")) {
+            utilities.dispel(context.player.minions[i], context);
+        }
+    }
+    for(i in context.foe.minions) {
+        if(!context.foe.minions[i].hasEffectType("deathrattle")) {
+            utilities.dispel(context.foe.minions[i], context);
+        }
+    }
+};
+
+var SanlaynBloodspeakerAction = function(source, context) {
+    printer.print(source.color + " " + source.name + "'s bloodlink heals " + source.leechBloodLink.color + " " + source.leechBloodLink.name + " for " + context.damage + " Health.");
+    utilities.healDamage(source.leechBloodLink, context.damage, context);
+};
+
+var SanlaynBloodspeakerEffect = {
+    name: "San'layn Bloodspeaker",
+    type: "pain",
+    action: SanlaynBloodspeakerAction
+};
+
+module.exports.SanlaynBloodspeaker = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + " establishes a bloodlink between " + target.color + " " + target.name + " and " + context.player.color + " " + context.player.name + ".");
+        target.leechBloodLink = context.player;
+        target.addEffect(SanlaynBloodspeakerEffect);
+    }
+};
+
+module.exports.YmirjarWarlord = function(target, source, context) {
+    var validArray = cardLists.setCards("Icecrown Citadel");
+    validArray = utilities.filterArray.hasType(validArray, "minion");
+    printer.print(source.color + " " + source.name + "'s battlecry calls for reinforcements, Discovering a minion from Icecrown Citadel.");
+    var options = utilities.Discover(validArray);
+    var result = utilities.discoverChoose(options, context.player);
+    printer.print("Card chosen: " + result.name);
+    utilities.addCard(result, context.player, context);
+};
+
+module.exports.DarkfallenTactician = function(target, source, context) {
+    var validArray = cardLists.setCards("Icecrown Citadel");
+    validArray = utilities.filterArray.hasType(validArray, "spell");
+    printer.print(source.color + " " + source.name + "'s battlecry offers a strategy, Discovering a spell from Icecrown Citadel.");
+    var options = utilities.Discover(validArray);
+    var result = utilities.discoverChoose(options, context.player);
+    printer.print("Card chosen: " + result.name);
+    utilities.addCard(result, context.player, context);
+};
+
+var Alchemy_Attack = {
+    name: "Alchemy Attack Buff",
+    alch: "Alchemy",
+    type: "buff damage",
+    num: 3
+};
+
+var Alchemy_Immune = {
+    name: "Immune",
+    alch: "Alchemy",
+    type: "passive"
+};
+
+var Alchemy_Windfury = {
+    name: "Windfury",
+    alch: "Alchemy",
+    type: "passive"
+};
+
+var Alchemy_Remove_Action = function(source, context) {
+    source.removeEffect(Alchemy_Attack);
+    source.removeEffect(Alchemy_Immune);
+    source.removeEffect(Alchemy_Windfury);
+    source.removeEffect(Alchemy_Remove);
+};
+
+var Alchemy_Remove = {
+    name: "Alchemical Effect Removal (TM)",
+    alch: "Alchemy",
+    type: "end of turn",
+    action: Alchemy_Remove_Action
+}
+
+module.exports.VolatileAlchemist = function(target, source, context) {
+    if(target) {
+        var alchemy = [
+            {eff: Alchemy_Attack, str: "increases their damage"},
+            {eff: Alchemy_Immune, str: "grants Immunity"},
+            {eff: Alchemy_Windfury, str: "grants Windfury"}
+        ];
+        var effect = alchemy[Math.floor(Math.random()*alchemy.length)];
+        printer.print(source.color + " " + source.name + " gives an alchemical vial to " + target.color + " " + target.name + " that " + effect.str + " until the end of the turn.");
+        target.addEffect(effect.eff);
+        target.addEffect(Alchemy_Remove);
+    }
+};
+
+module.exports.Executioner = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + "'s battlecry executes " + target.color + " " + target.name + ".");
+        utilities.kill(target, {
+            player: context.foe,
+            foe: context.player,
+            cause: source
+        });
+    }
+};
+
+module.exports.DeathspeakerHighPriest = function(target, source, context) {
+    var valid = [];
+    for(var i = 0; i < 2; i++) {
+        if(i==0) {
+            var char = context.player;
+        } else {
+            char = context.foe;
+        }
+        for(var j in char.cardsPlayed) {
+            valid.push(char.cardsPlayed[j]);
+        }
+    }
+    printer.print(source.color + " " + source.name + "'s battlecry recovers three cards that were played this game and shuffles them into " + context.player.color + " " + context.player.name + "'s deck.");
+    var cards = [];
+    for(i = 0; i < 3; i++) {
+        var notValid = true;
+        while(notValid) {
+            notValid = false;
+            var card = valid[Math.floor(Math.random() * valid.length)];
+            if(cards[0] && cards[0] == card) {
+                notValid = true;
+            } else if(cards[1] && cards[1] == card) {
+                notValid = true;
+            }
+        }
+        cards.push(card);
+        context.player.deck.push(card);
+    }
+    utilities.shuffle(context.player.deck);
+};
+
+var PrinceValanarMin = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Prince Valanar", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.PrinceValanar], ais.true, PrinceValanarMin);
+};
+
+var PrinceKelesethMin = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Prince Keleseth", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.PrinceKeleseth], ais.true, PrinceKelesethMin);
+};
+
+var PrinceTaldaramMin = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Prince Taldaram", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.PrinceTaldaram], ais.true, PrinceTaldaramMin);
+};
+
+var BloodPrinceCouncil = function() {
+    return [
+        [PrinceValanarMin()],
+        [PrinceKelesethMin()],
+        [PrinceTaldaramMin()]
+    ];
+};
+
+module.exports.DarkfallenOrb = function(target, source, context) {
+    printer.print(source.color + " " + source.name + " calls upon one of three Blood Princes.");
+    var princes = BloodPrinceCouncil();
+    var options = utilities.Discover(princes[0], princes[1], princes[2]);
+    var result = utilities.discoverChoose(options, context.player);
+    printer.print("Card chosen: " + result.name);
+    utilities.addCard(result, context.player, context);
+};
+
+var BoneStormAbil = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Bone Storm, dealing 2 damage to all minions.");
+    var hasCopied = false;
+    var targets = [];
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        if(minion.name != "Lord Marrowgar") {
+            targets.push(minion);
+        }
+    }
+    for(i in context.foe.minions) {
+        minion = context.foe.minions[i];
+        if(minion.name != "Lord Marrowgar") {
+            targets.push(minion);
+        }
+    }
+    
+    for(i in targets) {
+        utilities.dealSpellDamage(targets[i], 2, context);
+        if(!targets[i].isAlive()) {
+            i--;
+            if(!hasCopied) {
+                hasCopied = true;
+                var card = BoneStorm();
+                if(!context.player.boneStormCostUp) {
+                    context.player.boneStormCostUp = 0;
+                }
+                context.player.boneStormCostUp++;
+                for(var j = 0; j < context.player.boneStormCostUp; j++) {
+                    card.cost++;
+                }
+                printer.print("A copy of Bone Storm is added to " + context.player.color + " " + context.player.name + "'s hand" + (card.cost > 3 ? " (cost increased to " + card.cost + ")." : "."));
+                utilities.addCard(card, context.player, context);
+            }
+        }
+    }
+};
+
+var BoneStormAi = function(context) {
+    var value = 0;
+    for(var i in context.foe.minions) {
+        var hasSlain = false;
+        value += 0.5;
+        if(context.foe.minions[i].getHp() <= utilities.spellDamage(context.player, context.foe, 2)) {
+            value += 1;
+            if(!hasSlain) {
+                value += 1.5;
+                hasSlain = true;
+            }
+        }
+    }
+    for(var i in context.player.minions) {
+        value -= 0.5;
+        if(context.player.minions[i].getHp() <= utilities.spellDamage(context.player, context.foe, 2)) {
+            value -= 1;
+            if(!hasSlain) {
+                value += 1.5;
+                hasSlain = true;
+            }
+        }
+    }
+    return value >= (utilities.getCardCost(context.cause, context) / 2);
+};
+
+var BoneStorm = function() {
+    return utilities.makeSpell("Legendary", "Icecrown Citadel", ["Neutral"], "Bone Storm", 3, 0, BoneStormAbil, false, false, BoneStormAi, BoneStorm);
+};
+
+module.exports.LordMarrowgar = function(target, source, context) {
+    printer.print(source.color + " " + source.name + " grants " + context.player.color + " " + context.player.name + " a use of Bone Storm.");
+    utilities.addCard(BoneStorm(), context.player, context);
+};
+
+var FestergutHp = {
+    name: "Festergut",
+    type: "buff health",
+    num: 2
+};
+
+module.exports.Festergut = function(target, source, context) {
+    printer.print(source.color + " " + source.name + " releases a cloud of gas, dealing 1 damage to all other minions.");
+    var targets = [];
+    for(var i in context.player.minions) {
+        if(context.player.minions[i] != source) {
+            targets.push(context.player.minions[i]);
+        }
+    }
+    for(i in context.foe.minions) {
+        targets.push(context.foe.minions[i]);
+    }
+    for(i in targets) {
+        utilities.dealDamage(targets[i], 1, context);
+        if(!targets[i].isAlive()) {
+            i--;
+            printer.print(source.name + " is fed by death, gaining +2 Health.");
+            source.addEffect(FestergutHp);
+        }
+    }
+};
+
+var RotfaceHp = {
+    name: "Rotface",
+    type: "buff health",
+    num: 1
+};
+
+var RotfaceDmg = {
+    name: "Rotface",
+    type: "buff damage",
+    num: 1
+};
+
+module.exports.Rotface = function(target, source, context) {
+    var num = 0;
+    for(var i in context.player.minions) {
+        if(context.player.minions[i] != source && context.player.minions[i].getHp() < context.player.minions[i].getMaxHp()) {
+            num++;
+        }
+    }
+    for(i in context.foe.minions) {
+        if(context.foe.minions[i].getHp() < context.foe.minions[i].getMaxHp()) {
+            num++;
+        }
+    }
+    printer.print(source.color + " " + source.name + " is enraged by damaged minions, gaining +1/+1 for each (a total of +" + num + "/+" + num + ").");
+    for(var i = 0; i < num; i++) {
+        source.addEffect(RotfaceHp);
+        source.addEffect(RotfaceDmg);
+    }
+};
+
+module.exports.SisterSvalna = function(target, source, context) {
+    if(target) {
+        printer.print(source.color + " " + source.name + " hurls a dark spear at " + target.name + ", dealing 2 damage.");
+        utilities.dealDamage(target, 2, context);
+        if(!target.isAlive()) {
+            printer.print(source.color + " " + source.name + " reanimates the corpse of " + target.name);
+            utilities.summon(target.card(), context.player, context);
+        }
     }
 };
 
@@ -653,13 +1144,51 @@ module.exports.Spellslinger = function(target, source, context) {
     printer.print(source.color + " " + source.name + "'s battlecry gives each player a random spell.");
     var spell = spellList[Math.floor(Math.random() * spellList.length)];
     if (context.player.hand.length < 10) {
-        context.player.hand.push(spell);
+        utilities.addCard(spell, context.player, context);
         printer.print(context.player.color + " " + context.player.name + " receives spell: " + spell.name);
     }
     spell = spellList[Math.floor(Math.random() * spellList.length)];
     if (context.foe.hand.length < 10) {
-        context.foe.hand.push(spell);
+        utilities.addCard(spell, context.foe, {player: context.foe, foe: context.player});
         printer.print(context.foe.color + " " + context.foe.name + " receives spell: " + spell.name);
+    }
+};
+
+var ArcaneBlast = function() {
+    return utilities.makeSpell("Epic", "The Grand Tournament", ["Mage"], "Arcane Blast", 1, 0, abilities.ArcaneBlast, targetais.ArcaneShot, filters.minion, ais.ArcaneShot, ArcaneBlast, 68);
+};
+
+module.exports.KirinTorBattleMage = function(target, source, context) {
+    var num = 0;
+    for(var i in context.player.shallowGraves) {
+        if(context.player.shallowGraves[i].type == "spell") {
+            num++;
+        }
+    }
+    printer.print(source.color + " " + source.name + "'s battlecry grants " + context.player.color + " " + context.player.name + " " + num + " copies of Arcane Blast.");
+    for(i in num) {
+        utilities.addCard(ArcaneBlast(), context.player, context);
+    }
+};
+
+module.exports.ArchmageKhadgar = function(target, source, context) {
+    printer.print(source.color + " " + source.name + " creates three portals for the " + context.player.color + " " + context.player.name + ".");
+    var portalList = utilities.filterArray.hasName(cardLists.allCards(), "Portal", true);
+    for(var i = 0; i < 3; i++) {
+        var portal = portalList[Math.floor(Math.random() * portalList.length)];
+        printer.print("Portal received: " + portal.name + ".");
+        utilities.addCard(portal, context.player, context);
+    }
+};
+
+module.exports.RavagingGhoul = function(target, source, context) {
+    printer.print("The " + source.color + " " + source.name + "'s battlecry explodes, dealing 1 damage to all other minions.");
+    var targets = context.player.minions.slice();
+    for(var i in context.foe.minions) {
+        targets.push(context.foe.minions[i]);
+    }
+    for(var i in targets) {
+        utilities.dealDamage(targets[i], 1, {player: context.player, foe: context.foe, cause: context.player});
     }
 };
 
@@ -693,9 +1222,44 @@ module.exports.AncientShieldbearer = function(target, source, context) {
     }
 };
 
+var AshenDefenderDmg = {
+    name: "Ashen Defender",
+    type: "buff damage",
+    num: 1
+};
+
+module.exports.AshenDefender = function(target, source, context) {
+    var taunts = 0;
+    for(var i in context.player.minions) {
+        if(context.player.minions[i].hasEffectName("Taunt") && context.player.minions[i] != source) {
+            taunts++;
+        }
+    }
+    for(i in context.foe.minions) {
+        if(context.foe.minions[i].hasEffectName("Taunt") && context.player.minions[i] != source) {
+            taunts++;
+        }
+    }
+    printer.print(source.color + " " + source.name + "'s battlecry grants +1 Attack for each other Taunt minion (a total of +" + taunts + ").");
+    for(i = 0; i < taunts;i++) {
+        source.addEffect(AshenDefenderDmg);
+    }
+};
+
+var Cleave = function() {
+    return utilities.makeSpell("Basic", "Basic", ["Warrior"], "Cleave", 2, 0, abilities.Cleave, false, false, ais.Cleave, Cleave, 67);
+};
+
+module.exports.HighOverlordSaurfang = function(target, source, context) {
+    printer.print(source.color + " " + source.name + " grants " + context.player.color + " " + context.player.name + " three free copies of Cleave, a tiny sliver of his power.");
+    for(var i = 0; i < 3; i++) {
+        utilities.addCard(Cleave(), context.player, context);
+    }
+};
+
 module.exports.IronJuggernaut = function(target, source, context) {
     printer.print(source.color + " Iron Juggernaut places a dangerous Mine into " + context.foe.color + " " + context.foe.name + "'s deck, ready to explode at any minute.");
-    context.player.deck.push(Mine(context.foe.color));
+    context.foe.deck.push(Mine());
     utilities.shuffle(context.foe.deck);
 };
 
@@ -716,6 +1280,15 @@ module.exports.DruidoftheFlame = function(target, source, context) {
     }
 };
 
+var StormforgedAxe = function() {
+    return utilities.makeWeapon("Common", "Classic", ["Shaman"], "Stormforged Axe", 2, 1, 2, 3, false, false, false, [], ais.true, StormforgedAxe); // add tier
+};
+
+module.exports.TuskarrWeaponsmith = function(target, source, context) {
+    printer.print(source.color + " " + source.name + "'s battlecry fashions a Stormforged Axe for the " + context.player.color + " " + context.player.name + ".");
+    utilities.Equip(StormforgedAxe(), context);
+};
+
 module.exports.CoreRager = function(target, source, context) {
     if (context.player.hand.length === 0) {
         printer.print(source.color + " Core Rager's battlecry empowers them, increasing their Health and Damage by 3.");
@@ -732,6 +1305,19 @@ module.exports.KingsElekk = function(target, source, context) {
         context.player.deck.splice(context.player.deck.indexOf(card), 1);
         context.player.deck.unshift(card);
         utilities.drawCard(context.player, context);
+    }
+};
+
+var PreciousDebuff = {
+    name: "rawr xD",
+    type: "set health",
+    num: 1
+};
+
+module.exports.Precious = function(target, source, context) {
+    printer.print(source.color + " " + source.name + " smashes the ground, reducing all enemy minions to 1 Health.");
+    for(var i = 0; i < context.foe.minions.length; i++) {
+        context.foe.minions[i].addEffect(PreciousDebuff);
     }
 };
 
@@ -769,6 +1355,19 @@ var AmberWeaver = {
     name: "Amber-Weaver Buff",
     type: "buff health",
     num: 5
+};
+
+module.exports.KorkronPrimalist = function(target, source, context) {
+    if(context.choice==0 || context.choice==2) {
+        printer.print(source.color + " " + source.name + "'s battlecry creates a natural ward around " + target.color + " " + target.name + ", protecting them from harm until the end of the turn.");
+        target.addEffect(effects.tempImmune);
+        target.addEffect(effects.removeTempEoT);
+    }
+    if(context.choice==1 || context.choice==2) {
+        printer.print(source.color + " " + source.name + "'s battlecry grants " + target.color + " " + target.name + " swiftness until the end of the turn.");
+        target.addEffect(effects.tempWindfury);
+        target.addEffect(effects.removeTempEoT);
+    }
 };
 
 module.exports.AncientofLore = function(target, source, context) {
@@ -823,6 +1422,20 @@ module.exports.Cenarius = function(target, source, context) {
     }
 };
 
+module.exports.HamuulRunetotem = function(target, source, context) {
+    var minions = [];
+    for(var i in context.player.cardsPlayed) {
+        if(context.player.cardsPlayed[i].battlecry) {
+            minions.push(context.player.cardsPlayed[i].card());
+        }
+    }
+    var minion = minions[minions.length - 1];
+    if(minion) {
+        printer.print(source.color + " " + source.name + " communes with the spirit of " + minion.name + " and gains their Battlecry!");
+        source.battlecry = minion.battlecry;
+    }
+};
+
 module.exports.Succubus = function(target, source, context) {
     utilities.discardCard(context.player, {
         player: context.player,
@@ -831,11 +1444,54 @@ module.exports.Succubus = function(target, source, context) {
     });
 };
 
+var IcecrownValkyrHp = {
+    name: "Edge of the Abyss",
+    type: "set health",
+    num: 1
+};
+
+module.exports.IcecrownValkyr = function(target, source, context) {
+    var minions = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i].card();
+        if(card.type == "minion" && card.hasEffectType("deathrattle")) {
+            minions.push(card);
+        }
+    }
+    var minion = minions[minions.length-1];
+    if(minion) {
+        printer.print(source.color + " " + source.name + " reanimates the body of " + minion.name + " with 1 Health.");
+        minion.addEffect(IcecrownValkyrHp);
+        utilities.summon(minion, context.player, context);
+    }
+};
+
+var Murghoul = function() {
+    return utilities.makeMinion("Murloc", "Uncollectible", "Icecrown Citadel", ["Warlock"], "Mur'ghoul", 2, 0, 2, 3, false, false, false, [effects.sickness], ais.true, Murghoul);
+};
+
+module.exports.VilefinNecromancer = function(target, source, context) {
+    printer.print(source.color + " " + source.name + "'s necrotic magic destroys all friendly minions, replacing them with Mur'ghouls.");
+    var old = context.player.minions.slice();
+    for(var i in old) {
+        if(old[i] != source) {
+            utilities.kill(old[i], {
+                player: context.foe,
+                foe: context.player,
+                cause: source
+            });
+            utilities.summon(Murghoul(), context.player, context);
+        }
+    }
+};
+
 module.exports.LordJaraxxus = function(target, source, context) {
-    printer.print(source.color + " Lord Jaraxxus's battlecry replaces the " + context.player.color + " " + context.player.name + " with the hero Lord Jaraxxus.");
+    printer.print(source.color + " Lord Jaraxxus's battlecry incinerates the " + context.player.color + " " + context.player.name + " instantly and takes their place.");
     context.player.hero = heroes.LordJaraxxus;
+    printer.print(source.name + " replaces their Hero Power with INFERNO.");
     context.player.ability = heroes.LordJaraxxus.ability;
-    context.player.name = "Lord Jaraxxus";
+    context.player.name = source.name;
+    printer.print(source.name + " sets their Health to " + source.getHp() + ".");
     context.player.baseHp = source.getMaxHp();
     context.player.damageTaken = source.damageTaken;
     utilities.Equip(BloodFury(), context);
@@ -845,6 +1501,42 @@ module.exports.LordJaraxxus = function(target, source, context) {
 module.exports.GuardianofKings = function(target, source, context) {
     printer.print(source.color + " Guardian of Kings' battlecry restores 6 health to " + context.player.color + " " + context.player.name + ".");
     utilities.healDamage(context.player, 6, context);
+};
+
+module.exports.KingsHerald = function(target, source, context) {
+    var mins = [];
+    for(var i in context.player.hand) {
+        var min = context.player.hand[i];
+        if(min.type == "minion") {
+            mins.push(min);
+        }
+    }
+    target = mins[Math.floor(Math.random() * mins.length)];
+    printer.print(source.color + " " + source.name + "'s battlecry heralds the arrival of " + target.name + ", gaining its card text.");
+    source.battlecry = target.battlecry;
+    source.targetai = target.targetai;
+    source.filter = target.filter;
+    source.effects = target.effects.slice();
+};
+
+module.exports.TerenasMenethil = function(target, source, context) {
+    printer.print(source.color + " " + source.name + "'s battlecry restores three minions that died this game.");
+    var minions = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i].card();
+        if(card.type == "minion") {
+            minions.push(card);
+        }
+    }
+    for(i = 0; i < 3; i++) {
+        var randomNum = Math.floor(Math.random(0, 1) * minions.length);
+        var minion = minions[randomNum];
+        if(minion) {
+            minions.splice(minions.indexOf(minion), 1);
+            printer.print("Minion resurrected: " + minion.name + ".");
+            utilities.summon(minion, context.player, context);
+        }
+    }
 };
 
 module.exports.TwilightWhelp = function(target, source, context) {
@@ -890,6 +1582,24 @@ var WyrmrestAgentBuff = {
     name: "Wyrmrest Agent",
     type: "buff damage",
     num: 1
+};
+
+module.exports.SoulbinderTuulani = function(target, source, context) {
+    var minions = [];
+    for(var i in context.player.cardsPlayed) {
+        if(context.player.cardsPlayed[i].hasEffectType("deathrattle")) {
+            minions.push(context.player.cardsPlayed[i].card());
+        }
+    }
+    var minion = minions[minions.length - 1];
+    if(minion) {
+        printer.print(source.color + " " + source.name + " communes with the spirit of " + minion.name + " and gains their Deathrattle!");
+        for(i in minion.effects) {
+            if(minion.effects[i].type == "deathrattle") {
+                source.addEffect(minion.effects[i]);
+            }
+        }
+    }
 };
 
 var BoomBot = function() {

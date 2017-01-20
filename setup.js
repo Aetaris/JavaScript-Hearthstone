@@ -28,14 +28,16 @@ var player = module.exports.player = function (color) {
         cost: 0,
         ai: false,
         heroPowerUsed: false,
+        comboActive: false,
         turn: false,
         weapon: false,
         effects: [],
         isPlayer: false,
+        foe: false,
         minions: [],
         hand: [],
         deck: decks.basicDeck(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
         taunts: {
             start: false,
             heropower: false,
@@ -109,11 +111,11 @@ module.exports.drawStartCards = function(first, second) {
     var drawnCards = [];
     
     for(i = 0; i < 3; i++) {
-        drawnCards[i] = utilities.drawCard(first, { player: first, foe: second, cause: false });
+        drawnCards[i] = utilities.drawCard(first, { player: first, foe: second, cause: false }, true);
     }
     var mulliganNum = 0;
     for(i = 0; i < 3; i++) {
-        if(first.isPlayer == false || drawnCards[i].cost >= average + 1) {
+        if(drawnCards[i].cost >= average + 1) {
             if(first.isPlayer == true || second.isPlayer == false) {
                 printer.print(first.color + " " + first.name + " mulligans " + drawnCards[i].name + ".");
             } else {
@@ -122,7 +124,7 @@ module.exports.drawStartCards = function(first, second) {
             var randomNum = Math.floor(first.deck.length * Math.random(0, 1));
             first.deck.splice(randomNum, 0, drawnCards[i]);
             first.hand.splice(first.hand.indexOf(drawnCards[i]), 1);
-            utilities.drawCard(first, { player: first, foe: second, cause: false });
+            utilities.drawCard(first, { player: first, foe: second, cause: false }, true);
         }
     }
     if(first.isPlayer == false && second.isPlayer == true) {
@@ -143,12 +145,12 @@ module.exports.drawStartCards = function(first, second) {
     drawnCards = [];
     
     for(i = 0; i < 4; i++) {
-        drawnCards[i] = utilities.drawCard(second, { player: second, foe: first, cause: false });
+        drawnCards[i] = utilities.drawCard(second, { player: second, foe: first, cause: false }, true);
     }
     mulliganNum = 0;
     for(i = 0; i < 4; i++) {
         if(drawnCards[i].cost >= average + 1 ) {
-            if(first.isPlayer == true || second.isPlayer == false) {
+            if(second.isPlayer == true || first.isPlayer == false) {
                 printer.print(second.color + " " + second.name + " mulligans " + drawnCards[i].name + ".");
             } else {
                 mulliganNum++;
@@ -156,7 +158,7 @@ module.exports.drawStartCards = function(first, second) {
             randomNum = Math.floor(second.deck.length * Math.random(0, 1));
             second.deck.splice(randomNum, 0, drawnCards[i]);
             second.hand.splice(second.hand.indexOf(drawnCards[i]), 1);
-            utilities.drawCard(second, { player: second, foe: first, cause: false });
+            utilities.drawCard(second, { player: second, foe: first, cause: false }, true);
         }
     }
     

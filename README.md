@@ -45,5 +45,4 @@ Feel free to try them out.
 # TO BE ADDED
 
 - Better attack AI
-- Better Choose One system
 - Effects like Brann and Rivendare

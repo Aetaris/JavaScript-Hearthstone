@@ -9,34 +9,37 @@ var filters = require('./filters.js');
 var mage = module.exports.mage = function() {
     return {
         name: "Mage",
+        cardClass: "Mage",
         type: "basic", tier: 1,
         ability: abilities.MageFireblast,
         targetai: targetais.MageFireblast,
-        deck: decks.MechMage(),
+        deck: function() { var list = [decks.MechMage(), decks.RenoMage()]; return list[Math.floor(Math.random() * list.length)]; }(),
         ai: ais.MageFireblast, filter: filters.any,
         cardList: cardLists.classCards("Mage"),
         cost: 2, hp: 30, armor: 0
     };
 };
 
-var warrior = function() {
+var warrior = module.exports.warrior = function() {
     return {
     name: "Warrior",
+    cardClass: "Warrior",
     type: "basic", tier: 5,
     ability: abilities.WarriorArmorUp,
-    deck: decks.basicWarrior(),
+    deck: function() { var list = [decks.GoonsWarrior()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.WarriorArmorUp, filter: false,
     cardList: cardLists.classCards("Warrior"),
     cost: 2, hp: 30, armor: 0
     };
 };
 
-var rogue = function() {
+var rogue = module.exports.rogue = function() {
     return {
     name: "Rogue",
+    cardClass: "Rogue",
     type: "basic", tier: 2,
     ability: abilities.RogueWickedKnife,
-    deck: decks.basicRogue(),
+    deck: function() { var list = [decks.DragonRogue()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.RogueWickedKnife, filter: false,
     cardList: cardLists.classCards("Rogue"),
     cost: 2, hp: 30, armor: 0
@@ -46,9 +49,10 @@ var rogue = function() {
 var shaman = function() {
     return {
     name: "Shaman",
+    cardClass: "Shaman",
     type: "basic", tier: 7,
     ability: abilities.ShamanTotemicCall,
-    deck: decks.basicShaman(),
+    deck: function() { var list = [decks.JadeShaman()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.ShamanTotemicCall, filter: false,
     cardList: cardLists.classCards("Shaman"),
     cost: 2, hp: 30, armor: 0
@@ -58,9 +62,10 @@ var shaman = function() {
 var hunter = function() {
     return {
     name: "Hunter",
+    cardClass: "Hunter",
     type: "basic", tier: 8,
     ability: abilities.HunterSteadyShot,
-    deck: decks.basicHunter(),
+    deck: function() { var list = [decks.BeastHunter()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.HunterSteadyShot, filter: false,
     cardList: cardLists.classCards("Hunter"),
     cost: 2, hp: 30, armor: 0
@@ -70,9 +75,10 @@ var hunter = function() {
 var druid = module.exports.druid = function() {
     return {
     name: "Druid",
+    cardClass: "Druid",
     type: "basic", tier: 4,
     ability: abilities.DruidShapeshift,
-    deck: decks.JadeDruid(),
+    deck: function() { var list = [decks.JadeDruid()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.DruidShapeshift, filter: false,
     cardList: cardLists.classCards("Druid"),
     cost: 2, hp: 30, armor: 0
@@ -82,9 +88,10 @@ var druid = module.exports.druid = function() {
 var warlock = module.exports.warlock = function() {
     return {
     name: "Warlock",
+    cardClass: "Warlock",
     type: "basic", tier: 6,
     ability: abilities.WarlockLifeTap,
-    deck: decks.basicWarlock(),
+    deck: function() { var list = [decks.RenoWarlock()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.WarlockSiphonSoul, filter: false,
     cardList: cardLists.classCards("Warlock"),
     cost: 2, hp: 30, armor: 0
@@ -94,9 +101,10 @@ var warlock = module.exports.warlock = function() {
 var paladin = function() {
     return {
     name: "Paladin",
+    cardClass: "Paladin",
     type: "basic", tier: 3,
     ability: abilities.PaladinReinforce,
-    deck: decks.basicPaladin(),
+    deck: function() { var list = [decks.MurlocPaladin()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.PaladinReinforce, filter: false,
     cardList: cardLists.classCards("Paladin"),
     cost: 2, hp: 30, armor: 0
@@ -106,10 +114,11 @@ var paladin = function() {
 var priest = module.exports.priest = function() {
     return {
     name: "Priest",
+    cardClass: "Priest",
     type: "basic", tier: 9,
     ability: abilities.PriestLesserHeal,
     targetai: targetais.PriestLesserHeal,
-    deck: decks.basicPriest(),
+    deck: function() { var list = [decks.RenoPriest()]; return list[Math.floor(Math.random() * list.length)]; }(),
     ai: ais.PriestLesserHeal, filter: filters.any,
     cardList: cardLists.classCards("Priest"),
     cost: 2, hp: 30, armor: 0
@@ -131,6 +140,7 @@ module.exports.HeroList = [
 module.exports.LordJaraxxus = function() {
     return {
     name: "Lord Jaraxxus",
+    cardClass: "Warlock",
     type: "minion",
     ability: abilities.LordJaraxxusInferno,
     deck: decks.basicWarlock(),

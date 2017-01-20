@@ -15,7 +15,7 @@ module.exports.MageFireblast = function(target, context) {
 };
 
 module.exports.WarriorArmorUp = function(target, context) {
-    context.player.armor += 2;
+    utilities.addArmor(context.player, 2, context);
     printer.print("The " + context.player.color + " " + context.player.name + " casts Armor Up!, gaining 2 Armor for a total of " + context.player.armor + ".");
 };
 
@@ -49,7 +49,7 @@ module.exports.HunterSteadyShot = function(target, context) {
 };
 
 module.exports.DruidShapeshift = function(target, context) {
-    context.player.armor += 1;
+    utilities.addArmor(context.player, 1, context);
     context.player.addEffect(effects.DruidClaws);
     context.player.addEffect(effects.removeTempBuff);
     printer.print("The " + context.player.color + " " + context.player.name + " casts Shapeshift, gaining 1 Armor and 1 Damage this turn.");
@@ -57,7 +57,7 @@ module.exports.DruidShapeshift = function(target, context) {
 
 module.exports.WarlockLifeTap = function(target, context) {
         printer.print("The " + context.player.color + " " + context.player.name + " casts Life Tap, drawing a card at the cost of 2 Health and reducing them to "
-        + context.player.getHp() + " remaining health.");
+        + (context.player.getHp() - 2 >= 0 ? context.player.getHp() - 2 : 0) + " remaining health" + (context.player.armor > 0 ? " and " + context.player.armor + " Armor." : "."));
         utilities.dealDamage(context.player, 2, context);
         utilities.drawCard(context.player, context);
         return context.player.hand[context.player.hand.length - 1];
@@ -136,7 +136,7 @@ module.exports.TimeRewinder = function(target, context) {
         printer.print("The " + context.player.color + " " + context.player.name + " uses a Time Rewinder Spare Part on " + target.name + ", returning them to their owner's hand.");
         target.damageTaken = 0;
         target.damageLost = 0;
-        context.player.hand.push(target);
+        utilities.addCard(target, context.player, context);
         context.player.minions.splice(context.player.minions.indexOf(target), 1);
     }
 };
@@ -144,6 +144,53 @@ module.exports.TimeRewinder = function(target, context) {
 module.exports.TheCoin = function(target, context) {
     context.player.mana += 1;
     printer.print("The " + context.player.color + " " + context.player.name + " plays The Coin, gaining 1 mana crystal and bringing their total up to " + context.player.mana + ".");
+};
+
+module.exports.LanternofPower = function(target, context) {
+    printer.print(context.player.color + " " + context.player.name + " shines the light of the Lantern of Power upon " + target.color + " " + target.name + ", granting them an incredible surge of power.");
+    target.addEffect(LanternofPowerHp);
+    target.addEffect(LanternofPowerDmg);
+};
+
+var LanternofPowerHp = {
+    name: "Light of the Lantern",
+    type: "buff health",
+    num: 10
+};
+
+var LanternofPowerDmg = {
+    name: "Light of the Lantern",
+    type: "buff damage",
+    num: 10
+};
+
+module.exports.MirrorofDoom = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " looks into the Mirror of Doom and it gazes back at them. An army of mummy zombies rise from the earth surrounding the Mirror, ready to serve the " + context.player.name + ".");
+    for(var i = 0; i < 7; i++) {
+        utilities.summon(MummyZombie(), context.player, context);
+    }
+};
+
+var MummyZombie = function() {
+    return utilities.makeMinion(false, "Uncollectible", "League of Explorers", ["Neutral"], "Mummy Zombie", 3, 0, 3, 3, false, false, false, [effects.sickness], ais.true, MummyZombie);
+};
+
+module.exports.TimepieceofHorror = function(target, context) {
+    printer.print(context.player.color + " " + context.player.name + " activates the Timepiece of Horror, and it's high noon! The clock launches " + utilities.spellDamage(context.player, context.foe, 10) + " sharpened gears randomly at the " + context.player.name + "'s enemies!");
+    for(var i = 0; i < utilities.spellDamage(context.player, context.foe, 10); i++) {
+        target = context.foe;
+        var targetRoll = Math.floor((context.foe.minions.length + 1) * Math.random(0, 1));
+        if(targetRoll < context.foe.minions.length) {
+            target = context.foe.minions[targetRoll];
+        }
+        else {
+            target = context.foe;
+        }
+        utilities.dealDamage(target, 1, context);
+        if(target.getHp() < 0) {
+            i -= 1;
+        }
+    }
 };
 
 module.exports.MaptotheGoldenMonkey = function(target, context) {
@@ -207,7 +254,7 @@ module.exports.UnstablePortal = function(target, context) {
     printer.print(context.player.color + " " + context.player.name + " casts Unstable Portal, giving them a random minion.");
     if(context.player.hand.length < 10 && minion) {
         minion.cost -= 3;
-        context.player.hand.push(minion);
+        utilities.addCard(minion, context.player, context);
         printer.print("Card received: " + minion.name);
     }
     else if (minion) {
@@ -230,6 +277,17 @@ module.exports.Duplicate = function(target, context) {
 module.exports.Vaporize = function(target, context) {
     context.player.addEffect(effects.Vaporize);
     printer.print("The " + context.player.color + " " + context.player.name + " casts Vaporize, a Secret. It will trigger when a minion attacks them.");
+};
+
+module.exports.ArcaneBlast = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Arcane Blast, targeting " + target.color + " " + target.name + " with a concentrated pulse of arcane energy.");
+    utilities.dealSpellDamage(target, utilities.spellDamage(context.player, context.foe, 2), context);
+};
+
+module.exports.ForbiddenFlame = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Forbidden Flame, dealing damage equal to their Mana to " + target.color + " " + target.name + ".");
+    utilities.dealSpellDamage(target, context.player.mana, context);
+    context.player.mana = 0;
 };
 
 module.exports.IceBlock = function(target, context) {
@@ -308,6 +366,17 @@ module.exports.Flamecannon = function(target, context) {
     }
 };
 
+module.exports.FrostfireBolt = function(target, context) {
+    var num = 0;
+    for(var i in context.player.graveyard) {
+        if(context.player.graveyard[i].type == "spell") {
+            num++;
+        }
+    }
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Frostfire Bolt, dealing damage for each spell cast this game (a total of " + num + ").");
+    utilities.dealSpellDamage(target, num, context);
+};
+
 module.exports.FrostNova = function(target, context) {
     printer.print("The " + context.player.color + " " + context.player.name + " casts Frost Nova, Freezing all enemy minions.");
     for(var i = 0; i < context.foe.minions.length; i++) {
@@ -328,13 +397,23 @@ module.exports.Execute = function(target, context) {
     }
 };
 
+module.exports.ShieldBlock = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Shield Block, gaining 5 Armor and drawing a card.");
+    utilities.addArmor(context.player, 5, context);
+    utilities.drawCard(context.player, context);
+};
+
 module.exports.Whirlwind = function(target, context) {
     printer.print("The " + context.player.color + " " + context.player.name + " casts Whirlwind, dealing 1 damage to all minions in play.");
-    for(var i = 0; i < context.player.minions.length; i++) {
-        utilities.dealSpellDamage(context.player.minions[i], 1, { player: context.player, foe: context.foe, cause: context.player });
+    var targets = context.player.minions.slice();
+    for(var i in context.foe.minions) {
+        targets.push(context.foe.minions[i]);
     }
-    for(i = 0; i < context.foe.minions.length; i++) {
-        utilities.dealSpellDamage(context.foe.minions[i], 1, { player: context.foe, foe: context.player, cause: context.player });
+    for(i in targets) {
+        utilities.dealSpellDamage(targets[i], 1, context);
+        if(!targets[i].isAlive()) {
+            i--;
+        }
     }
 };
 
@@ -362,11 +441,63 @@ module.exports.Cleave = function(target, context) {
         }
         target2 = context.foe.minions[targetRoll2];
         if(target.getHp() > 0 && target2.getHp() > 0 && context.foe.minions.length >= 2) {
-            printer.print("The " + context.player.color + " " + context.player.name + " casts Cleave on " + target.name + " and " + target2.name + ". Overload: 1");
+            printer.print("The " + context.player.color + " " + context.player.name + " casts Cleave on " + target.name + " and " + target2.name + ".");
             utilities.dealSpellDamage(target, 2, context);
             utilities.dealSpellDamage(target2, 2, context);
         }
     }
+};
+
+module.exports.IKnowAGuy = function(target, context) {
+    var validArray = cardLists.classCards("Warrior", 4);
+    var allCards = cardLists.allCards();
+    for(var i in allCards) {
+        var card = allCards[i]();
+        if(card.cardClass.indexOf("Neutral")>=0) {
+            validArray.push(card);
+        }
+    }
+    validArray = utilities.filterArray.hasType(validArray, "minion");
+    validArray = utilities.filterArray.hasEffect(validArray, "Taunt");
+    printer.print(context.player.color + " " + context.player.name + " casts I Know A Guy, discovering a minion.");
+    var options = utilities.Discover(validArray);
+    var result = utilities.discoverChoose(options, context.player);
+    if(context.player.hand.length < 10) {
+        utilities.addCard(result, context.player, context);
+        printer.print("Card chosen: " + result.name);
+    } else {
+        printer.print("No room in your hand for that card.");
+    }
+};
+
+module.exports.StolenGoods = function(target, context) {
+    var targets = [];
+    for (var i = 0; i < context.player.hand.length; i++) {
+        if (context.player.hand[i].type == "minion" && context.player.hand[i].hasEffectName("Taunt")) {
+            targets.push(context.player.hand[i]);
+        }
+    }
+    target = targets[Math.floor(Math.random() * targets.length)];
+    if (target) {
+        target.addEffect(StolenGoodsHp);
+        target.addEffect(StolenGoodsDmg);
+        printer.print(context.player.color + " " + context.player.name + " gives Stolen Goods to " + target.name + " in their hand, giving them +3/+3 (up to " + target.getDamage() + "/" + target.getHp() + ").");
+    }
+    else {
+        printer.print(context.player.color + " " + context.player.name + " has Stolen Goods, but no one to give them to.");
+    }
+};
+
+var StolenGoodsHp = {
+    name: "Stolen Goods",
+    type: "buff health",
+    num: 3
+};
+
+var StolenGoodsDmg = {
+    name: "Stolen Goods",
+    type: "buff damage",
+    num: 3
 };
 
 module.exports.BloodWarriors = function(target, context) {
@@ -375,13 +506,13 @@ module.exports.BloodWarriors = function(target, context) {
     for(var i = 0; i < context.player.minions.length; i++) {
         if(context.player.minions[i].getHp() < context.player.minions[i].getMaxHp()) {
             if(context.player.hand.length < 10) {
-                context.player.hand.push(context.player.minions[i].card());
+                utilities.addCard(context.player.minions[i].card(), context.player, context);
                 targets.push(context.player.minions[i].name);
             }
         }
     }
     var string = "Minions added to hand: ";
-    for(var i = 0; i < targets.length; i++) {
+    for(i = 0; i < targets.length; i++) {
         if(i == 0) {
             string = string + targets[i];
         }
@@ -392,12 +523,40 @@ module.exports.BloodWarriors = function(target, context) {
     if(targets.length == 0) {
         string = "No damaged minions were on the board. No cards are added to the " + context.player.color + " " + context.player.name + "'s hand.";
     }
-}
+};
+
+module.exports.Brawl = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Brawl, inciting a massive bar fight between all the minions on the board.");
+    var minions = [];
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        minions.push(minion);
+    }
+    for(i in context.foe.minions) {
+        minion = context.foe.minions[i];
+        minions.push(minion);
+    }
+    var survivor = minions[Math.floor(Math.random() * minions.length)];
+    printer.print("The sole survivor of the vicious battle is " + survivor.color + " " + survivor.name + ".");
+    for(i in minions) {
+        minion = minions[i];
+        if(minion != survivor) {
+            utilities.kill(minion, {player: minion.owner, foe: minion.owner == context.player ? context.foe : context.player, cause: context.player});
+        }
+    }
+};
+
+module.exports.ShieldSlam = function(target, context) {
+    if(target) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Shield Slam, bashing " + target.color + " " + target.name + " and dealing " + utilities.spellDamage(context.player, context.foe, context.player.armor) + " damage.");
+        utilities.dealSpellDamage(target, context.player.armor, context);
+    }
+};
 
 module.exports.Backstab = function(target, context) {
     if(target) {
         printer.print("The " + context.player.color + " " + context.player.name + " casts Backstab, dealing 2 damage to " + target.name + ".");
-        utilities.dealSpellDamage(target, 2, {player: context.foe, foe: context.player, cause: context.player});
+        utilities.dealSpellDamage(target, 2, context);
     }
 };
 
@@ -405,7 +564,7 @@ module.exports.Sap = function(target, context) {
     
     if(target !== context.foe) {
         printer.print("The " + context.player.color + " " + context.player.name + " casts Sap, returning " + target.color + " " + target.name + " to the " + context.foe.color + " " + context.foe.name + "'s hand.");
-        context.foe.hand.push(target.card());
+        utilities.addCard(target.card(), context.player, context);
         context.foe.minions.splice(context.foe.minions.indexOf(target), 1);
     }
 };
@@ -432,11 +591,64 @@ module.exports.Sprint = function(target, context) {
     utilities.drawCard(context.player, context);
 };
 
+var recuperateAction = function(source, context) {
+    utilities.healDamage(source, 4, context);
+};
+
+var RecuperateEffect = {
+    name: "Recuperate",
+    temp: "EoT",
+    type: "spell hunger friend",
+    action: recuperateAction
+};
+
+module.exports.Recuperate = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Recuperate, causing spells to heal their injuries.");
+    context.player.addEffect(RecuperateEffect);
+    context.player.addEffect(effects.removeTempEoT);
+};
+
+var SliceAndDiceAction = function(source, context) {
+    if(context.cause.type === "spell") {
+        return -1;
+    }
+    return 0;
+};
+
+var SliceAndDiceEffect = {
+    name: "Slice and Dice",
+    temp: "EoT",
+    type: "aura hand friend buff cost",
+    action: SliceAndDiceAction
+};
+
+module.exports.SliceAndDice = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Slice and Dice, reducing the cost of spells this turn..");
+    context.player.addEffect(SliceAndDiceEffect);
+    context.player.addEffect(effects.removeTempEoT);
+};
+
 module.exports.Crackle = function(target, context) {
     var randomDamage = 3 + Math.round(3 * Math.random(0, 1));
     printer.print("The " + context.player.color + " " + context.player.name + " casts Crackle, dealing " + utilities.spellDamage(context.player, context.foe, randomDamage) +
     " damage to " + target.name + ". Overload: 1");
     utilities.dealSpellDamage(target, utilities.spellDamage(context.player, context.foe, randomDamage), context);
+};
+
+module.exports.ChainLightning = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " launches crackling Chain Lightning at " + target.name + ". Overload: 1");
+    var enemies = context.foe.minions.slice();
+    enemies.push(context.foe);
+    utilities.dealSpellDamage(target, 4, context);
+    enemies.splice(enemies.indexOf(target),1);
+    for(var i = 0; i < 2; i++) {
+        var newTarg = enemies[Math.floor(Math.random() * enemies.length)];
+        if(newTarg) {
+            printer.print("Lightning arcs to " + newTarg.color + " " + newTarg.name + ".");
+            utilities.dealSpellDamage(newTarg, 2, context);
+            enemies.splice(enemies.indexOf(newTarg), 1);
+        }
+    }
 };
 
 module.exports.LavaBurst = function(target, context) {
@@ -477,6 +689,16 @@ module.exports.ForkedLightning = function(target, context) {
     }
 };
 
+module.exports.ElementalGuidance = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " calls upon Elemental Guidance, adding four Elementals to their hand.");
+    var list = utilities.filterArray.hasName(utilities.filterArray.hasType(cardLists.allCards(), "minion"), "Elemental", true);
+    for(var i = 0; i < 4; i++) {
+        var card = list[Math.floor(Math.random() * list.length)];
+        printer.print("Card received: " + card.name + ".");
+        utilities.addCard(card, context.player, context);
+    }
+};
+
 module.exports.AnimalCompanion = function(target, context) {
     var companion = false;
     var companionNum = Math.floor(3 * Math.random(0, 1));
@@ -495,6 +717,19 @@ module.exports.AnimalCompanion = function(target, context) {
         if(context.player.minions[i].name === "Misha" || context.player.minions[i].name === "Huffer" || context.player.minions[i].name === "Leokk") {
             context.player.minions[i].color = context.player.color;
         }
+    }
+};
+
+module.exports.ArcaneShot = function(target, context) {
+    printer.print(context.player.name + " fires an Arcane Shot at " + target.name + ".");
+    utilities.dealSpellDamage(target, 2, context);
+};
+
+module.exports.HuntersMark = function(target, context) {
+    if(target !== context.foe) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Hunter's Mark on " + target.name + ", reducing their Health to 1.");
+        target.baseHp = 1;
+        target.damageTaken = 0;
     }
 };
 
@@ -519,10 +754,62 @@ module.exports.MultiShot = function(target, context) {
     }
 };
 
+module.exports.CobraShot = function(target, context) {
+    if(target !== context.foe) {
+        printer.print("The " + context.player.color + " " + context.player.name + " fires a Cobra Shot at " + target.name + ", damaging them and the " + context.foe.color + " " + context.foe.name + ".");
+        utilities.dealSpellDamage(target, 3, context);
+        utilities.dealSpellDamage(context.foe, 3, context);
+    }
+};
+
+module.exports.DeadlyShot = function(target, context) {
+    target = false;
+    var targetNum = Math.floor(context.foe.minions.length * Math.random(0, 1));
+    if(context.foe.minions.length > 0) {
+        target = context.foe.minions[targetNum];
+        printer.print("The " + context.player.color + " " + context.player.name + " fires a Deadly Shot at " + target.name + ", destroying them.");
+        utilities.kill(target, { player: context.foe, foe: context.player, cause: context.player });
+    }
+};
+
+module.exports.SplitShot = function(target, context) {
+    var target2 = false;
+    var targets = context.foe.minions.slice();
+    targets.push(context.foe);
+    if(targets.length > 1) {
+        var targetRoll = target;
+        while(targetRoll === target && targets.length > 1) {
+            targetRoll = targets[Math.floor(Math.random() * targets.length)];
+        }
+        target2 = targetRoll;
+        printer.print("The " + context.player.color + " " + context.player.name + " fires a Split Shot at " + target.color + " " + target.name + " and " + target2.color + " " + target2.name + ".");
+        utilities.dealSpellDamage(target, 2, context);
+        utilities.dealSpellDamage(target2, 1, context);
+    }
+};
+
 module.exports.UnleashTheHounds = function(target, context) {
     printer.print("The " + context.player.color + " " + context.player.name + " casts Unleash the Hounds, summoning " + context.foe.minions.length + " 1/1 Hounds with Charge.");
     for(var i = 0; i < context.foe.minions.length; i++) {
-        utilities.summon(Hound(context.player.color), context.player, context);
+        utilities.summon(Hound(), context.player, context);
+    }
+};
+
+module.exports.Barrage = function(target, context) {
+    var num = context.player.mana;
+    if(num > 6) {
+        num = 6;
+    }
+    context.player.mana -= num;
+    num = utilities.spellDamage(context.player, context.foe, num*2);
+    printer.print("The " + context.player.color + " " + context.player.name + " fires a barrage of bullets at their enemies, dealing " + num + " damage split among enemies.");
+    for(var i = 0; i < num; i++) {
+        var enemies = context.foe.minions.slice();
+        enemies.push(context.foe);
+        target = enemies[Math.floor(Math.random()*enemies.length)];
+        if(target) {
+            utilities.dealDamage(target, 1, context);
+        }
     }
 };
 
@@ -559,34 +846,17 @@ module.exports.ExplosiveShot = function(target, context) {
     }
 };
 
-module.exports.ArcaneShot = function(target, context) {
-    printer.print(context.player.name + " fires an Arcane Shot at " + target.name + ".");
-    utilities.dealSpellDamage(target, 2, context);
-};
-
-module.exports.CobraShot = function(target, context) {
-    if(target !== context.foe) {
-        printer.print("The " + context.player.color + " " + context.player.name + " fires a Cobra Shot at " + target.name + ", damaging them and the " + context.foe.color + " " + context.foe.name + ".");
-        utilities.dealSpellDamage(target, 3, context);
-        utilities.dealSpellDamage(context.foe, 3, context);
-    }
-};
-
-module.exports.DeadlyShot = function(target, context) {
-    target = false;
-    var targetNum = Math.floor(context.foe.minions.length * Math.random(0, 1));
-    if(context.foe.minions.length > 0) {
-        target = context.foe.minions[targetNum];
-        printer.print("The " + context.player.color + " " + context.player.name + " fires a Deadly Shot at " + target.name + ", destroying them.");
-        utilities.kill(target, { player: context.foe, foe: context.player, cause: context.player });
-    }
-};
-
-module.exports.HuntersMark = function(target, context) {
-    if(target !== context.foe) {
-        printer.print("The " + context.player.color + " " + context.player.name + " casts Hunter's Mark on " + target.name + ", reducing their Health to 1.");
-        target.baseHp = 1;
-        target.damageTaken = 0;
+module.exports.EagleEye = function(target, context) {
+    printer.print(context.player.color + " " + context.player.name + " casts Eagle Eye, Discovering two of three cards from their deck.");
+    var validArray = context.player.deck.slice();
+    var options = utilities.Discover(validArray);
+    var result = utilities.discoverChoose(options, context.player, true);
+    printer.print(context.player.color + " " + context.player.name + " chooses to discard " + result.name + " and draw the other two card options.");
+    options.splice(options.indexOf(result), 1);
+    for(var i = 0; i < options.length; i++) {
+        context.player.deck.splice(context.player.deck.indexOf(options[i]), 1);
+        context.player.deck.unshift(options[i]);
+        utilities.drawCard(context.player, context);
     }
 };
 
@@ -623,7 +893,7 @@ module.exports.WildGrowth = function(target, context) {
     } else {
         printer.print("Already at 10 mana: instead providing Excess Mana.");
         if(context.player.hand.length < 10) {
-            context.player.hand.push(ExcessMana());
+            utilities.addCard(ExcessMana(), context.player, context);
         } else {
             printer.print("No room to add Excess Mana.");
         }
@@ -633,6 +903,31 @@ module.exports.WildGrowth = function(target, context) {
 var ExcessMana = function(target, context) {
     printer.print(context.player.color + " " + context.player.name + " casts Excess Mana, drawing a card.");
     utilities.drawCard(context.player, context);
+};
+
+var ErodeHp = {
+    name: "Erode",
+    type: "buff health",
+    num: -3
+};
+
+var ErodeDmg = {
+    name: "Erode",
+    type: "buff damage",
+    num: -3
+};
+
+module.exports.Erode = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Erode on " + target.color + " " + target.name + ", giving them -3 Attack and -3 Health (down to " + (target.getDamage() - 3 > 0 ? target.getDamage() - 3 : 0) + "/" + (target.getHp() - 3 > 0 ? target.getHp() - 3 : 0) + ").");
+    target.addEffect(ErodeHp);
+    target.addEffect(ErodeDmg);
+    if(!target.isAlive()) {
+        utilities.kill(target, {
+            player: context.foe,
+            foe: context.player,
+            cause: context.player
+        });
+    }
 };
 
 module.exports.JadeBlossom = function(target, context) {
@@ -657,36 +952,38 @@ module.exports.LivingRoots = function(target, context) {
 module.exports.RavenIdol = function(target, context) {
     var allCards = cardLists.allCards();
     if(context.choice==0 || context.choice==2) {
-        var validArray = [];
+        var validArray = cardLists.classCards("Druid", 4);
         for(var i in allCards) {
             var card = allCards[i]();
-            if(card.type == "minion" && (card.cardClass.indexOf("Druid")>=0 || card.cardClass.indexOf("Neutral")>=0)) {
+            if(card.cardClass.indexOf("Neutral")>=0) {
                 validArray.push(card);
             }
         }
+        validArray = utilities.filterArray.hasType(validArray, "minion");
         printer.print(context.player.color + " " + context.player.name + " casts Raven Idol, discovering a minion.");
         var options = utilities.Discover(validArray);
         var result = utilities.discoverChoose(options, context.player);
         if(context.player.hand.length < 10) {
-            context.player.hand.push(result);
+            utilities.addCard(result, context.player, context);
             printer.print("Card chosen: " + result.name);
         } else {
             printer.print("No room in your hand for that card.");
         }
     }
     if(context.choice==1 || context.choice==2) {
-        validArray = [];
+        validArray = cardLists.classCards("Druid", 4);
         for(i in allCards) {
             card = allCards[i]();
-            if(card.type == "spell" && (card.cardClass.indexOf("Druid")>=0 || card.cardClass.indexOf("Neutral")>=0)) {
+            if(card.cardClass.indexOf("Neutral")>=0) {
                 validArray.push(card);
             }
         }
+        validArray = utilities.filterArray.hasType(validArray, "spell");
         printer.print(context.player.color + " " + context.player.name + " casts Raven Idol, discovering a spell.");
         options = utilities.Discover(validArray);
         result = utilities.discoverChoose(options, context.player);
         if(context.player.hand.length < 10) {
-            context.player.hand.push(result);
+            utilities.addCard(result, context.player, context);
             printer.print("Card chosen: " + result.name);
         } else {
             printer.print("No room in your hand for that card.");
@@ -773,6 +1070,18 @@ module.exports.MortalCoil = function(target, context) {
     }
 };
 
+module.exports.DarkOffering = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " casts Dark Offering on " + target.name + ", triggering their deathrattle twice.");
+    for(var i in target.effects) {
+        var eff = target.effects[i];
+        if(eff.type == "deathrattle") {
+            for(var j = 0; j < 2; j++) {
+                eff.action(target, context);
+            }
+        }
+    }
+};
+
 module.exports.Shadowflame = function(target, context) {
     if(target !== context.foe) {
         var damage = target.getDamage();
@@ -788,6 +1097,26 @@ module.exports.Shadowflame = function(target, context) {
 module.exports.LordJaraxxusInferno = function(target, context) {
     printer.print("The " + context.player.color + " " + context.player.name + "casts INFERNO, summoning a 6/6 Infernal.");
     utilities.summon(Infernal(context.player.color), context.player, context);
+};
+
+var HandofSacrificeAction = function(source, context) {
+    printer.print("Damage to " + source.color + " " + source.name + " is redirected to " + source.sacrificeLink.color + " " + source.sacrificeLink.name + ".");
+    utilities.dealDamage(source.sacrificeLink, context.damage, context);
+    return context.damage * -1;
+};
+
+var HandofSacrificeEffect = {
+    name: "Hand of Sacrifice",
+    temp: "SoT",
+    type: "pain interrupt",
+    action: HandofSacrificeAction
+};
+
+module.exports.HandofSacrifice = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " places a Hand of Sacrifice on " + target.color + " " + target.name + ", redirecting damage done to " + target.name + " to themselves.");
+    target.sacrificeLink = context.player;
+    target.addEffect(HandofSacrificeEffect);
+    target.addEffect(effects.removeTempSoT)
 };
 
 module.exports.StandAgainstDarkness = function(target, context) {
@@ -822,13 +1151,25 @@ module.exports.AvengingWrath = function(target, context) {
         else {
             target = context.foe;
         }
-        if(target.getHp() > 0) {
-            utilities.dealDamage(target, 1, context);
-        }
+        utilities.dealDamage(target, 1, context);
         if(target.getHp() < 0) {
             i -= 1;
         }
     }
+};
+
+var TemplarsVerdictBuff = {
+    name: "Temporary Buff",
+    temp: "EoT",
+    type: "buff damage",
+    num: 5
+};
+
+module.exports.TemplarsVerdict = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " cast Templar's Verdict, gaining Attack and immunity this turn.");
+    context.player.addEffect(TemplarsVerdictBuff);
+    context.player.addEffect(effects.tempImmune);
+    context.player.addEffect(effects.removeTempEoT);
 };
 
 module.exports.BlessingofKings = function(target, context) {
@@ -850,22 +1191,25 @@ module.exports.HolySmite = function(target, context) {
 };
 
 module.exports.PowerWordShield = function(target, context) {
+    if(target) {
         printer.print("The " + context.player.color + " " + context.player.name + " casts Power Word: Shield on " + target.name + ", increasing their health by 2 and drawing a card.");
         utilities.drawCard(context.player, context);
-        if(!target) {
-            throw new Error("no target");
-        }
         target.effects.push(effects.PowerWordShield);
+    }
 };
 
 module.exports.ShadowWordPain = function(target, context) {
-        printer.print("The " + context.player.color + " " + context.player.name + " casts Shadow Word: Pain on " + target.name + ", destroying them.");
+    if(target) {
+        printer.print("The " + context.player.color + " " + context.player.name + " invokes Shadow Word: Pain on " + target.color + " " + target.name + ", destroying them.");
         utilities.kill(target, { player: context.foe, foe: context.player, cause: context.player });
+    }
 };
 
 module.exports.ShadowWordDeath = function(target, context) {
-        printer.print("The " + context.player.color + " " + context.player.name + " casts Shadow Word: Death on " + target.name + ", destroying them.");
-        utilities.kill(target, {player: context.foe, foe: context.player, cause: context.player });
+        if(target) {
+            printer.print("The " + context.player.color + " " + context.player.name + " invokes Shadow Word: Death on " + target.color + " " + target.name + ", destroying them.");
+            utilities.kill(target, {player: context.foe, foe: context.player, cause: context.player });
+        }
 };
 
 module.exports.HolyNova = function(target, context) {
@@ -881,12 +1225,23 @@ module.exports.HolyNova = function(target, context) {
 };
 
 module.exports.Entomb = function(target, context) {
-    printer.print("The " + context.player.color + " " + context.player.name + " casts Entomb on " + target.color + " " + target.name + ", shuffling it into their deck.");
-    var randomNum = Math.floor(context.player.deck.length * Math.random(0, 1));
-    var card = target.card()
-    card["owner"] = context.player;
-    context.player.deck.splice(randomNum, 0, card);
-    context.foe.minions.splice(context.foe.minions.indexOf(target), 1);
+    if(target) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Entomb on " + target.color + " " + target.name + ", shuffling it into their deck.");
+        var randomNum = Math.floor(context.player.deck.length * Math.random(0, 1));
+        var card = target.card()
+        card["owner"] = context.player;
+        context.player.deck.splice(randomNum, 0, card);
+        context.foe.minions.splice(context.foe.minions.indexOf(target), 1);
+    }
+};
+
+module.exports.ShadowWordVoid = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " invokes Shadow Word: Void on " + target.color + " " + target.name + ", dealing 4 damage.");
+    utilities.dealSpellDamage(target, 4, context);
+    if(!target.isAlive()) {
+        printer.print(target.name + "'s death feeds the Void, giving " + context.player.color + " " + context.player.name + " 2 mana crystals this turn.");
+        context.player.mana += 2;
+    }
 };
 
 module.exports.VelensChosen = function(target, context) {
@@ -914,6 +1269,27 @@ module.exports.HolyFire = function(target, context) {
     utilities.healDamage(context.player, 5, context);
 };
 
+var PrayerAction = function(source, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + "'s Prayer is answered, healing " + context.player.prayTarget.name + ".");
+    utilities.healDamage(context.player.prayTarget, 15, context);
+};
+
+var PrayerEffect = {
+    name: "Prayer",
+    temp: "SoT",
+    type: "start of turn friend",
+    action: PrayerAction
+};
+
+module.exports.Prayer = function(target, context) {
+    if(target) {
+        printer.print("The " + context.player.color + " " + context.player.name + " casts Prayer on " + target.color + " " + target.name + ". At the start of their turn, " + target.name + " will be healed.");
+        target.addEffect(PrayerEffect);
+        target.addEffect(effects.removeTempSoT);
+        context.player.prayTarget = target;
+    }
+};
+
 module.exports.Resurrect = function(target, context) {
     var minions = [];
     for(var i = 0; i < context.player.graveyard.length; i++) {
@@ -926,6 +1302,15 @@ module.exports.Resurrect = function(target, context) {
     var minion = minions[randomNum];
     printer.print("The " + context.player.color + " " + context.player.name + " casts Resurrect, restoring the body and soul of " + minion.name + ".");
     utilities.summon(minion, context.player, context);
+};
+
+module.exports.PowerWordFortitude = function(target, context) {
+    printer.print("The " + context.player.color + " " + context.player.name + " invokes Power Word: Fortitude, granting their minions immunity until the end of the turn and drawing a card.");
+    for(var i in context.player.minions) {
+        context.player.minions[i].addEffect(effects.tempImmune);
+        context.player.minions[i].addEffect(effects.removeTempEoT);
+    }
+    utilities.drawCard(context.player, context);
 };
 
 module.exports.Shadowform = function(target, context) {
@@ -1112,7 +1497,7 @@ module.exports.C_IncineratingBlast = function(target, context) {
 };
 
 module.exports.C_Fortify = function(target, context) {
-    context.player.armor += 10;
+    utilities.addArmor(context.player, 10, context);
     printer.print("The " + context.player.color + " " + context.player.name + " Fortifies, gaining 10 Armor! [" + context.player.armor + " Total]");
 };
 
@@ -1137,7 +1522,7 @@ var C_CannonBlast =  function() {
 };
 
 module.exports.Arthas_FlashofLight = function(target, context) {
-    if(context.foe.minions.indexOf(target) != -1) {
+    if(context.foe.minions.indexOf(target) != -1 || (context.scenario && context.scenario.minions.indexOf(target) != -1)) {
         printer.print(context.player.color + " " + context.player.name + " smites " + target.color + " " + target.name + " with a flash of light, dealing 2 damage.");
         utilities.dealDamage(target, 2, context);
     }

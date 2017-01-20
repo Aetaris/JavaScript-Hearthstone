@@ -33,8 +33,11 @@ module.exports.Attack = function(context) { // Used for attacking minions (excep
     }
     var hasTaunt = false;
     var taunts = [];
-    for(var i = 0; i < context.foe.minions.length; i++) {
+    for(var i in context.foe.minions) {
         if(context.foe.minions[i].hasEffectName("Immune")) {
+            continue;
+        }
+        if(context.foe.minions[i].hasEffectName("Unattackable")) {
             continue;
         }
         if(context.foe.minions[i].hasEffectName("Taunt")) {
@@ -98,7 +101,16 @@ module.exports.ally = function(context) { // Can target any friendly character
         array.push(minion);
     }
     return finalize(array, context);
-}
+};
+
+module.exports.enemy = function(context) { // Can target any enemy character
+    var array = [context.foe];
+    for(var i = 0; i < context.foe.minions.length; i++) {
+        var minion = context.foe.minions[i];
+        array.push(minion);
+    }
+    return finalize(array, context);
+};
 
 module.exports.allyMinion = function(context) { // Can target friendly minions
     var array = [];
@@ -120,6 +132,30 @@ module.exports.enemyMinion = function(context) { // Can target enemy minions
 
 module.exports.player = function(context) { // Can target either player
     var array = [context.player, context.foe];
+    return finalize(array, context);
+};
+
+module.exports.SkybreakerVindicator = function(context) { // Can target everything except your hero
+    var array = [context.foe];
+    for(var i = 0; i < context.player.minions.length; i++) {
+        var minion = context.player.minions[i];
+        array.push(minion);
+    }
+    for(i = 0; i < context.foe.minions.length; i++) {
+        minion = context.foe.minions[i];
+        array.push(minion);
+    }
+    return finalize(array, context);
+}
+
+module.exports.Executioner = function(context) { // Can only target frozen minions
+    var array = [];
+    for(var i in context.foe.minions) {
+        var minion = context.foe.minions[i];
+        if(minion.hasEffectName("Frozen")) {
+            array.push(minion);
+        }
+    }
     return finalize(array, context);
 };
 

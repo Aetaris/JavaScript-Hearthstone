@@ -1,484 +1,948 @@
 
 -----------------------------------------------------------------------------------------------------------------------------------------------
 
-Red: Druid
-Blue: Druid
+Warrior-4400
 
-Blue Druid draws a Ancient of War.
-Blue Druid draws a Aya Blackpaw.
-Blue Druid draws a Azure Drake.
-Blue Druid mulligans Ancient of War.
-Blue Druid draws a Raven Idol.
-Blue Druid mulligans Aya Blackpaw.
-Blue Druid draws a Jade Idol.
-Blue Druid mulligans Azure Drake.
-Blue Druid draws a Wrath.
+1: Shield Slam
+1: Whirlwind
+2: Battle Rage
+2: Fiery War Axe
+2: Mechwarper
+2: Public Defender
+2: Wretched Ghoul
+3: Argent Horserider
+3: Deathspeaker Disciple
+3: Frothing Berserker
+3: Prince Keleseth [L]
+3: Sergeant Sally [L]
+3: Shield Block x2
+3: Val'kyr Shadowguard
+4: Grimy Gadgeteer x2
+4: Twilight Guardian
+5: Undying Spectre
+6: Orgrim's Hammer [L]
+6: Shadowmourne x2
+7: Don Han'Cho [L]
+8: High Overlord Saurfang [L]
+9: Alexstrasza [L]
+9: Arch-Thief Rafaam [L]
+10: Y'Shaarj, Rage Unbound [L]
+12: Arcane Giant x2
+20: Flesh Giant
 
 
 
-Red Druid draws a Wrath.
-Red Druid draws a Jade Spirit.
-Red Druid draws a Lotus Agents.
-Red Druid draws a Raven Idol.
-Red Druid mulligans Lotus Agents.
-Red Druid draws a Ancient of War.
-Red Druid is given The Coin.
+Paladin-2127
 
-It is now the Blue Druid's turn.
+1: Clockwork Gnome
+1: Elven Archer
+2: Equality x2
+2: Mechwarper
+2: Ravenous Geist
+3: Aldor Peacekeeper x2
+3: Big Game Hunter
+3: Blackwing Technician
+3: Bone Rager
+3: Grimestreet Smuggler
+3: Spider Tank
+3: Stoneskin Gargoyle
+3: Val'kyr Shadowguard
+4: Blessing of Kings
+4: C'Thun's Chosen
+5: Abomination
+5: Kor'kron Berserker
+5: Nightblade
+6: Lord Marrowgar [L]
+6: Orgrim's Hammer [L]
+6: The Skybreaker [L]
+7: Argent Redeemer
+7: Don Han'Cho [L]
+7: Guardian of Kings
+7: Hogger, Scourge of Elwynn [L]
+8: Echo of Arthas [L]
+8: Tirion Fordring [L]
+10: C'Thun [L]
 
-The Blue Druid now has 1 Mana Crystals and 27 cards left in their deck.
-Blue Druid's Health: 30 || Red Druid's Health: 30
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Nourish.
-The Blue Druid's hand now contains:
-[1] Raven Idol - 1
-[2] Jade Idol - 1
-[3] Wrath - 2
-[4] Nourish - 5
-Blue Druid casts Raven Idol, discovering a minion.
-Options: Beckoner of Evil, Malorne, Nexus-Champion Saraad.
-Card chosen: Nexus-Champion Saraad
 
-It is now the Red Druid's turn.
 
-The Red Druid now has 1 Mana Crystals and 26 cards left in their deck.
-Red Druid's Health: 30 || Blue Druid's Health: 30
-The Red Druid does not currently have any minions on the board.
-Red Druid draws a Aya Blackpaw.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Jade Spirit - 4
-[3] Raven Idol - 1
-[4] Ancient of War - 7
+Red: Warrior
+Blue: Paladin
+
+Diablo: Heaven will burn, and you with it.
+
+Red Warrior draws Prince Keleseth.
+Red Warrior draws Sergeant Sally.
+Red Warrior draws Shield Slam.
+
+
+
+Blue Paladin draws Guardian of Kings.
+Blue Paladin draws Echo of Arthas.
+Blue Paladin draws Nightblade.
+Blue Paladin draws Grimestreet Smuggler.
+Blue Paladin mulligans Guardian of Kings.
+Blue Paladin draws Hogger, Scourge of Elwynn.
+Blue Paladin mulligans Echo of Arthas.
+Blue Paladin draws Tirion Fordring.
+Blue Paladin is given The Coin.
+
+
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 77 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 74 health.
+
+It is now turn 1, the Red Warrior's turn.
+
+The Red Warrior now has 1 Mana Crystals and 57 cards left in their deck.
+Red Warrior's Health: 74 || Blue Paladin's Health: 80
+Diablo's Health: 66[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Twilight Guardian.
+The Red Warrior's hand now contains:
+[1] Prince Keleseth - 3
+[2] Sergeant Sally - 3
+[3] Shield Slam - 1
+[4] Twilight Guardian - 4
+
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 77 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 74 health.
+
+It is now turn 1, the Blue Paladin's turn.
+
+The Blue Paladin now has 1 Mana Crystals and 56 cards left in their deck.
+Blue Paladin's Health: 74 || Red Warrior's Health: 74
+Diablo's Health: 66[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Spider Tank.
+The Blue Paladin's hand now contains:
+[1] Nightblade - 5
+[2] Grimestreet Smuggler - 3
+[3] Hogger, Scourge of Elwynn - 7
+[4] Tirion Fordring - 8
 [5] The Coin - 0
-[6] Aya Blackpaw - 6
-Red Druid casts Raven Idol, discovering a minion.
-Options: North Sea Kraken, Gadgetzan Auctioneer, Twilight Elder.
-Card chosen: North Sea Kraken
+[6] Spider Tank - 3
 
-It is now the Blue Druid's turn.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 71 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 71 health.
 
-The Blue Druid now has 2 Mana Crystals and 26 cards left in their deck.
-Blue Druid's Health: 30 || Red Druid's Health: 30
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Jade Behemoth.
-The Blue Druid's hand now contains:
-[1] Jade Idol - 1
-[2] Wrath - 2
-[3] Nourish - 5
-[4] Nexus-Champion Saraad - 5
-[5] Jade Behemoth - 6
-Blue Druid casts Jade Idol, summoning a 1/1 Crude Jade Golem.
+It is now turn 2, the Red Warrior's turn.
 
-It is now the Red Druid's turn.
+The Red Warrior now has 2 Mana Crystals and 56 cards left in their deck.
+Red Warrior's Health: 71 || Blue Paladin's Health: 71
+Diablo's Health: 66[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws High Overlord Saurfang.
+The Red Warrior's hand now contains:
+[1] Prince Keleseth - 3
+[2] Sergeant Sally - 3
+[3] Shield Slam - 1
+[4] Twilight Guardian - 4
+[5] High Overlord Saurfang - 8
+The Red Warrior casts Armor Up!, gaining 2 Armor for a total of 2.
 
-The Red Druid now has 2 Mana Crystals and 25 cards left in their deck.
-Red Druid's Health: 30 || Blue Druid's Health: 30
-The Red Druid does not currently have any minions on the board.
-Red Druid draws a Innervate.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Jade Spirit - 4
-[3] Ancient of War - 7
-[4] The Coin - 0
-[5] Aya Blackpaw - 6
-[6] North Sea Kraken - 9
-[7] Innervate - 0
-The Red Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
-Red Druid attacks Blue Crude Jade Golem.
-Blue Crude Jade Golem takes 1 damage, reducing them to 0 health.
-Blue Crude Jade Golem has been killed!
-Red Druid blocks 1 damage, reducing them to 0 armor and 30 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 68 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 65 health.
 
-It is now the Blue Druid's turn.
+It is now turn 2, the Blue Paladin's turn.
 
-The Blue Druid now has 3 Mana Crystals and 25 cards left in their deck.
-Blue Druid's Health: 30 || Red Druid's Health: 30
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Azure Drake.
-The Blue Druid's hand now contains:
-[1] Wrath - 2
-[2] Nourish - 5
-[3] Nexus-Champion Saraad - 5
-[4] Jade Behemoth - 6
-[5] Azure Drake - 5
-The Blue Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
-Blue Druid attacks Red Druid.
-Red Druid takes 1 damage, reducing them to 29 health.
+The Blue Paladin now has 2 Mana Crystals and 55 cards left in their deck.
+Blue Paladin's Health: 65 || Red Warrior's Health: 71 [2]
+Diablo's Health: 66[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws The Skybreaker.
+Blue The Skybreaker fires at enemies with its cannon!
+Demonic Diablo takes 4 damage, reducing them to 62 health.
+Demonic Diablo takes 4 damage, reducing them to 58 health.
+The Blue Paladin's hand now contains:
+[1] Nightblade - 5
+[2] Grimestreet Smuggler - 3
+[3] Hogger, Scourge of Elwynn - 7
+[4] Tirion Fordring - 8
+[5] The Coin - 0
+[6] Spider Tank - 3
+[7] The Skybreaker - 6
+The Blue Paladin plays The Coin, gaining 1 mana crystal and bringing their total up to 3.
+The Blue Paladin summons Grimestreet Smuggler!
+Blue Grimestreet Smuggler's battlecry gives smuggled equipment to The Skybreaker in Blue Paladin's hand, giving them +1/+1 (up to 8/7).
 
-It is now the Red Druid's turn.
+Diablo: I have you now, little mortals.
+Diablo ensnares Blue Grimestreet Smuggler in a shadow prison.
+Ensnared Grimestreet Smuggler's resistance weakens. Their timer is reduced to 3.
 
-The Red Druid now has 3 Mana Crystals and 24 cards left in their deck.
-Red Druid's Health: 29 || Blue Druid's Health: 30 [1]
-The Red Druid does not currently have any minions on the board.
-Red Druid draws a Jade Behemoth.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Jade Spirit - 4
-[3] Ancient of War - 7
-[4] The Coin - 0
-[5] Aya Blackpaw - 6
-[6] North Sea Kraken - 9
-[7] Innervate - 0
-[8] Jade Behemoth - 6
-The Red Druid plays The Coin, gaining 1 mana crystal and bringing their total up to 4.
-The Red Druid summons Jade Spirit!
-Red Jade Spirit's battlecry summons a 1/1 Crude Jade Golem.
+It is now turn 3, the Red Warrior's turn.
 
-It is now the Blue Druid's turn.
+The Red Warrior now has 3 Mana Crystals and 55 cards left in their deck.
+Red Warrior's Health: 71 [2] || Blue Paladin's Health: 65
+Diablo's Health: 58[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Shield Block.
+The Red Warrior's hand now contains:
+[1] Prince Keleseth - 3
+[2] Sergeant Sally - 3
+[3] Shield Slam - 1
+[4] Twilight Guardian - 4
+[5] High Overlord Saurfang - 8
+[6] Shield Block - 3
+The Red Warrior summons Prince Keleseth!
 
-The Blue Druid now has 4 Mana Crystals and 24 cards left in their deck.
-Blue Druid's Health: 30 [1] || Red Druid's Health: 29
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Azure Drake.
-The Blue Druid's hand now contains:
-[1] Wrath - 2
-[2] Nourish - 5
-[3] Nexus-Champion Saraad - 5
-[4] Jade Behemoth - 6
-[5] Azure Drake - 5
-[6] Azure Drake - 5
-The Blue Druid casts Wrath on Crude Jade Golem, dealing 3 damage.
-Red Crude Jade Golem takes 3 damage, reducing them to 0 health.
-Red Crude Jade Golem has been killed!
-The Blue Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
-Blue Druid attacks Red Jade Spirit.
-Red Jade Spirit takes 1 damage, reducing them to 2 health.
-Blue Druid blocks 2 damage, reducing them to 0 armor and 30 health.
+Diablo: Ensnared within your own terror.
+Diablo ensnares Red Prince Keleseth in a shadow prison.
+Ensnared Grimestreet Smuggler's resistance weakens. Their timer is reduced to 2.
+Ensnared Prince Keleseth's resistance weakens. Their timer is reduced to 2.
 
-It is now the Red Druid's turn.
+It is now turn 3, the Blue Paladin's turn.
 
-The Red Druid now has 4 Mana Crystals and 23 cards left in their deck.
-Red Druid's Health: 29 || Blue Druid's Health: 30
-The Red Druid currently has 1 minions on the board:
-[Jade Spirit] - 2/2
-Red Druid draws a Azure Drake.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Ancient of War - 7
-[3] Aya Blackpaw - 6
-[4] North Sea Kraken - 9
-[5] Innervate - 0
-[6] Jade Behemoth - 6
-[7] Azure Drake - 5
-The Red Druid casts Innervate, gaining 2 additional mana crystals (a total of 6) this turn.
-The Red Druid summons Azure Drake!
-Red Azure Drake's battlecry draws a card for Red Druid.
-Red Druid draws a Nourish.
-Red Jade Spirit attacks Blue Druid.
-Blue Druid takes 2 damage, reducing them to 28 health.
+The Blue Paladin now has 3 Mana Crystals and 54 cards left in their deck.
+Blue Paladin's Health: 65 || Red Warrior's Health: 71 [2]
+Diablo's Health: 58[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Bone Rager.
+The Blue Paladin's hand now contains:
+[1] Nightblade - 5
+[2] Hogger, Scourge of Elwynn - 7
+[3] Tirion Fordring - 8
+[4] Spider Tank - 3
+[5] The Skybreaker - 6
+[6] Bone Rager - 3
+The Blue Paladin summons Spider Tank!
 
-It is now the Blue Druid's turn.
+Diablo launches a wave of fire outwards, damaging all minions.
+Blue Spider Tank takes 2 damage, reducing them to 2 health.
+Ensnared Grimestreet Smuggler's resistance weakens. Their timer is reduced to 1.
+Ensnared Prince Keleseth's resistance weakens. Their timer is reduced to 1.
 
-The Blue Druid now has 5 Mana Crystals and 23 cards left in their deck.
-Blue Druid's Health: 28 || Red Druid's Health: 29
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Jade Spirit.
-The Blue Druid's hand now contains:
-[1] Nourish - 5
-[2] Nexus-Champion Saraad - 5
-[3] Jade Behemoth - 6
-[4] Azure Drake - 5
-[5] Azure Drake - 5
-[6] Jade Spirit - 4
-Blue Druid casts Nourish, drawing 3 cards.
-Blue Druid draws a Innervate.
-Blue Druid draws a Nourish.
-Blue Druid draws a Wild Growth.
+It is now turn 4, the Red Warrior's turn.
 
-It is now the Red Druid's turn.
+The Red Warrior now has 4 Mana Crystals and 54 cards left in their deck.
+Red Warrior's Health: 71 [2] || Blue Paladin's Health: 65
+Diablo's Health: 58[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Shield Block.
+The Red Warrior's hand now contains:
+[1] Sergeant Sally - 3
+[2] Shield Slam - 1
+[3] Twilight Guardian - 4
+[4] High Overlord Saurfang - 8
+[5] Shield Block - 3
+[6] Shield Block - 3
+The Red Warrior summons Sergeant Sally!
 
-The Red Druid now has 5 Mana Crystals and 21 cards left in their deck.
-Red Druid's Health: 29 || Blue Druid's Health: 28
-The Red Druid currently has 2 minions on the board:
-[Jade Spirit] - 2/2
-[Azure Drake] - 4/4
-Red Druid draws a Ancient of War.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Ancient of War - 7
-[3] Aya Blackpaw - 6
-[4] North Sea Kraken - 9
-[5] Jade Behemoth - 6
-[6] Nourish - 5
-[7] Ancient of War - 7
-Red Druid casts Nourish, drawing 3 cards.
-Red Druid draws a Jade Behemoth.
-Red Druid draws a Raven Idol.
-Red Druid draws a Innervate.
-The Red Druid casts Innervate, gaining 2 additional mana crystals (a total of 2) this turn.
-Red Druid casts Raven Idol, discovering a minion.
-Options: Master Jouster, Beckoner of Evil, Nightblade.
-Card chosen: Master Jouster
-Red Jade Spirit attacks Blue Druid.
-Blue Druid takes 2 damage, reducing them to 26 health.
-Red Azure Drake attacks Blue Druid.
-Blue Druid takes 4 damage, reducing them to 22 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Spider Tank.
+Blue Spider Tank takes 3 damage, reducing them to 0 health.
+Blue Spider Tank has been killed!
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 62 health.
+The shadow prison devours the soul of Ensnared Grimestreet Smuggler, killing them and forming a Demonic Shade.
+Ensnared Grimestreet Smuggler has been killed!
 
-It is now the Blue Druid's turn.
+It is now turn 4, the Blue Paladin's turn.
 
-The Blue Druid now has 6 Mana Crystals and 19 cards left in their deck.
-Blue Druid's Health: 22 || Red Druid's Health: 29
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Lotus Agents.
-The Blue Druid's hand now contains:
-[1] Nexus-Champion Saraad - 5
-[2] Jade Behemoth - 6
-[3] Azure Drake - 5
-[4] Azure Drake - 5
-[5] Jade Spirit - 4
-[6] Innervate - 0
-[7] Nourish - 5
-[8] Wild Growth - 2
-[9] Lotus Agents - 5
-The Blue Druid summons Nexus-Champion Saraad!
-The Blue Druid casts Innervate, gaining 2 additional mana crystals (a total of 3) this turn.
-Blue Druid casts Wild Growth, gaining an empty mana crystal.
+The Blue Paladin now has 4 Mana Crystals and 53 cards left in their deck.
+Blue Paladin's Health: 62 || Red Warrior's Health: 71 [2]
+Diablo's Health: 58[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Big Game Hunter.
+The Blue Paladin's hand now contains:
+[1] Nightblade - 5
+[2] Hogger, Scourge of Elwynn - 7
+[3] Tirion Fordring - 8
+[4] The Skybreaker - 6
+[5] Bone Rager - 3
+[6] Big Game Hunter - 3
+The Blue Paladin summons Bone Rager!
 
-It is now the Red Druid's turn.
+Diablo launches a wave of fire outwards, damaging all minions.
+Blue Bone Rager takes 2 damage, reducing them to 0 health.
+Blue Bone Rager has been killed!
+Red Sergeant Sally takes 2 damage, reducing them to 0 health.
+Red Sergeant Sally has been killed!
+Red Sergeant Sally's deathrattle deals 1 damage to all enemy minions.
+The shadow prison devours the soul of Ensnared Prince Keleseth, killing them and forming a Demonic Shade.
+Ensnared Prince Keleseth has been killed!
 
-The Red Druid now has 6 Mana Crystals and 17 cards left in their deck.
-Red Druid's Health: 29 || Blue Druid's Health: 22
-The Red Druid currently has 2 minions on the board:
-[Jade Spirit] - 2/2
-[Azure Drake] - 4/4
-Red Druid draws a Jade Idol.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Ancient of War - 7
-[3] Aya Blackpaw - 6
-[4] North Sea Kraken - 9
-[5] Jade Behemoth - 6
-[6] Ancient of War - 7
-[7] Jade Behemoth - 6
-[8] Master Jouster - 6
-[9] Jade Idol - 1
-The Red Druid summons Aya Blackpaw!
-Red Aya Blackpaw's battlecry summons a 2/2 Crude Jade Golem.
-Red Jade Spirit attacks Blue Nexus-Champion Saraad.
-Blue Nexus-Champion Saraad takes 2 damage, reducing them to 3 health.
-Red Jade Spirit takes 4 damage, reducing them to 0 health.
-Red Jade Spirit has been killed!
-Red Azure Drake attacks Blue Nexus-Champion Saraad.
-Blue Nexus-Champion Saraad takes 4 damage, reducing them to 0 health.
-Blue Nexus-Champion Saraad has been killed!
-Red Azure Drake takes 4 damage, reducing them to 0 health.
-Red Azure Drake has been killed!
+It is now turn 5, the Red Warrior's turn.
 
-It is now the Blue Druid's turn.
+The Red Warrior now has 5 Mana Crystals and 53 cards left in their deck.
+Red Warrior's Health: 71 [2] || Blue Paladin's Health: 62
+Diablo's Health: 58[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Argent Horserider.
+The Red Warrior's hand now contains:
+[1] Shield Slam - 1
+[2] Twilight Guardian - 4
+[3] High Overlord Saurfang - 8
+[4] Shield Block - 3
+[5] Shield Block - 3
+[6] Argent Horserider - 3
+The Red Warrior summons Twilight Guardian!
+Red Twilight Guardian's battlecry does NOT trigger. There are no dragons in Red Warrior's hand.
 
-The Blue Druid now has 8 Mana Crystals and 18 cards left in their deck.
-Blue Druid's Health: 22 || Red Druid's Health: 29
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Jade Idol.
-The Blue Druid's hand now contains:
-[1] Jade Behemoth - 6
-[2] Azure Drake - 5
-[3] Azure Drake - 5
-[4] Jade Spirit - 4
-[5] Nourish - 5
-[6] Lotus Agents - 5
-[7] Jade Idol - 1
-The Blue Druid summons Jade Behemoth!
-Blue Jade Behemoth's battlecry summons a 2/2 Crude Jade Golem.
-Blue Druid casts Jade Idol, shuffling 3 more Jade Idols into their deck.
+Diablo launches a wave of fire outwards, damaging all minions.
+Red Twilight Guardian takes 2 damage, reducing them to 4 health.
+Demonic Demonic Shade attacks Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 59 health.
 
-It is now the Red Druid's turn.
+It is now turn 5, the Blue Paladin's turn.
 
-The Red Druid now has 7 Mana Crystals and 16 cards left in their deck.
-Red Druid's Health: 29 || Blue Druid's Health: 22
-The Red Druid currently has 2 minions on the board:
-[Aya Blackpaw] - 5/3
-[Crude Jade Golem] - 2/2
-Red Druid draws a Jade Blossom.
-The Red Druid's hand now contains:
-[1] Wrath - 2
-[2] Ancient of War - 7
-[3] North Sea Kraken - 9
-[4] Jade Behemoth - 6
-[5] Ancient of War - 7
-[6] Jade Behemoth - 6
-[7] Master Jouster - 6
-[8] Jade Idol - 1
-[9] Jade Blossom - 3
-The Red Druid casts Wrath on Crude Jade Golem, dealing 3 damage.
-Blue Crude Jade Golem takes 3 damage, reducing them to 0 health.
-Blue Crude Jade Golem has been killed!
-Red Druid casts Jade Idol, summoning a 3/3 Crude Jade Golem.
-Red Druid casts Jade Blossom, gaining an empty mana crystal and summoning a 4/4 Elaborate Jade Golem.
-Red Aya Blackpaw attacks Blue Jade Behemoth.
-Blue Jade Behemoth takes 5 damage, reducing them to 1 health.
-Red Aya Blackpaw takes 3 damage, reducing them to 0 health.
-Red Aya Blackpaw has been killed!
-Red Aya Blackpaw's deathrattle summons a 5/5 Elaborate Jade Golem.
-Red Crude Jade Golem attacks Blue Jade Behemoth.
-Blue Jade Behemoth takes 2 damage, reducing them to 0 health.
-Blue Jade Behemoth has been killed!
-Red Crude Jade Golem takes 3 damage, reducing them to 0 health.
-Red Crude Jade Golem has been killed!
+The Blue Paladin now has 5 Mana Crystals and 52 cards left in their deck.
+Blue Paladin's Health: 59 || Red Warrior's Health: 71 [2]
+Diablo's Health: 58[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Don Han'Cho.
+The Blue Paladin's hand now contains:
+[1] Nightblade - 5
+[2] Hogger, Scourge of Elwynn - 7
+[3] Tirion Fordring - 8
+[4] The Skybreaker - 6
+[5] Big Game Hunter - 3
+[6] Don Han'Cho - 7
+The Blue Paladin summons Nightblade!
+Blue Nightblade's battlecry hurls a knife at Demonic Diablo.
+Demonic Diablo takes 3 damage, reducing them to 55 health.
 
-It is now the Blue Druid's turn.
+Diablo: Ensnared within your own terror.
+Diablo ensnares Red Twilight Guardian in a shadow prison.
+Demonic Demonic Shade attacks Red Warrior.
+Red Warrior takes 3 damage, reducing them to 68 health.
+Demonic Demonic Shade attacks Red Warrior.
+Red Warrior takes 3 damage, reducing them to 65 health.
+Ensnared Twilight Guardian's resistance weakens. Their timer is reduced to 3.
 
-The Blue Druid now has 9 Mana Crystals and 20 cards left in their deck.
-Blue Druid's Health: 22 || Red Druid's Health: 29
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Jade Idol.
-The Blue Druid's hand now contains:
-[1] Azure Drake - 5
-[2] Azure Drake - 5
-[3] Jade Spirit - 4
-[4] Nourish - 5
-[5] Lotus Agents - 5
-[6] Jade Idol - 1
-The Blue Druid summons Azure Drake!
-Blue Azure Drake's battlecry draws a card for Blue Druid.
-Blue Druid draws a Jade Spirit.
-The Blue Druid summons Jade Spirit!
-Blue Jade Spirit's battlecry summons a 3/3 Crude Jade Golem.
+It is now turn 6, the Red Warrior's turn.
 
-It is now the Red Druid's turn.
+The Red Warrior now has 6 Mana Crystals and 52 cards left in their deck.
+Red Warrior's Health: 65 [2] || Blue Paladin's Health: 59
+Diablo's Health: 55[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Shield Slam.
+The Red Warrior's hand now contains:
+[1] Shield Slam - 1
+[2] High Overlord Saurfang - 8
+[3] Shield Block - 3
+[4] Shield Block - 3
+[5] Argent Horserider - 3
+[6] Shield Slam - 1
+The Red Warrior casts Shield Block, gaining 5 Armor and drawing a card.
+Red Warrior draws Alexstrasza.
+The Red Warrior summons Argent Horserider!
+Red Argent Horserider attacks Demonic Demonic Shade.
+Demonic Demonic Shade takes 2 damage, reducing them to 6 health.
+Red Argent Horserider takes 3 damage, reducing them to 0 health.
+Red Argent Horserider has been killed!
 
-The Red Druid now has 9 Mana Crystals and 15 cards left in their deck.
-Red Druid's Health: 29 || Blue Druid's Health: 22
-The Red Druid currently has 3 minions on the board:
-[Crude Jade Golem] - 3/3
-[Elaborate Jade Golem] - 4/4
-[Elaborate Jade Golem] - 5/5
-Red Druid draws a Gadgetzan Auctioneer.
-The Red Druid's hand now contains:
-[1] Ancient of War - 7
-[2] North Sea Kraken - 9
-[3] Jade Behemoth - 6
-[4] Ancient of War - 7
-[5] Jade Behemoth - 6
-[6] Master Jouster - 6
-[7] Gadgetzan Auctioneer - 6
-The Red Druid summons Ancient of War!
-Red Ancient of War's battlecry sinks roots deep into the earth, gaining +5 Health and Taunt.
-The Red Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
-Red Druid attacks Blue Azure Drake.
-Blue Azure Drake takes 1 damage, reducing them to 3 health.
-Red Druid partially blocks 4 damage, reducing them to 0 armor and 26 health.
-Red Crude Jade Golem attacks Blue Jade Spirit.
-Blue Jade Spirit takes 3 damage, reducing them to 0 health.
-Blue Jade Spirit has been killed!
-Red Crude Jade Golem takes 2 damage, reducing them to 1 health.
-Red Elaborate Jade Golem attacks Blue Azure Drake.
-Blue Azure Drake takes 4 damage, reducing them to 0 health.
-Blue Azure Drake has been killed!
-Red Elaborate Jade Golem takes 4 damage, reducing them to 0 health.
-Red Elaborate Jade Golem has been killed!
-Red Elaborate Jade Golem attacks Blue Crude Jade Golem.
-Blue Crude Jade Golem takes 5 damage, reducing them to 0 health.
-Blue Crude Jade Golem has been killed!
-Red Elaborate Jade Golem takes 3 damage, reducing them to 2 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 56 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 53 health.
+Demonic Demonic Shade attacks Blue Nightblade.
+Blue Nightblade takes 3 damage, reducing them to 1 health.
+Demonic Demonic Shade takes 4 damage, reducing them to 2 health.
+Demonic Demonic Shade attacks Blue Nightblade.
+Blue Nightblade takes 3 damage, reducing them to 0 health.
+Blue Nightblade has been killed!
+Demonic Demonic Shade takes 4 damage, reducing them to 4 health.
+Ensnared Twilight Guardian's resistance weakens. Their timer is reduced to 2.
 
-It is now the Blue Druid's turn.
+It is now turn 6, the Blue Paladin's turn.
 
-The Blue Druid now has 10 Mana Crystals and 18 cards left in their deck.
-Blue Druid's Health: 22 || Red Druid's Health: 26
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Living Roots.
-The Blue Druid's hand now contains:
-[1] Azure Drake - 5
-[2] Nourish - 5
-[3] Lotus Agents - 5
-[4] Jade Idol - 1
-[5] Jade Spirit - 4
-[6] Living Roots - 1
-The Blue Druid summons Azure Drake!
-Blue Azure Drake's battlecry draws a card for Blue Druid.
-Blue Druid draws a Jade Blossom.
-The Blue Druid summons Lotus Agents!
-Blue Lotus Agents's battlecry offers the Blue Druid a Druid, Rogue and Shaman card to choose from.
-Options: Ancient of Lore, Backstab, Whirling Zap-o-Matic.
-Card chosen: Backstab
+The Blue Paladin now has 6 Mana Crystals and 51 cards left in their deck.
+Blue Paladin's Health: 53 || Red Warrior's Health: 65 [7]
+Diablo's Health: 55[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Aldor Peacekeeper.
+The Blue Paladin's hand now contains:
+[1] Hogger, Scourge of Elwynn - 7
+[2] Tirion Fordring - 8
+[3] The Skybreaker - 6
+[4] Big Game Hunter - 3
+[5] Don Han'Cho - 7
+[6] Aldor Peacekeeper - 3
+The Blue Paladin summons The Skybreaker!
 
-It is now the Red Druid's turn.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 50 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 62 health.
+Demonic Demonic Shade attacks Blue The Skybreaker.
+Blue The Skybreaker takes 3 damage, reducing them to 4 health.
+Demonic Demonic Shade takes 8 damage, reducing them to 0 health.
+Demonic Demonic Shade has been killed!
+Ensnared Twilight Guardian's resistance weakens. Their timer is reduced to 1.
 
-The Red Druid now has 10 Mana Crystals and 14 cards left in their deck.
-Red Druid's Health: 26 || Blue Druid's Health: 22
-The Red Druid currently has 3 minions on the board:
-[Crude Jade Golem] - 3/1
-[Elaborate Jade Golem] - 5/2
-[Ancient of War] - 5/10
-Red Druid draws a Wrath.
-The Red Druid's hand now contains:
-[1] North Sea Kraken - 9
-[2] Jade Behemoth - 6
-[3] Ancient of War - 7
-[4] Jade Behemoth - 6
-[5] Master Jouster - 6
-[6] Gadgetzan Auctioneer - 6
-[7] Wrath - 2
-The Red Druid summons North Sea Kraken!
-The Red North Sea Kraken spits a jet of water at Lotus Agents.
-Blue Lotus Agents takes 4 damage, reducing them to 0 health.
-Blue Lotus Agents has been killed!
-Red Crude Jade Golem attacks Blue Druid.
-Blue Druid takes 3 damage, reducing them to 19 health.
-Red Elaborate Jade Golem attacks Blue Azure Drake.
-Blue Azure Drake takes 5 damage, reducing them to 0 health.
-Blue Azure Drake has been killed!
-Red Elaborate Jade Golem takes 4 damage, reducing them to 0 health.
-Red Elaborate Jade Golem has been killed!
-Red Ancient of War attacks Blue Druid.
-Blue Druid takes 5 damage, reducing them to 14 health.
+It is now turn 7, the Red Warrior's turn.
 
-It is now the Blue Druid's turn.
+The Red Warrior now has 7 Mana Crystals and 50 cards left in their deck.
+Red Warrior's Health: 62 [7] || Blue Paladin's Health: 50
+Diablo's Health: 55[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Orgrim's Hammer.
+Red Orgrim's Hammer fires a burst of missiles at its enemies!
+Ensnared Twilight Guardian takes 1 damage, reducing them to 3 health.
+Ensnared Twilight Guardian is freed from the Shadow Prison.
+Demonic Diablo takes 1 damage, reducing them to 54 health.
+Demonic Demonic Shade takes 1 damage, reducing them to 3 health.
+Demonic Demonic Shade takes 1 damage, reducing them to 2 health.
+Demonic Diablo takes 1 damage, reducing them to 53 health.
+Demonic Diablo takes 1 damage, reducing them to 52 health.
+The Red Warrior's hand now contains:
+[1] Shield Slam - 1
+[2] High Overlord Saurfang - 8
+[3] Shield Block - 3
+[4] Shield Slam - 1
+[5] Alexstrasza - 9
+[6] Orgrim's Hammer - 6
+The Red Warrior casts Shield Block, gaining 5 Armor and drawing a card.
+Red Warrior draws Don Han'Cho.
+The Red Warrior casts Armor Up!, gaining 2 Armor for a total of 14.
+Red Twilight Guardian attacks Demonic Demonic Shade.
+Demonic Demonic Shade takes 2 damage, reducing them to 0 health.
+Demonic Demonic Shade has been killed!
+Red Twilight Guardian takes 3 damage, reducing them to 0 health.
+Red Twilight Guardian has been killed!
 
-The Blue Druid now has 10 Mana Crystals and 16 cards left in their deck.
-Blue Druid's Health: 14 || Red Druid's Health: 26
-The Blue Druid does not currently have any minions on the board.
-Blue Druid draws a Swipe.
-The Blue Druid's hand now contains:
-[1] Nourish - 5
-[2] Jade Idol - 1
-[3] Jade Spirit - 4
-[4] Living Roots - 1
-[5] Jade Blossom - 3
-[6] Backstab - 0
-[7] Swipe - 4
-Blue Druid casts Nourish, drawing 3 cards.
-Blue Druid draws a Jade Blossom.
-Blue Druid draws a Jade Idol.
-Blue Druid draws a Raven Idol.
-The Blue Druid summons Jade Spirit!
-Blue Jade Spirit's battlecry summons a 4/4 Elaborate Jade Golem.
-Blue Druid casts Jade Idol, summoning a 5/5 Elaborate Jade Golem.
+Diablo: I have you now, little mortals.
+Diablo ensnares Blue The Skybreaker in a shadow prison.
+Ensnared The Skybreaker's resistance weakens. Their timer is reduced to 3.
 
-It is now the Red Druid's turn.
+It is now turn 7, the Blue Paladin's turn.
 
-The Red Druid now has 10 Mana Crystals and 13 cards left in their deck.
-Red Druid's Health: 26 || Blue Druid's Health: 14
-The Red Druid currently has 3 minions on the board:
-[Crude Jade Golem] - 3/1
-[Ancient of War] - 5/10
-[North Sea Kraken] - 9/7
-Red Druid draws a Azure Drake.
-The Red Druid's hand now contains:
-[1] Jade Behemoth - 6
-[2] Ancient of War - 7
-[3] Jade Behemoth - 6
-[4] Master Jouster - 6
-[5] Gadgetzan Auctioneer - 6
-[6] Wrath - 2
-[7] Azure Drake - 5
-The Red Druid summons Jade Behemoth!
-Red Jade Behemoth's battlecry summons a 6/6 Elaborate Jade Golem.
-The Red Druid casts Wrath on Elaborate Jade Golem, dealing 3 damage.
-Blue Elaborate Jade Golem takes 3 damage, reducing them to 2 health.
-The Red Druid casts Shapeshift, gaining 1 Armor and 1 Damage this turn.
-Red Druid attacks Blue Elaborate Jade Golem.
-Blue Elaborate Jade Golem takes 1 damage, reducing them to 1 health.
-Red Druid partially blocks 5 damage, reducing them to 0 armor and 22 health.
-Red Crude Jade Golem attacks Blue Elaborate Jade Golem.
-Blue Elaborate Jade Golem takes 3 damage, reducing them to 0 health.
-Blue Elaborate Jade Golem has been killed!
-Red Crude Jade Golem takes 5 damage, reducing them to 0 health.
-Red Crude Jade Golem has been killed!
-Red North Sea Kraken attacks Blue Druid.
-Blue Druid takes 9 damage, reducing them to 5 health.
-Red Ancient of War attacks Blue Druid.
-Blue Druid takes 5 damage, reducing them to 0 health.
-The Blue Druid has been defeated! The Red Druid is victorious!
+The Blue Paladin now has 7 Mana Crystals and 50 cards left in their deck.
+Blue Paladin's Health: 50 || Red Warrior's Health: 62 [14]
+Diablo's Health: 52[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Equality.
+The Blue Paladin's hand now contains:
+[1] Hogger, Scourge of Elwynn - 7
+[2] Tirion Fordring - 8
+[3] Big Game Hunter - 3
+[4] Don Han'Cho - 7
+[5] Aldor Peacekeeper - 3
+[6] Equality - 2
+The Blue Paladin summons Hogger, Scourge of Elwynn!
+
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 47 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 59 health.
+Ensnared The Skybreaker's resistance weakens. Their timer is reduced to 2.
+
+It is now turn 8, the Red Warrior's turn.
+
+The Red Warrior now has 8 Mana Crystals and 48 cards left in their deck.
+Red Warrior's Health: 59 [14] || Blue Paladin's Health: 47
+Diablo's Health: 52[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Argent Horserider.
+The Red Warrior's hand now contains:
+[1] Shield Slam - 1
+[2] High Overlord Saurfang - 8
+[3] Shield Slam - 1
+[4] Alexstrasza - 9
+[5] Orgrim's Hammer - 6
+[6] Don Han'Cho - 7
+[7] Argent Horserider - 3
+The Red Warrior summons Orgrim's Hammer!
+
+Diablo: I have you now, little mortals.
+Diablo ensnares Red Orgrim's Hammer in a shadow prison.
+Ensnared The Skybreaker's resistance weakens. Their timer is reduced to 1.
+Ensnared Orgrim's Hammer's resistance weakens. Their timer is reduced to 6.
+
+It is now turn 8, the Blue Paladin's turn.
+
+The Blue Paladin now has 8 Mana Crystals and 49 cards left in their deck.
+Blue Paladin's Health: 47 || Red Warrior's Health: 59 [14]
+Diablo's Health: 52[66]
+The Blue Paladin currently has 1 minions on the board:
+[Hogger, Scourge of Elwynn] - 6/6
+Blue Paladin draws C'Thun.
+The Blue Paladin's hand now contains:
+[1] Tirion Fordring - 8
+[2] Big Game Hunter - 3
+[3] Don Han'Cho - 7
+[4] Aldor Peacekeeper - 3
+[5] Equality - 2
+[6] C'Thun - 10
+The Blue Paladin summons Tirion Fordring!
+Blue Hogger, Scourge of Elwynn attacks Ensnared The Skybreaker.
+Ensnared The Skybreaker takes 1 damage, reducing them to 3 health.
+Ensnared The Skybreaker is freed from the Shadow Prison.
+Blue Hogger, Scourge of Elwynn takes 8 damage, reducing them to 0 health.
+Tentacles break off of Blue Hogger, Scourge of Elwynn, forming a 2/2 Gnoll with Taunt!
+Blue Hogger, Scourge of Elwynn has been killed!
+Blue The Skybreaker attacks Ensnared Orgrim's Hammer.
+Ensnared Orgrim's Hammer takes 1 damage, reducing them to 6 health.
+Ensnared Orgrim's Hammer is freed from the Shadow Prison.
+Blue The Skybreaker takes 6 damage, reducing them to 0 health.
+Blue The Skybreaker has been killed!
+
+Diablo: I have you now, little mortals.
+Diablo ensnares Blue Tirion Fordring in a shadow prison.
+Ensnared Tirion Fordring's resistance weakens. Their timer is reduced to 5.
+
+It is now turn 9, the Red Warrior's turn.
+
+The Red Warrior now has 9 Mana Crystals and 47 cards left in their deck.
+Red Warrior's Health: 59 [14] || Blue Paladin's Health: 47
+Diablo's Health: 52[66]
+The Red Warrior currently has 2 minions on the board:
+[Gnoll] - 2/2
+[Orgrim's Hammer] - 6/6
+Red Warrior draws Frothing Berserker.
+The Red Warrior's hand now contains:
+[1] High Overlord Saurfang - 8
+[2] Alexstrasza - 9
+[3] Don Han'Cho - 7
+[4] Argent Horserider - 3
+[5] Frothing Berserker - 3
+The Red Warrior summons High Overlord Saurfang!
+Red High Overlord Saurfang grants Red Warrior three free copies of Cleave, a tiny sliver of his power.
+Red Gnoll attacks Ensnared Tirion Fordring.
+Ensnared Tirion Fordring takes 1 damage, reducing them to 5 health.
+Ensnared Tirion Fordring is freed from the Shadow Prison.
+Red Gnoll takes 6 damage, reducing them to 0 health.
+Red Gnoll has been killed!
+Red Orgrim's Hammer attacks Demonic Diablo.
+Demonic Diablo takes 6 damage, reducing them to 46 health.
+
+Diablo launches a wave of fire outwards, damaging all minions.
+Blue Tirion Fordring takes 2 damage, reducing them to 3 health.
+Red Orgrim's Hammer takes 2 damage, reducing them to 4 health.
+Red High Overlord Saurfang takes 2 damage, reducing them to 4 health.
+
+It is now turn 9, the Blue Paladin's turn.
+
+The Blue Paladin now has 9 Mana Crystals and 48 cards left in their deck.
+Blue Paladin's Health: 47 || Red Warrior's Health: 59 [14]
+Diablo's Health: 46[66]
+The Blue Paladin currently has 1 minions on the board:
+[Tirion Fordring] - 6/3 [Shield]
+Blue Paladin draws Stoneskin Gargoyle.
+The Blue Paladin's hand now contains:
+[1] Big Game Hunter - 3
+[2] Don Han'Cho - 7
+[3] Aldor Peacekeeper - 3
+[4] Equality - 2
+[5] C'Thun - 10
+[6] Stoneskin Gargoyle - 3
+The Blue Paladin summons Don Han'Cho!
+Blue Don Han'Cho's battlecry gives smuggled equipment to Stoneskin Gargoyle in Blue Paladin's hand, giving them +5/+5 (up to 6/9).
+The Blue Paladin casts Reinforce, summoning a 1/1 Silver Hand Recruit.
+Blue Tirion Fordring attacks Demonic Diablo.
+Demonic Diablo takes 6 damage, reducing them to 40 health.
+
+Diablo launches a wave of fire outwards, damaging all minions.
+Blue Tirion Fordring takes 2 damage, reducing them to 1 health.
+Blue Don Han'Cho takes 2 damage, reducing them to 4 health.
+Blue Silver Hand Recruit takes 2 damage, reducing them to 0 health.
+Blue Silver Hand Recruit has been killed!
+Red Orgrim's Hammer takes 2 damage, reducing them to 2 health.
+Red High Overlord Saurfang takes 2 damage, reducing them to 2 health.
+
+It is now turn 10, the Red Warrior's turn.
+
+The Red Warrior now has 10 Mana Crystals and 46 cards left in their deck.
+Red Warrior's Health: 59 [14] || Blue Paladin's Health: 47
+Diablo's Health: 40[66]
+The Red Warrior currently has 2 minions on the board:
+[Orgrim's Hammer] - 6/2
+[High Overlord Saurfang] - 7/2
+Red Warrior draws Battle Rage.
+The Red Warrior's hand now contains:
+[1] Alexstrasza - 9
+[2] Don Han'Cho - 7
+[3] Argent Horserider - 3
+[4] Frothing Berserker - 3
+[5] Cleave - 2
+[6] Cleave - 2
+[7] Cleave - 2
+[8] Battle Rage - 2
+The Red Warrior summons Alexstrasza!
+Red Alextrasza's battlecry manipulates the life energy of the undefined undefined, setting their Health to 15.
+Red Orgrim's Hammer attacks Demonic Diablo.
+Demonic Diablo takes 6 damage, reducing them to 34 health.
+Red High Overlord Saurfang attacks Demonic Diablo.
+Demonic Diablo takes 7 damage, reducing them to 27 health.
+
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red High Overlord Saurfang.
+Red High Overlord Saurfang takes 3 damage, reducing them to 0 health.
+Red High Overlord Saurfang has been killed!
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 44 health.
+Diablo: The heavens BURN around you!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 41 health.
+Diablo strikes Blue Don Han'Cho.
+Blue Don Han'Cho takes 3 damage, reducing them to 1 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Don Han'Cho.
+Blue Don Han'Cho takes 3 damage, reducing them to 0 health.
+Blue Don Han'Cho has been killed!
+Diablo strikes Red Alexstrasza.
+Red Alexstrasza takes 3 damage, reducing them to 5 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 38 health.
+Diablo strikes Blue Tirion Fordring.
+Blue Tirion Fordring takes 3 damage, reducing them to 0 health.
+Blue Tirion Fordring has been killed!
+Blue Tirion Fordring's deathrattle equips Blue Paladin with a 5/3 Ashbringer weapon.
+
+It is now turn 10, the Blue Paladin's turn.
+
+The Blue Paladin now has 10 Mana Crystals and 47 cards left in their deck.
+Blue Paladin's Health: 38 || Red Warrior's Health: 59 [14]
+Diablo's Health: 27[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Orgrim's Hammer.
+Blue Orgrim's Hammer fires a burst of missiles at its enemies!
+Demonic Diablo takes 1 damage, reducing them to 26 health.
+Demonic Diablo takes 1 damage, reducing them to 25 health.
+Demonic Diablo takes 1 damage, reducing them to 24 health.
+Demonic Diablo takes 1 damage, reducing them to 23 health.
+Demonic Diablo takes 1 damage, reducing them to 22 health.
+Demonic Diablo takes 1 damage, reducing them to 21 health.
+The Blue Paladin's hand now contains:
+[1] Big Game Hunter - 3
+[2] Aldor Peacekeeper - 3
+[3] Equality - 2
+[4] C'Thun - 10
+[5] Stoneskin Gargoyle - 3
+[6] Orgrim's Hammer - 6
+The Blue Paladin summons Stoneskin Gargoyle!
+The Blue Paladin summons Orgrim's Hammer!
+Blue Paladin attacks Demonic Diablo.
+Demonic Diablo takes 5 damage, reducing them to 16 health.
+Remaining durability on the Blue Paladin's Ashbringer: 2.
+
+Diablo launches a wave of fire outwards, damaging all minions.
+Blue Stoneskin Gargoyle takes 2 damage, reducing them to 7 health.
+Blue Orgrim's Hammer takes 2 damage, reducing them to 5 health.
+Red Orgrim's Hammer takes 2 damage, reducing them to 0 health.
+Red Orgrim's Hammer has been killed!
+Red Alexstrasza takes 2 damage, reducing them to 3 health.
+Diablo: The heavens BURN around you!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Alexstrasza.
+Red Alexstrasza takes 3 damage, reducing them to 0 health.
+Red Alexstrasza has been killed!
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 56 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Orgrim's Hammer.
+Blue Orgrim's Hammer takes 3 damage, reducing them to 2 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 53 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 50 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 47 health.
+
+It is now turn 11, the Red Warrior's turn.
+
+The Red Warrior now has 10 Mana Crystals and 45 cards left in their deck.
+Red Warrior's Health: 47 [14] || Blue Paladin's Health: 38
+Diablo's Health: 16[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Flesh Giant.
+The Red Warrior's hand now contains:
+[1] Don Han'Cho - 7
+[2] Argent Horserider - 3
+[3] Frothing Berserker - 3
+[4] Cleave - 2
+[5] Cleave - 2
+[6] Cleave - 2
+[7] Battle Rage - 2
+[8] Flesh Giant - 9
+The Red Warrior summons Don Han'Cho!
+Red Don Han'Cho's battlecry gives smuggled equipment to Flesh Giant in Red Warrior's hand, giving them +5/+5 (up to 13/13).
+The Red Warrior summons Frothing Berserker!
+
+Diablo: Ensnared within your own terror.
+Diablo ensnares Blue Stoneskin Gargoyle in a shadow prison.
+Diablo: The heavens BURN around you!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 44 health.
+Red Frothing Berserker revels in the bloodshed, reaching 3 damage.
+Diablo strikes Blue Orgrim's Hammer.
+Blue Orgrim's Hammer takes 3 damage, reducing them to 0 health.
+Red Frothing Berserker revels in the bloodshed, reaching 4 damage.
+Blue Orgrim's Hammer has been killed!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Don Han'Cho.
+Red Don Han'Cho takes 3 damage, reducing them to 3 health.
+Red Frothing Berserker revels in the bloodshed, reaching 5 damage.
+Diablo strikes Red Don Han'Cho.
+Red Don Han'Cho takes 3 damage, reducing them to 0 health.
+Red Frothing Berserker revels in the bloodshed, reaching 6 damage.
+Red Don Han'Cho has been killed!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 35 health.
+Red Frothing Berserker revels in the bloodshed, reaching 7 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 32 health.
+Red Frothing Berserker revels in the bloodshed, reaching 8 damage.
+Ensnared Stoneskin Gargoyle's resistance weakens. Their timer is reduced to 6.
+
+It is now turn 11, the Blue Paladin's turn.
+
+The Blue Paladin now has 10 Mana Crystals and 46 cards left in their deck.
+Blue Paladin's Health: 32 || Red Warrior's Health: 44 [14]
+Diablo's Health: 16[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Guardian of Kings.
+The Blue Paladin's hand now contains:
+[1] Big Game Hunter - 3
+[2] Aldor Peacekeeper - 3
+[3] Equality - 2
+[4] C'Thun - 10
+[5] Guardian of Kings - 7
+The Blue Paladin summons Aldor Peacekeeper!
+Blue Aldor Peacekeeper's battlecry imposes order on undefined undefined, reducing their damage to 1.
+The Blue Paladin casts Equality, setting the health of all minions in play to 1.
+The Blue Paladin casts Reinforce, summoning a 1/1 Silver Hand Recruit.
+Blue Paladin attacks Ensnared Stoneskin Gargoyle.
+Ensnared Stoneskin Gargoyle takes 1 damage, reducing them to 0 health.
+Ensnared Stoneskin Gargoyle is freed from the Shadow Prison.
+Blue Stoneskin Gargoyle has been killed!
+Blue Paladin takes 6 damage, reducing them to 26 health.
+Red Frothing Berserker revels in the bloodshed, reaching 9 damage.
+Remaining durability on the Blue Paladin's Ashbringer: 1.
+Blue Stoneskin Gargoyle has been killed!
+
+Diablo: I have you now, little mortals.
+Diablo ensnares Blue Aldor Peacekeeper in a shadow prison.
+Diablo: Enough! This ends now!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Frothing Berserker.
+Red Frothing Berserker takes 3 damage, reducing them to 1 health.
+Red Frothing Berserker revels in the bloodshed, reaching 10 damage.
+Diablo strikes Red Frothing Berserker.
+Red Frothing Berserker takes 3 damage, reducing them to 0 health.
+Red Frothing Berserker revels in the bloodshed, reaching 11 damage.
+Red Frothing Berserker has been killed!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 23 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 41 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 38 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 20 health.
+The shadow prison devours the soul of Ensnared Aldor Peacekeeper, killing them and forming a Demonic Shade.
+Ensnared Aldor Peacekeeper has been killed!
+
+It is now turn 12, the Red Warrior's turn.
+
+The Red Warrior now has 10 Mana Crystals and 44 cards left in their deck.
+Red Warrior's Health: 38 [14] || Blue Paladin's Health: 20
+Diablo's Health: 16[66]
+The Red Warrior does not currently have any minions on the board.
+Red Warrior draws Fiery War Axe.
+The Red Warrior's hand now contains:
+[1] Argent Horserider - 3
+[2] Cleave - 2
+[3] Cleave - 2
+[4] Cleave - 2
+[5] Battle Rage - 2
+[6] Flesh Giant - 5
+[7] Fiery War Axe - 2
+The Red Warrior summons Argent Horserider!
+The Red Warrior summons Flesh Giant!
+Red Warrior equips Fiery War Axe.
+Red Warrior attacks Demonic Demonic Shade.
+Demonic Demonic Shade takes 3 damage, reducing them to 5 health.
+Red Warrior takes 3 damage, reducing them to 35 health.
+Remaining durability on the Red Warrior's Fiery War Axe: 1.
+Red Argent Horserider has been killed!
+
+Diablo launches a wave of fire outwards, damaging all minions.
+Blue Silver Hand Recruit takes 2 damage, reducing them to 0 health.
+Blue Silver Hand Recruit has been killed!
+Red Flesh Giant takes 2 damage, reducing them to 11 health.
+Diablo: Enough! This ends now!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 32 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 17 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 29 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 26 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Flesh Giant.
+Red Flesh Giant takes 3 damage, reducing them to 8 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 14 health.
+
+It is now turn 12, the Blue Paladin's turn.
+
+The Blue Paladin now has 10 Mana Crystals and 45 cards left in their deck.
+Blue Paladin's Health: 14 || Red Warrior's Health: 26 [14]
+Diablo's Health: 16[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Abomination.
+The Blue Paladin's hand now contains:
+[1] Big Game Hunter - 3
+[2] C'Thun - 10
+[3] Guardian of Kings - 7
+[4] Abomination - 5
+The Blue Paladin summons Guardian of Kings!
+Blue Guardian of Kings' battlecry restores 6 health to Blue Paladin.
+Blue Paladin regains 6 health, bringing them to 20 health.
+The Blue Paladin casts Reinforce, summoning a 1/1 Silver Hand Recruit.
+Blue Paladin attacks Demonic Demonic Shade.
+Demonic Demonic Shade takes 5 damage, reducing them to 0 health.
+Demonic Demonic Shade has been killed!
+Blue Paladin takes 3 damage, reducing them to 17 health.
+Remaining durability on the Blue Paladin's Ashbringer: 0.
+The Blue Paladin's Ashbringer shatters.
+
+Diablo: Ensnared within your own terror.
+Diablo ensnares Blue Guardian of Kings in a shadow prison.
+Diablo: The heavens BURN around you!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 23 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 14 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 20 health.
+Diablo strikes Red Flesh Giant.
+Red Flesh Giant takes 3 damage, reducing them to 5 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Silver Hand Recruit.
+Blue Silver Hand Recruit takes 3 damage, reducing them to 0 health.
+Blue Silver Hand Recruit has been killed!
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 11 health.
+Ensnared Guardian of Kings's resistance weakens. Their timer is reduced to 5.
+
+It is now turn 13, the Red Warrior's turn.
+
+The Red Warrior now has 10 Mana Crystals and 43 cards left in their deck.
+Red Warrior's Health: 20 [14] || Blue Paladin's Health: 11
+Diablo's Health: 16[66]
+The Red Warrior currently has 1 minions on the board:
+[Flesh Giant] - 13/5
+Red Warrior draws Grimy Gadgeteer.
+The Red Warrior's hand now contains:
+[1] Cleave - 2
+[2] Cleave - 2
+[3] Cleave - 2
+[4] Battle Rage - 2
+[5] Grimy Gadgeteer - 4
+The Red Warrior casts Armor Up!, gaining 2 Armor for a total of 16.
+Red Warrior attacks Ensnared Guardian of Kings.
+Ensnared Guardian of Kings takes 1 damage, reducing them to 5 health.
+Ensnared Guardian of Kings is freed from the Shadow Prison.
+Red Warrior takes 5 damage, reducing them to 15 health.
+Remaining durability on the Red Warrior's Fiery War Axe: 0.
+The Red Warrior's Fiery War Axe shatters.
+Red Flesh Giant attacks Demonic Diablo.
+Demonic Diablo takes 13 damage, reducing them to 3 health.
+
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Flesh Giant.
+Red Flesh Giant takes 3 damage, reducing them to 2 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 8 health.
+Diablo: Enough! This ends now!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Guardian of Kings.
+Blue Guardian of Kings takes 3 damage, reducing them to 2 health.
+Diablo strikes Blue Guardian of Kings.
+Blue Guardian of Kings takes 3 damage, reducing them to 0 health.
+Blue Guardian of Kings has been killed!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 5 health.
+Diablo strikes Red Flesh Giant.
+Red Flesh Giant takes 3 damage, reducing them to 0 health.
+Red Flesh Giant has been killed!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 12 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 9 health.
+
+It is now turn 13, the Blue Paladin's turn.
+
+The Blue Paladin now has 10 Mana Crystals and 44 cards left in their deck.
+Blue Paladin's Health: 5 || Red Warrior's Health: 9 [16]
+Diablo's Health: 3[66]
+The Blue Paladin does not currently have any minions on the board.
+Blue Paladin draws Grimestreet Smuggler.
+The Blue Paladin's hand now contains:
+[1] Big Game Hunter - 3
+[2] C'Thun - 10
+[3] Abomination - 5
+[4] Grimestreet Smuggler - 3
+The Blue Paladin summons Abomination!
+The Blue Paladin summons Grimestreet Smuggler!
+Ensnared Grimestreet Smuggler's battlecry gives smuggled equipment to Big Game Hunter in Blue Paladin's hand, giving them +1/+1 (up to 5/3).
+The Blue Paladin casts Reinforce, summoning a 1/1 Silver Hand Recruit.
+The shadow prison devours the soul of Ensnared Grimestreet Smuggler, killing them and forming a Demonic Shade.
+Ensnared Grimestreet Smuggler has been killed!
+
+Diablo: Ensnared within your own terror.
+Diablo ensnares Blue Demonic Shade in a shadow prison.
+Diablo: Enough! This ends now!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 6 health.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 2 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Silver Hand Recruit.
+Blue Silver Hand Recruit takes 3 damage, reducing them to 0 health.
+Blue Silver Hand Recruit has been killed!
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 3 health.
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Abomination.
+Blue Abomination takes 3 damage, reducing them to 1 health.
+Diablo strikes Red Warrior.
+Red Warrior takes 3 damage, reducing them to 0 health.
+Ensnared Demonic Shade's resistance weakens. Their timer is reduced to 7.
+
+Diablo: Ensnared within your own terror.
+Diablo ensnares Blue Abomination in a shadow prison.
+Diablo: The heavens BURN around you!
+Diablo quickly slashes at enemies twice, dealing 3 damage.
+Diablo strikes Blue Paladin.
+Blue Paladin takes 3 damage, reducing them to 0 health.
+Diablo strikes Blue Paladin.
+Ensnared Demonic Shade's resistance weakens. Their timer is reduced to 6.
+The shadow prison devours the soul of Ensnared Abomination, killing them and forming a Demonic Shade.
+Ensnared Abomination has been killed!
+Ensnared Abomination's deathrattle deals 2 damage to all characters.
+Red Warrior takes 2 damage, reducing them to 0 health.
+Red Warrior takes 2 damage, reducing them to 0 health.
+
+Diablo: You have failed. Now watch in your dying moments as this world comes to an end.

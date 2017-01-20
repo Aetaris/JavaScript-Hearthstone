@@ -124,7 +124,7 @@ module.exports.Zakazj = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -349,7 +349,9 @@ module.exports.Murozond = function() {
             victory: "Murozond: My victory was predetermined. Your battle was suicidal from the start.",
             action: endMatch
         },
-        abilities: [InfiniteFlight, RecallMemories, RunningOutofTime, SandBreath],
+        abilities: [murozond_turn],
+        abils: [InfiniteFlight, RecallMemories, RunningOutofTime, SandBreath],
+        phase: 0,
         
         turn: false,
 
@@ -361,7 +363,7 @@ module.exports.Murozond = function() {
         type: "hero",
         color: "Infinite",
         hero: {},
-        baseHp: 80,
+        baseHp: 180,
         damageTaken: 0,
         baseDamage: 0,
         damageLost: 0,
@@ -375,7 +377,7 @@ module.exports.Murozond = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -393,24 +395,44 @@ module.exports.Murozond = function() {
 };
 
 var murozond_action = function(red, blue, self) {
-    red.baseHp += 45;
-    blue.baseHp += 45;
+    red.baseHp += 70;
+    blue.baseHp += 70;
+};
+
+var murozond_turn = function(red, blue, self) {
+    self.phase++;
+    self.abils[Math.floor(Math.random()*self.abils.length)](red, blue, self);
+    if(self.phase % 12 == 0 && self.phase != 0) {
+        AlterTime(red, blue, self);
+    }
+    self.previousDmg = self.damageTaken;
+    self.previousRedDmg = red.damageTaken;
+    self.previousBlueDmg = blue.damageTaken;
 };
 
 var murozond_greeting = function(player) {
-    if(player.hero.name == "Sapphiron") {
-        printer.print("Murozond: Sapphiron? Time has not treated you well.");
+    if(player.hero.name == "Sapphiron" || player.hero.name == "Sindragosa" || player.hero.name == "Malygos") {
+        printer.print("Murozond: " + player.hero.name + "? Time has not treated you well.");
+    }
+    else if(player.hero.name == "Onyxia" || player.hero.name == "Nefarian" || player.hero.name == "Neltharion") {
+        printer.print("Murozond: Black dragons... out of my sight! You have no place here!");
     }
     else if(player.hero.name == "Vaelastrasz") {
         printer.print("Murozond: Vaelastrasz... even if you defeat me, you are still doomed. Still one of Nefarian's experiments...");
     }
 };
 
+var AlterTime = function(red, blue, self) {
+    printer.print(self.name + ": My wounds reverse...");
+    printer.print(self.name + " regains Health equal to more than four times the damage he took this turn.")
+    utilities.healDamage(self, Math.abs(self.damageTaken - self.previousDmg + 4)*4, {player: self, foe: red, cause: self});
+};
+
 var InfiniteFlight = function(red, blue, self) {
     printer.print(self.name + ": Come to me, my flight!");
     printer.print(self.name + " summons two deadly Infinite Drakes.");
     for(var i = 0; i < 2; i++) {
-        utilities.summon(InfiniteDrake(self, self), self, {player: self});
+        utilities.summon(InfiniteDrake(self, self), self, {player: self, foe: red});
     }
     
     attackWave(red, blue, self);
@@ -437,15 +459,17 @@ var RecallMemories = function(red, blue, self) {
             graveyards.push(blue.graveyard[i]);
         }
     }
+    graveyards = utilities.filterArray.notHasName(graveyards, "Sand Illusion");
+    
     for(i = 0; i < 2; i++) {
         var memory = graveyards[Math.floor(Math.random() * graveyards.length)];
         if(typeof memory == "function") {
-            memory = memory.card()
+            memory = memory.card();
         }
         if(!memory) {
             memory = false;
             printer.print("A Sand Illusion has been created in place of a Memory.");
-            utilities.summon(SandIllusion(self, self), self, {player: self});;
+            utilities.summon(SandIllusion(self, self), self, {player: self, foe: red});
         }
         else {
             printer.print("Memory formed: " + memory.name);
@@ -465,8 +489,8 @@ var RunningOutofTime = function(red, blue, self) {
     red.deck = [];
     blue.deck = [];
     
-    utilities.drawCard(red, {player: red, foe: blue});
-    utilities.drawCard(blue, {player: blue, foe: red});
+    utilities.drawCard(red, {player: red, foe: self});
+    utilities.drawCard(blue, {player: blue, foe: self});
     
     red.deck = redDeck;
     blue.deck = blueDeck;
@@ -476,19 +500,27 @@ var RunningOutofTime = function(red, blue, self) {
 
 var SandBreath = function(red, blue, self) {
     var target = Math.random() > 0.5 ? (red.getHp() > 0 ? red : blue) : (blue.getHp() > 0 ? blue : red);
-    printer.print(self.name + ": I will scour you from this world. You will erode.");
-    printer.print("" + self.name + " releases a deadly spray of sand from his jaws, dealing 3 damage to the " + target.color + " " + target.name + " and all the minions they control.");
+    printer.print(self.name + ": I will scour you from this world. You will ERODE.");
+    var num = Math.floor(self.phase / 12) + 1;
+    printer.print("" + self.name + " releases a deadly spray of sand from his jaws, dealing " + num + " damage to the " + target.color + " " + target.name + " and all the minions they control.");
     
-    utilities.dealDamage(target, 3, { player: target, foe: self, cause: target });
+    utilities.dealDamage(target, num, { player: target, foe: self, cause: target });
     for(var i = 0; i < target.minions.length; i++) {
-        utilities.dealDamage(target.minions[i], 3, { player: target, foe: self, cause: self });
+        var minion = target.minions[i];
+        utilities.dealDamage(minion, num, { player: target, foe: self, cause: self });
+        if(!minion.isAlive()) {
+            i--;
+        }
     }
     
     attackWave(red, blue, self);
 };
 
 var InfiniteDrake = function(player, creator) {
-    var minion = utilities.makeMinion(false, "Boss", "Custom", "Infinite", "Infinite Drake", 3, 0, 2, 3, false, false, false, [effects.sickness], ais.MurlocRaider, InfiniteDrake);
+    if(creator) {
+        var num = Math.floor(creator.phase / 8) + 1;
+    }
+    var minion = utilities.makeMinion("Dragon", "Boss", "Custom", ["Scenarios"], "Drake", 3, 0, num ? num : 2, num ? num : 3, false, false, false, [effects.sickness], ais.MurlocRaider, InfiniteDrake);
     minion["scenario"] = creator;
     return minion;
 };
@@ -550,7 +582,7 @@ module.exports.Mimiron = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.EmergencyCoolant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -871,7 +903,7 @@ module.exports.BlackrockBlademaster = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1129,7 +1161,7 @@ module.exports.PlaguedVillages = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1214,6 +1246,7 @@ var PlaguedVillages_Turn = function(red, blue, self) {
     }
     if(!abomAlive && grave == true && granaryAlive == false && necroPresent == false && self.necroSummoned == true) {
         printer.print("The plague appears to have lifted from this village.");
+        self.minions = [];
         self.damageTaken = 5000;
     }
     attackWave(red, blue, self);
@@ -1262,7 +1295,7 @@ var PlaguedVillages_Zombie2 = function() {
 };
 
 var PlaguedVillages_PlaguedGranary = function() {
-    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Granary", 3, 0, 45, 0, false, false, false, [effects.cantattack, effects.taunt], ais.true, PlaguedVillages_PlaguedGranary);
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", false, "Granary", 3, 0, 45, 0, false, false, false, [effects.cantattack, effects.taunt, effects.heroic], ais.true, PlaguedVillages_PlaguedGranary);
 };
 
 var PlaguedVillages_KTByeAction = function(source, context) {
@@ -1278,11 +1311,11 @@ var PlaguedVillages_KTBye = {
 };
 
 var PlaguedVillages_KelThuzad = function() {
-    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", "Necromancer", "Kel'Thuzad", 4, 0, 45, 5, false, false, false, [effects.sickness, effects.taunt, PlaguedVillages_KTBye], ais.true, PlaguedVillages_KelThuzad);
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", "Necromancer", "Kel'Thuzad", 4, 0, 45, 5, false, false, false, [effects.sickness, effects.taunt, effects.heroic, PlaguedVillages_KTBye], ais.true, PlaguedVillages_KelThuzad);
 };
 
 var PlaguedVillages_Abomination = function() {
-    return utilities.makeMinion("Undead", "Uncollectible", "Sad Mystery", false, "Abomination", 6, 0, 45, 6, false, false, false, [effects.sickness, effects.taunt], ais.true, PlaguedVillages_Abomination);
+    return utilities.makeMinion("Undead", "Uncollectible", "Sad Mystery", false, "Abomination", 6, 0, 45, 6, false, false, false, [effects.sickness, effects.taunt, effects.heroic], ais.true, PlaguedVillages_Abomination);
 };
 
 module.exports.KelThuzad = function() {
@@ -1328,7 +1361,7 @@ module.exports.KelThuzad = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1497,7 +1530,7 @@ module.exports.Stratholme = function() {
         phase: 1,
         
         malganisScore: 0,
-        arthasScore: 30,
+        arthasScore: 0,
         enabled: true,
         enableTimer: 0,
         
@@ -1525,7 +1558,7 @@ module.exports.Stratholme = function() {
         minions: [],
         hand: [],
         deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
-        graveyard: [], discarded: [],
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
 
         getMaxHp: function() {
             return utilities.genMaxHp(this);
@@ -1562,13 +1595,21 @@ var Stratholme_Turn = function(red, blue, self) {
             endMatch(red, blue, self);
         } else {
             printer.print("Arthas Menethil: These villagers will not be your minions in death, demon!");
+            self.removeEffect(effects.immune);
             self.removeEffect(Stratholme_MalganisAvoidDeath);
-            // utilities.dealDamage(self, 10000, {player: self, foe: red, cause: self});
+            utilities.dealDamage(self, 10000, {player: self, foe: red, cause: self});
         }
     }
     else {
-        printer.print("Arthas Score: " + self.arthasScore + " | Mal'Ganis Score: " + self.malganisScore);
+        var villagerNum = 0;
+        for(var i in self.minions) {
+            if(self.minions[i].name == "Villager") {
+                villagerNum++;
+            }
+        }
+        printer.print("Arthas Score: " + self.arthasScore + " | Mal'Ganis Score: " + self.malganisScore + " | Villager Count: " + villagerNum);
         if(self.enabled) {
+            self.removeEffect(effects.immune);
             self.phase++;
             
             var num = Math.floor(Math.random() * self.defaultAbils.length);
@@ -1597,15 +1638,16 @@ var Stratholme_Turn = function(red, blue, self) {
                 for(var i in self.minions) {
                     if(self.minions[i].name == "Villager") {
                         self.minions[i].removeEffect(effects.taunt);
-                        self.minions[i].addEffect(effects.stealth);
                     }
                 }
                 self.enabled = true;
                 self.damageTaken = 0;
                 self.removeEffect(effects.immune);
                 self.removeEffect(effects.stealth);
+            } else {
+                self.enableTimer--;
+                printer.print("Tick tock, " + self.enableTimer);
             }
-            self.enableTimer--;
         }
         Stratholme_PeopleOfStratholme(red, blue, self);
     }
@@ -1655,12 +1697,12 @@ var Stratholme_SleepWakeUp = function(source, context) {
 };
 
 var Stratholme_Sleep_ReduceDmgAction = function(source, context) {
-    return 1;
+    return (context.damage * -1) + 1;
 };
 
 var Stratholme_Sleep_ReduceDmg = {
     name: "Psst, wake up",
-    type: "self defense",
+    type: "pain interrupt",
     action: Stratholme_Sleep_ReduceDmgAction
 };
 
@@ -1754,7 +1796,6 @@ var Stratholme_MalganisDisable = function(source, context) {
     for(var i in source.minions) {
         if(source.minions[i].name == "Villager") {
             source.minions[i].addEffect(effects.taunt);
-            source.minions[i].removeEffect(effects.stealth);
         }
     }
     return 0;
@@ -1783,5 +1824,724 @@ var Stratholme_Villager_Deathrattle = {
 };
 
 var Stratholme_Villager = function() {
-    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", "Helpless", "Villager", 1, 0, 1, 0, false, false, false, [effects.sickness, effects.stealth, Stratholme_Villager_Deathrattle], ais.true, Stratholme_Villager);
+    return utilities.makeMinion(false, "Uncollectible", "Sad Mystery", "Helpless", "Villager", 1, 0, 1, 0, false, false, false, [effects.sickness, Stratholme_Villager_Deathrattle], ais.true, Stratholme_Villager);
+};
+
+module.exports.Stratholme = function() {
+    return utilities.withEffects({
+        scenarioName: "The Purging of Stratholme",
+        name: "Mal'Ganis",
+        startOfMatch: {
+            line:  "Arthas Menethil: No... Stratholme has been infected. We have to kill these citizens before they turn to undead...",
+            greeting: Stratholme_Greeting,
+            action: Stratholme_Action
+        },
+        endOfMatch: {
+            line: "Mal'Ganis: Impressively done, boy. But we have unfinished business between us. Meet me in Northrend... there shall your fate be revealed.\n",
+            victory: "With the defeat of Arthas and his forces, the city of Stratholme has fallen to Mal'Ganis.",
+            action: endMatch
+        },
+        abilities: [Stratholme_Turn],
+        defaultAbils: [Stratholme_VampiricBite, Stratholme_Reinforcements, Stratholme_Sleep],
+        
+        phase: 1,
+        
+        malganisScore: 0,
+        arthasScore: 0,
+        enabled: true,
+        enableTimer: 0,
+        
+        turn: false,
+
+        attackTarget: true,
+        minionLifelink: true,
+        mustDefeatBoth: true,
+        coop: true,
+        
+        type: "hero",
+        color: "Northrend",
+        hero: {},
+        baseHp: 100,
+        damageTaken: 0,
+        baseDamage: 0,
+        damageLost: 0,
+        armor: 0,
+        maxMana: 0,
+        mana: 0,
+        lockedMana: 0,
+        fatigue: 0,
+        effects: [effects.immune],
+        isPlayer: false,
+        minions: [],
+        hand: [],
+        deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
+
+        getMaxHp: function() {
+            return utilities.genMaxHp(this);
+        },
+        getHp: function() {
+            return utilities.genHp(this);
+        },
+        getMaxDamage: function() {
+            return utilities.genMaxDamage(this);
+        },
+        getDamage: function() {
+            return utilities.genDamage(this);
+        }
+    });
+};
+
+var Northrend_Action = function(red, blue, self) {
+    
+};
+
+var Northrend_Greeting = function(player) {
+    
+};
+
+var Northrend_Turn = function(red, blue, self) {
+    if(self.malganisScore >= 30 || self.arthasScore >= 30) {
+        if(self.malganisScore >= 30) {
+            printer.print("Mal'Ganis: Perfect. I have the army I need. Now to wipe out the kingdom of Lordaeron...");
+            endMatch(red, blue, self);
+        } else {
+            printer.print("Arthas Menethil: These villagers will not be your minions in death, demon!");
+            self.removeEffect(effects.immune);
+            self.removeEffect(Stratholme_MalganisAvoidDeath);
+            utilities.dealDamage(self, 10000, {player: self, foe: red, cause: self});
+        }
+    }
+    else {
+        var villagerNum = 0;
+        for(var i in self.minions) {
+            if(self.minions[i].name == "Villager") {
+                villagerNum++;
+            }
+        }
+        printer.print("Arthas Score: " + self.arthasScore + " | Mal'Ganis Score: " + self.malganisScore + " | Villager Count: " + villagerNum);
+        if(self.enabled) {
+            self.removeEffect(effects.immune);
+            self.phase++;
+            
+            var num = Math.floor(Math.random() * self.defaultAbils.length);
+            if(self.defaultAbils[num]) {
+                self.defaultAbils[num](red, blue, self);
+            }
+            
+            attackWave(red, blue, self);
+            for(var i in self.minions) {
+                    if(self.minions[i].name == "Villager") {
+                        if(self.minions[i].timer <= 0) {
+                            printer.print("Mal'Ganis claims a Villager, transforming them into a zombie!");
+                            utilities.kill(self.minions[i], {player: self, foe: red, cause: self});
+                            utilities.summon(PlaguedVillages_Zombie(), self, {player: self, foe: red});
+                        }
+                        self.minions[i].timer--;
+                    }
+                }
+        } else {
+            if(self.enableTimer <= 0) {
+                var taunts = [
+                    "You thought yourself rid of me?",
+                    "My work is not yet complete."
+                ];
+                printer.print("\nMal'Ganis: " + taunts[Math.floor(Math.random() * taunts.length)] + "\n");
+                for(var i in self.minions) {
+                    if(self.minions[i].name == "Villager") {
+                        self.minions[i].removeEffect(effects.taunt);
+                    }
+                }
+                self.enabled = true;
+                self.damageTaken = 0;
+                self.removeEffect(effects.immune);
+                self.removeEffect(effects.stealth);
+            } else {
+                self.enableTimer--;
+                printer.print("Tick tock, " + self.enableTimer);
+            }
+        }
+        Stratholme_PeopleOfStratholme(red, blue, self);
+    }
+};
+
+module.exports.Diablo20_Leoric = function() {
+    return utilities.withEffects({
+        scenarioName: "Diablo Event: Leoric",
+        name: "Leoric",
+        startOfMatch: {
+            line:  "Leoric: Traitors, all of you!",
+            greeting: Leoric_Greeting,
+            action: Leoric_Action
+        },
+        endOfMatch: {
+            line: "The Skeleton King crumbles into a pile of bones, his dark power expended.\n",
+            victory: "Leoric: No mercy for those who disobey me.",
+            action: endMatch
+        },
+        abilities: [Leoric_Turn],
+        defaultAbils: [/**Leoric_SkeletalSwing,**/ Leoric_ShatteringStrike, Leoric_Entomb, Leoric_Unbury],
+        
+        phase: 1,
+        enraged: false,
+        cryptCollection: [],
+        
+        turn: false,
+
+        attackTarget: true,
+        minionLifelink: true,
+        mustDefeatBoth: true,
+        coop: true,
+        
+        type: "hero",
+        color: "Cursed",
+        hero: {},
+        baseHp: 100,
+        damageTaken: 0,
+        baseDamage: 0,
+        damageLost: 0,
+        armor: 0,
+        maxMana: 0,
+        mana: 0,
+        lockedMana: 0,
+        fatigue: 0,
+        effects: [Leoric_Resist, Leoric_Enrage],
+        isPlayer: false,
+        minions: [],
+        hand: [],
+        deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
+
+        getMaxHp: function() {
+            return utilities.genMaxHp(this);
+        },
+        getHp: function() {
+            return utilities.genHp(this);
+        },
+        getMaxDamage: function() {
+            return utilities.genMaxDamage(this);
+        },
+        getDamage: function() {
+            return utilities.genDamage(this);
+        }
+    });
+};
+
+var Leoric_Action = function(red, blue, self) {
+    red.baseHp += 20;
+    blue.baseHp += 20;
+};
+
+var Leoric_GetNum = function(self, num) { // if enraged Leoric deals 2x damage and has other empowered abilities
+    return self.enraged ? num*2 : num;
+};
+
+var Leoric_ResistAction = function(source, context) {
+    var resist = Leoric_GetNum(source, 2);
+    var num = context.damage - resist;
+    
+    if(num <= 0 && context.damage > 0) { // if Leoric takes damage but it is fully absorbed
+        var minimum = source.enraged ? 0.25 : 0.5;
+        return (context.damage - minimum) * -1;
+    }
+    return resist * -1;
+};
+
+var Leoric_EnrageAction = function(source, context) {
+    if(source.getHp() <= 30 && !source.enraged) {
+        printer.print("Leoric: This treason will be rooted out!");
+        printer.print("Leoric enrages.");
+        source.enraged = true;
+    }
+};
+
+var Leoric_Enrage = {
+    name: "Skeleton King's Wrath",
+    type: "pain",
+    action: Leoric_EnrageAction
+};
+
+var Leoric_Resist = {
+    name: "Skeleton King's Plating",
+    type: "pain interrupt",
+    action: Leoric_ResistAction
+};
+
+var Leoric_Greeting = function(player) {
+    
+};
+
+var Leoric_Turn = function(red, blue, self) {
+    self.defaultAbils[Math.floor(Math.random()*self.defaultAbils.length)](red, blue, self);
+    if(self.phase % 8 == 0 && self.phase != 0) {
+        var lines = [
+            "Warriors of Khanduras, rise and serve your king once more!",
+            "Your king is threatened! Guards, to arms!"
+        ];
+        printer.print("Leoric: " + lines[Math.floor(Math.random() * lines.length)]);
+        printer.print("Leoric calls two Khanduran warriors to his side.");
+        var num = Math.floor(self.phase / 8) + 1;
+        for(var i = 0; i < num; i++) {
+            utilities.summon(Leoric_KhanduranWarrior(), self, {player: self, foe: red, cause: self});
+        }
+    }
+    if(self.phase % 17 == 0 && self.phase != 0) {
+        var lines = [
+            "Your audience is over!",
+            "Bow before your king!"
+        ];
+        printer.print("Leoric: " + lines[Math.floor(Math.random() * lines.length)]);
+        for(var i = 0; i < 3; i++) {
+            if(red.isAlive() || blue.isAlive()) {
+                Leoric_ShatteringStrike(red, blue, self, true);
+            }
+        }
+    }
+    attackWave(red, blue, self);
+    self.phase++;
+};
+
+var Leoric_ShatteringStrike = function(red, blue, self, phase) {
+    if(red.isAlive()) {
+        var player = red;
+    } else {
+        player = blue;
+    }
+    var lines = [
+        "",
+    ];
+    var targets = player.minions.slice();
+    targets.push(player);
+    var target = targets[Math.floor(Math.random() * targets.length)];
+    if(!phase) {
+        // printer.print("Leoric: " + lines[Math.floor(Math.random() * lines.length)]);
+    }
+    var num = Leoric_GetNum(self, 6);
+    printer.print("Leoric strikes " + target.color + " " + target.name + " with a bone-shattering blow, dealing up to " + num + " damage based on their Health.");
+    var dmg = Math.round(num * (target.getHp() / target.getMaxHp()));
+    utilities.dealDamage(target, dmg, {player: self, foe: player, cause: self});
+};
+
+var Leoric_Entomb = function(red, blue, self) {
+    var num = Leoric_GetNum(self, 1);
+    var repeated = false;
+    for(var i = 0; i < num; i++) {
+        if(red.minions.length > 0) {
+            var target = red;
+        } else if(blue.minions.length > 0) {
+            target = blue;
+        }
+        if(target) {
+            var lines = [
+                "I will bury you alive.",
+                "Perhaps you will serve more loyally in death!"
+            ];
+            var minion = target.minions[Math.floor(Math.random() * target.minions.length)];
+            if(minion) {
+                if(i==0) {
+                    printer.print("Leoric: " + lines[Math.floor(Math.random() * lines.length)]);
+                }
+                printer.print("Leoric entombs " + minion.color + " " + minion.name + ", burying them in his crypt.");
+                utilities.kill(minion, {player: target, foe: self, cause: self});
+                self.cryptCollection.push(minion.card());
+            } else if(!repeated) {
+                Leoric_ShatteringStrike(red, blue, self);
+                repeated = true;
+            }
+        }
+    }
+};
+
+var Leoric_Unbury = function(red, blue, self) {
+    var lines = [
+        "Soldier, rise and serve your king!",
+        "King Leoric has need of you, soldier!",
+    ];
+    if(self.cryptCollection.length > 0) {
+        var minion = self.cryptCollection[Math.floor(Math.random() * self.cryptCollection.length)];
+        printer.print("Leoric: " + lines[Math.floor(Math.random() * lines.length)]);
+        printer.print(minion.name + " claws its way out of its grave, reanimated to serve the Skeleton King.");
+        minion.baseHp = Leoric_GetNum(self, minion.baseHp);
+        minion.baseDamage = Leoric_GetNum(self, minion.baseDamage);
+        utilities.summon(minion, self, {player: self, foe: red});
+        self.cryptCollection.splice(self.cryptCollection.indexOf(minion));
+    } else {
+        Leoric_Entomb(red, blue, self);
+    }
+};
+
+var Leoric_KhanduranWarriorResistAction = function(source, context) {
+    if(context.damage <= 1) {
+        if(context.damage <= 0) {
+            return 0;
+        }
+        return (context.damage - 0.5) * -1;
+    }
+    return -1;
+};
+
+var Leoric_KhanduranWarriorResist = {
+    name: "Khanduran Plating Plating",
+    type: "pain interrupt",
+    action: Leoric_KhanduranWarriorResistAction
+};
+
+var Leoric_KhanduranWarrior = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Diablo Event", ["Boss"], "Khanduran Warrior", 3, 0, 6, 3, false, false, false, [effects.sickness, effects.taunt, Leoric_KhanduranWarriorResist], ais.true, Leoric_KhanduranWarrior);
+};
+
+module.exports.Diablo20_Diablo = function() {
+    return utilities.withEffects({
+        scenarioName: "Diablo Event: Diablo",
+        name: "Diablo",
+        startOfMatch: {
+            line:  "Diablo: Heaven will burn, and you with it.",
+            greeting: Diablo_Greeting,
+            action: Diablo_Action
+        },
+        endOfMatch: {
+            line: "Diablo dissolves, leaving only the Black Soulstone behind...\n",
+            victory: "Diablo: You have failed. Now watch in your dying moments as this world comes to an end.",
+            action: endMatch
+        },
+        abilities: [Diablo_Turn],
+        phaseAbils: {
+            phase1: [Diablo_FireWave, Diablo_Swipe, Diablo_ShadowPrison],
+            phase2: [Diablo_Swipe, Diablo_ShadowPrison]
+        },
+        currentAbils: [Diablo_FireWave, Diablo_Swipe, Diablo_ShadowPrison],
+        
+        mainPhase: 1,
+        terrorPhase: 0,
+        swipePhase: 0,
+        
+        turn: false,
+
+        attackTarget: true,
+        minionLifelink: true,
+        mustDefeatBoth: true,
+        coop: true,
+        
+        type: "hero",
+        color: "Demonic",
+        hero: {},
+        baseHp: 66,
+        
+        damageTaken: 0,
+        baseDamage: 0,
+        damageLost: 0,
+        armor: 66,
+        maxMana: 0,
+        mana: 0,
+        lockedMana: 0,
+        fatigue: 0,
+        effects: [Diablo_PhaseChange],
+        isPlayer: false,
+        minions: [],
+        hand: [],
+        deck: function() { var decklist = []; for(var i = 0; i < 60; i++) { decklist.push(cards.AbusiveSergeant()); } return decklist; }(),
+        graveyard: [], shallowGraves: [], cardsPlayed: [], discarded: [],
+
+        getMaxHp: function() {
+            return utilities.genMaxHp(this);
+        },
+        getHp: function() {
+            return utilities.genHp(this);
+        },
+        getMaxDamage: function() {
+            return utilities.genMaxDamage(this);
+        },
+        getDamage: function() {
+            return utilities.genDamage(this);
+        }
+    });
+};
+
+var Diablo_Action = function(red, blue, self) {
+    for(var i = 0; i < 2; i++) {
+        var player = (i == 0) ? red : blue;
+        player.baseHp += 50;
+        var originDeck = player.deck.slice();
+        for(var j = 0; j < originDeck.length; j++) {
+            player.deck.push(originDeck[j]);
+            utilities.shuffle(player.deck);
+        }
+    }
+};
+
+var Diablo_PhaseChangeAction = function(source, context) {
+    if(source.armor - context.damage <= 0 && source.mainPhase != 3) {
+        if(source.mainPhase == 1) {
+            printer.print("\nDiablo: Let us see how you fare in my Realm of Terror.");
+            printer.print("The world darkens as Diablo pulls you into his realm.\n");
+            source.mainPhase = 2;
+            source.damageTaken = 0;
+            source.armor = 66;
+            source.name = "Shadow of Diablo";
+            source.currentAbils = source.phaseAbils.phase2;
+        } else {
+            printer.print("\nYou are pulled back to the physical realm as the Shadow of Diablo is destroyed.");
+            printer.print("Diablo: No! This world will BURN!\n");
+            source.mainPhase = 3;
+            source.damageTaken = 0;
+            source.name = "Diablo";
+            source.currentAbils = source.phaseAbils.phase1;
+            source.currentAbils.push(Diablo_LightningBreath);
+        }
+    }
+};
+
+var Diablo_PhaseChange = {
+    name: "Phase Change",
+    type: "pain",
+    action: Diablo_PhaseChangeAction
+};
+
+var Diablo_Greeting = function(player) {
+    
+};
+
+var Diablo_Turn = function(red, blue, self) {
+    self.currentAbils[Math.floor(Math.random()*self.currentAbils.length)](red, blue, self);
+    attackWave(red, blue, self);
+    if(self.getHp() <= 33 && self.swipePhase % 9 == 0) {
+        var lines = [
+            "Enough! This ends now!",
+            "The heavens BURN around you!"
+        ];
+        printer.print(self.name + ": " + lines[Math.floor(Math.random() * lines.length)]);
+        for(var i = 0; i < 3; i++) {
+            if(red.isAlive() || blue.isAlive()) {
+                Diablo_Swipe(red, blue, self, true);
+            }
+        }
+    }
+    if(self.mainPhase == 2) {
+        if(self.terrorPhase % 13 == 0) {
+            Diablo_MakeShadowClone(red, blue, self);
+        }
+        self.terrorPhase++;
+    }
+};
+
+var Diablo_FireWave = function(red, blue, self) {
+    if(red.minions.length + blue.minions.length > 0) {
+        var lines = [
+            "",
+        ];
+        // printer.print(self.name + ": " + lines[Math.floor(Math.random() * lines.length)]);
+        printer.print(self.name + " launches a wave of fire outwards, damaging all minions.");
+        for(var k = 0; k < 2; k++) {
+            if(k == 0) {
+                var target = red;
+            } else {
+                target = blue;
+            }
+            utilities.affectArray.damage(target.minions, 2, {player: target, foe: self, cause: self});
+        }
+    } else {
+        Diablo_Swipe(red, blue, self);
+    }
+};
+
+var Diablo_Swipe = function(red, blue, self) {
+    var lines = [
+        "",
+    ];
+    // printer.print(self.name + ": " + lines[Math.floor(Math.random() * lines.length)]);
+    printer.print(self.name + " quickly slashes at enemies twice, dealing 3 damage.");
+    for(var i = 0; i < 2; i++) {
+        if(red.isAlive() && blue.isAlive()) {
+            if(Math.random() > 0.5) {
+                var player = red;
+            } else {
+                player = blue;
+            }
+        }
+        else if(red.isAlive()) {
+            player = red;
+        } else {
+            player = blue;
+        }
+        if(player) {
+            var targetList = player.minions.slice();
+            targetList.push(player);
+            var target = targetList[Math.floor(targetList.length * Math.random())];
+            printer.print("Diablo strikes " + target.color + " " + target.name + ".");
+            if(target.isAlive()) {
+                utilities.dealDamage(target, 3, {player: player, foe: self, cause: self});
+            }
+        }
+    }
+};
+
+var Diablo_LightningBreath = function(red, blue, self, phase) {
+    var lines = [
+        "",
+    ];
+    if(!phase) {
+        // printer.print(self.name + ": " + lines[Math.floor(Math.random() * lines.length)]);
+    }
+    var player = Math.random() > 0.5 ? (red.isAlive() ? red : blue) : (blue.isAlive() ? blue : red);
+    printer.print(self.name + " breathes lightning at " + player.color + " " + player.name + "'s minions, dealing immense damage.");
+    utilities.affectArray.damage(player.minions, 5, {player: self, foe: player, cause: self});
+};
+
+var Diablo_ShadowPrisonShatter = function(source, context) {
+    printer.print(source.color + " " + source.name + " is freed from the Shadow Prison.");
+    context.player.minions.splice(context.player.minions.indexOf(source), 1);
+    source.originalOwner.minions.push(source);
+    source.removeEffect(effects.cantattack);
+    source.removeEffect(Diablo_ShadowPrison_Effect);
+    source.removeEffect(Diablo_ShadowPrison_ReduceDmg);
+    source.removeEffect(Diablo_ShadowPrison_Zap);
+    source.color = source.originalColor;
+    source.owner = source.originalOwner;
+};
+
+var Diablo_ShadowPrison_ReduceDmgAction = function(source, context) {
+    if(context.cause != source) {
+        return (context.damage * -1) + 1;
+    }
+    return 0;
+};
+
+var Diablo_ShadowPrison_ZapAction = function(source, context) {
+    if(source.prisonTimer > 1) {
+        source.prisonTimer--;
+        printer.print(source.color + " " + source.name + "'s resistance weakens. Their timer is reduced to " + source.prisonTimer + ".");
+    } else {
+        printer.print("The shadow prison devours the soul of " + source.color + " " + source.name + ", killing them and forming a Demonic Shade.");
+        utilities.kill(source, {player: context.player, foe: context.foe, cause: context.player});
+        utilities.summon(Diablo_DemonicShade(), context.player, {player: context.player, foe: context.foe, cause: context.player});
+    }
+};
+
+var Diablo_ShadowPrison_Zap = {
+    name: "AGH IT BURNS",
+    type: "end of turn",
+    action: Diablo_ShadowPrison_ZapAction
+};
+
+var Diablo_ShadowPrison_ReduceDmg = {
+    name: "Psst, wake up",
+    type: "pain interrupt",
+    action: Diablo_ShadowPrison_ReduceDmgAction
+};
+
+var Diablo_ShadowPrison_Effect = {
+    name: "Wha?",
+    type: "pain",
+    action: Diablo_ShadowPrisonShatter
+};
+
+var Diablo_ShadowPrison = function(red, blue, self) {
+    var filter = red.minions.slice();
+    for(var i = 0; i < blue.minions.length; i++) {
+        filter.push(blue.minions[i]);
+    }
+    
+    if(filter.length > 0) {
+        var lines = [
+            "I have you now, little mortals.",
+            "Ensnared within your own terror."
+        ];
+        printer.print(self.name + ": " + lines[Math.floor(Math.random() * lines.length)]);
+        var num = 1;
+        for(i = 0; i < num; i++) {
+            filter = red.minions.slice();
+            for(var j = 0; j < blue.minions.length; j++) {
+                filter.push(blue.minions[j]);
+            }
+            var target = filter[Math.floor(Math.random() * filter.length)];
+            if(target) {
+                printer.print(self.name + " ensnares " + target.color + " " + target.name + " in a shadow prison.");
+                target.owner.minions.splice(target.owner.minions.indexOf(target), 1);
+                self.minions.push(target);
+                target.effects.push(Diablo_ShadowPrison_Effect);
+                target.effects.push(Diablo_ShadowPrison_ReduceDmg);
+                target.effects.push(Diablo_ShadowPrison_Zap);
+                target.effects.push(effects.cantattack);
+                target["originalColor"] = target.color;
+                target["originalOwner"] = target.owner;
+                target.owner = self;
+                target["prisonTimer"] = target.getHp();
+                target.color = "Ensnared";
+            }
+        }
+    } else {
+        Diablo_Swipe(red, blue, self);
+    }
+};
+
+var Diablo_MakeShadowClone = function(red, blue, self) {
+    if(red.isAlive()) {
+        var target = red;
+    } else {
+        target = blue;
+    }
+    if(target.isAlive()) {
+        var lines = [
+            "You cannot defeat your own terror.",
+            "How well do you know yourself?",
+        ];
+        printer.print(self.name + ": " + lines[Math.floor(Math.random() * lines.length)]);
+        printer.print(self.name + " creates a shadow of " + target.color + " " + target.name + ".");
+        var copy = Diablo_ShadowClone();
+        copy.name = "Shadow of " + target.name;
+        copy.baseHp = target.getMaxHp() + target.armor;
+        copy.spellList = utilities.filterArray.hasType(target.hero.cardList, "spell");
+        
+        utilities.summon(copy, self, {player: self, foe: red, cause: self});
+    }
+};
+
+var Diablo_ShadowCloneCastAction = function(source, context) {
+    if(source.spellList) {
+        var card = source.spellList[Math.floor(Math.random()*source.spellList.length)];
+        if(typeof card == "function") {
+            card = card();
+        }
+        if(!card) {
+            throw new Error("WAT");
+        }
+        printer.print(source.name + " grants " + context.player.name + " the ability to cast " + card.name + ".");
+        // casts the spell
+        if(card.chooseAi) {
+            var choice = card.chooseAi(filters.ChooseOne(context), context);
+        }
+        if(card.targetai) {
+            if(!context.foe) {
+                throw new Error("wut");
+            }
+            var target = card.targetai(card.filter({player: context.player, foe: context.foe, choice: choice}), {player: context.player, foe: context.foe, cause: card, choice: choice});
+        }
+        else {
+            target = false;
+        }
+        if(typeof card.ability != "function") {
+            throw new Error("Wat");
+        }
+        card.ability(target, {
+            player: context.player,
+            foe: context.foe,
+            cause: card,
+            choice: choice,
+            target: /**function() { if(card.targetai) { return card.targetai(card.filter(context), context) } else { return false } }()**/ target
+        });
+    }
+};
+
+var Diablo_ShadowCloneCast = {
+    name: "Shadow Clone Cast",
+    type: "end of turn",
+    action: Diablo_ShadowCloneCastAction
+};
+
+var Diablo_ShadowClone = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Diablo Event", ["Boss"], "Shadow Clone", 6, 0, 24, 6, false, false, false, [effects.sickness, effects.taunt, Diablo_ShadowCloneCast], ais.true, Diablo_ShadowClone);
+};
+
+var Diablo_DemonicShade = function() {
+    return utilities.makeMinion(false, "Uncollectible", "Diablo Event", ["Boss"], "Demonic Shade", 3, 0, 8, 3, false, false, false, [effects.sickness, effects.taunt], ais.true, Diablo_DemonicShade);
 };

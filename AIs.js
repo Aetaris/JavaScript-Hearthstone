@@ -254,6 +254,10 @@ module.exports.KnifeJuggler = function(context) {
     return true;
 };
 
+module.exports.MindControlTech = function(context) {
+    return context.foe.minions.length >= 4;
+};
+
 module.exports.AzureDrake = function(context) {
     return true;
 };
@@ -448,6 +452,14 @@ module.exports.NexusChampionSaraad = function(context) {
     return true;
 };
 
+module.exports.ArchThiefRafaam = function(context) {
+    return context.player.hand.length <= 9;
+};
+
+module.exports.MirrorofDoom = function(context) {
+    return context.player.minions.length <= 3;
+};
+
 module.exports.EliseStarseeker = function(context) {
     return true;
 };
@@ -460,7 +472,7 @@ module.exports.GoldenMonkey = function(context) {
     return true;
 };
 
-module.exports.RenoJackson = function(context) {
+var hasDuplicates = function(context) {
     var deckCards = [];
     for(var i = 0; i < context.player.deck.length; i++) {
         var card = context.player.deck[i];
@@ -472,6 +484,10 @@ module.exports.RenoJackson = function(context) {
         deckCards.push(card);
     }
     return true;
+};
+
+module.exports.RenoJackson = function(context) {
+    return hasDuplicates(context) && context.player.getHp() <= context.player.getMaxHp() / 2;
 };
 
 module.exports.EaterofSecrets = function(context) {
@@ -537,25 +553,135 @@ module.exports.ArcaneGiant = function(context) {
 };
 
 module.exports.GrimyGoons = function(context) { // A general AI that returns true if there's a minion in your hand that you can buff
+    var num = 0;
     for(var i = 0; i < context.player.hand.length; i++) {
         if(context.player.hand[i].type == "minion") {
+            num++;
+            if(num >= 2) {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
+module.exports.DeathspeakerDisciple = function(context) {
+    return context.player.minions.length > 0;
+};
+
+module.exports.DarkfallenKnight = function(context) {
+    return context.foe.minions.length > 0;
+};
+
+module.exports.DeathspeakerAttendant = function(context) {
+    var myTotal = 0;
+    var foeTotal = 0;
+    for(var i in context.player.minions) {
+        for(var j in context.player.minions[i].effects) {
+            var effect = context.player.minions[i].effects[j];
+            if(effect.name != "Summoning Sickness" && effect.type != "deathrattle") {
+                myTotal++;
+            }
+        }
+    }
+    for(i in context.foe.minions) {
+        for(j in context.foe.minions[i].effects) {
+            var effect = context.foe.minions[i].effects[j];
+            if(effect.name != "Summoning Sickness" && effect.type != "deathrattle") {
+                foeTotal++;
+            }
+        }
+    }
+    return myTotal <= foeTotal + 2;
+};
+
+module.exports.Executioner = function(context) {
+    for(var i in context.foe.minions) {
+        if(context.foe.minions[i].hasEffectName("Frozen")) {
             return true;
         }
     }
     return false;
 };
 
-module.exports.Resurrect = function(context) {
-    var minions = [];
-    var totalCost = 0;
-    for(var i = 0; i < context.player.graveyard.length; i++) {
-        var card = context.player.graveyard[i];
-        if(card.type == "minion") {
-            totalCost += card.cost;
-            minions.push(card);
+module.exports.DeathspeakerHighPriest = function(context) {
+    return context.player.cardsPlayed.length + context.foe.cardsPlayed.length >= 3;
+};
+
+module.exports.SpiritAlarm = function(context) {
+    var myTotal = 0;
+    var foeTotal = 0;
+    for(var i in context.player.minions) {
+        for(var j in context.player.minions[i].effects) {
+            var effect = context.player.minions[i].effects[j];
+            if(effect.name != "Summoning Sickness") {
+                myTotal++;
+            }
         }
     }
-    return (totalCost / minions.length >= 3);
+    for(i in context.foe.minions) {
+        for(j in context.foe.minions[i].effects) {
+            var effect = context.foe.minions[i].effects[j];
+            if(effect.name != "Summoning Sickness") {
+                foeTotal++;
+            }
+        }
+    }
+    return myTotal <= foeTotal + 2;
+};
+
+module.exports.FleshGiant = function(context) {
+    var minions = [];
+    for(var i = 0; i < 2; i++) {
+        if(i==0) {
+            var char = context.player;
+        } else {
+            char = context.foe;
+        }
+        for(var j in char.graveyard) {
+            var card = char.graveyard[j];
+            if(card.type == "minion") {
+                minions.push(card);
+            }
+        }
+    }
+    return (20 - 1 * minions.length <= 8);
+};
+
+module.exports.LordMarrowgar = function(context) {
+    return context.player.hand.length < 10;
+};
+
+module.exports.Festergut = function(context) {
+    var value = 0;
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        if(minion.getHp() == 1) {
+            value += 0.5;
+        }
+    }
+    for(var i in context.foe.minions) {
+        var minion = context.foe.minions[i];
+        if(minion.getHp() == 1) {
+            value += 1;
+        }
+    }
+    return value > 2;
+}
+
+module.exports.Rotface = function(context) {
+    var num = 0;
+    for(var i in context.player.minions) {
+        if(context.player.minions[i].getHp() < context.player.minions[i].getMaxHp()) {
+            num++;
+        }
+    }
+    for(i in context.foe.minions) {
+        if(context.foe.minions[i].getHp() < context.foe.minions[i].getMaxHp()) {
+            num++;
+        }
+    }
+    return num >= 2;
 };
 
 module.exports.Fireball = function(context) {
@@ -811,8 +937,32 @@ module.exports.MirrorImage = function(context) {
     }
 };
 
+module.exports.ForbiddenFlame = function(context) {
+    for(var i in context.foe.minions) {
+        var minion = context.foe.minions[i];
+        if((minion.getHp() + minion.getDamage()) >= 6 && minion.getHp() > 1 && minion.getHp() <= context.player.mana) {
+            return true;
+        }
+    }
+    return false;
+};
+
+module.exports.KirinTorBattleMage = function(context) {
+    var num = 0;
+    for(var i in context.player.shallowGraves) {
+        if(context.player.shallowGraves[i].type == "spell") {
+            num++;
+        }
+    }
+    return num >= 2;
+};
+
 module.exports.ArchmageAntonidas = function(context) {
     return true;
+};
+
+module.exports.ArchmageKhadgar = function(context) {
+    return context.player.hand.length < 8;
 };
 
 module.exports.Execute = function(context) {
@@ -932,6 +1082,15 @@ module.exports.BattleRage = function(context) {
     }
 };
 
+module.exports.StolenGoods = function(context) {
+    for(var i = 0; i < context.player.hand.length; i++) {
+        if(context.player.hand[i].type == "minion" && context.player.hand[i].hasEffectName("Taunt")) {
+            return true;
+        }
+    }
+    return false;
+};
+
 module.exports.BloodWarriors = function(context) {
     var injuredMinions = 0;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -944,7 +1103,89 @@ module.exports.BloodWarriors = function(context) {
         return true;
     }
     return false;
-}
+};
+
+module.exports.Brawl = function(context) {
+    var totalStats = [0, 0];
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        totalStats[0] += minion.getDamage() + minion.getHp();
+    }
+    for(i in context.foe.minions) {
+        minion = context.foe.minions[i];
+        totalStats[1] += minion.getDamage() + minion.getHp();
+    }
+    return totalStats[0] <= totalStats[1] + 2 && totalStats[1] >= 8 && context.foe.minions.length >= 3;
+};
+
+module.exports.ShieldSlam = function(context) {
+    var isPowerful = false;
+    if (context.foe.minions.length > 0) {
+        for (var i = 0; i < context.foe.minions.length; i++) {
+            if ((context.foe.minions[i].getHp() + context.foe.minions[i].getDamage()) >= 10 && context.foe.minions[i].getHp() >= 4 && context.foe.minions[i].getHp() <= context.player.armor) {
+                return context.player.armor >= 6;
+            }
+        }
+    }
+    return false;
+};
+
+module.exports.RavagingGhoul = function(context) {
+    var value = 2;
+    for (var i = 0; i < context.player.minions.length; i++) {
+        var hasSpecial = false;
+        if (context.player.minions[i].enrage && context.player.minions[i].getHp() > 1) {
+            value += 1;
+            hasSpecial = true;
+        }
+        for (var o = 0; o < context.player.minions[i].effects.length; o++) {
+            if (context.player.minions[i].effects[o].type === "pain" || context.player.minions[i].effects[o].type === "damage hunger") {
+                value += 1;
+                hasSpecial = true;
+            }
+        }
+        if (!hasSpecial) {
+            value -= 1;
+        }
+    }
+    for (i = 0; i < context.foe.minions.length; i++) {
+        var hasSpecial = false;
+        if (context.foe.minions[i].enrage) {
+            value -= 1;
+            hasSpecial = true;
+        }
+        for (o = 0; o < context.foe.minions[i].effects.length; o++) {
+            if (context.foe.minions[i].effects[o].type === "pain" || context.foe.minions[i].effects[o].type === "damage hunger") {
+                value -= 1;
+                hasSpecial = true;
+            }
+        }
+        if (!hasSpecial) {
+            value += 1;
+        }
+    }
+    if (value > 2) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+
+module.exports.AshenDefender = function(context) {
+    var taunts = 0;
+    for(var i in context.player.minions) {
+        if(context.player.minions[i].hasEffectName("Taunt")) {
+            taunts++;
+        }
+    }
+    for(i in context.foe.minions) {
+        if(context.foe.minions[i].hasEffectName("Taunt")) {
+            taunts++;
+        }
+    }
+    return taunts >= 1;
+};
 
 module.exports.IronSensei = function(context) {
     for (var i = 0; i < context.player.minions.length; i++) {
@@ -998,7 +1239,7 @@ module.exports.Shiv = function(context) {
     else {
         return false;
     }
-}
+};
 
 module.exports.FanofKnives = function(context) {
     var goodTargets = 0;
@@ -1032,6 +1273,16 @@ module.exports.Sprint = function(context) {
     else {
         return false;
     }
+};
+
+module.exports.Recuperate = function(context) {
+    var spells = 0;
+    for(var i in context.player.hand) {
+        if(context.player.hand[i].type == "spell") {
+            spells++;
+        }
+    }
+    return spells >= 3;
 };
 
 module.exports.Crackle = function(context) {
@@ -1089,15 +1340,6 @@ module.exports.ForkedLightning = function(context) {
     else {
         return false;
     }
-};
-
-module.exports.UnboundElemental = function(context) {
-    for(var i = 0; i < context.player.hand.length; i++) {
-        if(context.cause.overload > 0) {
-            return true;
-        }
-    }
-    return false;
 };
 
 module.exports.AlAkirtheWindlord = function(context) {
@@ -1171,6 +1413,14 @@ module.exports.ExplosiveShot = function(context) {
     else {
         return false;
     }
+};
+
+module.exports.Precious = function(context) {
+    var total = 0;
+    for(var i = 0; i < context.foe.minions.length; i++) {
+        total += context.foe.minions[i].getHp();
+    }
+    return total >= context.foe.minions.length + 4;
 };
 
 module.exports.ArcaneShot = function(context) {
@@ -1361,6 +1611,15 @@ module.exports.Cenarius = function(context) {
     }
 };
 
+module.exports.SoulbinderTuulani = function(context) {
+    for(var i in context.player.cardsPlayed) {
+        if(context.player.cardsPlayed[i].hasEffectType("deathrattle", context)) {
+            return true;
+        }
+    }
+    return false;
+};
+
 module.exports.Malorne = function(context) {
     return true;
 };
@@ -1418,6 +1677,47 @@ module.exports.Succubus = function(context) {
     return true;
 };
 
+module.exports.IcecrownValkyr = function(context) {
+    for(var i in context.player.graveyard) {
+        var card = context.player.graveyard[i];
+        if(card.type == "minion" && card.hasEffectType("deathrattle")) {
+            return true;
+        }
+    }
+    for(i in context.foe.graveyard) {
+        card = context.foe.graveyard[i];
+        if(card.type == "minion" && card.hasEffectType("deathrattle")) {
+            return true;
+        }
+    }
+};
+
+module.exports.VilefinNecromancer = function(context) {
+    var value = 0;
+    for(var i in context.player.minions) {
+        var card = context.player.minions[i];
+        if(card.hasEffectType("deathrattle")) {
+            value++;
+        }
+        if((card.getHp() + card.getDamage()) < 5) {
+            value++;
+        }
+        else {
+            value -= (card.getHp() + card.getDamage() - 5) / 2;
+        }
+    }
+    return value >= 2;
+};
+
+module.exports.DarkOffering = function(context) {
+    for(var i in context.player.minions) {
+        if(context.player.minions[i].hasEffectType("deathrattle")) {
+            return true;
+        }
+    }
+    return false;
+};
+
 module.exports.Shadowflame = function(context) {
     var isTarget = false;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -1448,6 +1748,10 @@ module.exports.MalGanis = function(context) {
 
 module.exports.LordJaraxxusINFERNO = function(context) {
     return true;
+};
+
+module.exports.HandofSacrifice = function(context) {
+    return context.player.minions.length > 0 && context.foe.minions.length > 0;
 };
 
 module.exports.StandAgainstDarkness = function(context) {
@@ -1545,11 +1849,29 @@ module.exports.MurlocKnight = function(context) {
     return true;
 };
 
-module.exports.TirionFordring = function(context) {
-    if(!context.player.weapon) {
-        return true;
+module.exports.KingsHerald = function(context) {
+    for(var i in context.player.hand) {
+        var card = context.player.hand[i];
+        if(card.type == "minion" && card.effects.length >= 2) {
+            return true;
+        }
     }
     return false;
+};
+
+module.exports.TerenasMenethil = function(context) {
+    var minions = [];
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i].card();
+        if(card.type == "minion") {
+            minions.push(card);
+        }
+    }
+    return minions.length >= 3;
+}
+
+module.exports.TirionFordring = function(context) {
+    return !context.player.weapon;
 };
 
 module.exports.BolvarFordragon = function(context) {
@@ -1636,6 +1958,32 @@ module.exports.VelensChosen = function(context) {
     }
 };
 
+module.exports.Prayer = function(context) {
+    for(var i in context.player.minions) {
+        if(context.player.minions[i].damageTaken >= 12) {
+            return true;
+        }
+    }
+    return context.player.getHp() <= 15;
+};
+
+module.exports.Resurrect = function(context) {
+    var minions = [];
+    var totalCost = 0;
+    for(var i = 0; i < context.player.graveyard.length; i++) {
+        var card = context.player.graveyard[i];
+        if(card.type == "minion") {
+            totalCost += card.cost;
+            minions.push(card);
+        }
+    }
+    return (totalCost / minions.length >= 3);
+};
+
+module.exports.PowerWordFortitude = function(context) {
+    return context.player.minions.length >= 2 && context.foe.minions.length > 0;
+};
+
 module.exports.NorthshireCleric = function(context) {
     return true;
 };
@@ -1660,6 +2008,15 @@ module.exports.TwilightWhelp = function(context) {
         }
     }
     return true;
+};
+
+module.exports.HamuulRunetotem = function(context) {
+    for(var i in context.player.cardsPlayed) {
+        if(context.player.cardsPlayed[i].battlecry) {
+            return true;
+        }
+    }
+    return false;
 };
 
 module.exports.AnubRekhanSkitter = function(context) {

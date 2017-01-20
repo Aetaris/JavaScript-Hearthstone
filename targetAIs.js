@@ -176,9 +176,60 @@ module.exports.BlackwingCorruptor = function(targets, context) {
     return target;
 };
 
-module.exports.Fireball = function(targets, context) {
+module.exports.DeathspeakerDisciple = function(targets, context) {
+    var target = false;
+    var maxHealth = 0;
+    for(var i = 0; i < context.player.minions.length; i++) {
+        if(context.player.minions[i].getHp() > maxHealth && (!target || !target.hasEffectName("Summoning Sickness"))) {
+            target = context.player.minions[i];
+            maxHealth = context.player.minions[i].getHp();
+        }
+    }
+    return target;
+};
+
+module.exports.CryptFiend = function(targets, context) {
     var targets = removeAllies(targets, context.player.color);
     var target = context.foe;
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() <= 2 || ((targets[i].getHp() + targets[i].getDamage()) > 6 && targets[i].getHp() < 5)) {
+            target = targets[i];
+        }
+    }
+    return target;
+};
+
+module.exports.SkybreakerVindicator = function(targets, context) {
+    if(context.foe.minions.length == 0) {
+        return context.foe;
+    }
+    var target = false;
+    var enemies = removeAllies(targets, context.player.color);
+    for(var i = 0; i < enemies.length; i++) {
+        if((enemies[i].getHp() + enemies[i].getDamage()) >= 2 && enemies[i].getHp() <= 2) {
+            target = targets[i];
+        }
+    }
+    if(target) {
+        return target;
+    }
+    var allies = removeEnemies(targets, context.player.color);
+    var maxHealth = 0;
+    for(var i = 0; i < allies.length; i++) {
+        if((allies[i].getHp() > maxHealth || !target) && allies[i].type == "minion") {
+            target = allies[i];
+            maxHealth = allies[i].getHp();
+        }
+    }
+    if(target) {
+        return target;
+    }
+    return context.foe;
+};
+
+module.exports.SanlaynBloodspeaker = function(targets, context) {
+    targets = removeAllies(targets, context.player.color);
+    var target = false;
     for(var i = 0; i < targets.length; i++) {
         if(targets[i].getHp() > 3 && targets[i].getDamage() > 2) {
             target = targets[i];
@@ -187,8 +238,22 @@ module.exports.Fireball = function(targets, context) {
     return target;
 };
 
+module.exports.Fireball = function(targets, context) {
+    targets = removeAllies(targets, context.player.color);
+    var target = context.foe;
+    for(var i = 0; i < targets.length; i++) {
+        if(targets[i].getHp() > 3 && targets[i].getDamage() >= 4) {
+            target = targets[i];
+        }
+    }
+    if(context.foe.getHp() <= 6) {
+        return context.foe;
+    }
+    return target;
+};
+
 module.exports.Polymorph = function(targets, context) {
-    var targets = removeAllies(targets, context.player.color);
+    targets = removeAllies(targets, context.player.color);
     var target = false;
     var maxDmg = 0;
     var maxHp = 0;
@@ -228,11 +293,32 @@ module.exports.ConeofCold = function(targets, context) {
     return target;
 };
 
+module.exports.ForbiddenFlame = function(targets, context) {
+    targets = removeAllies(targets, context.player.color);
+    for(var i in targets) {
+        if((targets[i].getHp() + targets[i].getDamage()) >= 6 && targets[i].getHp() > 1 && targets[i].getHp() <= context.player.mana) {
+            return targets[i];
+        }
+    }
+    return false;
+};
+
 module.exports.Execute = function(targets, context) {
     var target = false;
     for(var i = 0; i < targets.length; i++) {
         if(targets[i].getHp() < targets[i].getMaxHp() && ((targets[i].getHp() + targets[i].getDamage()) >= 10 || !target)) {
             target = targets[i];
+        }
+    }
+    return target;
+};
+
+module.exports.ShieldSlam = function(targets, context) {
+    targets = removeAllies(targets, context.player.color);
+    for(var i in targets) {
+        var minion = targets[i];
+        if(minion.getHp() > 4 && minion.getDamage() >= 3 && minion.getHp() <= context.player.armor) {
+            var target = targets[i];
         }
     }
     return target;
@@ -430,6 +516,26 @@ module.exports.MortalCoil = function(targets, context) {
     return target;
 };
 
+module.exports.DarkOffering = function(targets, context) {
+    targets = removeEnemies(targets, context.player.color);
+    var rattleNum = 0;
+    var rattler = false;
+    var thisRattleNum = 0;
+    for(var i in targets) {
+        for(var j in targets[i].effects) {
+            var eff = targets[i].effects[j];
+            if(eff.type == "deathrattle") {
+                thisRattleNum++;
+            }
+        }
+        if(thisRattleNum > rattleNum) {
+            rattler = targets[i];
+            rattleNum = thisRattleNum;
+        }
+    }
+    return rattler;
+};
+
 module.exports.Shadowflame = function(targets, context) {
     var target = context.foe;
     for(var i = 0; i < context.player.minions.length; i++) {
@@ -515,6 +621,17 @@ module.exports.VelensChosen = function(targets, context) {
         }
     }
     return target;
+};
+
+module.exports.Prayer = function(targets, context) {
+    for(var i in targets) {
+        if(targets[i].damageTaken >= 12) {
+            return targets[i];
+        }
+    }
+    if(context.player.getHp() <= 15) {
+        return context.player;
+    }
 };
 
 // Custom Sets

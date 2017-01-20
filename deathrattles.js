@@ -24,6 +24,29 @@ var DancingSwords = function(source, context) {
     utilities.drawCard(context.foe, {player: context.foe, foe: context.player, cause: source});
 };
 
+var UnstableGhoul = function(source, context) {
+    printer.print(source.color + " " + source.name + " violently explodes, dealing 1 damage to all minions.");
+    var minions = [];
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        if(minion != source) {
+            minions.push(minion);
+        }
+    }
+    for(i in context.foe.minions) {
+        var minion = context.foe.minions[i];
+        if(minion != source) {
+            minions.push(minion);
+        }
+    }
+    for(i in minions) {
+        utilities.dealDamage(minions[i], 1, context);
+        if(!minions[i].isAlive()) {
+            i--;
+        }
+    }
+};
+
 var NerubianEgg = function(source, context) {
     printer.print(context.player.color + " Nerubian Egg's deathrattle summons a " + context.player.color + " 4/4 Nerubian.");
     utilities.summon(EggNerubian(context.player.color), context.player, context);
@@ -77,7 +100,7 @@ var ClockworkGnome = function(source, context) {
     printer.print(context.player.color + " Clockwork Gnome's deathrattle gives " + context.player.color + " " + context.player.name + " a Spare Part card.");
     var sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
     var part = SpareParts[sparePartNum]();
-    context.player.hand.push(part);
+    utilities.addCard(part, context.player, context);
     printer.print(context.player.color + " " + context.player.name + " receives: " + part.name + ".");
 };
 
@@ -92,11 +115,11 @@ var MechanicalYeti = function(source, context) {
     + " and " + context.foe.color + " " + context.foe.name + "a Spare Part card.");
     var sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
     var part = SpareParts[sparePartNum]();
-    context.player.hand.push(part);
+    utilities.addCard(part, context.player, context);
     printer.print(context.player.color + " " + context.player.name + " receives: " + part.name + ".");
     sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
     part = SpareParts[sparePartNum]();
-    context.foe.hand.push(part);
+    utilities.addCard(part, context.foe, {player: context.foe, foe: context.player});
     printer.print(context.foe.color + " " + context.foe.name + " receives: " + part.name + ".");
 };
 
@@ -127,7 +150,7 @@ var Toshley = function(source, context) {
     printer.print(context.player.color + " Toshley's deathrattle gives " + context.player.color + " " + context.player.name + " a Spare Part card.");
     var sparePartNum = Math.floor((SpareParts.length) * Math.random(0, 1));
     var part = SpareParts[sparePartNum]();
-    context.player.hand.push(part);
+    utilities.addCard(part, context.player, context);
     printer.print(context.player.color + " " + context.player.name + " receives: " + part.name + ".");
 };
 
@@ -182,11 +205,115 @@ var AyaBlackpaw = function(source, context) {
     utilities.summon(golem, context.player, context);
 };
 
+var UnstableGhoulMinion = function() {
+    return utilities.makeMinion(false, "Common", "Naxxramas", ["Neutral"], "Unstable Ghoul", 2, 0, 3, 1, false, false, false, [effects.sickness, effects.taunt, UnstableGhoul_Deathrattle], ais.true, UnstableGhoulMinion);
+};
+
+var IcecrownCombatant = function(source, context) {
+    printer.print(source.color + " " + source.name + "'s deathrattle reanimates it as an Unstable Ghoul under the " + context.foe.color + " " + context.foe.name + "'s control.");
+    utilities.summon(UnstableGhoulMinion(), context.foe, {player: context.foe, foe: context.player});
+};
+
+var PlagueRatBOOM = function(source, context) {
+    printer.print("A plague ravages the board, dealing 3 damage to all minions.");
+    for(var i in context.player.minions) {
+        var minion = context.player.minions[i];
+        utilities.dealDamage(minion, 3, context);
+        if(!minion.isAlive()) {
+            i--;
+        }
+    }
+    for(i in context.foe.minions) {
+        minion = context.foe.minions[i];
+        utilities.dealDamage(minion, 3, context);
+        if(!minion.isAlive()) {
+            i--;
+        }
+    }
+    for(i in context.player.effects) {
+        if(context.player.effects[i].name == "The Black Death") {
+            context.player.effects.splice(i, 1);
+            i--;
+        }
+    }
+};
+
+var PlagueRatEffect = {
+    name: "The Black Death",
+    type: "start of turn friend",
+    action: PlagueRatBOOM
+};
+
+var PlagueRat = function(source, context) {
+    printer.print(source.color + " " + source.name + " leaves behind a disease that will ravage the board at the start of the " + context.player.color + " " + context.player.name + "'s next turn.");
+    context.player.addEffect(PlagueRatEffect);
+};
+
+var SpiritAlarm = function(source, context) {
+    printer.print(source.color + " " + source.name + "'s deathrattle silences all minions.");
+    for(var i in context.player.minions) {
+        utilities.dispel(context.player.minions[i], context);
+    }
+    for(i in context.foe.minions) {
+        utilities.dispel(context.foe.minions[i], context);
+    }
+};
+
+var UndyingSpectreMinion = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Undying Spectre", 5, 0, 1, 4, false, false, false, [effects.sickness, UndyingSpectre_Deathrattle], ais.true, UndyingSpectreMinion);
+};
+
+var UndyingSpectreAction = function(source, context) {
+    var minion = UndyingSpectreMinion();
+    for(var i in context.player.effects) {
+        var effect = context.player.effects[i];
+        if(effect.name == "Undying Spectre Reforming") {
+            printer.print(source.color + " " + minion.name + " reforms.");
+            context.player.effects.splice(i, 1);
+            utilities.summon(minion, context.player, context);
+            i--;
+        }
+    }
+};
+
+var UndyingSpectreEffect = {
+    name: "Undying Spectre Reforming",
+    type: "start of turn",
+    action: UndyingSpectreAction
+};
+
+var UndyingSpectre = function(source, context) {
+    printer.print(source.color + " " + source.name + " breaks apart. Its essence will gather together again shortly.");
+    context.player.addEffect(UndyingSpectreEffect);
+};
+
 var Rhonin = function(source, context) {
     printer.print(source.color + " Rhonin's deathrattle grants " + context.player.color + " " + context.player.name + " 3 copies of Arcane Missiles.");
-    context.player.hand.push(ArcaneMissiles);
-    context.player.hand.push(ArcaneMissiles);
-    context.player.hand.push(ArcaneMissiles);
+    for(var i = 0; i < 3; i++) {
+        utilities.addCard(ArcaneMissiles(), context.player, context);
+    }
+};
+
+var WretchedGhoul = function(source, context) {
+    printer.print(source.color + " " + source.name + "'s deathrattle damages all damaged minions.");
+    for(var i in context.player.minions) {
+        var min = context.player.minions[i];
+        if(min.damageTaken > 0) {
+            utilities.dealDamage(min, 2, context);
+        }
+        if(!min.isAlive()) {
+            i--;
+        }
+    }
+    for(var i in context.foe.minions) {
+        var min = context.foe.minions[i];
+        if(min.damageTaken > 0) {
+            utilities.dealDamage(min, 2, context);
+        }
+        if(!min.isAlive()) {
+            i--;
+        }
+    }
 };
 
 var ArcaneMissiles = function() {
@@ -206,7 +333,7 @@ var AnubarAmbusher = function(source, context) {
         if(!target.card || typeof target.card != "function") {
             throw new Error("lol oops");
         }
-        context.player.hand.push(target.card());
+        utilities.addCard(target.card(), context.player, context);
         context.player.minions.splice(context.player.minions.indexOf(target), 1);
     }
 };
@@ -225,7 +352,7 @@ var Webspinner = function(source, context) {
     printer.print(source.color + " " + source.name + "'s deathrattle adds a random Beast to the " + context.player.color + " " + context.player.name + "'s hand.");
     if(context.player.hand.length < 10 && beast) {
         printer.print("Beast received: " + beast.name);
-        context.player.hand.push(beast);
+        utilities.addCard(beast, context.player, context);
     }
     else if (beast) {
         printer.print("Hand too full! Could not receive card.");
@@ -338,7 +465,7 @@ var SpareParts = module.exports.SpareParts = [
 ];
 
 var Ashbringer = function(color) {
-    return utilities.makeWeapon("Legendary", "Classic", "Ashbringer", 5, 0, 5, 3, false, false, false, [], ais.ArcaniteReaper, Ashbringer, 100);
+    return utilities.makeWeapon("Legendary", "Classic", ["Paladin"], "Ashbringer", 5, 0, 5, 3, false, false, false, [], ais.ArcaniteReaper, Ashbringer, 100);
 };
 
 module.exports.LeperGnome_Deathrattle = {
@@ -357,6 +484,12 @@ module.exports.HauntedCreeper_Deathrattle = {
     name: "Haunted Creeper",
     type: "deathrattle",
     action: HauntedCreeper
+};
+
+var UnstableGhoul_Deathrattle = module.exports.UnstableGhoul_Deathrattle = {
+    name: "Unstable Ghoul",
+    type: "deathrattle",
+    action: UnstableGhoul
 };
 
 module.exports.NerubianEgg_Deathrattle = {
@@ -447,6 +580,36 @@ module.exports.CorruptedHealbot_Deathrattle = {
     name: "Corrupted Healbot",
     type: "deathrattle",
     action: CorruptedHealbot
+};
+
+module.exports.IcecrownCombatant_Deathrattle = {
+    name: "Icecrown Combatant",
+    type: "deathrattle",
+    action: IcecrownCombatant
+};
+
+module.exports.PlagueRat_Deathrattle = {
+    name: "Plague Rat",
+    type: "deathrattle",
+    action: PlagueRat
+};
+
+module.exports.SpiritAlarm_Deathrattle = {
+    name: "Spirit Alarm",
+    type: "deathrattle",
+    action: SpiritAlarm
+};
+
+var UndyingSpectre_Deathrattle = module.exports.UndyingSpectre_Deathrattle = {
+    name: "Undying Spectre",
+    type: "deathrattle",
+    action: UndyingSpectre
+};
+
+module.exports.WretchedGhoul_Deathrattle = {
+    name: "Wretched Ghoul",
+    type: "deathrattle",
+    action: WretchedGhoul
 };
 
 module.exports.AnubarAmbusher_Deathrattle = {

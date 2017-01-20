@@ -90,8 +90,7 @@ var ChillwindYeti = module.exports.ChillwindYeti = function() {
 };
 
 var ElvenArcher = module.exports.ElvenArcher = function() {
-    return utilities.makeMinion(false, "Basic", "Basic", ["Neutral"], "Elven Archer", 1, 0, 1, 1,
-    battlecries.ElvenArcher, targetais.ElvenArcher, filters.any, [effects.sickness], ais.ElvenArcher, ElvenArcher, 59);
+    return utilities.makeMinion(false, "Basic", "Basic", ["Neutral"], "Elven Archer", 1, 0, 1, 1, battlecries.ElvenArcher, targetais.MageFireblast, filters.any, [effects.sickness], ais.ElvenArcher, ElvenArcher, 59);
 };
 
 var FrostwolfGrunt = module.exports.FrostwolfGrunt = function() {
@@ -259,8 +258,12 @@ var NerubarWeblord = module.exports.NerubarWeblord = function() {
 };
 
 var StoneskinGargoyle = module.exports.StoneskinGargoyle = function() {
-    return utilities.makeMinion(false, "Common", "Naxxramas", ["Neutral"], "Stoneskin Gargoyle", 3, 0, 4, 1, false, false, false,
+    return utilities.makeMinion("Beast", "Common", "Naxxramas", ["Neutral"], "Stoneskin Gargoyle", 3, 0, 4, 1, false, false, false,
     [effects.sickness, effects.StoneskinGargoyle], ais.MurlocRaider, StoneskinGargoyle, 7);
+};
+
+var UnstableGhoul = module.exports.UnstableGhoul = function() {
+    return utilities.makeMinion(false, "Common", "Naxxramas", ["Neutral"], "Unstable Ghoul", 2, 0, 3, 1, false, false, false, [effects.sickness, effects.taunt, deathrattles.UnstableGhoul_Deathrattle], ais.true, UnstableGhoul);
 };
 
 // Rares
@@ -436,11 +439,20 @@ var NexusChampionSaraad = module.exports.NexusChampionSaraad = function() {
 
 // Commons
 
+
+var MurlocTinyfin = module.exports.MurlocTinyfin = function() {
+    return utilities.makeMinion(false, "Common", "League of Explorers", ["Neutral"], "Murloc Tinyfin", 6, 0, 1, 1, false, false, false, false, false, MurlocTinyfin, 26)
+};
+
 // Rares
 
 // Epics
 
 // Legendaries
+
+var ArchThiefRafaam = module.exports.ArchThiefRafaam = function() {
+    return utilities.makeMinion(false, "Legendary", "League of Explorers", ["Neutral"], "Arch-Thief Rafaam", 9, 0, 8, 7, battlecries.ArchThiefRafaam, false, false, [effects.sickness], ais.ArchThiefRafaam, ArchThiefRafaam, 79);
+};
 
 var EliseStarseeker = module.exports.EliseStarseeker = function() {
     return utilities.makeMinion(false, "Legendary", "League of Explorers", ["Neutral"], "Elise Starseeker", 4, 0, 5, 3, battlecries.EliseStarseeker,
@@ -558,6 +570,10 @@ var SergeantSally = module.exports.SergeantSally = function() {
 
     // The Grimy Goons
     
+    var GrimestreetSmuggler = module.exports.GrimestreetSmuggler = function() {
+        return utilities.makeMinion(false, "Common", "Mean Streets of Gadgetzan", ["Warrior", "Hunter", "Paladin"], "Grimestreet Smuggler", 3, 0, 4, 2, battlecries.GrimestreetSmuggler, false, false, [effects.sickness], ais.GrimyGoons, GrimestreetSmuggler, 54);
+    };
+    
     var DonHanCho = module.exports.DonHanCho = function() {
         return utilities.makeMinion(false, "Legendary", "Mean Streets of Gadgetzan", ["Warrior", "Hunter", "Paladin"], "Don Han'Cho", 7, 0, 6, 5, battlecries.DonHanCho, false, false, [effects.sickness], ais.GrimyGoons, DonHanCho, 84);
     };
@@ -581,6 +597,241 @@ var SergeantSally = module.exports.SergeantSally = function() {
     var KabalChemist = module.exports.KabalChemist = function() {
         return utilities.makeMinion(false, "Common", "Mean Streets of Gadgetzan", ["Mage", "Priest", "Warlock"], "Kabal Chemist", 4, 0, 3, 3, battlecries.KabalChemist, false, false, [effects.sickness], ais.true, KabalChemist, 77);
     };
+
+// ICECROWN CITADEL
+
+// Commons
+
+var IcecrownCombatant = module.exports.IcecrownCombatant = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Icecrown Combatant", 3, 0, 5, 5, false, false, false, [effects.sickness, deathrattles.IcecrownCombatant_Deathrattle], ais.true, IcecrownCombatant);
+};
+
+var SkeletalSoldier = module.exports.SkeletalSoldier = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Skeletal Soldier", 1, 0, 2, 1, false, false, false, [effects.sickness, effects.SkeletalSoldier], ais.true, SkeletalSoldier)
+};
+
+var DeathspeakerDisciple = module.exports.DeathspeakerDisciple = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Deathspeaker Disciple", 3, 0, 2, 2, battlecries.DeathspeakerDisciple, targetais.DeathspeakerDisciple, filters.allyMinion, [effects.sickness], ais.DeathspeakerDisciple, DeathspeakerDisciple);
+};
+
+var FrostWyrm = module.exports.FrostWyrm = function() {
+    return utilities.makeMinion("Dragon", "Common", "Icecrown Citadel", ["Neutral"], "Frost Wyrm", 8, 0, 8, 7, battlecries.FrostWyrm, targetais.ArcaneShot, filters.any, [effects.sickness], ais.true, FrostWyrm);
+};
+
+var SkeletalSuppressor = module.exports.SkeletalSuppressor = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Skeletal Suppressor", 2, 0, 3, 2, false, false, false, [effects.sickness, effects.SkeletalSuppressor], ais.true, SkeletalSuppressor);
+};
+
+var KorkronBerserker = module.exports.KorkronBerserker = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Kor'kron Berserker", 5, 0, 6, 3, false, false, false, [effects.sickness, effects.KorkronBerserker], ais.true, KorkronBerserker);
+};
+
+var PlagueScientist = module.exports.PlagueScientist = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Plague Scientist", 3, 0, 2, 3, false, false, false, [effects.sickness, effects.PlagueScientist], ais.true, PlagueScientist);
+};
+
+var YmirjarHuntress = module.exports.YmirjarHuntress = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Ymirjar Huntress", 4, 0, 4, 2, battlecries.YmirjarHuntress, targetais.ArcaneShot, filters.any, [effects.sickness], ais.true, YmirjarHuntress);
+};
+
+var RavenousGeist = module.exports.RavenousGeist = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Ravenous Geist", 2, 0, 3, 4, battlecries.RavenousGeist, false, false, [effects.sickness], ais.true, RavenousGeist);
+};
+
+var MalevolentSwords = module.exports.MalevolentSwords = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Malevolent Swords", 4, 0, 6, 5, false, false, false, [effects.sickness, effects.taunt, deathrattles.DancingSwords_Deathrattle], ais.DancingSwords, MalevolentSwords);
+};
+
+var YmirjarWarrior = module.exports.YmirjarWarrior = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Ymirjar Warrior", 3, 0, 4, 3, false, false, false, [effects.sickness, effects.YmirjarWarrior], ais.true, YmirjarWarrior);
+};
+
+var PlagueRat = module.exports.PlagueRat = function() {
+    return utilities.makeMinion("Beast", "Common", "Icecrown Citadel", ["Neutral"], "Plague Rat", 2, 0, 1, 1, false, false, false, [effects.sickness, deathrattles.PlagueRat_Deathrattle], ais.Whirlwind, PlagueRat);
+};
+
+var ValkyrShadowguard = module.exports.ValkyrShadowguard = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Val'kyr Shadowguard", 3, 0, 4, 2, false, false, false, [effects.sickness, effects.ValkyrShadowguard], ais.true, ValkyrShadowguard);
+};
+
+var BoneRager = module.exports.BoneRager = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Neutral"], "Bone Rager", 3, 0, 2, 5, false, false, false, [effects.sickness, effects.taunt], ais.true, BoneRager);
+};
+
+// Rares
+
+var Historian = module.exports.Historian = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Historian", 3, 0, 5, 2, battlecries.Historian, false, false, [effects.sickness], ais.true, Historian);
+};
+
+var DeathboundWard = module.exports.DeathboundWard = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Deathbound Ward", 4, 0, 8, 5, false, false, false, [effects.sickness, effects.permanentfreeze, inspires.DeathboundWard_Inspire], ais.true, DeathboundWard);
+};
+
+var CultAdherent = module.exports.CultAdherent = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Cult Adherent", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.CultAdherent], ais.true, CultAdherent);
+};
+
+var CryptFiend = module.exports.CryptFiend = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Crypt Fiend", 4, 0, 2, 4, battlecries.CryptFiend, targetais.CryptFiend, filters.any, [effects.sickness], ais.true, CryptFiend);
+};
+
+var DarkfallenKnight = module.exports.DarkfallenKnight = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Darkfallen Knight", 3, 0, 2, 3, battlecries.DarkfallenKnight, targetais.Darkbomb, filters.minion, [effects.sickness], ais.DarkfallenKnight, DarkfallenKnight);
+};
+
+var BloodCrazedVampire = module.exports.BloodCrazedVampire = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Blood-Crazed Vampire", 4, 0, 5, 3, false, false, false, [effects.sickness, effects.BloodCrazedVampire], ais.true, BloodCrazedVampire);
+};
+
+var SkybreakerVindicator = module.exports.SkybreakerVindicator = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Skybreaker Vindicator", 5, 0, 5, 4, battlecries.SkybreakerVindicator, targetais.SkybreakerVindicator, filters.SkybreakerVindicator, [effects.sickness], ais.true, SkybreakerVindicator);
+};
+
+var FallenChampion = module.exports.FallenChampion = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Fallen Champion", 5, 0, 5, 5, false, false, false, [effects.sickness, effects.taunt, effects.freezetarget], ais.true, FallenChampion);
+};
+
+var DeathspeakerAttendant = module.exports.DeathspeakerAttendant = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Deathspeaker Attendant", 4, 0, 4, 2, battlecries.DeathspeakerAttendant, false, false, [effects.sickness], ais.DeathspeakerAttendant, DeathspeakerAttendant);
+};
+
+var FrostQueensAttendant = module.exports.FrostQueensAttendant = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Frost-Queen's Attendant", 4, 0, 4, 4, false, false, false, [effects.sickness, effects.FrostQueensAttendant], ais.true, FrostQueensAttendant);
+};
+
+var SanlaynBloodspeaker = module.exports.SanlaynBloodspeaker = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "San'layn Bloodspeaker", 6, 0, 6, 5, battlecries.SanlaynBloodspeaker, targetais.SanlaynBloodspeaker, filters.minion, [effects.sickness], ais.true, SanlaynBloodspeaker);
+};
+
+var YmirjarWarlord = module.exports.YmirjarWarlord = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Ymirjar Warlord", 5, 0, 5, 4, battlecries.YmirjarWarlord, false, false, [effects.sickness], ais.true, YmirjarWarlord);
+};
+
+var DarkfallenTactician = module.exports.DarkfallenTactician = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Darkfallen Tactician", 5, 0, 4, 5, battlecries.DarkfallenTactician, false, false, [effects.sickness], ais.true, DarkfallenTactician);
+};
+
+var Suppressor = module.exports.Suppressor = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Suppressor", 4, 0, 5, 2, false, false, false, [effects.sickness, effects.Suppressor], ais.true, Suppressor);
+};
+
+var VolatileAlchemist = module.exports.VolatileAlchemist = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Neutral"], "Volatile Alchemist", 5, 0, 3, 5, battlecries.VolatileAlchemist, targetais.DeathspeakerDisciple, filters.allyMinion, [effects.sickness], ais.DeathspeakerDisciple, VolatileAlchemist);
+};
+
+// Epics
+
+var Executioner = module.exports.Executioner = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Executioner", 6, 0, 4, 7, battlecries.Executioner, targetais.Polymorph, filters.Executioner, [effects.sickness], ais.Executioner, Executioner);
+}
+
+var DeathspeakerHighPriest = module.exports.DeathspeakerHighPriest = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Deathspeaker High Priest", 7, 0, 7, 6, battlecries.DeathspeakerHighPriest, false, false, [effects.sickness], ais.DeathspeakerHighPriest, DeathspeakerHighPriest);
+};
+
+var SpiritAlarm = module.exports.SpiritAlarm = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Spirit Alarm", 2, 0, 3, 0, false, false, false, [effects.sickness, deathrattles.SpiritAlarm_Deathrattle], ais.SpiritAlarm, SpiritAlarm);
+};
+
+var TormentedVision = module.exports.TormentedVision = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Tormented Vision", 5, 0, 4, 4, false, false, false, [effects.sickness, effects.unattackable], ais.true, TormentedVision);
+};
+
+var UndyingSpectre = module.exports.UndyingSpectre = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Undying Spectre", 5, 0, 1, 4, false, false, false, [effects.sickness, deathrattles.UndyingSpectre_Deathrattle], ais.true, UndyingSpectre);
+};
+
+var ArgentRedeemer = module.exports.ArgentRedeemer = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Argent Redeemer", 7, 0, 7, 5, false, false, false, [effects.sickness, effects.ArgentRedeemer], ais.true, ArgentRedeemer);
+};
+
+var BloodBeast = module.exports.BloodBeast = function() {
+    return utilities.makeMinion("Beast", "Epic", "Icecrown Citadel", ["Neutral"], "Blood Beast", 4, 0, 6, 2, false, false, false, [effects.sickness, effects.BloodBeast], ais.true, BloodBeast);
+};
+
+var DarkfallenOrb = module.exports.DarkfallenOrb = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Darkfallen Orb", 3, 0, 3, 0, battlecries.DarkfallenOrb, false, false, [effects.sickness], ais.true, DarkfallenOrb);
+};
+
+var FleshEatingInsect = module.exports.FleshEatingInsect = function() {
+    return utilities.makeMinion("Beast", "Epic", "Icecrown Citadel", ["Neutral"], "Flesh-Eating Insect", 1, 0, 1, 1, false, false, false, [effects.sickness, effects.FleshEatingInsect], ais.true, FleshEatingInsect);
+};
+
+var FleshGiant = module.exports.FleshGiant = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Neutral"], "Flesh Giant", 20, 0, 8, 8, false, false, false,
+    [effects.sickness, effects.FleshGiant], ais.FleshGiant, FleshGiant);
+};
+
+// Legendaries
+
+var LordMarrowgar = module.exports.LordMarrowgar = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Lord Marrowgar", 6, 0, 8, 5, battlecries.LordMarrowgar, false, false, [effects.sickness], ais.LordMarrowgar, LordMarrowgar);
+};
+
+var LadyDeathwhisper = module.exports.LadyDeathwhisper = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Lady Deathwhisper", 4, 0, 6, 2, false, false, false, [effects.sickness, effects.LadyDeathwhisper], ais.true, LadyDeathwhisper);
+};
+
+var OrgrimsHammer = module.exports.OrgrimsHammer = function() {
+    return utilities.makeMinion("Mech", "Legendary", "Icecrown Citadel", ["Neutral"], "Orgrim's Hammer", 6, 0, 7, 6, false, false, false, [effects.sickness, effects.OrgrimsHammer], ais.true, OrgrimsHammer);
+};
+
+var TheSkybreaker = module.exports.TheSkybreaker = function() {
+    return utilities.makeMinion("Mech", "Legendary", "Icecrown Citadel", ["Neutral"], "The Skybreaker", 6, 0, 6, 7, false, false, false, [effects.sickness, effects.TheSkybreaker], ais.true, TheSkybreaker);
+};
+
+var DeathbringerSaurfang = module.exports.DeathbringerSaurfang = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Deathbringer Saurfang", 4, 0, 4, 4, false, false, false, [effects.sickness, effects.DeathbringerSaurfang], ais.true, DeathbringerSaurfang);
+};
+
+var Festergut = module.exports.Festergut = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Festergut", 5, 0, 4, 4, battlecries.Festergut, false, false, [effects.sickness], ais.Festergut, Festergut);
+};
+
+var Rotface = module.exports.Rotface = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Rotface", 5, 0, 4, 4, battlecries.Rotface, false, false, [effects.sickness], ais.Rotface, Rotface);
+};
+
+var ProfessorPutricide = module.exports.ProfessorPutricide = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Professor Putricide", 5, 0, 5, 5, false, false, false, [effects.sickness, effects.ProfessorPutricide], ais.true, ProfessorPutricide);
+};
+
+var PrinceValanar = module.exports.PrinceValanar = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Prince Valanar", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.PrinceValanar], ais.true, PrinceValanar);
+};
+
+var PrinceKeleseth = module.exports.PrinceKeleseth = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Prince Keleseth", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.PrinceKeleseth], ais.true, PrinceKeleseth);
+};
+
+var PrinceTaldaram = module.exports.PrinceTaldaram = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Prince Taldaram", 3, 0, 3, 3, false, false, false, [effects.sickness, effects.PrinceTaldaram], ais.true, PrinceTaldaram);
+};
+
+var BloodQueenLanathel = module.exports.BloodQueenLanathel = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Blood-Queen Lana'thel", 7, 0, 8, 3, false, false, false, [effects.sickness, effects.BloodQueenLanathel], ais.true, BloodQueenLanathel);
+};
+
+var SisterSvalna = module.exports.SisterSvalna = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Sister Svalna", 5, 0, 4, 3, battlecries.SisterSvalna, targetais.ArcaneShot, filters.minion, [effects.sickness], ais.DeathspeakerDisciple, SisterSvalna);
+};
+
+var ValithriaDreamwalker = module.exports.ValithriaDreamwalker = function() {
+    return utilities.makeMinion("Dragon", "Legendary", "Icecrown Citadel", ["Neutral"], "Valithria Dreamwalker", 6, 0, 8, 4, false, false, false, [effects.sickness, effects.ValithriaDreamwalker], ais.true, ValithriaDreamwalker);
+};
+
+var Sindragosa = module.exports.Sindragosa = function() {
+    return utilities.makeMinion("Dragon", "Legendary", "Icecrown Citadel", ["Neutral"], "Sindragosa", 9, 0, 12, 4, false, false, false, [effects.sickness, effects.Sindragosa], ais.true, Sindragosa);
+};
+
+var EchoOfArthas = module.exports.EchoOfArthas = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Echo of Arthas", 8, 0, 10, 5, false, false, false, [effects.sickness, effects.EchoOfArthas], ais.true, EchoOfArthas);
+};
+
+var EchoOfNerzhul = module.exports.EchoOfNerzhul = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Neutral"], "Echo of Ner'zhul", 8, 0, 10, 5, false, false, false, [effects.sickness, effects.EchoOfNerzhul], ais.true, EchoOfNerzhul);
+};
 
 // ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -640,6 +891,10 @@ var Flamecannon = module.exports.Flamecannon = function() {
     return utilities.makeSpell("Common", "Goblins vs Gnomes", ["Mage"], "Flamecannon", 2, 0, abilities.Flamecannon, false, false, ais.Flamecannon, Flamecannon, 80);
 };
 
+var FrostfireBolt = module.exports.FrostfireBolt = function() {
+    return utilities.makeSpell("Common", "Icecrown Citadel", ["Mage"], "Frostfire Bolt", 4, 0, abilities.FrostfireBolt, targetais.Fireball, filters.minion, ais.ArcaneGiant, FrostfireBolt);
+};
+
 var MirrorEntity = module.exports.MirrorEntity = function() {
     return utilities.makeSpell("Common", "Classic", ["Mage"], "Mirror Entity", 3, 0, abilities.MirrorEntity, false, false, ais.MirrorEntity, MirrorEntity, 58);
 };
@@ -655,6 +910,14 @@ var Vaporize = module.exports.Vaporize = function() {
 };
 
 // Epics
+
+var ArcaneBlast = module.exports.ArcaneBlast = function() {
+    return utilities.makeSpell("Epic", "The Grand Tournament", ["Mage"], "Arcane Blast", 1, 0, abilities.ArcaneBlast, targetais.ArcaneShot, filters.minion, ais.ArcaneShot, ArcaneBlast, 68);
+};
+
+var ForbiddenFlame = module.exports.ForbiddenFlame = function() {
+    return utilities.makeSpell("Epic", "Whispers of the Old Gods", ["Mage"], "Forbidden Flame", 0, 0, abilities.ForbiddenFlame, targetais.ForbiddenFlame, filters.minion, ais.ForbiddenFlame, ForbiddenFlame, 70);
+};
 
 var IceBlock = module.exports.IceBlock = function() {
     return utilities.makeSpell("Epic", "Classic", ["Mage"], "Ice Block", 3, 0, abilities.IceBlock, false, false, ais.true, IceBlock, 18);
@@ -682,13 +945,25 @@ var GoblinBlastmage = module.exports.GoblinBlastmage = function() {
     false, false, [effects.sickness], ais.GoblinBlastmage, GoblinBlastmage, 71);
 };
 
+var SkybreakerSorcerer = module.exports.SkybreakerSorcerer = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Mage"], "Skybreaker Sorcerer", 4, 0, 3, 3, false, false, false, [effects.sickness, effects.SkybreakerSorcerer], ais.true, SkybreakerSorcerer);
+};
+
 // Epics
+
+var KirinTorBattleMage = module.exports.KirinTorBattleMage = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Mage"], "Kirin Tor Battle-Mage", 4, 0, 3, 5, battlecries.KirinTorBattleMage, false, false, [effects.sickness], ais.KirinTorBattleMage, KirinTorBattleMage);
+};
 
 // Legendaries
 
 var ArchmageAntonidas = module.exports.ArchmageAntonidas = function() {
     return utilities.makeMinion(false, "Legendary", "Classic", ["Mage"], "Archmage Antonidas", 7, 0, 7, 5, false, false, false,
     [effects.sickness, effects.Antonidas], ais.ArchmageAntonidas, ArchmageAntonidas, 78);
+};
+
+var ArchmageKhadgar = module.exports.ArchmageKhadgar = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Mage"], "Archmage Khadgar", 9, 0, 7, 7, battlecries.ArchmageKhadgar, false, false, [effects.sickness], ais.ArchmageKhadgar, ArchmageKhadgar);
 };
 
 var Rhonin = module.exports.Rhonin = function() {
@@ -714,6 +989,14 @@ var Execute = module.exports.Execute = function() {
     return utilities.makeSpell("Basic", "Basic", ["Warrior"], "Execute", 1, 0, abilities.Execute, targetais.Execute, filters.Execute, ais.Execute, Execute, 72);
 };
 
+var FieryWarAxe = module.exports.FieryWarAxe = function() {
+    return utilities.makeWeapon("Basic", "Basic", ["Warrior"], "Fiery War Axe", 2, 0, 3, 2, false, false, false, [], ais.true, FieryWarAxe, 104);
+};
+
+var ShieldBlock = module.exports.ShieldBlock = function() {
+    return utilities.makeSpell("Basic", "Basic", ["Warrior"], "Shield Block", 3, 0, abilities.ShieldBlock, false, false, ais.true, ShieldBlock, 40);
+};
+
 var Whirlwind = module.exports.Whirlwind = function() {
     return utilities.makeSpell("Basic", "Basic", ["Warrior"], "Whirlwind", 1, 0, abilities.Whirlwind, false, false, ais.Whirlwind, Whirlwind, 45);
 };
@@ -724,12 +1007,32 @@ var BattleRage = module.exports.BattleRage = function() {
     return utilities.makeSpell("Common", "Classic", ["Warrior"], "Battle Rage", 2, 0, abilities.BattleRage, false, false, ais.BattleRage, BattleRage, 61);
 };
 
+var IKnowAGuy = module.exports.IKnowAGuy = function() {
+    return utilities.makeSpell("Common", "Mean Streets of Gadgetzan", ["Warrior"], "I Know A Guy", 1, 0, abilities.IKnowAGuy, false, false, ais.true, IKnowAGuy, 55);
+};
+
 // Rares
+
+var StolenGoods = module.exports.StolenGoods = function() {
+    return utilities.makeSpell("Rare", "Mean Streets of Gadgetzan", ["Warrior"], "Stolen Goods", 2, 0, abilities.StolenGoods, false, false, ais.StolenGoods, StolenGoods, 24);
+};
 
 // Epics
 
 var BloodWarriors = module.exports.BloodWarriors = function() {
     return utilities.makeSpell("Epic", "Whispers of the Old Gods", ["Warrior"], "Blood Warriors", 3, 0, abilities.BloodWarriors, false, false, ais.BloodWarriors, BloodWarriors, 36);
+};
+
+var Brawl = module.exports.Brawl = function() {
+    return utilities.makeSpell("Epic", "Classic", ["Warior"], "Brawl", 5, 0, abilities.Brawl, false, false, ais.Brawl, Brawl, 77);
+};
+
+var Shadowmourne = module.exports.Shadowmourne = function() {
+    return utilities.makeWeapon("Epic", "Icecrown Citadel", ["Warrior"], "Shadowmourne", 6, 0, 4, 3, false, false, false, [effects.Shadowmourne], ais.true, Shadowmourne);
+};
+
+var ShieldSlam = module.exports.ShieldSlam = function() {
+    return utilities.makeSpell("Epic", "Classic", ["Warrior"], "Shield Slam", 1, 0, abilities.ShieldSlam, targetais.ShieldSlam, filters.minion, ais.ShieldSlam, ShieldSlam, 57);
 };
 
 // MINIONS
@@ -738,12 +1041,40 @@ var BloodWarriors = module.exports.BloodWarriors = function() {
 
 // Commons
 
+var BloodhoofBrave = module.exports.BloodhoofBrave = function() {
+    return utilities.makeMinion(false, "Common", "Whispers of the Old Gods", ["Warrior"], "Bloodhoof Brave", 4, 0, 6, 2, false, false, false, [effects.sickness, effects.taunt, effects.BloodhoofBrave, effects.enrage], ais.true, BloodhoofBrave, 76);
+};
+
+var GrimyGadgeteer = module.exports.GrimyGadgeteer = function() {
+    return utilities.makeMinion(false, "Common", "Mean Streets of Gadgetzan", ["Warrior"], "Grimy Gadgeteer", 4, 0, 3, 4, false, false, false, [effects.sickness, effects.GrimyGadgeteer], ais.GrimyGoons, GrimyGadgeteer, 74);
+};
+
+var PublicDefender = module.exports.PublicDefender = function() {
+    return utilities.makeMinion(false, "Common", "Mean Streets of Gadgetzan", ["Warrior"], "Public Defender", 2, 0, 7, 0, false, false, false, [effects.sickness, effects.taunt], ais.true, PublicDefender, 43);
+};
+
+var RavagingGhoul = module.exports.RavagingGhoul = function() {
+    return utilities.makeMinion(false, "Common", "Whispers of the Old Gods", ["Warrior"], "Ravaging Ghoul", 3, 0, 3, 3, battlecries.RavagingGhoul, false, false, [effects.sickness], ais.RavagingGhoul, RavagingGhoul, 100);
+};
+
+var WretchedGhoul = module.exports.WretchedGhoul = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Warrior"], "Wretched Ghoul", 2, 0, 2, 2, false, false, false, [effects.sickness, deathrattles.WretchedGhoul_Deathrattle], ais.RavagingGhoul, WretchedGhoul);
+};
+
 // Rares
+
+var AlleyArmorsmith = module.exports.AlleyArmorsmith = function() {
+    return utilities.makeMinion(false, "Rare", "Mean Streets of Gadgetzan", ["Warrior"], "Alley Armorsmith", 5, 0, 7, 3, false, false, false, [effects.sickness, effects.taunt, effects.AlleyArmorsmith], ais.true, AlleyArmorsmith, 52);
+};
 
 var AncientShieldbearer = module.exports.AncientShieldbearer = function() {
     var card = utilities.makeMinion(false, "Rare", "Whispers of the Old Gods", ["Warrior"], "Ancient Shieldbearer", 7, 0, 6, 6, battlecries.AncientShieldbearer, false, false, [effects.sickness], ais.KlaxxiAmberWeaver, AncientShieldbearer, 28);
     card["cult"] = "C'Thun";
     return card;
+};
+
+var AshenDefender = module.exports.AshenDefender = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Warrior"], "Ashen Defender", 4, 0, 6, 2, battlecries.AshenDefender, false, false, [effects.sickness, effects.taunt], ais.AshenDefender, AshenDefender);
 };
 
 var FrothingBerserker = module.exports.FrothingBerserker = function() {
@@ -755,6 +1086,10 @@ var FrothingBerserker = module.exports.FrothingBerserker = function() {
 
 // Legendaries
 
+var HighOverlordSaurfang = module.exports.HighOverlordSaurfang = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Warrior"], "High Overlord Saurfang", 8, 0, 6, 7, battlecries.HighOverlordSaurfang, false, false, [effects.sickness], ais.ArchmageKhadgar, HighOverlordSaurfang);
+};
+
 // ROGUE CARDS
 
 // WEAPONS
@@ -762,7 +1097,7 @@ var FrothingBerserker = module.exports.FrothingBerserker = function() {
 // Basic
 
 var WickedKnife = module.exports.WickedKnife = function() {
-    return utilities.makeWeapon("Basic", "Basic", ["Rogue"], "Wicked Knife", 2, 0, 1, 2, false, false, false, [], ais.MurlocRaider, WickedKnife, 50);
+    return utilities.makeWeapon("Basic", "Basic", ["Rogue"], "Wicked Knife", 2, 0, 1, 2, false, false, false, [], ais.MurlocRaider, WickedKnife);
 };
 
 // Commons
@@ -797,7 +1132,15 @@ var Sprint = module.exports.Sprint = function() {
 
 // Commons
 
+var Recuperate = module.exports.Recuperate = function() {
+    return utilities.makeSpell("Common", "Icecrown Citadel", ["Rogue"], "Recuperate", 3, 0, abilities.Recuperate, false, false, ais.Recuperate, Recuperate);
+};
+
 // Rares
+
+var SliceAndDice = module.exports.SliceAndDice = function() {
+    return utilities.makeSpell("Rare", "Icecrown Citadel", ["Rogue"], "Slice and Dice", 4, 0, abilities.SliceAndDice, false, false, ais.Recuperate, SliceAndDice);
+};
 
 // Epics
 
@@ -808,20 +1151,28 @@ var Sprint = module.exports.Sprint = function() {
 // Commons
 
 var AnubarAmbusher = module.exports.AnubarAmbusher = function() {
-    return utilities.makeMinion("Undead", "Naxxramas", "Common", ["Rogue"], "Anub'ar Ambusher", 4, 0, 5, 5, false, false, false,
+    return utilities.makeMinion(false, "Common", "Naxxramas", ["Rogue"], "Anub'ar Ambusher", 4, 0, 5, 5, false, false, false,
     [effects.sickness, deathrattles.AnubarAmbusher_Deathrattle], ais.MurlocRaider, AnubarAmbusher, 56);
 };
 
 // Rares
 
 var IronSensei = module.exports.IronSensei = function() {
-    return utilities.makeMinion("Mech", "Goblins vs Gnomes", "Rare", ["Rogue"], "Iron Sensei", 3, 0, 2, 2, false, false, false,
+    return utilities.makeMinion("Mech", "Rare", "Goblins vs Gnomes", ["Rogue"], "Iron Sensei", 3, 0, 2, 2, false, false, false,
     [effects.sickness, effects.IronSensei], ais.IronSensei, IronSensei, 40);
 };
 
 // Epics
 
+var AccursedShade = module.exports.AccursedShade = function() {
+    return utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Rogue"], "Accursed Shade", 4, 0, 5, 3, false, false, false, [effects.sickness, effects.stealth, effects.AccursedShade], ais.true, AccursedShade);
+};
+
 // Legendaries
+
+var CrokScourgebane = module.exports.CrokScourgebane = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Rogue"], "Crok Scourgebane", 6, 0, 7, 5, false, false, false, [effects.sickness, effects.CrokScourgebane], ais.true, CrokScourgebane);
+};
 
 // SHAMAN CARDS
 
@@ -839,7 +1190,15 @@ var ForkedLightning = module.exports.ForkedLightning = function() {
     return utilities.makeSpell("Common", "Classic", ["Shaman"], "Forked Lightning", 1, 1, abilities.ForkedLightning, false, false, ais.ForkedLightning, ForkedLightning, 59);
 };
 
+var StormforgedAxe = module.exports.StormforgedAxe = function() {
+    return utilities.makeWeapon("Common", "Classic", ["Shaman"], "Stormforged Axe", 2, 1, 2, 3, false, false, false, [], ais.true, StormforgedAxe); // add tier
+};
+
 // Rares
+
+var ChainLightning = module.exports.ChainLightning = function() {
+    return utilities.makeSpell("Rare", "Icecrown Citadel", ["Shaman"], "Chain Lightning", 3, 1, abilities.ChainLightning, targetais.Swipe, filters.enemy, ais.Swipe, ChainLightning);
+};
 
 var FeralSpirit = module.exports.FeralSpirit = function() {
     return utilities.makeSpell("Rare", "Classic", ["Shaman"], "Feral Spirit", 3, 2, abilities.FeralSpirit, false, false, ais.FeralSpirit, FeralSpirit, 78);
@@ -851,20 +1210,28 @@ var LavaBurst = module.exports.LavaBurst = function() {
 
 // Epics
 
+var ElementalGuidance = module.exports.ElementalGuidance = function() {
+    return utilities.makeSpell("Epic", "Icecrown Citadel", ["Shaman"], "Elemental Guidance", 6, 0, abilities.ElementalGuidance, false, false, ais.ArchmageKhadgar, ElementalGuidance);
+};
+
 // MINIONS
 
 // Basic
 
 // Commons
 
+var TuskarrWeaponsmith = module.exports.TuskarrWeaponsmith = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Shaman"], "Tuskarr Weaponsmith", 4, 0, 2, 3, battlecries.TuskarrWeaponsmith, false, false, [effects.sickness], ais.true, TuskarrWeaponsmith);
+};
+
 var UnboundElemental = module.exports.UnboundElemental = function() {
     return utilities.makeMinion(false, "Common", "Classic", ["Shaman"], "Unbound Elemental", 3, 0, 4, 2, false, false, false,
-    [effects.sickness, effects.UnboundElemental], ais.UnboundElemental, UnboundElemental, 57);
+    [effects.sickness, effects.UnboundElemental], ais.true, UnboundElemental, 57);
 };
 
 var WhirlingZapoMatic = module.exports.WhirlingZapoMatic = function() {
     return utilities.makeMinion("Mech", "Common", "Goblins vs Gnomes", ["Shaman"], "Whirling Zap-o-Matic", 2, 0, 2, 3, false, false, false,
-    [effects.sickness, effects.windfury], ais.WhirlingZapoMatic, WhirlingZapoMatic, 65);
+    [effects.sickness, effects.sickness, effects.windfury], ais.WhirlingZapoMatic, WhirlingZapoMatic, 65);
 };
 
 // Rares
@@ -876,6 +1243,10 @@ var WhirlingZapoMatic = module.exports.WhirlingZapoMatic = function() {
 var AlAkirtheWindlord = module.exports.AlAkirtheWindlord = function() {
     return utilities.makeMinion(false, "Legendary", "Classic", ["Shaman"], "Al'Akir the Windlord", 8, 0, 5, 3, false, false, false, [effects.windfury, effects.divineshield,
     effects.taunt], ais.AlAkirtheWindlord, AlAkirtheWindlord, 83);
+};
+
+var Tectus = module.exports.Tectus = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Shaman"], "Tectus", 7, 0, 3, 3, false, false, false, [effects.sickness, effects.Tectus], ais.true, Tectus);
 };
 
 // HUNTER CARDS
@@ -914,13 +1285,25 @@ var UnleashTheHounds = module.exports.UnleashTheHounds = function() {
     return utilities.makeSpell("Common", "Classic", ["Hunter"], "Unleash the Hounds", 2, 0, abilities.UnleashTheHounds, false, false, ais.UnleashTheHounds, UnleashTheHounds, 84);
 };
 
+var SplitShot = module.exports.SplitShot = function() {
+    return utilities.makeSpell("Common", "Icecrown Citadel", ["Hunter"], "Split Shot", 2, 0, abilities.SplitShot, targetais.ArcaneShot, filters.any, ais.ArcaneShot, SplitShot);
+};
+
 // Rares
+
+var Barrage = module.exports.Barrage = function() {
+    return utilities.makeSpell("Rare", "Icecrown Citadel", ["Hunter"], "Barrage", 2, 0, abilities.Barrage, false, false, ais.AvengingWrath, Barrage);
+};
 
 var ExplosiveShot = module.exports.ExplosiveShot = function() {
     return utilities.makeSpell("Rare", "Classic", ["Hunter"], "Explosive Shot", 5, 0, abilities.ExplosiveShot, targetais.ExplosiveShot, filters.minion, ais.ExplosiveShot, ExplosiveShot, 80);
 };
 
 // Epics
+
+var EagleEye = module.exports.EagleEye = function() {
+    return utilities.makeSpell("Epic", "Icecrown Citadel", ["Hunter"], "Eagle Eye", 4, 0, abilities.EagleEye, false, false, ais.true, EagleEye);
+};
 
 // MINIONS
 
@@ -960,7 +1343,11 @@ var Gahzrilla = module.exports.Gahzrilla = function() {
 
 var KingKrush = module.exports.KingKrush = function() {
     return utilities.makeMinion("Beast", "Legendary", "Classic", ["Hunter"], "King Krush", 9, 0, 8, 8,
-    false, false, false, [], false, ais.KingKrush, KingKrush, 84);
+    false, false, false, [], ais.true, KingKrush, 84);
+};
+
+var Precious = module.exports.Precious = function() {
+    return utilities.makeMinion("Beast", "Legendary", "Icecrown Citadel", ["Hunter"], "Precious", 5, 0, 3, 4, battlecries.Precious, false, false, [effects.sickness], ais.Precious, Precious);
 };
 
 // DRUID CARDS
@@ -987,8 +1374,12 @@ var WildGrowth = module.exports.WildGrowth = function() {
 
 // Commons
 
+var Erode = module.exports.Erode = function() {
+    return utilities.makeSpell("Common", "Icecrown Citadel", ["Druid"], "Erode", 3, 0, abilities.Erode, targetais.ShadowBolt, filters.minion, ais.ShadowBolt, Erode);
+};
+
 var JadeBlossom = module.exports.JadeBlossom = function() {
-    return utilities.makeSpell("Common", "Mean Streets of Gadgetzan", ["Druid"], "Jade Blossom", 3, 0, abilities.JadeBlossom, false, false, ais.true, JadeBlossom, 21);
+    return utilities.makeSpell("Common", "Mean Streets of Gadgetzan", ["Druid"], "Jade Blossom", 3, 0, abilities.JadeBlossom, false, false, ais.true, JadeBlossom, 36);
 };
 
 var LivingRoots = module.exports.LivingRoots = function() {
@@ -1012,7 +1403,7 @@ var Wrath = module.exports.Wrath = function() {
 // Rares
 
 var JadeIdol = module.exports.JadeIdol = function() {
-    var card = utilities.makeSpell("Rare", "Mean Streets of Gadgetzan", ["Druid"], "Jade Idol", 1, 0, abilities.JadeIdol, false, false, ais.true, JadeIdol, 16);
+    var card = utilities.makeSpell("Rare", "Mean Streets of Gadgetzan", ["Druid"], "Jade Idol", 1, 0, abilities.JadeIdol, false, false, ais.true, JadeIdol, 36);
     card.chooseAi = coAis.JadeIdol;
     return card;
 };
@@ -1055,6 +1446,12 @@ var KlaxxiAmberWeaver = module.exports.KlaxxiAmberWeaver = function() {
     return card;
 };
 
+var KorkronPrimalist = module.exports.KorkronPrimalist = function() {
+    var card = utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Druid"], "Kor'kron Primalist", 6, 0, 6, 4, battlecries.KorkronPrimalist, targetais.AbusiveSergeant, filters.ally, ais.true, KorkronPrimalist);
+    card.chooseAi = coAis.KorkronPrimalist;
+    return card;
+};
+
 // Epics
 
 var AncientofLore = module.exports.AncientofLore = function() {
@@ -1069,6 +1466,18 @@ var AncientofWar = module.exports.AncientofWar = function() {
     return card;
 };
 
+var DruidoftheTalon = module.exports.DruidoftheTalon = function() {
+    var card = utilities.makeMinion(false, "Epic", "Icecrown Citadel", ["Druid"], "Druid of the Talon", 4, 0, 6, 3, false, false, false, [effects.sickness, effects.spelldamage1, effects.DruidoftheTalon], ais.true, DruidoftheTalon);
+    card.crow = StormCrow;
+    return card;
+};
+
+var StormCrow = function() {
+    var card = utilities.makeMinion("Beast", "Epic", "Icecrown Citadel", ["Druid"], "Storm Crow", 4, 0, 3, 6, false, false, false, [effects.stealth, effects.StormCrow], ais.true, StormCrow);
+    card.druid = DruidoftheTalon;
+    return card;
+};
+
 // Legendaries
 
 var Cenarius = module.exports.Cenarius = function() {
@@ -1080,7 +1489,11 @@ var Cenarius = module.exports.Cenarius = function() {
 
 var FandralStaghelm = module.exports.FandralStaghelm = function() {
     return utilities.makeMinion(false, "Legendary", "Whispers of the Old Gods", ["Druid"], "Fandral Staghelm", 4, 0, 5, 3, false, false, false, [effects.sickness, effects.FandralStaghelm], ais.true, FandralStaghelm, 62);
-}
+};
+
+var HamuulRunetotem = module.exports.HamuulRunetotem = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Druid"], "Hamuul Runetotem", 5, 0, 6, 4, battlecries.HamuulRunetotem, false, false, [effects.sickness], ais.HamuulRunetotem, HamuulRunetotem);
+};
 
 var Malorne = module.exports.Malorne = function() {
     return utilities.makeMinion("Beast", "Legendary", "Goblins vs Gnomes", ["Druid"], "Malorne", 7, 0, 7, 9, false, false, false,
@@ -1109,6 +1522,10 @@ var Darkbomb = module.exports.Darkbomb = function() {
 
 // Rares
 
+var DarkOffering = module.exports.DarkOffering = function() {
+    return utilities.makeSpell("Rare", "Icecrown Citadel", ["Warlock"], "Dark Offering", 2, 0, abilities.DarkOffering, targetais.DarkOffering, filters.minion, ais.DarkOffering, DarkOffering);
+};
+
 var Shadowflame = module.exports.Shadowflame = function() {
     return utilities.makeSpell("Rare", "Classic", ["Warlock"], "Shadowflame", 4, 0, abilities.Shadowflame, targetais.Shadowflame, filters.allyMinion, ais.Shadowflame, Shadowflame, 78);
 };
@@ -1130,15 +1547,27 @@ var Voidwalker = module.exports.Voidwalker = function() {
 
 // Commons
 
+var IcecrownValkyr = module.exports.IcecrownValkyr = function() {
+    return utilities.makeMinion(false, "Common", "Icecrown Citadel", ["Warlock"], "Icecrown Val'kyr", 4, 0, 2, 4, battlecries.IcecrownValkyr, false, false, [effects.sickness], ais.IcecrownValkyr, IcecrownValkyr);
+};
+
 // Rares
 
 // Epics
 
+var VilefinNecromancer = module.exports.VilefinNecromancer = function() {
+    return utilities.makeMinion("Murloc", "Epic", "Icecrown Citadel", ["Warlock"], "Vilefin Necromancer", 4, 0, 4, 3, battlecries.VilefinNecromancer, false, false, [effects.sickness], ais.VilefinNecromancer, VilefinNecromancer);
+};
+
 // Legendaries
+
+var BlackheartTheInciter = module.exports.BlackheartTheInciter = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Warlock"], "Blackheart the Inciter", 8, 0, 9, 5, false, false, false, [effects.sickness, effects.BlackheartTheInciter], ais.true, BlackheartTheInciter);
+}
 
 var LordJaraxxus = module.exports.LordJaraxxus = function() {
     return utilities.makeMinion("Demon", "Legendary", "Classic", ["Warlock"], "Lord Jaraxxus", 9, 0, 15, 3, battlecries.LordJaraxxus, false,
-    false, [effects.sickness], ais.LordJaraxxus, LordJaraxxus, 67);
+    false, [effects.sickness], ais.LordJaraxxus, LordJaraxxus, 87);
 };
 
 var MalGanis = module.exports.MalGanis = function() {
@@ -1164,6 +1593,10 @@ var HammerofWrath = module.exports.HammerofWrath = function() {
 
 // Commons
 
+var HandofSacrifice = module.exports.HandofSacrifice = function() {
+    return utilities.makeSpell("Common", "Icecrown Citadel", ["Paladin"], "Hand of Sacrifice", 1, 0, abilities.HandofSacrifice, targetais.BlessingofKings, filters.minion, ais.HandofSacrifice, HandofSacrifice);
+};
+
 var StandAgainstDarkness = module.exports.StandAgainstDarkness = function() {
     return utilities.makeSpell("Common", "Whispers of the Old Gods", ["Paladin"], "Stand Against Darkness", 5, 0, abilities.StandAgainstDarkness, false, false, ais.StandAgainstDarkness, StandAgainstDarkness, 49);
 };
@@ -1178,6 +1611,10 @@ var Equality = module.exports.Equality = function() {
 
 var AvengingWrath = module.exports.AvengingWrath = function() {
     return utilities.makeSpell("Epic", "Classic", ["Paladin"], "Avenging Wrath", 6, 0, abilities.AvengingWrath, false, false, ais.AvengingWrath, AvengingWrath, 57);
+};
+
+var TemplarsVerdict = module.exports.TemplarsVerdict = function() {
+    return utilities.makeSpell("Epic", "Icecrown Citadel", ["Paladin"], "Templar's Verdict", 4, 0, abilities.TemplarsVerdict, false, false, ais.true, TemplarsVerdict);
 };
 
 // MINIONS
@@ -1208,6 +1645,10 @@ var AldorPeacekeeper = module.exports.AldorPeacekeeper = function() {
     targetais.AldorPeacekeeper, filters.minion, [effects.sickness], ais.AldorPeacekeeper, AldorPeacekeeper, 96);
 };
 
+var KingsHerald = module.exports.KingsHerald = function() {
+    return utilities.makeMinion(false, "Rare", "Icecrown Citadel", ["Paladin"], "King's Herald", 4, 0, 4, 3, battlecries.KingsHerald, false, false, [effects.sickness], ais.KingsHerald, KingsHerald);
+};
+
 // Epics
 
 // Legendaries
@@ -1215,6 +1656,10 @@ var AldorPeacekeeper = module.exports.AldorPeacekeeper = function() {
 var BolvarFordragon = module.exports.BolvarFordragon = function() {
     return utilities.makeMinion(false, "Legendary", "Goblins vs Gnomes", ["Paladin"], "Bolvar Fordragon", 5, 0, 7, 1, false, false, false,
     [effects.sickness, effects.BolvarFordragon], ais.BolvarFordragon, BolvarFordragon, 55);
+};
+
+var TerenasMenethil = module.exports.TerenasMenethil = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Paladin"], "Terenas Menethil", 9, 0, 8, 6, battlecries.TerenasMenethil, false, false, [effects.sickness], ais.TerenasMenethil, TerenasMenethil);
 };
 
 var TirionFordring = module.exports.TirionFordring = function() {
@@ -1257,6 +1702,10 @@ var Entomb = module.exports.Entomb = function() {
     return utilities.makeSpell("Common", "League of Explorers", ["Priest"], "Entomb", 6, 0, abilities.Entomb, targetais.Entomb, filters.enemyMinion, ais.Entomb, Entomb, 65);
 };
 
+var ShadowWordVoid = module.exports.ShadowWordVoid = function() {
+    return utilities.makeSpell("Common", "Icecrown Citadel", ["Priest"], "Shadow Word: Void", 4, 0, abilities.ShadowWordVoid, targetais.ShadowBolt, filters.minion, ais.ShadowBolt, ShadowWordVoid);
+};
+
 var VelensChosen = module.exports.VelensChosen = function() {
     return utilities.makeSpell("Common", "Goblins vs Gnomes", ["Priest"], "Velen's Chosen", 3, 0, abilities.VelensChosen, 
     targetais.VelensChosen, filters.minion, ais.VelensChosen, VelensChosen, 85);
@@ -1268,11 +1717,19 @@ var HolyFire = module.exports.HolyFire = function() {
     return utilities.makeSpell("Rare", "Classic", ["Priest"], "Holy Fire", 6, 0, abilities.HolyFire, targetais.Fireball, filters.any, ais.Fireball, HolyFire, 59);
 };
 
+var Prayer = module.exports.Prayer = function() {
+    return utilities.makeSpell("Rare", "Icecrown Citadel", ["Priest"], "Prayer", 4, 0, abilities.Prayer, targetais.Prayer, filters.ally, ais.Prayer, Prayer);
+};
+
 var Resurrect = module.exports.Resurrect = function() {
     return utilities.makeSpell("Rare", "Blackrock Mountain", ["Priest"], "Resurrect", 2, 0, abilities.Resurrect, false, false, ais.Resurrect, Resurrect, 53);
 };
 
 // Epics
+
+var PowerWordFortitude = module.exports.PowerWordFortitude = function() {
+    return utilities.makeSpell("Epic", "Icecrown Citadel", ["Priest"], "Power Word: Fortitude", 3, 0, abilities.PowerWordFortitude, false, false, ais.PowerWordFortitude, PowerWordFortitude);
+};
 
 var Shadowform = module.exports.Shadowform = function() {
     return utilities.makeSpell("Epic", "Classic", ["Priest"], "Shadowform", 3, 0, abilities.Shadowform, false, false, ais.true, Shadowform, 48);
@@ -1306,6 +1763,10 @@ var WyrmrestAgent = module.exports.WyrmrestAgent = function() {
 // Epics
 
 // Legendaries
+
+var SoulbinderTuulani = module.exports.SoulbinderTuulani = function() {
+    return utilities.makeMinion(false, "Legendary", "Icecrown Citadel", ["Priest"], "Soulbinder Tuulani", 5, 0, 6, 4, battlecries.SoulbinderTuulani, false, false, [effects.sickness], ais.SoulbinderTuulani, SoulbinderTuulani);
+};
 
 // -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

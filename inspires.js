@@ -36,6 +36,11 @@ var NexusChampionSaraad = function(source, context) {
     }
 };
 
+var DeathboundWard = function(source, context) {
+    printer.print(source.color + " " + source.name + " wakes from its long, icy sleep.");
+    utilities.dispel(source, context);
+};
+
 var MurlocKnight = function(source, context) {
     var murlocList = [];
     var cardList = cardLists.allCards();
@@ -69,6 +74,12 @@ module.exports.NexusChampionSaraad_Inspire = {
     name: "Nexus-Champion Saraad",
     type: "inspire",
     action: NexusChampionSaraad
+};
+
+module.exports.DeathboundWard_Inspire = {
+    name: "Deathbound Ward",
+    type: "inspire",
+    action: DeathboundWard
 };
 
 module.exports.MurlocKnight_Inspire = {

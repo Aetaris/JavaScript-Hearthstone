@@ -69,6 +69,15 @@ module.exports.AncientofLore = function(targets, context) {
     return targets[1];
 };
 
+module.exports.KorkronPrimalist = function(targets, context) {
+    for(var i in context.player.minions) {
+        if(context.player.minions[i].getHp() <= 3 && context.player.minions[i].getDamage() >= 3 && context.foe.minions.length >0) {
+            return targets[0];
+        }
+    }
+    return targets[1];
+};
+
 module.exports.AncientofWar = function(targets, context) {
     return targets[1];
 };

@@ -1,4 +1,5 @@
 var cards = require('./cards.js');
+var cardLists = require('./cardlists.js');
 
 module.exports.basicDeck = function() {
     return [
@@ -61,6 +62,41 @@ module.exports.basicMage = function() {
     ];
 };
 
+module.exports.RenoMage = function() {
+    return [
+        cards.ForbiddenFlame(),
+        cards.ArcaneBlast(),
+        // cards.BabblingBook(),
+        cards.MirrorImage(),
+        cards.Frostbolt(),
+        cards.ArcaneIntellect(),
+        // cards.Flamewaker(),
+        // cards.ForgottenTorch(),
+        cards.IceBlock(),
+        // cards.VolcanicPotion(),
+        cards.Fireball(),
+        cards.Polymorph(),
+        // cards.WaterElemental(),
+        cards.ArchmageAntonidas(),
+        cards.Flamestrike(),
+        cards.Rhonin(),
+        // cards.MistressofMixtures(),
+        // cards.AcidicSwampOoze(),
+        cards.BloodmageThalnos(),
+        // cards.Doomsayer(),
+        // cards.LootHoarder(),
+        // cards.BrannBronzebeard(),
+        // cards.Barnes(),
+        // cards.InfestedTauren(),
+        // cards.Kazakus(),
+        cards.AzureDrake(),
+        cards.EmperorThaurissan(),
+        cards.RenoJackson(),
+        cards.Sylvanas(),
+        cards.NZoththeCorruptor()
+    ];
+};
+
 module.exports.basicWarrior = function() {
     return [
         cards.Execute(),
@@ -93,6 +129,41 @@ module.exports.basicWarrior = function() {
         cards.PollutedHoarder(),
         cards.CorruptedHealbot(),
         cards.ValidatedDoomsayer(),
+    ];
+};
+
+module.exports.GoonsWarrior = function() {
+    return [
+        cards.IKnowAGuy(),
+        cards.IKnowAGuy(),
+        cards.ShieldSlam(),
+        cards.Execute(),
+        cards.Execute(),
+        cards.FieryWarAxe(),
+        cards.FieryWarAxe(),
+        cards.PublicDefender(),
+        cards.StolenGoods(),
+        cards.FrothingBerserker(),
+        cards.FrothingBerserker(),
+        cards.RavagingGhoul(),
+        cards.RavagingGhoul(),
+        cards.ShieldBlock(),
+        cards.ShieldBlock(),
+        cards.BloodhoofBrave(),
+        cards.BloodhoofBrave(),
+        cards.GrimyGadgeteer(),
+        cards.GrimyGadgeteer(),
+        cards.AlleyArmorsmith(),
+        cards.AlleyArmorsmith(),
+        cards.Brawl(),
+        cards.Brawl(),
+        cards.AcolyteofPain(),
+        cards.AcolyteofPain(),
+        cards.GrimestreetSmuggler(),
+        cards.GrimestreetSmuggler(),
+        // cards.Doppelgangster(),
+        cards.DonHanCho(),
+        cards.ArchThiefRafaam(),
     ];
 };
 
@@ -131,6 +202,41 @@ module.exports.basicRogue = function() {
     ];
 };
 
+module.exports.DragonRogue = function() {
+    return [
+        cards.Backstab(),
+        cards.Backstab(),
+        // cards.Swashburglar(),
+        // cards.Eviscerate(),
+        // cards.Eviscerate(),
+        cards.Sap(),
+        cards.Sap(),
+        // cards.UndercityHuckster(),
+        // cards.UndercityHuckster(),
+        cards.FanofKnives(),
+        cards.FanofKnives(),
+        // cards.ShadowStrike(),
+        // cards.Si7Agent(),
+        // cards.Si7Agent(),
+        // cards.DarkIronSkulker(),
+        cards.BloodmageThalnos(),
+        // cards.FaerieDragon(),
+        // cards.FaerieDragon(),
+        // cards.EarthenRingFarseer(),
+        // cards.EarthenRingFarseer(),
+        cards.TwilightGuardian(),
+        cards.TwilightGuardian(),
+        cards.AzureDrake(),
+        cards.AzureDrake(),
+        cards.BlackwingCorruptor(),
+        cards.BlackwingCorruptor(),
+        // cards.BookWyrm(),
+        // cards.DrakonidCrusher(),
+        // cards.DrakonidCrusher(),
+        cards.Ragnaros()
+    ];
+};
+
 module.exports.basicShaman = function() {
     return [
         cards.Crackle(),
@@ -163,6 +269,39 @@ module.exports.basicShaman = function() {
         cards.PollutedHoarder(),
         cards.CorruptedHealbot(),
         cards.ValidatedDoomsayer(),
+    ];
+};
+
+module.exports.JadeShaman = function() {
+    return [
+        // cards.LightningBolt(),
+        // cards.LightningBolt(),
+        // cards.TunnelTrog(),
+        // cards.TunnelTrog(),
+        // cards.JadeClaws(),
+        // cards.JadeClaws(),
+        // cards.MaelstromPortal(),
+        // cards.MaelstromPortal(),
+        // cards.TotemGolem(),
+        // cards.TotemGolem(),
+        cards.FeralSpirit(),
+        // cards.Hex(),
+        // cards.Hex(),
+        // cards.LightningStorm(),
+        // cards.LightningStorm(),
+        // cards.ManaTideTotem(),
+        // cards.ManaTideTotem(),
+        // cards.JadeLightning(),
+        // cards.ThunderBluffValiant(),
+        // cards.ThunderBluffValiant(),
+        // cards.ThingFromBelow(),
+        // cards.ThingFromBelow(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.AzureDrake(),
+        cards.AzureDrake(),
+        cards.AyaBlackpaw(),
+        cards.Ragnaros()
     ];
 };
 
@@ -201,6 +340,41 @@ module.exports.basicHunter = function() {
     ];
 };
 
+module.exports.BeastHunter = function() {
+    return [
+        // cards.Alleycat(),
+        // cards.Alleycat(),
+        cards.HuntersMark(),
+        // cards.Tracking(),
+        // cards.KindlyGrandmother(),
+        // cards.KindlyGrandmother(),
+        // cards.QuickShot(),
+        // cards.QuickShot(),
+        // cards.ScavengingHyena(),
+        // cards.ScavengingHyena(),
+        // cards.TroggBeastrager(),
+        // cards.TroggBeastrager(),
+        // cards.KillCommand(),
+        // cards.KillCommand(),
+        // cards.RatPack(),
+        // cards.RatPack(),
+        // cards.ShakyZipgunner(),
+        // cards.ShakyZipgunner(),
+        cards.UnleashTheHounds(),
+        // cards.DispatchKodo(),
+        // cards.DispatchKodo(),
+        // cards.Houndmaster(),
+        // cards.Houndmaster(),
+        // cards.TundraRhino(),
+        // cards.TundraRhino(),
+        // cards.SavannahHighmane(),
+        // cards.SavannahHighmane(),
+        // cards.DireWolfAlpha(),
+        // cards.DireWolfAlpha(),
+        // cards.LeeroyJenkins()
+    ];
+};
+
 module.exports.basicDruid = function() {
     return [
         cards.Swipe(),
@@ -233,6 +407,41 @@ module.exports.basicDruid = function() {
         cards.PollutedHoarder(),
         cards.CorruptedHealbot(),
         cards.ValidatedDoomsayer(),
+    ];
+};
+
+module.exports.JadeDruid = function() {
+    return [
+        cards.Innervate(),
+        cards.Innervate(),
+        cards.LivingRoots(),
+        cards.JadeIdol(),
+        cards.JadeIdol(),
+        cards.RavenIdol(),
+        cards.RavenIdol(),
+        cards.WildGrowth(),
+        cards.WildGrowth(),
+        cards.Wrath(),
+        cards.Wrath(),
+        cards.LotusAgents(),
+        cards.LotusAgents(),
+        cards.JadeBlossom(),
+        cards.JadeBlossom(),
+        cards.FandralStaghelm(),
+        cards.Swipe(),
+        cards.Swipe(),
+        cards.Nourish(),
+        cards.Nourish(),
+        cards.JadeBehemoth(),
+        cards.JadeBehemoth(),
+        cards.AncientofWar(),
+        cards.AncientofWar(),
+        cards.JadeSpirit(),
+        cards.JadeSpirit(),
+        cards.AzureDrake(),
+        cards.AzureDrake(),
+        cards.AyaBlackpaw(),
+        cards.GadgetzanAuctioneer(),
     ];
 };
 
@@ -271,6 +480,41 @@ module.exports.basicWarlock = function() {
     ];
 };
 
+module.exports.RenoWarlock = function() {
+    return [
+        cards.MortalCoil(),
+        // cards.PowerOverwhelming(),
+        // cards.DarkPeddler(),
+        // cards.Demonwrath(),
+        // cards.ImpGangBoss(),
+        cards.ShadowBolt(),
+        // cards.Hellfire(),
+        cards.Shadowflame(),
+        // cards.SiphonSoul(),
+        // cards.AbyssalEnforcer(),
+        // cards.TwistingNether(),
+        cards.LordJaraxxus(),
+        // cards.AcidicSwampOoze(),
+        // cards.DirtyRat(),
+        // cards.Doomsayer(),
+        // cards.SunfuryProtector(),
+        // cards.BrannBronzebeard(),
+        // cards.EarthenRingFarseer(),
+        // cards.MindControlTech(),
+        // cards.FacelessShambler(),
+        // cards.Kazakus(),
+        // cards.RefreshmentVendor(),
+        // cards.TwilightDrake(),
+        cards.FacelessManipulator(),
+        // cards.LeeroyJenkins(),
+        // cards.SecondRateBruiser(),
+        cards.EmperorThaurissan(),
+        cards.RenoJackson(),
+        cards.Sylvanas(),
+        // cards.MountainGiant()
+    ];    
+};
+
 module.exports.basicPaladin = function() {
     return [
         cards.BlessingofKings(),
@@ -306,6 +550,40 @@ module.exports.basicPaladin = function() {
     ];
 };
 
+module.exports.MurlocPaladin = function() {
+    return [
+        // cards.GrimscaleChum(),
+        // cards.GrimscaleChum(),
+        // cards.SmugglersRun(),
+        // cards.SmugglersRun(),
+        // cards.VilefinInquisitor(),
+        // cards.VilefinInquisitor(),
+        // cards.GrimestreetOutfitter(),
+        // cards.GrimestreetOutfitter(),
+        // cards.DivineFavor(),
+        // cards.SmallTimeRecruits(),
+        // cards.SmallTimeRecruits(),
+        cards.MurlocKnight(),
+        cards.MurlocKnight(),
+        // cards.GrimscaleOracle(),
+        // cards.GrimscaleOracle(),
+        // cards.MurlocTidecaller(),
+        // cards.MurlocTidecaller(),
+        // cards.SirFinleyMrrgglton(),
+        // cards.BilefinTidehunter(),
+        // cards.BlowgillSniper(),
+        // cards.BluegillWarrior(),
+        // cards.MurlocTidehunter(),
+        // cards.MurlocTidehunter(),
+        // cards.BrannBronzebeard(),
+        // cards.ColdlightSeer(),
+        // cards.ColdlightSeer(),
+        // cards.MurlocWarleader(),
+        // cards.MurlocWarleader(),
+        // cards.FinjaTheFlyingStar()
+    ];
+}
+
 module.exports.basicPriest = function() {
     return [
         cards.HolyNova(),
@@ -338,6 +616,41 @@ module.exports.basicPriest = function() {
         cards.PollutedHoarder(),
         cards.CorruptedHealbot(),
         cards.ValidatedDoomsayer(),
+    ];
+};
+
+module.exports.RenoPriest = function() {
+    return [
+        cards.NorthshireCleric(),
+        // cards.PintSizePotion(),
+        cards.PowerWordShield(),
+        cards.TwilightWhelp(),
+        cards.ShadowWordPain(),
+        // cards.KabalTalonpriest(),
+        cards.ShadowWordDeath(),
+        // cards.DrakonidOperative(),
+        cards.HolyNova(),
+        // cards.KabalSongstealer(),
+        // cards.RazaTheChained(),
+        // cards.CabalShadowPriest(),
+        // cards.DragonfirePotion(),
+        cards.Entomb(),
+        // cards.AcidicSwampOoze(),
+        // cards.DirtyRat(),
+        // cards.Doomsayer(),
+        // cards.NetherspiteHistorian(),
+        // cards.BrannBronzebeard(),
+        // cards.KabalCourier(),
+        // cards.MindControlTech(),
+        cards.KabalChemist(),
+        // cards.Kazakus(),
+        cards.TwilightGuardian(),
+        cards.AzureDrake(),
+        cards.BlackwingCorruptor(),
+        // cards.BookWyrm(),
+        cards.RenoJackson(),
+        // cards.Chillmaw(),
+        // cards.Ysera()
     ];
 };
 
@@ -406,10 +719,16 @@ module.exports.DragonPriest = function() {
         // cards.JusticarTrueheart(),
         cards.Sylvanas(),
         // cards.RendBlackhand(),
-        // cards.Nefarian(),
+        cards.Nefarian(),
         // cards.Ysera()
     ];
 };
+
+module.exports.Nerzhul = function() {
+    return cardLists.setCards("Icecrown Citadel");
+};
+
+// Adventure bosses
 
 module.exports.AnubRekhan = function() {
     return [
@@ -513,216 +832,6 @@ module.exports.GrandWidowFaerlina_Heroic = function() {
         // cards.WorshipperH(),
         // cards.WorshipperH(),
         // cards.WorshipperH()
-    ];
-};
-
-module.exports.ItsTheFuzz = function() {
-    return [
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-        cards.SergeantSally(),
-    ];
-};
-
-module.exports.CrimeGoneMad = function() {
-    return [
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-        cards.DonHanCho(),
-    ];
-};
-
-module.exports.WhooshingSounds = function() {
-    return [
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.JadeIdol(),
-        cards.JadeIdol(),
-        cards.JadeIdol(),
-        cards.JadeIdol(),
-        cards.JadeIdol(),
-        cards.JadeBlossom(),
-        cards.JadeBlossom(),
-        cards.JadeBlossom(),
-        cards.JadeBlossom(),
-        cards.JadeBlossom(),
-        cards.JadeBehemoth(),
-        cards.JadeBehemoth(),
-        cards.JadeBehemoth(),
-        cards.JadeBehemoth(),
-        cards.JadeBehemoth(),
-        cards.AyaBlackpaw(),
-        cards.AyaBlackpaw(),
-        cards.AyaBlackpaw(),
-        cards.AyaBlackpaw(),
-        cards.AyaBlackpaw(),
-    ];
-};
-
-module.exports.JadeDruid = function() {
-    return [
-        cards.Innervate(),
-        cards.Innervate(),
-        cards.LivingRoots(),
-        cards.JadeIdol(),
-        cards.JadeIdol(),
-        cards.RavenIdol(),
-        cards.RavenIdol(),
-        cards.WildGrowth(),
-        cards.WildGrowth(),
-        cards.Wrath(),
-        cards.Wrath(),
-        cards.LotusAgents(),
-        cards.LotusAgents(),
-        cards.JadeBlossom(),
-        cards.JadeBlossom(),
-        cards.FandralStaghelm(),
-        cards.Swipe(),
-        cards.Swipe(),
-        cards.Nourish(),
-        cards.Nourish(),
-        cards.JadeBehemoth(),
-        cards.JadeBehemoth(),
-        cards.AncientofWar(),
-        cards.AncientofWar(),
-        cards.JadeSpirit(),
-        cards.JadeSpirit(),
-        cards.AzureDrake(),
-        cards.AzureDrake(),
-        cards.AyaBlackpaw(),
-        cards.GadgetzanAuctioneer(),
-    ];
-};
-
-module.exports.TooManyPortals = function() {
-    return [
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-        cards.UnstablePortal(),
-    ];
-};
-
-module.exports.SpidersSpidersEverywhere = function() {
-    return [
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
-        cards.Webspinner(),
     ];
 };
 
